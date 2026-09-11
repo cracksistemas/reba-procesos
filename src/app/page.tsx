@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import { AlertTriangle, ArrowRight, CheckCircle2, Clock3, FolderKanban, Info, Layers3 } from "lucide-react";
 import { StatusBadge } from "@/components/status-badge";
-import { areas, processes, reviews } from "@/lib/data";
+import { areas, processes, reviews, subareas } from "@/lib/data";
 
 export default function Home() {
   const approved = processes.filter((item) => item.status === "Aprobado").length;
@@ -12,7 +12,7 @@ export default function Home() {
     <div className="page-heading"><div><p className="eyebrow">Panel institucional</p><h1>Gestión de Procesos</h1><p>Consulta, actualiza y controla los procesos de Rebagliati.</p></div><Link className="button button-primary" href="/procesos">Ver catálogo <ArrowRight size={16}/></Link></div>
     <div className="pilot-banner"><Info size={17}/><span><strong>Entorno piloto.</strong> Los registros visibles sirven para validar la experiencia; la estructura está lista para conectarse al proyecto Supabase y a los archivos maestros de Drive.</span></div>
     <section className="dashboard-grid" aria-label="Resumen">
-      <div className="metric-card" style={metricStyle("#01017B","#EEEEFF")}><div className="metric-top"><div className="metric-icon"><FolderKanban size={19}/></div><span className="metric-change">7 áreas</span></div><div className="metric-number">{processes.length}</div><div className="metric-label">Procesos inventariados</div></div>
+      <div className="metric-card" style={metricStyle("#01017B","#EEEEFF")}><div className="metric-top"><div className="metric-icon"><FolderKanban size={19}/></div><span className="metric-change">{areas.length} áreas · {subareas.length} subáreas</span></div><div className="metric-number">{processes.length}</div><div className="metric-label">Procesos inventariados</div></div>
       <div className="metric-card" style={metricStyle("#2E8B57","#E8F7EF")}><div className="metric-top"><div className="metric-icon"><CheckCircle2 size={19}/></div><span className="metric-change">{Math.round(approved/processes.length*100)}%</span></div><div className="metric-number">{approved}</div><div className="metric-label">Procesos aprobados</div></div>
       <div className="metric-card" style={metricStyle("#D49A00","#FFF5D9")}><div className="metric-top"><div className="metric-icon"><Clock3 size={19}/></div><span className="metric-change">Atención</span></div><div className="metric-number">{reviews.length}</div><div className="metric-label">En revisión u observados</div></div>
       <div className="metric-card" style={metricStyle("#7E57C2","#F1ECF8")}><div className="metric-top"><div className="metric-icon"><Layers3 size={19}/></div><span className="metric-change">En curso</span></div><div className="metric-number">{drafts}</div><div className="metric-label">Borradores activos</div></div>

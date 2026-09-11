@@ -20,7 +20,8 @@ Módulos implementados:
 - ingreso por enlace mágico de Supabase;
 - dashboard gerencial;
 - catálogo con búsqueda y filtros;
-- áreas y mapa institucional;
+- áreas, subáreas y mapa institucional;
+- creación de subáreas y edición de sus flujogramas en modo piloto;
 - ficha de proceso con resumen, diagrama, documentos, KPI e historial;
 - flujo piloto para enviar a revisión, observar y aprobar;
 - cola de revisiones;
@@ -57,7 +58,7 @@ No agregues `service_role` a variables públicas ni al navegador. La autorizaci�
 
 ## Supabase
 
-El esquema está en [`supabase/migrations/202609100001_initial_schema.sql`](supabase/migrations/202609100001_initial_schema.sql). Incluye perfiles, áreas, roles, procesos, versiones, participantes, documentos, comentarios, KPI, aprobaciones y auditoría.
+El esquema está en [`supabase/migrations`](supabase/migrations). Incluye perfiles, áreas, subáreas con flujogramas, roles, procesos, versiones, participantes, documentos, comentarios, KPI, aprobaciones y auditoría.
 
 ```bash
 npx supabase link --project-ref jqhechsdraqpdfyddaaz
@@ -99,7 +100,8 @@ La plantilla institucional está en [`docs/gobierno/03_plantilla_reba_procesos.d
 | `/` | Dashboard |
 | `/procesos` | Catálogo |
 | `/procesos/[code]` | Ficha del proceso |
-| `/areas` | Áreas |
+| `/areas` | Áreas y resumen de subáreas |
+| `/areas/[code]` | Subáreas, responsables y flujogramas del área |
 | `/mapa` | Mapa institucional |
 | `/revisiones` | Cola de revisión |
 | `/indicadores` | Indicadores de gobierno |
