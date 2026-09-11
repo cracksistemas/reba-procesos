@@ -1,0 +1,4 @@
+import type { Metadata } from "next";
+import { LoginForm } from "@/components/login-form";
+export const metadata:Metadata={title:"Ingreso"};
+export default function LoginPage(){return <main className="login-page"><section className="login-panel"><div className="brand login-brand"><div className="brand-mark">R</div><div><strong>REBA</strong><small>PROCESOS</small></div></div><div className="login-copy"><p className="eyebrow">Gestión institucional</p><h1>Procesos claros.<br/>Decisiones trazables.</h1><p>Consulta la versión vigente, colabora en la revisión y preserva el conocimiento de Rebagliati.</p></div><div className="login-quote">“La gestión mejora cuando todos entienden el proceso y saben cuál es su responsabilidad.”</div></section><section className="login-card"><div><h2>Bienvenido</h2><p>Ingresa con tu correo institucional para continuar.</p></div><LoginForm/><span className="login-foot">REBA Procesos · Entorno seguro institucional</span></section></main>}

@@ -1,0 +1,21 @@
+<mxfile host="app.diagrams.net" modified="2026-09-10T00:00:00.000Z" agent="REBA Procesos" version="24.7.17" type="device">
+  <diagram id="reba-template" name="Proceso">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/><mxCell id="1" parent="0"/>
+        <mxCell id="title" value="REBA PROCESOS · [CÓDIGO] NOMBRE DEL PROCESO" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#01017B;" vertex="1" parent="1"><mxGeometry x="40" y="30" width="780" height="40" as="geometry"/></mxCell>
+        <mxCell id="meta" value="Área: [ÁREA]   |   Dueño: [DUEÑO]   |   Versión: 0.1   |   Estado: BORRADOR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F7FB;strokeColor=#DCE4EC;fontColor=#5B6573;align=left;spacingLeft=12;" vertex="1" parent="1"><mxGeometry x="40" y="78" width="780" height="34" as="geometry"/></mxCell>
+        <mxCell id="start" value="Inicio" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#01017B;strokeWidth=2;fontColor=#01017B;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="60" y="220" width="100" height="50" as="geometry"/></mxCell>
+        <mxCell id="activity" value="Validar información" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF8FE;strokeColor=#00A7EB;strokeWidth=2;fontColor=#172033;" vertex="1" parent="1"><mxGeometry x="230" y="210" width="140" height="70" as="geometry"/></mxCell>
+        <mxCell id="decision" value="¿Información completa?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#D49A00;strokeWidth=2;fontColor=#172033;" vertex="1" parent="1"><mxGeometry x="445" y="195" width="105" height="100" as="geometry"/></mxCell>
+        <mxCell id="evidence" value="Registrar evidencia" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F7EF;strokeColor=#2E8B57;strokeWidth=2;fontColor=#172033;" vertex="1" parent="1"><mxGeometry x="630" y="210" width="140" height="70" as="geometry"/></mxCell>
+        <mxCell id="end" value="Fin" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#E8F7EF;strokeColor=#2E8B57;strokeWidth=2;fontColor=#2E8B57;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="840" y="220" width="100" height="50" as="geometry"/></mxCell>
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5B6573;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="start" target="activity"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5B6573;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="activity" target="decision"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="Sí" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5B6573;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="decision" target="evidence"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#5B6573;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="evidence" target="end"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="note" value="Reglas: flujo izquierda→derecha · actividades con verbo + objeto · decisiones como preguntas · conectores Sí/No" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#F5F7FB;strokeColor=#DCE4EC;fontColor=#5B6573;align=left;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="40" y="390" width="900" height="80" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

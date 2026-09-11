@@ -1,0 +1,6 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+export const metadata:Metadata={title:"Mapa de procesos"};
+const lanes=[{name:"ESTRATÉGICOS",color:"#01017B",nodes:["Planeamiento institucional","Gobierno de procesos","Aprobación presupuestal"]},{name:"MISIONALES",color:"#00A7EB",nodes:["Generar demanda","Gestionar oportunidades","Matricular alumno","Ejecutar programa","Certificar alumno"]},{name:"SOPORTE",color:"#5B6573",nodes:["Gestionar personas","Abastecer recursos","Administrar plataformas","Controlar finanzas"]}];
+export default function MapPage(){return <><div className="page-heading"><div><p className="eyebrow">Vista ejecutiva</p><h1>Mapa institucional</h1><p>Cómo se conectan los procesos estratégicos, misionales y de soporte.</p></div></div><div className="card map-board">{lanes.map((lane)=><section className="map-lane" key={lane.name}><div className="map-lane-header" style={{background:lane.color}}>{lane.name}</div><div className="map-lane-content">{lane.nodes.map((node,index)=><div style={{display:"contents"}} key={node}><Link className="map-node" href="/procesos">{node}</Link>{index<lane.nodes.length-1&&<ArrowRight className="map-arrow" size={17}/>}</div>)}</div></section>)}</div></>}
