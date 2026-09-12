@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { BarChart3, Bell, BookOpen, Building2, ChevronDown, FileText, FolderKanban, GitBranch, Home, Menu, Search, Settings, ShieldCheck, X } from "lucide-react";
+import { BarChart3, Bell, BookOpen, Building2, ChevronDown, FileText, FolderKanban, GitBranch, Home, Menu, Search, Settings, ShieldCheck, Workflow, X } from "lucide-react";
 
 const nav = [
   { href: "/", label: "Inicio", icon: Home }, { href: "/procesos", label: "Procesos", icon: FolderKanban },
-  { href: "/areas", label: "Áreas", icon: Building2 }, { href: "/mapa", label: "Mapa de procesos", icon: GitBranch },
+  { href: "/areas", label: "Áreas", icon: Building2 }, { href: "/flujogramas", label: "Flujogramas", icon: Workflow }, { href: "/mapa", label: "Mapa de procesos", icon: GitBranch },
   { href: "/revisiones", label: "Revisiones", icon: ShieldCheck, badge: 5 }, { href: "/indicadores", label: "Indicadores", icon: BarChart3 },
   { href: "/documentos", label: "Documentos", icon: FileText },
 ];

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { ArrowRight, CheckCircle2, GitBranch, Pencil, Plus, Save, X } from "lucide-react";
+import { FlowchartEditor } from "@/components/flowchart-editor";
 import type { Area, Process, Subarea } from "@/lib/data";
 
 type SubareaManagerProps = {
@@ -22,8 +23,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
   const [showForm, setShowForm] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
-  const [editingCode, setEditingCode] = useState<string | null>(null);
-  const [editingFlow, setEditingFlow] = useState("");
+  const [activeFlowchart, setActiveFlowchart] = useState<Subarea | null>(null);
 
   const subscribe = useCallback((onStoreChange: () => void) => {
     const handleStorage = (event: StorageEvent) => {
@@ -83,26 +83,6 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
     window.setTimeout(() => setNotice(""), 4500);
   };
 
-  const beginFlowEdit = (subarea: Subarea) => {
-    setEditingCode(subarea.code);
-    setEditingFlow(subarea.flow.join("\n"));
-    setError("");
-  };
-
-  const saveFlow = (subarea: Subarea) => {
-    const flow = splitFlow(editingFlow);
-    if (flow.length < 2) {
-      setError("El flujograma debe tener al menos dos etapas.");
-      return;
-    }
-    persist(items.map((item) => item.code === subarea.code ? { ...item, flow, source: item.source === "Usuario" ? "Usuario" : item.source } : item));
-    setEditingCode(null);
-    setEditingFlow("");
-    setError("");
-    setNotice(`Flujograma de ${subarea.name} actualizado.`);
-    window.setTimeout(() => setNotice(""), 4500);
-  };
-
   return <>
     <div className="page-heading area-detail-heading">
       <div>
@@ -142,7 +122,6 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
     <section className="subarea-grid" aria-label="Subáreas">
       {items.map((subarea) => {
         const related = areaProcesses.filter((process) => process.subareaCode === subarea.code);
-        const editing = editingCode === subarea.code;
         return <article className="card subarea-card" id={subarea.code} key={subarea.code}>
           <div className="subarea-card-head">
             <div className="subarea-icon" style={{ background: area.color }}><GitBranch size={18}/></div>
@@ -151,14 +130,12 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
           </div>
           <p className="subarea-description">{subarea.description}</p>
           <div className="subarea-meta"><span>Responsable</span><strong>{subarea.owner}</strong><span>Procesos vinculados</span><strong>{related.length}</strong></div>
-          <div className="mini-flow-header"><strong>Flujograma de la subárea</strong>{!editing && <button className="text-button" onClick={() => beginFlowEdit(subarea)}><Pencil size={13}/> Editar</button>}</div>
-          {editing ? <div className="flow-editor">
-            <textarea value={editingFlow} onChange={(event) => setEditingFlow(event.target.value)} rows={5} aria-label={`Etapas de ${subarea.name}`} />
-            <div><button className="button button-secondary" onClick={() => setEditingCode(null)}>Cancelar</button><button className="button button-primary" onClick={() => saveFlow(subarea)}><Save size={14}/> Guardar flujo</button></div>
-          </div> : <div className="mini-flow">{subarea.flow.map((step, index) => <div className="mini-flow-step" key={`${subarea.code}-${step}`}><span>{index + 1}</span><strong>{step}</strong>{index < subarea.flow.length - 1 && <ArrowRight size={14}/>}</div>)}</div>}
-          <div className="subarea-footer"><span>{related.length ? related.map((process) => process.code).join(" · ") : "Lista para vincular procesos"}</span><Link className="button button-ghost" href={`/procesos?area=${area.code}&subarea=${subarea.code}`}>Ver procesos <ArrowRight size={14}/></Link></div>
+          <div className="mini-flow-header"><strong>Flujograma de la subárea</strong><button className="text-button" onClick={() => setActiveFlowchart(subarea)}><Pencil size={13}/> Editar visualmente</button></div>
+          <div className="mini-flow"><div className="mini-flow-terminal">Inicio</div>{subarea.flow.map((step, index) => <div className="mini-flow-step" key={`${subarea.code}-${step}`}><ArrowRight size={14}/><strong>{step}</strong>{index === subarea.flow.length - 1 && <><ArrowRight size={14}/><div className="mini-flow-terminal end">Fin</div></>}</div>)}</div>
+          <div className="subarea-footer"><span>{related.length ? related.map((process) => process.code).join(" · ") : "Lista para vincular procesos"}</span><div><button className="button button-secondary" onClick={() => setActiveFlowchart(subarea)}><GitBranch size={14}/> Abrir lienzo</button><Link className="button button-ghost" href={`/procesos?area=${area.code}&subarea=${subarea.code}`}>Ver procesos <ArrowRight size={14}/></Link></div></div>
         </article>;
       })}
     </section>
+    {activeFlowchart && <FlowchartEditor area={area} subarea={activeFlowchart} onClose={() => setActiveFlowchart(null)}/>}
   </>;
 }

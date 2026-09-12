@@ -9,6 +9,7 @@ export default function AreasPage() {
   return <>
     <div className="page-heading">
       <div><p className="eyebrow">Estructura organizacional</p><h1>Áreas y subáreas</h1><p>Responsables, procesos y flujogramas organizados por unidad.</p></div>
+      <Link className="button button-primary" href="/flujogramas"><GitBranch size={15}/> Ver flujogramas por área</Link>
     </div>
     <section className="area-grid">
       {areas.map((area) => {
