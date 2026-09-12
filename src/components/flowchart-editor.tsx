@@ -37,11 +37,36 @@ const nodeTypes = { reba: RebaFlowNode };
 const defaultViewport: Viewport = { x: 0, y: 0, zoom: 1 };
 const nodeColors: Record<NodeKind, string> = { start: "#0f766e", activity: "#5653a6", decision: "#b77900", evidence: "#52616b", exception: "#b42318", end: "#2e7d32" };
 
-function nodeDimensions(kind: NodeKind) {
-  if (kind === "decision") return { width: 174, height: 132 };
-  if (kind === "exception") return { width: 270, height: 86 };
-  if (kind === "start" || kind === "end") return { width: 230, height: 72 };
-  return { width: 230, height: 90 };
+function numericSize(value: unknown, fallback: number) {
+  return typeof value === "number" && Number.isFinite(value) ? value : fallback;
+}
+
+function nodeDimensions(kind: NodeKind, label = "", role = "", preferredWidth?: number) {
+  const baseWidth = kind === "decision" ? 300 : kind === "exception" ? 320 : kind === "start" || kind === "end" ? 230 : 250;
+  const maxWidth = kind === "decision" || kind === "exception" ? 540 : 440;
+  const textLength = label.replace(/\s+/g, " ").trim().length;
+  const responsiveWidth = baseWidth + Math.max(0, textLength - 42) * 1.7;
+  const width = Math.round(Math.min(maxWidth, Math.max(baseWidth, preferredWidth ?? 0, responsiveWidth)));
+  const usableWidth = width * (kind === "decision" ? 0.68 : kind === "exception" ? 0.78 : kind === "start" || kind === "end" ? 0.82 : 1) - 36;
+  const charactersPerLine = Math.max(18, Math.floor(usableWidth / 5.6));
+  const labelLines = Math.max(1, Math.ceil(textLength / charactersPerLine));
+  const roleHeight = role.trim() ? 16 : 0;
+  const contentHeight = 20 + roleHeight + labelLines * 14;
+  const minimumHeight = kind === "decision" ? 72 : kind === "exception" ? 64 : kind === "start" || kind === "end" ? 54 : 58;
+  return { width, height: Math.max(minimumHeight, contentHeight) };
+}
+
+function fitNodeBox(kind: NodeKind, label: string, role: string, position: { x: number; y: number }, currentStyle?: RebaNode["style"]) {
+  const currentWidth = numericSize(currentStyle?.width, nodeDimensions(kind).width);
+  const currentHeight = numericSize(currentStyle?.height, nodeDimensions(kind).height);
+  const style = nodeDimensions(kind, label, role, currentWidth);
+  return {
+    style,
+    position: {
+      x: position.x + (currentWidth - style.width) / 2,
+      y: position.y + (currentHeight - style.height) / 2,
+    },
+  };
 }
 
 function RebaFlowNode({ data, selected }: NodeProps<RebaNode>) {
@@ -74,21 +99,24 @@ function buildInitialGraph(subarea: Subarea, imported?: MarketingFlowchart): Flo
   if (imported) {
     return {
       version: 2,
-      nodes: imported.nodes.map((node) => ({
-        id: node.id,
-        type: "reba",
-        position: node.position,
-        data: { kind: node.kind, label: node.label, role: node.role, fill: node.fill, stroke: node.stroke, textColor: node.textColor },
-        style: node.size,
-      })),
+      nodes: imported.nodes.map((node) => {
+        const box = fitNodeBox(node.kind, node.label, node.role, node.position, node.size);
+        return {
+          id: node.id,
+          type: "reba",
+          position: box.position,
+          data: { kind: node.kind, label: node.label, role: node.role, fill: node.fill, stroke: node.stroke, textColor: node.textColor },
+          style: box.style,
+        };
+      }),
       edges: imported.edges.map((edge) => makeEdge(edge.id, edge.source, edge.target, edge.route, edge.label, edge.sourceHandle)),
     };
   }
   const x = 430;
   const nodes: RebaNode[] = [
-    { id: "start", type: "reba", position: { x, y: 30 }, data: { kind: "start", label: `Inicio: ${subarea.name}`, role: subarea.owner }, style: nodeDimensions("start") },
-    ...subarea.flow.map((label, index) => ({ id: `step-${index + 1}`, type: "reba" as const, position: { x, y: 150 + index * 145 }, data: { kind: "activity" as const, label, role: subarea.owner }, style: nodeDimensions("activity") })),
-    { id: "end", type: "reba", position: { x, y: 150 + subarea.flow.length * 145 }, data: { kind: "end", label: "Fin: actividad cerrada y evidenciada", role: "Resultado" }, style: nodeDimensions("end") },
+    { id: "start", type: "reba", position: { x, y: 30 }, data: { kind: "start", label: `Inicio: ${subarea.name}`, role: subarea.owner }, style: nodeDimensions("start", `Inicio: ${subarea.name}`, subarea.owner) },
+    ...subarea.flow.map((label, index) => ({ id: `step-${index + 1}`, type: "reba" as const, position: { x, y: 150 + index * 145 }, data: { kind: "activity" as const, label, role: subarea.owner }, style: nodeDimensions("activity", label, subarea.owner) })),
+    { id: "end", type: "reba", position: { x, y: 150 + subarea.flow.length * 145 }, data: { kind: "end", label: "Fin: actividad cerrada y evidenciada", role: "Resultado" }, style: nodeDimensions("end", "Fin: actividad cerrada y evidenciada", "Resultado") },
   ];
   const edges = nodes.slice(0, -1).map((node, index) => makeEdge(`edge-${index + 1}`, node.id, nodes[index + 1].id));
   return { version: 2, nodes, edges };
@@ -104,11 +132,16 @@ function migrateGraph(value: string | null, fallback: FlowGraph): FlowGraph {
       const legacyKind = typeof item.type === "string" && item.type !== "reba" ? item.type as NodeKind : undefined;
       const kind = data?.kind ?? legacyKind ?? "activity";
       const position = item.position as { x?: number; y?: number } | undefined;
+      const label = data?.label ?? String(item.label ?? "Actividad");
+      const role = data?.role ?? String(item.role ?? "Responsable");
+      const positionValue = { x: position?.x ?? (typeof item.x === "number" ? item.x : 90 + (index % 3) * 310), y: position?.y ?? (typeof item.y === "number" ? item.y : 80 + Math.floor(index / 3) * 145) };
+      const currentStyle = item.style && typeof item.style === "object" ? item.style as RebaNode["style"] : undefined;
+      const box = fitNodeBox(kind, label, role, positionValue, currentStyle);
       return {
         id: String(item.id ?? `node-${index + 1}`), type: "reba",
-        position: { x: position?.x ?? (typeof item.x === "number" ? item.x : 90 + (index % 3) * 310), y: position?.y ?? (typeof item.y === "number" ? item.y : 80 + Math.floor(index / 3) * 145) },
-        data: { kind, label: data?.label ?? String(item.label ?? "Actividad"), role: data?.role ?? String(item.role ?? "Responsable"), fill: data?.fill, stroke: data?.stroke, textColor: data?.textColor },
-        style: item.style && typeof item.style === "object" ? item.style as RebaNode["style"] : nodeDimensions(kind),
+        position: box.position,
+        data: { kind, label, role, fill: data?.fill, stroke: data?.stroke, textColor: data?.textColor },
+        style: box.style,
       };
     });
     const edges = raw.edges.map((item, index) => {
@@ -153,7 +186,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
     const labels: Record<NodeKind, string> = { start: "Inicio del proceso", activity: "Nueva actividad", decision: "¿Decisión?", evidence: "Evidencia o documento", exception: "Excepción o escalamiento", end: "Fin del proceso" };
     const center = instance?.screenToFlowPosition({ x: window.innerWidth * 0.48, y: window.innerHeight * 0.48 }) ?? { x: 250, y: 180 };
     const id = `node-${Date.now()}`;
-    const node: RebaNode = { id, type: "reba", position: center, data: { kind, label: labels[kind], role: subarea.owner }, style: nodeDimensions(kind), selected: true };
+    const node: RebaNode = { id, type: "reba", position: center, data: { kind, label: labels[kind], role: subarea.owner }, style: nodeDimensions(kind, labels[kind], subarea.owner), selected: true };
     setNodes((current) => [...current.map((item) => ({ ...item, selected: false })), node]);
     setSelectedNodeId(id); setSelectedEdgeId(null); setDirty(true);
     setNotice("Cuadro añadido. Edita su contenido en el panel derecho y conéctalo desde sus puntos.");
@@ -164,7 +197,8 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
     setNodes((current) => current.map((node) => {
       if (node.id !== selectedNodeId) return node;
       const data = { ...node.data, ...patch };
-      return { ...node, data, style: nodeDimensions(data.kind) };
+      const box = fitNodeBox(data.kind, data.label, data.role, node.position, node.style);
+      return { ...node, data, position: box.position, style: box.style };
     }));
     setDirty(true);
   };

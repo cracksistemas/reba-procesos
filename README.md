@@ -7,7 +7,7 @@ La solución sigue una arquitectura híbrida:
 - **Next.js + Vercel:** experiencia web, rutas y despliegue.
 - **Supabase:** autenticación, metadatos, RLS, aprobaciones y auditoría.
 - **Google Drive:** repositorio documental y archivos maestros.
-- **Editor visual REBA sobre XYFlow (MIT):** lienzo integrado con arrastre, conexiones, zoom, minimapa, selección múltiple y cuadros de actividad, decisión, evidencia, inicio y fin.
+- **Editor visual REBA sobre XYFlow (MIT):** lienzo integrado con arrastre, conexiones, zoom, minimapa, selección múltiple y autoajuste de cada figura al largo de su texto.
 - **Marketing v3.0:** 17 flujogramas operativos importados desde el HTML institucional, agrupados en 8 subáreas y conservados como 155 nodos y 163 conexiones editables.
 
 El HTML puede publicarse, pero no es la fuente editable. Cada proceso debe mantener un solo archivo maestro `.drawio`.
