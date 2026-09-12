@@ -8,6 +8,7 @@ La solución sigue una arquitectura híbrida:
 - **Supabase:** autenticación, metadatos, RLS, aprobaciones y auditoría.
 - **Google Drive:** repositorio documental y archivos maestros.
 - **Editor visual REBA sobre XYFlow (MIT):** lienzo integrado con arrastre, conexiones, zoom, minimapa, selección múltiple y cuadros de actividad, decisión, evidencia, inicio y fin.
+- **Marketing v3.0:** 17 flujogramas operativos importados desde el HTML institucional, agrupados en 8 subáreas y conservados como 155 nodos y 163 conexiones editables.
 
 El HTML puede publicarse, pero no es la fuente editable. Cada proceso debe mantener un solo archivo maestro `.drawio`.
 
@@ -85,6 +86,8 @@ https://drive.google.com/drive/folders/1YoIFfdcoQn107r0juIKyQk6fhaQWkT1H
 El MVP abre la carpeta institucional y ofrece un lienzo propio inspirado en Miro, construido sobre `@xyflow/react`, para editar los flujos como JSON estructurado. El formato anterior guardado en el navegador se migra automáticamente. En la siguiente fase, cada registro debe guardar `approved_pdf_file_id`; la importación o exportación `.drawio` puede añadirse como interoperabilidad opcional.
 
 La plantilla institucional está en [`docs/gobierno/03_plantilla_reba_procesos.drawio`](docs/gobierno/03_plantilla_reba_procesos.drawio).
+
+La conversión reproducible del paquete de Marketing se encuentra en [`scripts/import-marketing-flows.ps1`](scripts/import-marketing-flows.ps1). El HTML se usa como fuente de importación; los diagramas operativos del portal viven en JSON estructurado.
 
 ## Artefactos de gobierno
 

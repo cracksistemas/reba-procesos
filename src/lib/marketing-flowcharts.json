@@ -1,0 +1,4230 @@
+[
+  {
+    "code": "MKT-JM-01",
+    "sourceId": "JM_01_gobierno_estrat_gico_y_autonom_a_del_rea",
+    "subareaCode": "MKT-S01",
+    "subareaName": "Jefatura de Marketing",
+    "owner": "Jefatura de Marketing",
+    "title": "Gobierno estratégico y autonomía del área",
+    "description": "Jefatura fija dirección y guardrails; las subáreas ejecutan y solo escalan excepciones reales.",
+    "canvas": {
+      "height": 878.4,
+      "width": 730.16
+    },
+    "nodes": [
+      {
+        "id": "MKT-JM-01-s",
+        "kind": "start",
+        "label": "Inicio del periodo / prioridad estratégica",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 173.42
+        },
+        "size": {
+          "height": 36,
+          "width": 240
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-01-j1",
+        "kind": "activity",
+        "label": "Define objetivos, prioridades,\nKPI, presupuesto y guardrails",
+        "role": "JM",
+        "position": {
+          "y": 132.2,
+          "x": 127.59
+        },
+        "size": {
+          "height": 36,
+          "width": 332
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-01-j2",
+        "kind": "activity",
+        "label": "Convierte prioridades en\ncalendario, backlog,\nresponsables y SLA",
+        "role": "CO",
+        "position": {
+          "y": 211.2,
+          "x": 107.59
+        },
+        "size": {
+          "height": 36,
+          "width": 372
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-01-d1",
+        "kind": "decision",
+        "label": "¿La tarea está dentro de plan, brief, presupuesto y reglas?",
+        "role": "",
+        "position": {
+          "y": 290.2,
+          "x": 25.31
+        },
+        "size": {
+          "height": 36,
+          "width": 537
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-01-sub",
+        "kind": "activity",
+        "label": "Ejecuta su proceso de forma\nautónoma y registra evidencia",
+        "role": "SUBÁREA",
+        "position": {
+          "y": 435.2,
+          "x": 32.59
+        },
+        "size": {
+          "height": 36,
+          "width": 368
+        },
+        "fill": "#eef2f6",
+        "stroke": "#5d6d7e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-01-ex",
+        "kind": "exception",
+        "label": "Excepción: conflicto, desviación material, riesgo o decisión irreversible",
+        "role": "",
+        "position": {
+          "y": 378.2,
+          "x": 260.35
+        },
+        "size": {
+          "height": 36,
+          "width": 444
+        },
+        "fill": "#ffe7e7",
+        "stroke": "#b42318",
+        "textColor": "#7a1b14"
+      },
+      {
+        "id": "MKT-JM-01-ev",
+        "kind": "evidence",
+        "label": "Tablero actualizado + decisión + responsable + fecha",
+        "role": "",
+        "position": {
+          "y": 738.2,
+          "x": 280.09
+        },
+        "size": {
+          "height": 36,
+          "width": 269
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-01-j3",
+        "kind": "activity",
+        "label": "Resuelve, reasigna\nprioridad/capacidad o activa\nplan correctivo",
+        "role": "JM",
+        "position": {
+          "y": 492.2,
+          "x": 303.59
+        },
+        "size": {
+          "height": 36,
+          "width": 358
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-01-d2",
+        "kind": "decision",
+        "label": "¿Excede autoridad / presupuesto / política?",
+        "role": "",
+        "position": {
+          "y": 571.2,
+          "x": 281.5
+        },
+        "size": {
+          "height": 36,
+          "width": 402
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-01-g",
+        "kind": "activity",
+        "label": "Aprueba decisión estratégica o\nextraordinaria",
+        "role": "GERENCIA",
+        "position": {
+          "y": 659.2,
+          "x": 260.59
+        },
+        "size": {
+          "height": 36,
+          "width": 308
+        },
+        "fill": "#ffe8c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-01-e",
+        "kind": "end",
+        "label": "Fin: operación autónoma y excepción trazada",
+        "role": "",
+        "position": {
+          "y": 817.2,
+          "x": 277.27
+        },
+        "size": {
+          "height": 36,
+          "width": 275
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-JM-01-edge-1",
+        "source": "MKT-JM-01-s",
+        "target": "MKT-JM-01-j1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-01-edge-2",
+        "source": "MKT-JM-01-j1",
+        "target": "MKT-JM-01-j2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-01-edge-3",
+        "source": "MKT-JM-01-j2",
+        "target": "MKT-JM-01-d1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-01-edge-4",
+        "source": "MKT-JM-01-d1",
+        "target": "MKT-JM-01-sub",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-01-edge-5",
+        "source": "MKT-JM-01-d1",
+        "target": "MKT-JM-01-ex",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-JM-01-edge-6",
+        "source": "MKT-JM-01-sub",
+        "target": "MKT-JM-01-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-01-edge-7",
+        "source": "MKT-JM-01-ex",
+        "target": "MKT-JM-01-j3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-01-edge-8",
+        "source": "MKT-JM-01-j3",
+        "target": "MKT-JM-01-d2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-01-edge-9",
+        "source": "MKT-JM-01-d2",
+        "target": "MKT-JM-01-g",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-01-edge-10",
+        "source": "MKT-JM-01-d2",
+        "target": "MKT-JM-01-ev",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-01-edge-11",
+        "source": "MKT-JM-01-g",
+        "target": "MKT-JM-01-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-01-edge-12",
+        "source": "MKT-JM-01-ev",
+        "target": "MKT-JM-01-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-JM-02",
+    "sourceId": "JM_02_revisi_n_semanal_por_excepci_n",
+    "subareaCode": "MKT-S01",
+    "subareaName": "Jefatura de Marketing",
+    "owner": "Jefatura de Marketing",
+    "title": "Revisión semanal por excepción",
+    "description": "Evita que Jefatura revise cada pieza, campaña o tarea; mira solo KPI, bloqueos y riesgos relevantes.",
+    "canvas": {
+      "height": 632.4,
+      "width": 631.67
+    },
+    "nodes": [
+      {
+        "id": "MKT-JM-02-s",
+        "kind": "start",
+        "label": "Corte semanal",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 164.72
+        },
+        "size": {
+          "height": 36,
+          "width": 120
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-02-c",
+        "kind": "activity",
+        "label": "Consolida KPI, backlog,\ncapacidad, bloqueos y alertas",
+        "role": "CO",
+        "position": {
+          "y": 132.2,
+          "x": 59.97
+        },
+        "size": {
+          "height": 36,
+          "width": 311
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-02-d",
+        "kind": "decision",
+        "label": "¿Existe desviación o excepción material?",
+        "role": "",
+        "position": {
+          "y": 211.2,
+          "x": 25.43
+        },
+        "size": {
+          "height": 36,
+          "width": 380
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-02-ok",
+        "kind": "activity",
+        "label": "Mantiene autonomía; no\ninterviene en la ejecución\nrutinaria",
+        "role": "JM",
+        "position": {
+          "y": 356.2,
+          "x": 43.47
+        },
+        "size": {
+          "height": 36,
+          "width": 338
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-02-r",
+        "kind": "activity",
+        "label": "Revisa causa, impacto y\nalternativas con responsable\ndel proceso",
+        "role": "JM",
+        "position": {
+          "y": 299.2,
+          "x": 236.47
+        },
+        "size": {
+          "height": 36,
+          "width": 370
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-02-ev",
+        "kind": "evidence",
+        "label": "Registro de excepción y plan de acción",
+        "role": "",
+        "position": {
+          "y": 492.2,
+          "x": 134.97
+        },
+        "size": {
+          "height": 36,
+          "width": 203
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-02-a",
+        "kind": "activity",
+        "label": "Decide: reasignar, corregir,\npausar o escalar",
+        "role": "JM",
+        "position": {
+          "y": 413.2,
+          "x": 271.47
+        },
+        "size": {
+          "height": 36,
+          "width": 262
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-02-e",
+        "kind": "start",
+        "label": "Cierre semanal",
+        "role": "",
+        "position": {
+          "y": 571.2,
+          "x": 184.19
+        },
+        "size": {
+          "height": 36,
+          "width": 120
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-JM-02-edge-1",
+        "source": "MKT-JM-02-s",
+        "target": "MKT-JM-02-c",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-02-edge-2",
+        "source": "MKT-JM-02-c",
+        "target": "MKT-JM-02-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-02-edge-3",
+        "source": "MKT-JM-02-d",
+        "target": "MKT-JM-02-ok",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-02-edge-4",
+        "source": "MKT-JM-02-d",
+        "target": "MKT-JM-02-r",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-JM-02-edge-5",
+        "source": "MKT-JM-02-ok",
+        "target": "MKT-JM-02-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-02-edge-6",
+        "source": "MKT-JM-02-r",
+        "target": "MKT-JM-02-a",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-02-edge-7",
+        "source": "MKT-JM-02-a",
+        "target": "MKT-JM-02-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-JM-02-edge-8",
+        "source": "MKT-JM-02-ev",
+        "target": "MKT-JM-02-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-JM-03",
+    "sourceId": "JM_03_portafolio_de_innovaci_n",
+    "subareaCode": "MKT-S01",
+    "subareaName": "Jefatura de Marketing",
+    "owner": "Jefatura de Marketing",
+    "title": "Portafolio de innovación",
+    "description": "Formaliza innovación como hipótesis y piloto medible, no como ideas aisladas.",
+    "canvas": {
+      "height": 764.4,
+      "width": 668.4
+    },
+    "nodes": [
+      {
+        "id": "MKT-JM-03-s",
+        "kind": "start",
+        "label": "Idea / problema / oportunidad",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 239.36
+        },
+        "size": {
+          "height": 36,
+          "width": 185
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-03-o",
+        "kind": "activity",
+        "label": "Registra problema, hipótesis,\nimpacto esperado y evidencia",
+        "role": "SUBÁREA",
+        "position": {
+          "y": 132.2,
+          "x": 147.7
+        },
+        "size": {
+          "height": 36,
+          "width": 368
+        },
+        "fill": "#eef2f6",
+        "stroke": "#5d6d7e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-03-co",
+        "kind": "activity",
+        "label": "Clasifica dependencia,\nesfuerzo, responsable y fecha",
+        "role": "CO",
+        "position": {
+          "y": 211.2,
+          "x": 178.2
+        },
+        "size": {
+          "height": 36,
+          "width": 307
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-03-d",
+        "kind": "decision",
+        "label": "¿Puede probarse dentro de recursos y reglas existentes?",
+        "role": "",
+        "position": {
+          "y": 290.2,
+          "x": 68.94
+        },
+        "size": {
+          "height": 36,
+          "width": 526
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-03-p",
+        "kind": "activity",
+        "label": "Ejecuta piloto y mide resultado",
+        "role": "SUBÁREA",
+        "position": {
+          "y": 457.2,
+          "x": 212.2
+        },
+        "size": {
+          "height": 36,
+          "width": 225
+        },
+        "fill": "#eef2f6",
+        "stroke": "#5d6d7e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-03-j",
+        "kind": "activity",
+        "label": "Prioriza o resuelve excepción\nde capacidad/alcance",
+        "role": "JM",
+        "position": {
+          "y": 378.2,
+          "x": 346.2
+        },
+        "size": {
+          "height": 36,
+          "width": 297
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-03-d2",
+        "kind": "decision",
+        "label": "¿Resultado valida la hipótesis?",
+        "role": "",
+        "position": {
+          "y": 536.2,
+          "x": 177.57
+        },
+        "size": {
+          "height": 36,
+          "width": 294
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-03-sc",
+        "kind": "activity",
+        "label": "Decide escalar, estandarizar o\nintegrar al proceso",
+        "role": "JM",
+        "position": {
+          "y": 624.2,
+          "x": 25.2
+        },
+        "size": {
+          "height": 36,
+          "width": 287
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-03-cl",
+        "kind": "activity",
+        "label": "Ajusta o cierra el piloto y\ndocumenta aprendizaje",
+        "role": "JM",
+        "position": {
+          "y": 624.2,
+          "x": 341.2
+        },
+        "size": {
+          "height": 36,
+          "width": 281
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-JM-03-e",
+        "kind": "start",
+        "label": "Portafolio actualizado",
+        "role": "",
+        "position": {
+          "y": 703.2,
+          "x": 254.6
+        },
+        "size": {
+          "height": 36,
+          "width": 140
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-JM-03-edge-1",
+        "source": "MKT-JM-03-s",
+        "target": "MKT-JM-03-o",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-03-edge-2",
+        "source": "MKT-JM-03-o",
+        "target": "MKT-JM-03-co",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-03-edge-3",
+        "source": "MKT-JM-03-co",
+        "target": "MKT-JM-03-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-03-edge-4",
+        "source": "MKT-JM-03-d",
+        "target": "MKT-JM-03-p",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-03-edge-5",
+        "source": "MKT-JM-03-d",
+        "target": "MKT-JM-03-j",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-JM-03-edge-6",
+        "source": "MKT-JM-03-p",
+        "target": "MKT-JM-03-d2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-JM-03-edge-7",
+        "source": "MKT-JM-03-j",
+        "target": "MKT-JM-03-p",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-JM-03-edge-8",
+        "source": "MKT-JM-03-d2",
+        "target": "MKT-JM-03-sc",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-JM-03-edge-9",
+        "source": "MKT-JM-03-d2",
+        "target": "MKT-JM-03-cl",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-JM-03-edge-10",
+        "source": "MKT-JM-03-sc",
+        "target": "MKT-JM-03-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-JM-03-edge-11",
+        "source": "MKT-JM-03-cl",
+        "target": "MKT-JM-03-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      }
+    ]
+  },
+  {
+    "code": "MKT-CO-01",
+    "sourceId": "CO_01_bandeja_nica_y_enrutamiento",
+    "subareaCode": "MKT-S02",
+    "subareaName": "Coordinación / Asistencia",
+    "owner": "Coordinador / Asistente",
+    "title": "Bandeja única y enrutamiento",
+    "description": "El Coordinador/Asistente valida y enruta sin convertir a Jefatura en aprobador.",
+    "canvas": {
+      "height": 843.4,
+      "width": 826.11
+    },
+    "nodes": [
+      {
+        "id": "MKT-CO-01-s",
+        "kind": "start",
+        "label": "Solicitud / brief / requerimiento",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 477.86
+        },
+        "size": {
+          "height": 36,
+          "width": 189
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-01-c1",
+        "kind": "activity",
+        "label": "Registra la solicitud en la\nbandeja única",
+        "role": "CO",
+        "position": {
+          "y": 132.2,
+          "x": 326.41
+        },
+        "size": {
+          "height": 36,
+          "width": 242
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-01-d1",
+        "kind": "decision",
+        "label": "¿Tiene fuente, objetivo, fecha, formato, prioridad y responsable?",
+        "role": "",
+        "position": {
+          "y": 211.2,
+          "x": 24.99
+        },
+        "size": {
+          "height": 36,
+          "width": 587
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-01-ret",
+        "kind": "activity",
+        "label": "Devuelve al solicitante\nindicando campos faltantes",
+        "role": "CO",
+        "position": {
+          "y": 299.2,
+          "x": 509.91
+        },
+        "size": {
+          "height": 36,
+          "width": 291
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-01-c2",
+        "kind": "activity",
+        "label": "Clasifica subárea, SLA,\ndependencias y evidencia\nesperada",
+        "role": "CO",
+        "position": {
+          "y": 299.2,
+          "x": 136.41
+        },
+        "size": {
+          "height": 36,
+          "width": 344
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-01-c3",
+        "kind": "activity",
+        "label": "Enruta al responsable y\nactualiza calendario/backlog",
+        "role": "CO",
+        "position": {
+          "y": 378.2,
+          "x": 156.91
+        },
+        "size": {
+          "height": 36,
+          "width": 303
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-01-d2",
+        "kind": "decision",
+        "label": "¿Existe conflicto de capacidad o prioridad?",
+        "role": "",
+        "position": {
+          "y": 457.2,
+          "x": 109.84
+        },
+        "size": {
+          "height": 36,
+          "width": 397
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-01-sub",
+        "kind": "activity",
+        "label": "Ejecuta de forma autónoma",
+        "role": "SUBÁREA",
+        "position": {
+          "y": 624.2,
+          "x": 195.91
+        },
+        "size": {
+          "height": 36,
+          "width": 211
+        },
+        "fill": "#eef2f6",
+        "stroke": "#5d6d7e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-01-j",
+        "kind": "activity",
+        "label": "Resuelve conflicto de\nprioridad/capacidad",
+        "role": "JM",
+        "position": {
+          "y": 545.2,
+          "x": 326.91
+        },
+        "size": {
+          "height": 36,
+          "width": 249
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-01-ev",
+        "kind": "evidence",
+        "label": "Tarea asignada + SLA + responsable + estado",
+        "role": "",
+        "position": {
+          "y": 703.2,
+          "x": 183.41
+        },
+        "size": {
+          "height": 36,
+          "width": 236
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-01-e",
+        "kind": "start",
+        "label": "Solicitud controlada",
+        "role": "",
+        "position": {
+          "y": 782.2,
+          "x": 236.9
+        },
+        "size": {
+          "height": 36,
+          "width": 129
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-CO-01-edge-1",
+        "source": "MKT-CO-01-s",
+        "target": "MKT-CO-01-c1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CO-01-edge-2",
+        "source": "MKT-CO-01-c1",
+        "target": "MKT-CO-01-d1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CO-01-edge-3",
+        "source": "MKT-CO-01-d1",
+        "target": "MKT-CO-01-ret",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CO-01-edge-4",
+        "source": "MKT-CO-01-d1",
+        "target": "MKT-CO-01-c2",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CO-01-edge-5",
+        "source": "MKT-CO-01-ret",
+        "target": "MKT-CO-01-s",
+        "label": "",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CO-01-edge-6",
+        "source": "MKT-CO-01-c2",
+        "target": "MKT-CO-01-c3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CO-01-edge-7",
+        "source": "MKT-CO-01-c3",
+        "target": "MKT-CO-01-d2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CO-01-edge-8",
+        "source": "MKT-CO-01-d2",
+        "target": "MKT-CO-01-sub",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CO-01-edge-9",
+        "source": "MKT-CO-01-d2",
+        "target": "MKT-CO-01-j",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CO-01-edge-10",
+        "source": "MKT-CO-01-sub",
+        "target": "MKT-CO-01-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CO-01-edge-11",
+        "source": "MKT-CO-01-j",
+        "target": "MKT-CO-01-sub",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CO-01-edge-12",
+        "source": "MKT-CO-01-ev",
+        "target": "MKT-CO-01-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-CO-02",
+    "sourceId": "CO_02_punto_cero_y_calendario_integrado",
+    "subareaCode": "MKT-S02",
+    "subareaName": "Coordinación / Asistencia",
+    "owner": "Coordinador / Asistente",
+    "title": "Punto Cero y calendario integrado",
+    "description": "Prepara el horizonte de lanzamientos; Jefatura entra solo si hay conflicto o excepción.",
+    "canvas": {
+      "height": 685.4,
+      "width": 710.9
+    },
+    "nodes": [
+      {
+        "id": "MKT-CO-02-s",
+        "kind": "start",
+        "label": "Horizonte de eventos",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 375.78
+        },
+        "size": {
+          "height": 36,
+          "width": 139
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-02-c1",
+        "kind": "activity",
+        "label": "Extrae eventos y verifica\nficha, código, fecha, categoría\ny dueño",
+        "role": "CO",
+        "position": {
+          "y": 132.2,
+          "x": 263.7
+        },
+        "size": {
+          "height": 36,
+          "width": 363
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-02-d1",
+        "kind": "decision",
+        "label": "¿Falta información o viabilidad?",
+        "role": "",
+        "position": {
+          "y": 211.2,
+          "x": 200.39
+        },
+        "size": {
+          "height": 36,
+          "width": 298
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-02-own",
+        "kind": "activity",
+        "label": "Completa información oficial\npendiente",
+        "role": "ÁREA DUEÑA",
+        "position": {
+          "y": 299.2,
+          "x": 398.7
+        },
+        "size": {
+          "height": 36,
+          "width": 287
+        },
+        "fill": "#eef2f6",
+        "stroke": "#5d6d7e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-02-c2",
+        "kind": "activity",
+        "label": "Consolida campañas, producción,\ndependencias y capacidad",
+        "role": "CO",
+        "position": {
+          "y": 299.2,
+          "x": 25.2
+        },
+        "size": {
+          "height": 36,
+          "width": 344
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-02-d2",
+        "kind": "decision",
+        "label": "¿Hay conflicto o excepción material?",
+        "role": "",
+        "position": {
+          "y": 378.2,
+          "x": 26.27
+        },
+        "size": {
+          "height": 36,
+          "width": 342
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-02-c3",
+        "kind": "activity",
+        "label": "Publica calendario y\ncompromisos",
+        "role": "CO",
+        "position": {
+          "y": 545.2,
+          "x": 83.2
+        },
+        "size": {
+          "height": 36,
+          "width": 214
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-02-j",
+        "kind": "activity",
+        "label": "Resuelve conflicto / excepción",
+        "role": "JM",
+        "position": {
+          "y": 466.2,
+          "x": 215.2
+        },
+        "size": {
+          "height": 36,
+          "width": 188
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CO-02-e",
+        "kind": "start",
+        "label": "Punto Cero operativo",
+        "role": "",
+        "position": {
+          "y": 624.2,
+          "x": 120.78
+        },
+        "size": {
+          "height": 36,
+          "width": 139
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-CO-02-edge-1",
+        "source": "MKT-CO-02-s",
+        "target": "MKT-CO-02-c1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CO-02-edge-2",
+        "source": "MKT-CO-02-c1",
+        "target": "MKT-CO-02-d1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CO-02-edge-3",
+        "source": "MKT-CO-02-d1",
+        "target": "MKT-CO-02-own",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CO-02-edge-4",
+        "source": "MKT-CO-02-d1",
+        "target": "MKT-CO-02-c2",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CO-02-edge-5",
+        "source": "MKT-CO-02-own",
+        "target": "MKT-CO-02-c1",
+        "label": "",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CO-02-edge-6",
+        "source": "MKT-CO-02-c2",
+        "target": "MKT-CO-02-d2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CO-02-edge-7",
+        "source": "MKT-CO-02-d2",
+        "target": "MKT-CO-02-c3",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CO-02-edge-8",
+        "source": "MKT-CO-02-d2",
+        "target": "MKT-CO-02-j",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CO-02-edge-9",
+        "source": "MKT-CO-02-c3",
+        "target": "MKT-CO-02-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CO-02-edge-10",
+        "source": "MKT-CO-02-j",
+        "target": "MKT-CO-02-c3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      }
+    ]
+  },
+  {
+    "code": "MKT-PE-01",
+    "sourceId": "PE_01_activaci_n_aut_noma_de_campa_a",
+    "subareaCode": "MKT-S03",
+    "subareaName": "Traffic y Performance",
+    "owner": "Traffic y Performance",
+    "title": "Activación autónoma de campaña",
+    "description": "Traffic activa cuando checklist y guardrails están completos; Jefatura no aprueba cada campaña.",
+    "canvas": {
+      "height": 597.4,
+      "width": 789.9
+    },
+    "nodes": [
+      {
+        "id": "MKT-PE-01-s",
+        "kind": "start",
+        "label": "Brief y assets disponibles",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 499.91
+        },
+        "size": {
+          "height": 36,
+          "width": 162
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-01-p1",
+        "kind": "activity",
+        "label": "Valida evento, oferta, público,\npresupuesto, fechas, CTA y\ndestino",
+        "role": "PE",
+        "position": {
+          "y": 132.2,
+          "x": 396.7
+        },
+        "size": {
+          "height": 36,
+          "width": 368
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-01-p2",
+        "kind": "activity",
+        "label": "Configura campaña, UTM,\nformulario, Pixel/CAPI y\nconversiones",
+        "role": "PE",
+        "position": {
+          "y": 211.2,
+          "x": 288.2
+        },
+        "size": {
+          "height": 36,
+          "width": 361
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-01-p3",
+        "kind": "activity",
+        "label": "Prueba ingreso y asignación del\nlead en CRM",
+        "role": "PE",
+        "position": {
+          "y": 290.2,
+          "x": 331.7
+        },
+        "size": {
+          "height": 36,
+          "width": 268
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-01-d1",
+        "kind": "decision",
+        "label": "¿Checklist completo y dentro del plan?",
+        "role": "",
+        "position": {
+          "y": 369.2,
+          "x": 281.39
+        },
+        "size": {
+          "height": 36,
+          "width": 361
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-01-act",
+        "kind": "activity",
+        "label": "Activa campaña y registra\nevidencia",
+        "role": "PE",
+        "position": {
+          "y": 457.2,
+          "x": 25.2
+        },
+        "size": {
+          "height": 36,
+          "width": 221
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-01-x",
+        "kind": "exception",
+        "label": "Excepción de presupuesto, objetivo, oferta, datos o riesgo",
+        "role": "",
+        "position": {
+          "y": 457.2,
+          "x": 274.82
+        },
+        "size": {
+          "height": 36,
+          "width": 374
+        },
+        "fill": "#ffe7e7",
+        "stroke": "#b42318",
+        "textColor": "#7a1b14"
+      },
+      {
+        "id": "MKT-PE-01-e",
+        "kind": "start",
+        "label": "Campaña activa y trazable",
+        "role": "",
+        "position": {
+          "y": 536.2,
+          "x": 51.34
+        },
+        "size": {
+          "height": 36,
+          "width": 169
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-01-j",
+        "kind": "activity",
+        "label": "Resuelve excepción o escala si\ncorresponde",
+        "role": "JM",
+        "position": {
+          "y": 536.2,
+          "x": 495.2
+        },
+        "size": {
+          "height": 36,
+          "width": 263
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-PE-01-edge-1",
+        "source": "MKT-PE-01-s",
+        "target": "MKT-PE-01-p1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-PE-01-edge-2",
+        "source": "MKT-PE-01-p1",
+        "target": "MKT-PE-01-p2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-PE-01-edge-3",
+        "source": "MKT-PE-01-p2",
+        "target": "MKT-PE-01-p3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-PE-01-edge-4",
+        "source": "MKT-PE-01-p3",
+        "target": "MKT-PE-01-d1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-PE-01-edge-5",
+        "source": "MKT-PE-01-d1",
+        "target": "MKT-PE-01-act",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-PE-01-edge-6",
+        "source": "MKT-PE-01-d1",
+        "target": "MKT-PE-01-x",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-PE-01-edge-7",
+        "source": "MKT-PE-01-act",
+        "target": "MKT-PE-01-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-PE-01-edge-8",
+        "source": "MKT-PE-01-x",
+        "target": "MKT-PE-01-j",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-PE-01-edge-9",
+        "source": "MKT-PE-01-j",
+        "target": "MKT-PE-01-p1",
+        "label": "",
+        "route": "return",
+        "sourceHandle": "right"
+      }
+    ]
+  },
+  {
+    "code": "MKT-PE-02",
+    "sourceId": "PE_02_monitoreo_guardrails_y_optimizaci_n",
+    "subareaCode": "MKT-S03",
+    "subareaName": "Traffic y Performance",
+    "owner": "Traffic y Performance",
+    "title": "Monitoreo, guardrails y optimización",
+    "description": "Optimización diaria por resultados y reglas de corte.",
+    "canvas": {
+      "height": 685.4,
+      "width": 718.9
+    },
+    "nodes": [
+      {
+        "id": "MKT-PE-02-s",
+        "kind": "start",
+        "label": "Campaña activa",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 278.21
+        },
+        "size": {
+          "height": 36,
+          "width": 120
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-02-p1",
+        "kind": "activity",
+        "label": "Revisa gasto, CTR, CPC, CPL,\nfrecuencia, calidad, CPA/ROAS",
+        "role": "PE",
+        "position": {
+          "y": 132.2,
+          "x": 159.7
+        },
+        "size": {
+          "height": 36,
+          "width": 347
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-02-d1",
+        "kind": "decision",
+        "label": "¿Activa un guardrail crítico?",
+        "role": "",
+        "position": {
+          "y": 211.2,
+          "x": 200.14
+        },
+        "size": {
+          "height": 36,
+          "width": 266
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-02-pause",
+        "kind": "activity",
+        "label": "Pausa componente afectado y\nregistra motivo",
+        "role": "PE",
+        "position": {
+          "y": 299.2,
+          "x": 25.2
+        },
+        "size": {
+          "height": 36,
+          "width": 268
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-02-opt",
+        "kind": "activity",
+        "label": "Optimiza público, creativo,\nmensaje o distribución dentro\nde reglas",
+        "role": "PE",
+        "position": {
+          "y": 299.2,
+          "x": 322.7
+        },
+        "size": {
+          "height": 36,
+          "width": 371
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-02-d2",
+        "kind": "decision",
+        "label": "¿Requiere cambio fuera del plan?",
+        "role": "",
+        "position": {
+          "y": 378.2,
+          "x": 174.17
+        },
+        "size": {
+          "height": 36,
+          "width": 318
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-02-j",
+        "kind": "activity",
+        "label": "Decide excepción",
+        "role": "JM",
+        "position": {
+          "y": 466.2,
+          "x": 207.7
+        },
+        "size": {
+          "height": 36,
+          "width": 129
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-02-log",
+        "kind": "evidence",
+        "label": "Bitácora de cambio + resultado",
+        "role": "",
+        "position": {
+          "y": 545.2,
+          "x": 251.2
+        },
+        "size": {
+          "height": 36,
+          "width": 164
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-PE-02-e",
+        "kind": "start",
+        "label": "Siguiente ciclo de monitoreo",
+        "role": "",
+        "position": {
+          "y": 624.2,
+          "x": 245.1
+        },
+        "size": {
+          "height": 36,
+          "width": 176
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-PE-02-edge-1",
+        "source": "MKT-PE-02-s",
+        "target": "MKT-PE-02-p1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-PE-02-edge-2",
+        "source": "MKT-PE-02-p1",
+        "target": "MKT-PE-02-d1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-PE-02-edge-3",
+        "source": "MKT-PE-02-d1",
+        "target": "MKT-PE-02-pause",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-PE-02-edge-4",
+        "source": "MKT-PE-02-d1",
+        "target": "MKT-PE-02-opt",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-PE-02-edge-5",
+        "source": "MKT-PE-02-pause",
+        "target": "MKT-PE-02-d2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-PE-02-edge-6",
+        "source": "MKT-PE-02-opt",
+        "target": "MKT-PE-02-d2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-PE-02-edge-7",
+        "source": "MKT-PE-02-d2",
+        "target": "MKT-PE-02-j",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-PE-02-edge-8",
+        "source": "MKT-PE-02-d2",
+        "target": "MKT-PE-02-log",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-PE-02-edge-9",
+        "source": "MKT-PE-02-j",
+        "target": "MKT-PE-02-log",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-PE-02-edge-10",
+        "source": "MKT-PE-02-log",
+        "target": "MKT-PE-02-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-CM-01",
+    "sourceId": "CM_01_parrilla_y_publicaci_n_aut_noma",
+    "subareaCode": "MKT-S04",
+    "subareaName": "Community Manager",
+    "owner": "Community Manager",
+    "title": "Parrilla y publicación autónoma",
+    "description": "Community publica lo rutinario dentro de calendario y lineamientos; escala solo lo sensible.",
+    "canvas": {
+      "height": 764.4,
+      "width": 626.58
+    },
+    "nodes": [
+      {
+        "id": "MKT-CM-01-s",
+        "kind": "start",
+        "label": "Calendario + pilares + eventos",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 149.41
+        },
+        "size": {
+          "height": 36,
+          "width": 189
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-01-c1",
+        "kind": "activity",
+        "label": "Construye parrilla, CTA,\nformatos y fechas",
+        "role": "CM",
+        "position": {
+          "y": 132.2,
+          "x": 117.46
+        },
+        "size": {
+          "height": 36,
+          "width": 253
+        },
+        "fill": "#fff0f6",
+        "stroke": "#b42369",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-01-c2",
+        "kind": "activity",
+        "label": "Solicita activos a\nDiseño/Audiovisual y valida\ndatos oficiales",
+        "role": "CM",
+        "position": {
+          "y": 211.2,
+          "x": 73.46
+        },
+        "size": {
+          "height": 36,
+          "width": 341
+        },
+        "fill": "#fff0f6",
+        "stroke": "#b42369",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-01-d1",
+        "kind": "decision",
+        "label": "¿Está dentro de calendario, marca y protocolo?",
+        "role": "",
+        "position": {
+          "y": 290.2,
+          "x": 25.44
+        },
+        "size": {
+          "height": 36,
+          "width": 437
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-01-pub",
+        "kind": "activity",
+        "label": "Programa / publica sin\naprobación pieza por pieza",
+        "role": "CM",
+        "position": {
+          "y": 545.2,
+          "x": 44.46
+        },
+        "size": {
+          "height": 36,
+          "width": 291
+        },
+        "fill": "#fff0f6",
+        "stroke": "#b42369",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-01-x",
+        "kind": "exception",
+        "label": "Contenido sensible, extraordinario o con riesgo reputacional",
+        "role": "",
+        "position": {
+          "y": 378.2,
+          "x": 216.61
+        },
+        "size": {
+          "height": 36,
+          "width": 385
+        },
+        "fill": "#ffe7e7",
+        "stroke": "#b42318",
+        "textColor": "#7a1b14"
+      },
+      {
+        "id": "MKT-CM-01-m",
+        "kind": "activity",
+        "label": "Monitorea interacción y\nmétricas",
+        "role": "CM",
+        "position": {
+          "y": 624.2,
+          "x": 86.96
+        },
+        "size": {
+          "height": 36,
+          "width": 206
+        },
+        "fill": "#fff0f6",
+        "stroke": "#b42369",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-01-j",
+        "kind": "activity",
+        "label": "Resuelve excepción de contenido\n/ reputación",
+        "role": "JM",
+        "position": {
+          "y": 466.2,
+          "x": 244.96
+        },
+        "size": {
+          "height": 36,
+          "width": 270
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-01-e",
+        "kind": "start",
+        "label": "Publicación medida",
+        "role": "",
+        "position": {
+          "y": 703.2,
+          "x": 126.31
+        },
+        "size": {
+          "height": 36,
+          "width": 127
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-CM-01-edge-1",
+        "source": "MKT-CM-01-s",
+        "target": "MKT-CM-01-c1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CM-01-edge-2",
+        "source": "MKT-CM-01-c1",
+        "target": "MKT-CM-01-c2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CM-01-edge-3",
+        "source": "MKT-CM-01-c2",
+        "target": "MKT-CM-01-d1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CM-01-edge-4",
+        "source": "MKT-CM-01-d1",
+        "target": "MKT-CM-01-pub",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CM-01-edge-5",
+        "source": "MKT-CM-01-d1",
+        "target": "MKT-CM-01-x",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CM-01-edge-6",
+        "source": "MKT-CM-01-pub",
+        "target": "MKT-CM-01-m",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CM-01-edge-7",
+        "source": "MKT-CM-01-x",
+        "target": "MKT-CM-01-j",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CM-01-edge-8",
+        "source": "MKT-CM-01-j",
+        "target": "MKT-CM-01-pub",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CM-01-edge-9",
+        "source": "MKT-CM-01-m",
+        "target": "MKT-CM-01-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-CM-02",
+    "sourceId": "CM_02_interacci_n_leads_y_crisis",
+    "subareaCode": "MKT-S04",
+    "subareaName": "Community Manager",
+    "owner": "Community Manager",
+    "title": "Interacción, leads y crisis",
+    "description": "Clasifica la conversación y deriva al dueño funcional.",
+    "canvas": {
+      "height": 553.4,
+      "width": 780.4
+    },
+    "nodes": [
+      {
+        "id": "MKT-CM-02-s",
+        "kind": "start",
+        "label": "Comentario / DM / mención / alerta",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 320.1
+        },
+        "size": {
+          "height": 36,
+          "width": 213
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-02-d",
+        "kind": "decision",
+        "label": "¿Tipo de caso?",
+        "role": "",
+        "position": {
+          "y": 132.2,
+          "x": 348.44
+        },
+        "size": {
+          "height": 36,
+          "width": 157
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-02-std",
+        "kind": "activity",
+        "label": "Responde consulta estándar con\nprotocolo",
+        "role": "CM",
+        "position": {
+          "y": 277.2,
+          "x": 25.2
+        },
+        "size": {
+          "height": 36,
+          "width": 257
+        },
+        "fill": "#fff0f6",
+        "stroke": "#b42369",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-02-lead",
+        "kind": "activity",
+        "label": "Recibe lead comercial con\nfuente y contexto",
+        "role": "VENTAS",
+        "position": {
+          "y": 277.2,
+          "x": 287.2
+        },
+        "size": {
+          "height": 36,
+          "width": 287
+        },
+        "fill": "#e8edf2",
+        "stroke": "#5d6d7e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-02-cr",
+        "kind": "exception",
+        "label": "Crisis, fraude, denuncia o suplantación",
+        "role": "",
+        "position": {
+          "y": 220.2,
+          "x": 470.56
+        },
+        "size": {
+          "height": 36,
+          "width": 256
+        },
+        "fill": "#ffe7e7",
+        "stroke": "#b42318",
+        "textColor": "#7a1b14"
+      },
+      {
+        "id": "MKT-CM-02-ev",
+        "kind": "evidence",
+        "label": "Interacción registrada + derivación / cierre",
+        "role": "",
+        "position": {
+          "y": 413.2,
+          "x": 289.2
+        },
+        "size": {
+          "height": 36,
+          "width": 217
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-02-j",
+        "kind": "activity",
+        "label": "Coordina respuesta de alta\nseveridad y escala si aplica",
+        "role": "JM",
+        "position": {
+          "y": 334.2,
+          "x": 442.2
+        },
+        "size": {
+          "height": 36,
+          "width": 313
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CM-02-e",
+        "kind": "start",
+        "label": "Caso atendido",
+        "role": "",
+        "position": {
+          "y": 492.2,
+          "x": 346.95
+        },
+        "size": {
+          "height": 36,
+          "width": 120
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-CM-02-edge-1",
+        "source": "MKT-CM-02-s",
+        "target": "MKT-CM-02-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CM-02-edge-2",
+        "source": "MKT-CM-02-d",
+        "target": "MKT-CM-02-std",
+        "label": "Estándar",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CM-02-edge-3",
+        "source": "MKT-CM-02-d",
+        "target": "MKT-CM-02-lead",
+        "label": "Comercial",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CM-02-edge-4",
+        "source": "MKT-CM-02-d",
+        "target": "MKT-CM-02-cr",
+        "label": "Sensible",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CM-02-edge-5",
+        "source": "MKT-CM-02-std",
+        "target": "MKT-CM-02-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CM-02-edge-6",
+        "source": "MKT-CM-02-lead",
+        "target": "MKT-CM-02-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CM-02-edge-7",
+        "source": "MKT-CM-02-cr",
+        "target": "MKT-CM-02-j",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CM-02-edge-8",
+        "source": "MKT-CM-02-j",
+        "target": "MKT-CM-02-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CM-02-edge-9",
+        "source": "MKT-CM-02-ev",
+        "target": "MKT-CM-02-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-DG-01",
+    "sourceId": "DG_01_brief_dise_o_qa_entrega",
+    "subareaCode": "MKT-S05",
+    "subareaName": "Diseño Gráfico",
+    "owner": "Diseño Gráfico",
+    "title": "Brief → diseño → QA → entrega",
+    "description": "El diseño estándar se libera por checklist, no por aprobación permanente de Jefatura.",
+    "canvas": {
+      "height": 764.4,
+      "width": 713.5
+    },
+    "nodes": [
+      {
+        "id": "MKT-DG-01-s",
+        "kind": "start",
+        "label": "Brief recibido",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 392.29
+        },
+        "size": {
+          "height": 36,
+          "width": 120
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-DG-01-d1",
+        "kind": "activity",
+        "label": "Valida fuente, objetivo,\nformato, fecha, copy y\nprioridad",
+        "role": "DG",
+        "position": {
+          "y": 132.2,
+          "x": 176.8
+        },
+        "size": {
+          "height": 36,
+          "width": 320
+        },
+        "fill": "#fff4e5",
+        "stroke": "#b85c00",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-DG-01-q1",
+        "kind": "decision",
+        "label": "¿Brief completo?",
+        "role": "",
+        "position": {
+          "y": 211.2,
+          "x": 252.17
+        },
+        "size": {
+          "height": 36,
+          "width": 169
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-DG-01-ret",
+        "kind": "activity",
+        "label": "Devuelve al solicitante /\nCoordinación con faltantes",
+        "role": "DG",
+        "position": {
+          "y": 299.2,
+          "x": 393.3
+        },
+        "size": {
+          "height": 36,
+          "width": 295
+        },
+        "fill": "#fff4e5",
+        "stroke": "#b85c00",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-DG-01-des",
+        "kind": "activity",
+        "label": "Diseña conforme a identidad y\nobjetivo",
+        "role": "DG",
+        "position": {
+          "y": 299.2,
+          "x": 127.3
+        },
+        "size": {
+          "height": 36,
+          "width": 237
+        },
+        "fill": "#fff4e5",
+        "stroke": "#b85c00",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-DG-01-qa",
+        "kind": "activity",
+        "label": "Auto-QA: datos, ortografía,\nCTA, logos, formatos y\nexportación",
+        "role": "DG",
+        "position": {
+          "y": 378.2,
+          "x": 67.8
+        },
+        "size": {
+          "height": 36,
+          "width": 356
+        },
+        "fill": "#fff4e5",
+        "stroke": "#b85c00",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-DG-01-q2",
+        "kind": "decision",
+        "label": "¿Cambio de marca, claim sensible o excepción?",
+        "role": "",
+        "position": {
+          "y": 457.2,
+          "x": 25.1
+        },
+        "size": {
+          "height": 36,
+          "width": 441
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-DG-01-del",
+        "kind": "activity",
+        "label": "Entrega final + editable +\nversión",
+        "role": "DG",
+        "position": {
+          "y": 624.2,
+          "x": 134.3
+        },
+        "size": {
+          "height": 36,
+          "width": 209
+        },
+        "fill": "#fff4e5",
+        "stroke": "#b85c00",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-DG-01-j",
+        "kind": "activity",
+        "label": "Resuelve excepción de alto\nimpacto",
+        "role": "JM",
+        "position": {
+          "y": 545.2,
+          "x": 264.3
+        },
+        "size": {
+          "height": 36,
+          "width": 221
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-DG-01-e",
+        "kind": "start",
+        "label": "Pieza cerrada y archivada",
+        "role": "",
+        "position": {
+          "y": 703.2,
+          "x": 156.47
+        },
+        "size": {
+          "height": 36,
+          "width": 165
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-DG-01-edge-1",
+        "source": "MKT-DG-01-s",
+        "target": "MKT-DG-01-d1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-DG-01-edge-2",
+        "source": "MKT-DG-01-d1",
+        "target": "MKT-DG-01-q1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-DG-01-edge-3",
+        "source": "MKT-DG-01-q1",
+        "target": "MKT-DG-01-ret",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-DG-01-edge-4",
+        "source": "MKT-DG-01-q1",
+        "target": "MKT-DG-01-des",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-DG-01-edge-5",
+        "source": "MKT-DG-01-ret",
+        "target": "MKT-DG-01-s",
+        "label": "",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-DG-01-edge-6",
+        "source": "MKT-DG-01-des",
+        "target": "MKT-DG-01-qa",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-DG-01-edge-7",
+        "source": "MKT-DG-01-qa",
+        "target": "MKT-DG-01-q2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-DG-01-edge-8",
+        "source": "MKT-DG-01-q2",
+        "target": "MKT-DG-01-del",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-DG-01-edge-9",
+        "source": "MKT-DG-01-q2",
+        "target": "MKT-DG-01-j",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-DG-01-edge-10",
+        "source": "MKT-DG-01-del",
+        "target": "MKT-DG-01-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-DG-01-edge-11",
+        "source": "MKT-DG-01-j",
+        "target": "MKT-DG-01-del",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      }
+    ]
+  },
+  {
+    "code": "MKT-AV-01",
+    "sourceId": "AV_01_producci_n_audiovisual_completa",
+    "subareaCode": "MKT-S06",
+    "subareaName": "Producción Audiovisual",
+    "owner": "Producción Audiovisual",
+    "title": "Producción audiovisual completa",
+    "description": "Producción estándar se cierra técnicamente sin microaprobación.",
+    "canvas": {
+      "height": 755.4,
+      "width": 616.45
+    },
+    "nodes": [
+      {
+        "id": "MKT-AV-01-s",
+        "kind": "start",
+        "label": "Brief / guion / fecha",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 193.42
+        },
+        "size": {
+          "height": 36,
+          "width": 129
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-01-a1",
+        "kind": "activity",
+        "label": "Valida objetivo, formato,\nlocación, talento, recursos y\npermisos",
+        "role": "AV",
+        "position": {
+          "y": 132.2,
+          "x": 82.25
+        },
+        "size": {
+          "height": 36,
+          "width": 351
+        },
+        "fill": "#f3ecff",
+        "stroke": "#7a4bc2",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-01-a2",
+        "kind": "activity",
+        "label": "Prepara shot list, equipos,\ncronograma y respaldo",
+        "role": "AV",
+        "position": {
+          "y": 211.2,
+          "x": 114.25
+        },
+        "size": {
+          "height": 36,
+          "width": 287
+        },
+        "fill": "#f3ecff",
+        "stroke": "#7a4bc2",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-01-a3",
+        "kind": "activity",
+        "label": "Graba y realiza backup\ninmediato",
+        "role": "AV",
+        "position": {
+          "y": 290.2,
+          "x": 153.25
+        },
+        "size": {
+          "height": 36,
+          "width": 209
+        },
+        "fill": "#f3ecff",
+        "stroke": "#7a4bc2",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-01-a4",
+        "kind": "activity",
+        "label": "Edita, subtitula, corrige\naudio/color y genera derivados",
+        "role": "AV",
+        "position": {
+          "y": 369.2,
+          "x": 103.25
+        },
+        "size": {
+          "height": 36,
+          "width": 309
+        },
+        "fill": "#f3ecff",
+        "stroke": "#7a4bc2",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-01-d",
+        "kind": "decision",
+        "label": "¿Producción estándar dentro del brief y derechos?",
+        "role": "",
+        "position": {
+          "y": 448.2,
+          "x": 25.15
+        },
+        "size": {
+          "height": 36,
+          "width": 465
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-01-del",
+        "kind": "activity",
+        "label": "QA, exporta, entrega y archiva\nbruto/proyecto/máster",
+        "role": "AV",
+        "position": {
+          "y": 615.2,
+          "x": 56.25
+        },
+        "size": {
+          "height": 36,
+          "width": 303
+        },
+        "fill": "#f3ecff",
+        "stroke": "#7a4bc2",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-01-j",
+        "kind": "activity",
+        "label": "Resuelve excepción de gasto,\nidentidad, reputación o\ncapacidad",
+        "role": "JM",
+        "position": {
+          "y": 536.2,
+          "x": 228.25
+        },
+        "size": {
+          "height": 36,
+          "width": 363
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-01-e",
+        "kind": "start",
+        "label": "Activo audiovisual disponible",
+        "role": "",
+        "position": {
+          "y": 694.2,
+          "x": 118.3
+        },
+        "size": {
+          "height": 36,
+          "width": 179
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-AV-01-edge-1",
+        "source": "MKT-AV-01-s",
+        "target": "MKT-AV-01-a1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-01-edge-2",
+        "source": "MKT-AV-01-a1",
+        "target": "MKT-AV-01-a2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-01-edge-3",
+        "source": "MKT-AV-01-a2",
+        "target": "MKT-AV-01-a3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-01-edge-4",
+        "source": "MKT-AV-01-a3",
+        "target": "MKT-AV-01-a4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-01-edge-5",
+        "source": "MKT-AV-01-a4",
+        "target": "MKT-AV-01-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-01-edge-6",
+        "source": "MKT-AV-01-d",
+        "target": "MKT-AV-01-del",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-01-edge-7",
+        "source": "MKT-AV-01-d",
+        "target": "MKT-AV-01-j",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-AV-01-edge-8",
+        "source": "MKT-AV-01-del",
+        "target": "MKT-AV-01-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-01-edge-9",
+        "source": "MKT-AV-01-j",
+        "target": "MKT-AV-01-del",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      }
+    ]
+  },
+  {
+    "code": "MKT-AV-02",
+    "sourceId": "AV_02_respaldo_temporal_de_dise_o",
+    "subareaCode": "MKT-S06",
+    "subareaName": "Producción Audiovisual",
+    "owner": "Producción Audiovisual",
+    "title": "Respaldo temporal de Diseño",
+    "description": "Continuidad de piezas críticas durante ausencias del Diseñador.",
+    "canvas": {
+      "height": 711.4,
+      "width": 668.99
+    },
+    "nodes": [
+      {
+        "id": "MKT-AV-02-s",
+        "kind": "start",
+        "label": "Ausencia programada / contingencia",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 191.1
+        },
+        "size": {
+          "height": 36,
+          "width": 223
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-02-d1",
+        "kind": "activity",
+        "label": "Transfiere prioridades,\nplantillas, editables y\npendientes",
+        "role": "DG",
+        "position": {
+          "y": 132.2,
+          "x": 141.29
+        },
+        "size": {
+          "height": 36,
+          "width": 323
+        },
+        "fill": "#fff4e5",
+        "stroke": "#b85c00",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-02-a1",
+        "kind": "activity",
+        "label": "Recibe cola priorizada y\natiende piezas estándar",
+        "role": "AV",
+        "position": {
+          "y": 211.2,
+          "x": 162.29
+        },
+        "size": {
+          "height": 36,
+          "width": 281
+        },
+        "fill": "#f3ecff",
+        "stroke": "#7a4bc2",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-02-q",
+        "kind": "decision",
+        "label": "¿La pieza está dentro de plantilla, competencia y capacidad?",
+        "role": "",
+        "position": {
+          "y": 290.2,
+          "x": 25.11
+        },
+        "size": {
+          "height": 36,
+          "width": 555
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-02-ok",
+        "kind": "activity",
+        "label": "Produce, QA, entrega y registra",
+        "role": "AV",
+        "position": {
+          "y": 435.2,
+          "x": 129.29
+        },
+        "size": {
+          "height": 36,
+          "width": 195
+        },
+        "fill": "#f3ecff",
+        "stroke": "#7a4bc2",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-02-x",
+        "kind": "exception",
+        "label": "Concepto complejo / sobrecarga / nueva identidad",
+        "role": "",
+        "position": {
+          "y": 378.2,
+          "x": 286.33
+        },
+        "size": {
+          "height": 36,
+          "width": 325
+        },
+        "fill": "#ffe7e7",
+        "stroke": "#b42318",
+        "textColor": "#7a1b14"
+      },
+      {
+        "id": "MKT-AV-02-r",
+        "kind": "activity",
+        "label": "Al retorno recibe reporte,\narchivos y pendientes",
+        "role": "DG",
+        "position": {
+          "y": 571.2,
+          "x": 97.29
+        },
+        "size": {
+          "height": 36,
+          "width": 279
+        },
+        "fill": "#fff4e5",
+        "stroke": "#b85c00",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-02-co",
+        "kind": "activity",
+        "label": "Reprograma o coordina\nalternativa; escala si afecta\nprioridad crítica",
+        "role": "CO",
+        "position": {
+          "y": 492.2,
+          "x": 263.79
+        },
+        "size": {
+          "height": 36,
+          "width": 380
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-AV-02-e",
+        "kind": "start",
+        "label": "Continuidad documentada",
+        "role": "",
+        "position": {
+          "y": 650.2,
+          "x": 153.79
+        },
+        "size": {
+          "height": 36,
+          "width": 166
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-AV-02-edge-1",
+        "source": "MKT-AV-02-s",
+        "target": "MKT-AV-02-d1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-02-edge-2",
+        "source": "MKT-AV-02-d1",
+        "target": "MKT-AV-02-a1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-02-edge-3",
+        "source": "MKT-AV-02-a1",
+        "target": "MKT-AV-02-q",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-02-edge-4",
+        "source": "MKT-AV-02-q",
+        "target": "MKT-AV-02-ok",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-02-edge-5",
+        "source": "MKT-AV-02-q",
+        "target": "MKT-AV-02-x",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-AV-02-edge-6",
+        "source": "MKT-AV-02-ok",
+        "target": "MKT-AV-02-r",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-02-edge-7",
+        "source": "MKT-AV-02-x",
+        "target": "MKT-AV-02-co",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-AV-02-edge-8",
+        "source": "MKT-AV-02-co",
+        "target": "MKT-AV-02-r",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-AV-02-edge-9",
+        "source": "MKT-AV-02-r",
+        "target": "MKT-AV-02-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-CRM-01",
+    "sourceId": "CRM_01_cambio_t_cnico_controlado",
+    "subareaCode": "MKT-S07",
+    "subareaName": "CRM, Web y Automatización",
+    "owner": "CRM, Web y Automatización",
+    "title": "Cambio técnico controlado",
+    "description": "CRM/Web ejecuta cambios rutinarios por nivel de riesgo, no por autorización de Jefatura.",
+    "canvas": {
+      "height": 711.4,
+      "width": 928.61
+    },
+    "nodes": [
+      {
+        "id": "MKT-CRM-01-s",
+        "kind": "start",
+        "label": "Requerimiento / incidencia",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 295.52
+        },
+        "size": {
+          "height": 36,
+          "width": 167
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-01-c1",
+        "kind": "activity",
+        "label": "Define problema, dueño del dato\ny criterio de aceptación",
+        "role": "CRM",
+        "position": {
+          "y": 132.2,
+          "x": 214.7
+        },
+        "size": {
+          "height": 36,
+          "width": 329
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-01-d1",
+        "kind": "decision",
+        "label": "¿Nivel de riesgo?",
+        "role": "",
+        "position": {
+          "y": 211.2,
+          "x": 292.06
+        },
+        "size": {
+          "height": 36,
+          "width": 174
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-01-low",
+        "kind": "activity",
+        "label": "Cambio bajo: configura, prueba,\ndespliega y monitorea",
+        "role": "CRM",
+        "position": {
+          "y": 356.2,
+          "x": 25.2
+        },
+        "size": {
+          "height": 36,
+          "width": 320
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-01-mid",
+        "kind": "activity",
+        "label": "Cambio medio: desarrolla + UAT\ncon usuarios funcionales",
+        "role": "CRM",
+        "position": {
+          "y": 492.2,
+          "x": 229.2
+        },
+        "size": {
+          "height": 36,
+          "width": 334
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-01-crit",
+        "kind": "exception",
+        "label": "Cambio crítico: datos, seguridad, arquitectura, costo o migración irreversible",
+        "role": "",
+        "position": {
+          "y": 299.2,
+          "x": 422.78
+        },
+        "size": {
+          "height": 36,
+          "width": 481
+        },
+        "fill": "#ffe7e7",
+        "stroke": "#b42318",
+        "textColor": "#7a1b14"
+      },
+      {
+        "id": "MKT-CRM-01-log",
+        "kind": "evidence",
+        "label": "Bitácora + prueba + rollback + resultado",
+        "role": "",
+        "position": {
+          "y": 571.2,
+          "x": 99.2
+        },
+        "size": {
+          "height": 36,
+          "width": 206
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-01-j",
+        "kind": "activity",
+        "label": "Coordina prioridad/impacto;\nescala a Gerencia/Sistemas si\ncorresponde",
+        "role": "JM",
+        "position": {
+          "y": 413.2,
+          "x": 443.7
+        },
+        "size": {
+          "height": 36,
+          "width": 397
+        },
+        "fill": "#efe8ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-01-e",
+        "kind": "start",
+        "label": "Cambio controlado",
+        "role": "",
+        "position": {
+          "y": 650.2,
+          "x": 139.9
+        },
+        "size": {
+          "height": 36,
+          "width": 125
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-CRM-01-edge-1",
+        "source": "MKT-CRM-01-s",
+        "target": "MKT-CRM-01-c1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-01-edge-2",
+        "source": "MKT-CRM-01-c1",
+        "target": "MKT-CRM-01-d1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-01-edge-3",
+        "source": "MKT-CRM-01-d1",
+        "target": "MKT-CRM-01-low",
+        "label": "Bajo",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CRM-01-edge-4",
+        "source": "MKT-CRM-01-d1",
+        "target": "MKT-CRM-01-mid",
+        "label": "Medio",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-01-edge-5",
+        "source": "MKT-CRM-01-d1",
+        "target": "MKT-CRM-01-crit",
+        "label": "Alto",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CRM-01-edge-6",
+        "source": "MKT-CRM-01-low",
+        "target": "MKT-CRM-01-log",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-01-edge-7",
+        "source": "MKT-CRM-01-mid",
+        "target": "MKT-CRM-01-log",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CRM-01-edge-8",
+        "source": "MKT-CRM-01-crit",
+        "target": "MKT-CRM-01-j",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-01-edge-9",
+        "source": "MKT-CRM-01-j",
+        "target": "MKT-CRM-01-mid",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CRM-01-edge-10",
+        "source": "MKT-CRM-01-log",
+        "target": "MKT-CRM-01-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-CRM-02",
+    "sourceId": "CRM_02_integraci_n_campus_crm_resultado",
+    "subareaCode": "MKT-S07",
+    "subareaName": "CRM, Web y Automatización",
+    "owner": "CRM, Web y Automatización",
+    "title": "Integración Campus → CRM → resultado",
+    "description": "Distribuye responsabilidades de datos y evita doble registro.",
+    "canvas": {
+      "height": 676.4,
+      "width": 748.9
+    },
+    "nodes": [
+      {
+        "id": "MKT-CRM-02-s",
+        "kind": "start",
+        "label": "Evento oficial en Campus",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 360.41
+        },
+        "size": {
+          "height": 36,
+          "width": 162
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-02-c1",
+        "kind": "activity",
+        "label": "Consume ID del evento y\nrelaciona campaña/origen",
+        "role": "CRM",
+        "position": {
+          "y": 132.2,
+          "x": 288.2
+        },
+        "size": {
+          "height": 36,
+          "width": 306
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-02-c2",
+        "kind": "activity",
+        "label": "Crea/actualiza lead, deduplica\ny asigna según regla",
+        "role": "CRM",
+        "position": {
+          "y": 211.2,
+          "x": 288.2
+        },
+        "size": {
+          "height": 36,
+          "width": 306
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-02-v",
+        "kind": "activity",
+        "label": "Gestiona contacto, estados y\nresultado comercial",
+        "role": "VENTAS",
+        "position": {
+          "y": 290.2,
+          "x": 285.7
+        },
+        "size": {
+          "height": 36,
+          "width": 311
+        },
+        "fill": "#e8edf2",
+        "stroke": "#5d6d7e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-02-c3",
+        "kind": "activity",
+        "label": "Recibe resultado/matrícula y\nreconcilia errores",
+        "role": "CRM",
+        "position": {
+          "y": 369.2,
+          "x": 300.7
+        },
+        "size": {
+          "height": 36,
+          "width": 281
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-02-d",
+        "kind": "decision",
+        "label": "¿Trazabilidad completa?",
+        "role": "",
+        "position": {
+          "y": 448.2,
+          "x": 242.4
+        },
+        "size": {
+          "height": 36,
+          "width": 236
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-02-fix",
+        "kind": "activity",
+        "label": "Corrige mapeo, reintento o dato\ntécnico; alerta al dueño si es\nfuncional",
+        "role": "CRM",
+        "position": {
+          "y": 536.2,
+          "x": 320.7
+        },
+        "size": {
+          "height": 36,
+          "width": 403
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-02-ev",
+        "kind": "evidence",
+        "label": "Evento → campaña → lead → ejecutivo → resultado",
+        "role": "",
+        "position": {
+          "y": 536.2,
+          "x": 25.2
+        },
+        "size": {
+          "height": 36,
+          "width": 266
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-02-e",
+        "kind": "start",
+        "label": "Trazabilidad auditable",
+        "role": "",
+        "position": {
+          "y": 615.2,
+          "x": 86.74
+        },
+        "size": {
+          "height": 36,
+          "width": 143
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-CRM-02-edge-1",
+        "source": "MKT-CRM-02-s",
+        "target": "MKT-CRM-02-c1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-02-edge-2",
+        "source": "MKT-CRM-02-c1",
+        "target": "MKT-CRM-02-c2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-02-edge-3",
+        "source": "MKT-CRM-02-c2",
+        "target": "MKT-CRM-02-v",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-02-edge-4",
+        "source": "MKT-CRM-02-v",
+        "target": "MKT-CRM-02-c3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-02-edge-5",
+        "source": "MKT-CRM-02-c3",
+        "target": "MKT-CRM-02-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CRM-02-edge-6",
+        "source": "MKT-CRM-02-d",
+        "target": "MKT-CRM-02-fix",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CRM-02-edge-7",
+        "source": "MKT-CRM-02-d",
+        "target": "MKT-CRM-02-ev",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CRM-02-edge-8",
+        "source": "MKT-CRM-02-fix",
+        "target": "MKT-CRM-02-c3",
+        "label": "",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CRM-02-edge-9",
+        "source": "MKT-CRM-02-ev",
+        "target": "MKT-CRM-02-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-CRM-03",
+    "sourceId": "CRM_03_retiro_de_excel_control_paralelo",
+    "subareaCode": "MKT-S07",
+    "subareaName": "CRM, Web y Automatización",
+    "owner": "CRM, Web y Automatización",
+    "title": "Retiro de Excel / control paralelo",
+    "description": "El corte se basa en criterios de estabilidad, no en una autorización rutinaria de Jefatura.",
+    "canvas": {
+      "height": 597.4,
+      "width": 693.4
+    },
+    "nodes": [
+      {
+        "id": "MKT-CRM-03-s",
+        "kind": "start",
+        "label": "Sistema nuevo funcional",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 336.79
+        },
+        "size": {
+          "height": 36,
+          "width": 156
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-03-c1",
+        "kind": "activity",
+        "label": "Verifica campos, logs, reportes\ny criterios de aceptación",
+        "role": "CRM",
+        "position": {
+          "y": 132.2,
+          "x": 252.2
+        },
+        "size": {
+          "height": 36,
+          "width": 325
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-03-c2",
+        "kind": "activity",
+        "label": "Migra/archiva histórico\nnecesario y ejecuta periodo\nparalelo",
+        "role": "CRM",
+        "position": {
+          "y": 211.2,
+          "x": 240.2
+        },
+        "size": {
+          "height": 36,
+          "width": 349
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-03-d",
+        "kind": "decision",
+        "label": "¿Resultados consistentes y sin brechas críticas?",
+        "role": "",
+        "position": {
+          "y": 290.2,
+          "x": 58.49
+        },
+        "size": {
+          "height": 36,
+          "width": 446
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-03-fix",
+        "kind": "activity",
+        "label": "Corrige diferencias y repite\nvalidación",
+        "role": "CRM",
+        "position": {
+          "y": 378.2,
+          "x": 429.2
+        },
+        "size": {
+          "height": 36,
+          "width": 239
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-03-p",
+        "kind": "activity",
+        "label": "Valida con dueños funcionales\nel cierre del control paralelo",
+        "role": "PROCESOS",
+        "position": {
+          "y": 378.2,
+          "x": 25.2
+        },
+        "size": {
+          "height": 36,
+          "width": 375
+        },
+        "fill": "#eef2f6",
+        "stroke": "#475569",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-03-cut",
+        "kind": "activity",
+        "label": "Congela Excel, comunica corte y\nmonitorea estabilidad",
+        "role": "CRM",
+        "position": {
+          "y": 457.2,
+          "x": 52.7
+        },
+        "size": {
+          "height": 36,
+          "width": 320
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-CRM-03-e",
+        "kind": "start",
+        "label": "Control paralelo retirado",
+        "role": "",
+        "position": {
+          "y": 536.2,
+          "x": 134.79
+        },
+        "size": {
+          "height": 36,
+          "width": 156
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-CRM-03-edge-1",
+        "source": "MKT-CRM-03-s",
+        "target": "MKT-CRM-03-c1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-03-edge-2",
+        "source": "MKT-CRM-03-c1",
+        "target": "MKT-CRM-03-c2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-03-edge-3",
+        "source": "MKT-CRM-03-c2",
+        "target": "MKT-CRM-03-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-CRM-03-edge-4",
+        "source": "MKT-CRM-03-d",
+        "target": "MKT-CRM-03-fix",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CRM-03-edge-5",
+        "source": "MKT-CRM-03-d",
+        "target": "MKT-CRM-03-p",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-03-edge-6",
+        "source": "MKT-CRM-03-fix",
+        "target": "MKT-CRM-03-c2",
+        "label": "",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-CRM-03-edge-7",
+        "source": "MKT-CRM-03-p",
+        "target": "MKT-CRM-03-cut",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-CRM-03-edge-8",
+        "source": "MKT-CRM-03-cut",
+        "target": "MKT-CRM-03-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-RRPP-01",
+    "sourceId": "RRPP_01_prospecci_n_y_alianza_institucional",
+    "subareaCode": "MKT-S08",
+    "subareaName": "RRPP, Campo y Alianzas",
+    "owner": "RRPP, Campo y Alianzas",
+    "title": "Prospección y alianza institucional",
+    "description": "RRPP puede prospectar y seguir oportunidades; escala cuando aparece compromiso formal.",
+    "canvas": {
+      "height": 676.4,
+      "width": 724.9
+    },
+    "nodes": [
+      {
+        "id": "MKT-RRPP-01-s",
+        "kind": "start",
+        "label": "Institución / contacto objetivo",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 237.89
+        },
+        "size": {
+          "height": 36,
+          "width": 182
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-01-r1",
+        "kind": "activity",
+        "label": "Investiga, califica y registra\noportunidad",
+        "role": "RRPP",
+        "position": {
+          "y": 132.2,
+          "x": 201.7
+        },
+        "size": {
+          "height": 36,
+          "width": 254
+        },
+        "fill": "#fff7d6",
+        "stroke": "#9a6700",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-01-r2",
+        "kind": "activity",
+        "label": "Realiza acercamiento, reunión y\nseguimiento con material\naprobado",
+        "role": "RRPP",
+        "position": {
+          "y": 211.2,
+          "x": 131.7
+        },
+        "size": {
+          "height": 36,
+          "width": 394
+        },
+        "fill": "#fff7d6",
+        "stroke": "#9a6700",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-01-r3",
+        "kind": "activity",
+        "label": "Prepara propuesta dentro del\nmarco institucional",
+        "role": "RRPP",
+        "position": {
+          "y": 290.2,
+          "x": 180.2
+        },
+        "size": {
+          "height": 36,
+          "width": 297
+        },
+        "fill": "#fff7d6",
+        "stroke": "#9a6700",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-01-d",
+        "kind": "decision",
+        "label": "¿Implica firma, cláusula, presupuesto o compromiso institucional?",
+        "role": "",
+        "position": {
+          "y": 369.2,
+          "x": 32.76
+        },
+        "size": {
+          "height": 36,
+          "width": 592
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-01-r4",
+        "kind": "activity",
+        "label": "Continúa negociación y\nsiguiente acción",
+        "role": "RRPP",
+        "position": {
+          "y": 457.2,
+          "x": 25.2
+        },
+        "size": {
+          "height": 36,
+          "width": 257
+        },
+        "fill": "#fff7d6",
+        "stroke": "#9a6700",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-01-g",
+        "kind": "activity",
+        "label": "Aprueba/firma; coordina\nLegal/Finanzas cuando\ncorresponde",
+        "role": "GERENCIA",
+        "position": {
+          "y": 457.2,
+          "x": 311.7
+        },
+        "size": {
+          "height": 36,
+          "width": 388
+        },
+        "fill": "#ffe8c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-01-ev",
+        "kind": "evidence",
+        "label": "Pipeline + acuerdo + vigencia + responsable",
+        "role": "",
+        "position": {
+          "y": 536.2,
+          "x": 215.2
+        },
+        "size": {
+          "height": 36,
+          "width": 227
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-01-e",
+        "kind": "start",
+        "label": "Oportunidad actualizada / alianza formalizada",
+        "role": "",
+        "position": {
+          "y": 615.2,
+          "x": 191.38
+        },
+        "size": {
+          "height": 36,
+          "width": 275
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-RRPP-01-edge-1",
+        "source": "MKT-RRPP-01-s",
+        "target": "MKT-RRPP-01-r1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-RRPP-01-edge-2",
+        "source": "MKT-RRPP-01-r1",
+        "target": "MKT-RRPP-01-r2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-RRPP-01-edge-3",
+        "source": "MKT-RRPP-01-r2",
+        "target": "MKT-RRPP-01-r3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-RRPP-01-edge-4",
+        "source": "MKT-RRPP-01-r3",
+        "target": "MKT-RRPP-01-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-RRPP-01-edge-5",
+        "source": "MKT-RRPP-01-d",
+        "target": "MKT-RRPP-01-r4",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-RRPP-01-edge-6",
+        "source": "MKT-RRPP-01-d",
+        "target": "MKT-RRPP-01-g",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-RRPP-01-edge-7",
+        "source": "MKT-RRPP-01-r4",
+        "target": "MKT-RRPP-01-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-RRPP-01-edge-8",
+        "source": "MKT-RRPP-01-g",
+        "target": "MKT-RRPP-01-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-RRPP-01-edge-9",
+        "source": "MKT-RRPP-01-ev",
+        "target": "MKT-RRPP-01-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "MKT-RRPP-02",
+    "sourceId": "RRPP_02_activaci_n_de_campo",
+    "subareaCode": "MKT-S08",
+    "subareaName": "RRPP, Campo y Alianzas",
+    "owner": "RRPP, Campo y Alianzas",
+    "title": "Activación de campo",
+    "description": "Cada activación debe cerrar con fuente, leads y resultado.",
+    "canvas": {
+      "height": 597.4,
+      "width": 686.9
+    },
+    "nodes": [
+      {
+        "id": "MKT-RRPP-02-s",
+        "kind": "start",
+        "label": "Activación / visita / feria programada",
+        "role": "",
+        "position": {
+          "y": 53.2,
+          "x": 297.86
+        },
+        "size": {
+          "height": 36,
+          "width": 222
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-02-r1",
+        "kind": "activity",
+        "label": "Define objetivo, audiencia,\nmateriales, meta, presupuesto y\npermisos",
+        "role": "RRPP",
+        "position": {
+          "y": 132.2,
+          "x": 209.7
+        },
+        "size": {
+          "height": 36,
+          "width": 398
+        },
+        "fill": "#fff7d6",
+        "stroke": "#9a6700",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-02-d",
+        "kind": "decision",
+        "label": "¿Condiciones listas y dentro del plan?",
+        "role": "",
+        "position": {
+          "y": 211.2,
+          "x": 121.41
+        },
+        "size": {
+          "height": 36,
+          "width": 355
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-02-fix",
+        "kind": "activity",
+        "label": "Completa logística, material o\npermiso faltante",
+        "role": "RRPP",
+        "position": {
+          "y": 299.2,
+          "x": 377.7
+        },
+        "size": {
+          "height": 36,
+          "width": 284
+        },
+        "fill": "#fff7d6",
+        "stroke": "#9a6700",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-02-r2",
+        "kind": "activity",
+        "label": "Ejecuta activación y captura\ndatos con consentimiento",
+        "role": "RRPP",
+        "position": {
+          "y": 299.2,
+          "x": 25.2
+        },
+        "size": {
+          "height": 36,
+          "width": 323
+        },
+        "fill": "#fff7d6",
+        "stroke": "#9a6700",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-02-crm",
+        "kind": "activity",
+        "label": "Recibe leads con fuente y\ntrazabilidad",
+        "role": "CRM",
+        "position": {
+          "y": 378.2,
+          "x": 65.7
+        },
+        "size": {
+          "height": 36,
+          "width": 242
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-02-r3",
+        "kind": "activity",
+        "label": "Mide contactos, leads,\noportunidades y aprendizajes",
+        "role": "RRPP",
+        "position": {
+          "y": 457.2,
+          "x": 29.2
+        },
+        "size": {
+          "height": 36,
+          "width": 315
+        },
+        "fill": "#fff7d6",
+        "stroke": "#9a6700",
+        "textColor": "#243447"
+      },
+      {
+        "id": "MKT-RRPP-02-e",
+        "kind": "start",
+        "label": "Activación cerrada",
+        "role": "",
+        "position": {
+          "y": 536.2,
+          "x": 125.26
+        },
+        "size": {
+          "height": 36,
+          "width": 123
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MKT-RRPP-02-edge-1",
+        "source": "MKT-RRPP-02-s",
+        "target": "MKT-RRPP-02-r1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-RRPP-02-edge-2",
+        "source": "MKT-RRPP-02-r1",
+        "target": "MKT-RRPP-02-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-RRPP-02-edge-3",
+        "source": "MKT-RRPP-02-d",
+        "target": "MKT-RRPP-02-fix",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-RRPP-02-edge-4",
+        "source": "MKT-RRPP-02-d",
+        "target": "MKT-RRPP-02-r2",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "MKT-RRPP-02-edge-5",
+        "source": "MKT-RRPP-02-fix",
+        "target": "MKT-RRPP-02-r1",
+        "label": "",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "MKT-RRPP-02-edge-6",
+        "source": "MKT-RRPP-02-r2",
+        "target": "MKT-RRPP-02-crm",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-RRPP-02-edge-7",
+        "source": "MKT-RRPP-02-crm",
+        "target": "MKT-RRPP-02-r3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "MKT-RRPP-02-edge-8",
+        "source": "MKT-RRPP-02-r3",
+        "target": "MKT-RRPP-02-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  }
+]

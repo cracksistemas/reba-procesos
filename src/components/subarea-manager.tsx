@@ -4,7 +4,8 @@ import Link from "next/link";
 import { FormEvent, useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { ArrowRight, CheckCircle2, GitBranch, Pencil, Plus, Save, X } from "lucide-react";
 import { FlowchartEditor } from "@/components/flowchart-editor";
-import type { Area, Process, Subarea } from "@/lib/data";
+import { mergeSubareas, type Area, type Process, type Subarea } from "@/lib/data";
+import { getMarketingFlowcharts, type MarketingFlowchart } from "@/lib/marketing-flowcharts";
 
 type SubareaManagerProps = {
   area: Area;
@@ -23,7 +24,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
   const [showForm, setShowForm] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
-  const [activeFlowchart, setActiveFlowchart] = useState<Subarea | null>(null);
+  const [activeFlowchart, setActiveFlowchart] = useState<{ subarea: Subarea; flowchart?: MarketingFlowchart } | null>(null);
 
   const subscribe = useCallback((onStoreChange: () => void) => {
     const handleStorage = (event: StorageEvent) => {
@@ -42,9 +43,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
     if (!storedValue) return initialSubareas;
     try {
       const stored = JSON.parse(storedValue) as Subarea[];
-      const byCode = new Map(initialSubareas.map((item) => [item.code, item]));
-      stored.forEach((item) => byCode.set(item.code, item));
-      return Array.from(byCode.values());
+      return mergeSubareas(initialSubareas, stored);
     } catch {
       return initialSubareas;
     }
@@ -122,6 +121,8 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
     <section className="subarea-grid" aria-label="Subáreas">
       {items.map((subarea) => {
         const related = areaProcesses.filter((process) => process.subareaCode === subarea.code);
+        const importedFlowcharts = area.code === "MKT" ? getMarketingFlowcharts(subarea.code) : [];
+        const openFlowchart = (flowchart?: MarketingFlowchart) => setActiveFlowchart({ subarea, flowchart });
         return <article className="card subarea-card" id={subarea.code} key={subarea.code}>
           <div className="subarea-card-head">
             <div className="subarea-icon" style={{ background: area.color }}><GitBranch size={18}/></div>
@@ -130,12 +131,13 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
           </div>
           <p className="subarea-description">{subarea.description}</p>
           <div className="subarea-meta"><span>Responsable</span><strong>{subarea.owner}</strong><span>Procesos vinculados</span><strong>{related.length}</strong></div>
-          <div className="mini-flow-header"><strong>Flujograma de la subárea</strong><button className="text-button" onClick={() => setActiveFlowchart(subarea)}><Pencil size={13}/> Editar visualmente</button></div>
+          <div className="mini-flow-header"><strong>{importedFlowcharts.length ? `${importedFlowcharts.length} ${importedFlowcharts.length === 1 ? "flujograma oficial" : "flujogramas oficiales"}` : "Flujograma de la subárea"}</strong><button className="text-button" onClick={() => openFlowchart(importedFlowcharts[0])}><Pencil size={13}/> Editar visualmente</button></div>
           <div className="mini-flow"><div className="mini-flow-terminal">Inicio</div>{subarea.flow.map((step, index) => <div className="mini-flow-step" key={`${subarea.code}-${step}`}><ArrowRight size={14}/><strong>{step}</strong>{index === subarea.flow.length - 1 && <><ArrowRight size={14}/><div className="mini-flow-terminal end">Fin</div></>}</div>)}</div>
-          <div className="subarea-footer"><span>{related.length ? related.map((process) => process.code).join(" · ") : "Lista para vincular procesos"}</span><div><button className="button button-secondary" onClick={() => setActiveFlowchart(subarea)}><GitBranch size={14}/> Abrir lienzo</button><Link className="button button-ghost" href={`/procesos?area=${area.code}&subarea=${subarea.code}`}>Ver procesos <ArrowRight size={14}/></Link></div></div>
+          {importedFlowcharts.length > 0 && <div className="subarea-flow-list">{importedFlowcharts.map((flowchart) => <button key={flowchart.code} onClick={() => openFlowchart(flowchart)}><span>{flowchart.code}</span><strong>{flowchart.title}</strong><ArrowRight size={13}/></button>)}</div>}
+          <div className="subarea-footer"><span>{related.length ? related.map((process) => process.code).join(" · ") : "Lista para vincular procesos"}</span><div><button className="button button-secondary" onClick={() => openFlowchart(importedFlowcharts[0])}><GitBranch size={14}/> Abrir lienzo</button><Link className="button button-ghost" href={`/procesos?area=${area.code}&subarea=${subarea.code}`}>Ver procesos <ArrowRight size={14}/></Link></div></div>
         </article>;
       })}
     </section>
-    {activeFlowchart && <FlowchartEditor area={area} subarea={activeFlowchart} onClose={() => setActiveFlowchart(null)}/>}
+    {activeFlowchart && <FlowchartEditor area={area} subarea={activeFlowchart.subarea} flowchart={activeFlowchart.flowchart} onClose={() => setActiveFlowchart(null)}/>} 
   </>;
 }

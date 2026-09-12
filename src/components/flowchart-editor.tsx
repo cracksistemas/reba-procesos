@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
+import { CSSProperties, useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import {
   addEdge,
   Background,
@@ -23,30 +23,37 @@ import {
 import "@xyflow/react/dist/style.css";
 import { Box, Circle, Diamond, FileText, GitBranch, Link2, RotateCcw, Save, Trash2, X } from "lucide-react";
 import type { Area, Subarea } from "@/lib/data";
+import type { MarketingFlowchart } from "@/lib/marketing-flowcharts";
 
-type NodeKind = "start" | "activity" | "decision" | "evidence" | "end";
+type NodeKind = "start" | "activity" | "decision" | "evidence" | "exception" | "end";
 type EdgeRoute = "normal" | "return";
 
-type RebaNodeData = { label: string; role: string; kind: NodeKind };
+type RebaNodeData = { label: string; role: string; kind: NodeKind; fill?: string; stroke?: string; textColor?: string };
 type RebaNode = Node<RebaNodeData, "reba">;
 type RebaEdge = Edge<{ route: EdgeRoute }>;
 type FlowGraph = { version: 2; nodes: RebaNode[]; edges: RebaEdge[]; viewport?: Viewport };
 
 const nodeTypes = { reba: RebaFlowNode };
 const defaultViewport: Viewport = { x: 0, y: 0, zoom: 1 };
-const nodeColors: Record<NodeKind, string> = { start: "#0f766e", activity: "#5653a6", decision: "#b77900", evidence: "#52616b", end: "#2e7d32" };
+const nodeColors: Record<NodeKind, string> = { start: "#0f766e", activity: "#5653a6", decision: "#b77900", evidence: "#52616b", exception: "#b42318", end: "#2e7d32" };
 
 function nodeDimensions(kind: NodeKind) {
   if (kind === "decision") return { width: 174, height: 132 };
+  if (kind === "exception") return { width: 270, height: 86 };
   if (kind === "start" || kind === "end") return { width: 230, height: 72 };
   return { width: 230, height: 90 };
 }
 
 function RebaFlowNode({ data, selected }: NodeProps<RebaNode>) {
-  return <div className={`xy-node node-${data.kind} ${selected ? "selected" : ""}`}>
+  const customColors = data.fill ? {
+    "--node-fill": data.fill,
+    "--node-stroke": data.stroke ?? "#5653a6",
+    "--node-text": data.textColor ?? "#243447",
+  } as CSSProperties : undefined;
+  return <div className={`xy-node node-${data.kind} ${selected ? "selected" : ""}`} style={customColors}>
     <Handle className="xy-handle" type="target" position={Position.Top}/>
     <Handle className="xy-handle xy-handle-left" id="left" type="source" position={Position.Left}/>
-    <div className="xy-node-content"><small>{data.role}</small><strong>{data.label}</strong></div>
+    <div className="xy-node-content">{data.role && <small>{data.role}</small>}<strong>{data.label}</strong></div>
     <Handle className="xy-handle" id="bottom" type="source" position={Position.Bottom}/>
     <Handle className="xy-handle xy-handle-right" id="right" type="source" position={Position.Right}/>
   </div>;
@@ -63,7 +70,20 @@ function makeEdge(id: string, source: string, target: string, route: EdgeRoute =
   };
 }
 
-function buildInitialGraph(subarea: Subarea): FlowGraph {
+function buildInitialGraph(subarea: Subarea, imported?: MarketingFlowchart): FlowGraph {
+  if (imported) {
+    return {
+      version: 2,
+      nodes: imported.nodes.map((node) => ({
+        id: node.id,
+        type: "reba",
+        position: node.position,
+        data: { kind: node.kind, label: node.label, role: node.role, fill: node.fill, stroke: node.stroke, textColor: node.textColor },
+        style: node.size,
+      })),
+      edges: imported.edges.map((edge) => makeEdge(edge.id, edge.source, edge.target, edge.route, edge.label, edge.sourceHandle)),
+    };
+  }
   const x = 430;
   const nodes: RebaNode[] = [
     { id: "start", type: "reba", position: { x, y: 30 }, data: { kind: "start", label: `Inicio: ${subarea.name}`, role: subarea.owner }, style: nodeDimensions("start") },
@@ -87,8 +107,8 @@ function migrateGraph(value: string | null, fallback: FlowGraph): FlowGraph {
       return {
         id: String(item.id ?? `node-${index + 1}`), type: "reba",
         position: { x: position?.x ?? (typeof item.x === "number" ? item.x : 90 + (index % 3) * 310), y: position?.y ?? (typeof item.y === "number" ? item.y : 80 + Math.floor(index / 3) * 145) },
-        data: { kind, label: data?.label ?? String(item.label ?? "Actividad"), role: data?.role ?? String(item.role ?? "Responsable") },
-        style: nodeDimensions(kind),
+        data: { kind, label: data?.label ?? String(item.label ?? "Actividad"), role: data?.role ?? String(item.role ?? "Responsable"), fill: data?.fill, stroke: data?.stroke, textColor: data?.textColor },
+        style: item.style && typeof item.style === "object" ? item.style as RebaNode["style"] : nodeDimensions(kind),
       };
     });
     const edges = raw.edges.map((item, index) => {
@@ -102,7 +122,7 @@ function migrateGraph(value: string | null, fallback: FlowGraph): FlowGraph {
   }
 }
 
-function FlowchartCanvas({ area, subarea, initialGraph, storageKey, onClose }: { area: Area; subarea: Subarea; initialGraph: FlowGraph; storageKey: string; onClose: () => void }) {
+function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, storageKey, onClose }: { area: Area; subarea: Subarea; flowCode: string; flowTitle: string; initialGraph: FlowGraph; storageKey: string; onClose: () => void }) {
   const [nodes, setNodes, onNodesChange] = useNodesState<RebaNode>(initialGraph.nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState<RebaEdge>(initialGraph.edges);
   const [instance, setInstance] = useState<ReactFlowInstance<RebaNode, RebaEdge> | null>(null);
@@ -130,7 +150,7 @@ function FlowchartCanvas({ area, subarea, initialGraph, storageKey, onClose }: {
   }, [setEdges]);
 
   const addNode = (kind: NodeKind) => {
-    const labels: Record<NodeKind, string> = { start: "Inicio del proceso", activity: "Nueva actividad", decision: "¿Decisión?", evidence: "Evidencia o documento", end: "Fin del proceso" };
+    const labels: Record<NodeKind, string> = { start: "Inicio del proceso", activity: "Nueva actividad", decision: "¿Decisión?", evidence: "Evidencia o documento", exception: "Excepción o escalamiento", end: "Fin del proceso" };
     const center = instance?.screenToFlowPosition({ x: window.innerWidth * 0.48, y: window.innerHeight * 0.48 }) ?? { x: 250, y: 180 };
     const id = `node-${Date.now()}`;
     const node: RebaNode = { id, type: "reba", position: center, data: { kind, label: labels[kind], role: subarea.owner }, style: nodeDimensions(kind), selected: true };
@@ -181,11 +201,11 @@ function FlowchartCanvas({ area, subarea, initialGraph, storageKey, onClose }: {
     setDirty(false); setNotice("Flujograma guardado en este navegador.");
   };
 
-  return <div className="flowchart-modal" role="dialog" aria-modal="true" aria-label={`Editor de ${subarea.name}`}>
+  return <div className="flowchart-modal" role="dialog" aria-modal="true" aria-label={`Editor de ${flowTitle}`}>
     <div className="flowchart-editor-shell">
       <header className="flowchart-editor-head">
         <div className="flowchart-title-mark" style={{ background: area.color }}>{area.code}</div>
-        <div><span>{area.name} · {subarea.code}</span><h2>{subarea.name}</h2></div>
+        <div><span>{area.name} · {subarea.name} · {flowCode}</span><h2>{flowTitle}</h2></div>
         <div className="flowchart-save-state">{dirty ? <><i/> Cambios sin guardar</> : <><i className="saved"/> Guardado</>}</div>
         <button className="icon-button" aria-label="Cerrar editor" onClick={onClose}><X size={21}/></button>
       </header>
@@ -216,14 +236,14 @@ function FlowchartCanvas({ area, subarea, initialGraph, storageKey, onClose }: {
           >
             <Background variant={BackgroundVariant.Dots} gap={18} size={1.4} color="#cfd7e2"/>
             <Controls position="bottom-left" showInteractive={false}/>
-            <MiniMap position="bottom-right" pannable zoomable nodeColor={(node) => nodeColors[(node.data as RebaNodeData).kind]} maskColor="rgba(240,243,248,.72)"/>
+            <MiniMap position="bottom-right" pannable zoomable nodeColor={(node) => (node.data as RebaNodeData).fill ?? nodeColors[(node.data as RebaNodeData).kind]} maskColor="rgba(240,243,248,.72)"/>
           </ReactFlow>
         </div>
 
         <aside className="flowchart-properties">
           <div className="properties-head"><GitBranch size={16}/><div><strong>Propiedades</strong><span>Edita el elemento seleccionado</span></div></div>
           {selectedNode ? <div className="properties-form">
-            <label><span>Tipo de cuadro</span><select value={selectedNode.data.kind} onChange={(event) => updateSelectedNode({ kind: event.target.value as NodeKind })}><option value="activity">Actividad</option><option value="decision">Decisión</option><option value="start">Inicio</option><option value="end">Fin</option><option value="evidence">Evidencia</option></select></label>
+            <label><span>Tipo de cuadro</span><select value={selectedNode.data.kind} onChange={(event) => updateSelectedNode({ kind: event.target.value as NodeKind })}><option value="activity">Actividad</option><option value="decision">Decisión</option><option value="start">Inicio</option><option value="end">Fin</option><option value="evidence">Evidencia</option><option value="exception">Excepción</option></select></label>
             <label><span>Responsable / carril</span><input value={selectedNode.data.role} onChange={(event) => updateSelectedNode({ role: event.target.value })}/></label>
             <label><span>Texto del cuadro</span><textarea rows={5} value={selectedNode.data.label} onChange={(event) => updateSelectedNode({ label: event.target.value })}/></label>
             <button className="button button-secondary danger-button" onClick={removeSelection}><Trash2 size={15}/> Eliminar cuadro</button>
@@ -240,9 +260,11 @@ function FlowchartCanvas({ area, subarea, initialGraph, storageKey, onClose }: {
   </div>;
 }
 
-export function FlowchartEditor({ area, subarea, onClose }: { area: Area; subarea: Subarea; onClose: () => void }) {
-  const storageKey = `reba-flowchart-${subarea.code}`;
-  const template = useMemo(() => buildInitialGraph(subarea), [subarea]);
+export function FlowchartEditor({ area, subarea, flowchart, onClose }: { area: Area; subarea: Subarea; flowchart?: MarketingFlowchart; onClose: () => void }) {
+  const flowCode = flowchart?.code ?? subarea.code;
+  const flowTitle = flowchart?.title ?? subarea.name;
+  const storageKey = `reba-flowchart-${flowCode}`;
+  const template = useMemo(() => buildInitialGraph(subarea, flowchart), [subarea, flowchart]);
   const subscribe = useCallback((onStoreChange: () => void) => {
     const handleStorage = (event: StorageEvent) => { if (!event.key || event.key === storageKey) onStoreChange(); };
     window.addEventListener("storage", handleStorage); window.addEventListener(storageKey, onStoreChange);
@@ -251,5 +273,5 @@ export function FlowchartEditor({ area, subarea, onClose }: { area: Area; subare
   const getSnapshot = useCallback(() => window.localStorage.getItem(storageKey), [storageKey]);
   const storedValue = useSyncExternalStore(subscribe, getSnapshot, () => null);
   const initialGraph = useMemo(() => migrateGraph(storedValue, template), [storedValue, template]);
-  return <FlowchartCanvas key={storedValue ?? subarea.code} area={area} subarea={subarea} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose}/>;
+  return <FlowchartCanvas key={storedValue ?? flowCode} area={area} subarea={subarea} flowCode={flowCode} flowTitle={flowTitle} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose}/>;
 }
