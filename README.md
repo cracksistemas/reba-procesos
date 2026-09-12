@@ -7,7 +7,7 @@ La solución sigue una arquitectura híbrida:
 - **Next.js + Vercel:** experiencia web, rutas y despliegue.
 - **Supabase:** autenticación, metadatos, RLS, aprobaciones y auditoría.
 - **Google Drive:** repositorio documental y archivos maestros.
-- **Editor visual REBA:** lienzo integrado para crear cuadros, decisiones, evidencias y conexiones.
+- **Editor visual REBA sobre XYFlow (MIT):** lienzo integrado con arrastre, conexiones, zoom, minimapa, selección múltiple y cuadros de actividad, decisión, evidencia, inicio y fin.
 
 El HTML puede publicarse, pero no es la fuente editable. Cada proceso debe mantener un solo archivo maestro `.drawio`.
 
@@ -82,7 +82,7 @@ La carpeta raíz identificada es:
 https://drive.google.com/drive/folders/1YoIFfdcoQn107r0juIKyQk6fhaQWkT1H
 ```
 
-El MVP abre la carpeta institucional y ofrece un lienzo propio inspirado en Miro para editar los flujos. En la siguiente fase, cada registro debe guardar `approved_pdf_file_id`; la importación o exportación `.drawio` puede añadirse como interoperabilidad opcional.
+El MVP abre la carpeta institucional y ofrece un lienzo propio inspirado en Miro, construido sobre `@xyflow/react`, para editar los flujos como JSON estructurado. El formato anterior guardado en el navegador se migra automáticamente. En la siguiente fase, cada registro debe guardar `approved_pdf_file_id`; la importación o exportación `.drawio` puede añadirse como interoperabilidad opcional.
 
 La plantilla institucional está en [`docs/gobierno/03_plantilla_reba_procesos.drawio`](docs/gobierno/03_plantilla_reba_procesos.drawio).
 

@@ -1,229 +1,184 @@
 "use client";
 
-import { PointerEvent as ReactPointerEvent, useCallback, useMemo, useRef, useState, useSyncExternalStore } from "react";
-import { Box, Circle, Diamond, FileText, GitBranch, Link2, MousePointer2, RotateCcw, Save, Trash2, X } from "lucide-react";
+import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
+import {
+  addEdge,
+  Background,
+  BackgroundVariant,
+  Connection,
+  Controls,
+  Edge,
+  Handle,
+  MarkerType,
+  MiniMap,
+  Node,
+  NodeProps,
+  Position,
+  ReactFlow,
+  ReactFlowInstance,
+  Viewport,
+  useEdgesState,
+  useNodesState,
+} from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
+import { Box, Circle, Diamond, FileText, GitBranch, Link2, RotateCcw, Save, Trash2, X } from "lucide-react";
 import type { Area, Subarea } from "@/lib/data";
 
-type NodeType = "start" | "activity" | "decision" | "evidence" | "end";
+type NodeKind = "start" | "activity" | "decision" | "evidence" | "end";
+type EdgeRoute = "normal" | "return";
 
-type FlowNode = {
-  id: string;
-  type: NodeType;
-  label: string;
-  role: string;
-  x: number;
-  y: number;
-};
+type RebaNodeData = { label: string; role: string; kind: NodeKind };
+type RebaNode = Node<RebaNodeData, "reba">;
+type RebaEdge = Edge<{ route: EdgeRoute }>;
+type FlowGraph = { version: 2; nodes: RebaNode[]; edges: RebaEdge[]; viewport?: Viewport };
 
-type FlowEdge = {
-  id: string;
-  from: string;
-  to: string;
-  label: string;
-  route: "normal" | "return";
-};
+const nodeTypes = { reba: RebaFlowNode };
+const defaultViewport: Viewport = { x: 0, y: 0, zoom: 1 };
+const nodeColors: Record<NodeKind, string> = { start: "#0f766e", activity: "#5653a6", decision: "#b77900", evidence: "#52616b", end: "#2e7d32" };
 
-type FlowGraph = { nodes: FlowNode[]; edges: FlowEdge[] };
+function nodeDimensions(kind: NodeKind) {
+  if (kind === "decision") return { width: 174, height: 132 };
+  if (kind === "start" || kind === "end") return { width: 230, height: 72 };
+  return { width: 230, height: 90 };
+}
 
-const canvasWidth = 1160;
-const canvasHeight = 820;
+function RebaFlowNode({ data, selected }: NodeProps<RebaNode>) {
+  return <div className={`xy-node node-${data.kind} ${selected ? "selected" : ""}`}>
+    <Handle className="xy-handle" type="target" position={Position.Top}/>
+    <Handle className="xy-handle xy-handle-left" id="left" type="source" position={Position.Left}/>
+    <div className="xy-node-content"><small>{data.role}</small><strong>{data.label}</strong></div>
+    <Handle className="xy-handle" id="bottom" type="source" position={Position.Bottom}/>
+    <Handle className="xy-handle xy-handle-right" id="right" type="source" position={Position.Right}/>
+  </div>;
+}
 
-function nodeSize(type: NodeType) {
-  if (type === "decision") return { width: 154, height: 116 };
-  if (type === "start" || type === "end") return { width: 220, height: 66 };
-  return { width: 220, height: 82 };
+function makeEdge(id: string, source: string, target: string, route: EdgeRoute = "normal", label = "", sourceHandle?: string | null): RebaEdge {
+  const color = route === "return" ? "#c0392b" : "#52616b";
+  return {
+    id, source, target, sourceHandle, type: "smoothstep", label, data: { route },
+    style: { stroke: color, strokeWidth: route === "return" ? 2.4 : 1.8, strokeDasharray: route === "return" ? "7 4" : undefined },
+    labelStyle: { fill: color, fontWeight: 800, fontSize: 11 },
+    labelBgStyle: { fill: "#ffffff", fillOpacity: 0.92 },
+    markerEnd: { type: MarkerType.ArrowClosed, color, width: 18, height: 18 },
+  };
 }
 
 function buildInitialGraph(subarea: Subarea): FlowGraph {
-  const nodes: FlowNode[] = [
-    { id: "start", type: "start", label: `Inicio: ${subarea.name}`, role: subarea.owner, x: 470, y: 42 },
-    ...subarea.flow.map((label, index) => ({
-      id: `step-${index + 1}`,
-      type: "activity" as const,
-      label,
-      role: subarea.owner,
-      x: 470,
-      y: 150 + index * 130,
-    })),
-    { id: "end", type: "end", label: "Fin: actividad cerrada y evidenciada", role: "Resultado", x: 470, y: 150 + subarea.flow.length * 130 },
+  const x = 430;
+  const nodes: RebaNode[] = [
+    { id: "start", type: "reba", position: { x, y: 30 }, data: { kind: "start", label: `Inicio: ${subarea.name}`, role: subarea.owner }, style: nodeDimensions("start") },
+    ...subarea.flow.map((label, index) => ({ id: `step-${index + 1}`, type: "reba" as const, position: { x, y: 150 + index * 145 }, data: { kind: "activity" as const, label, role: subarea.owner }, style: nodeDimensions("activity") })),
+    { id: "end", type: "reba", position: { x, y: 150 + subarea.flow.length * 145 }, data: { kind: "end", label: "Fin: actividad cerrada y evidenciada", role: "Resultado" }, style: nodeDimensions("end") },
   ];
-  const edges = nodes.slice(0, -1).map((node, index) => ({
-    id: `edge-${index + 1}`,
-    from: node.id,
-    to: nodes[index + 1].id,
-    label: "",
-    route: "normal" as const,
-  }));
-  return { nodes, edges };
+  const edges = nodes.slice(0, -1).map((node, index) => makeEdge(`edge-${index + 1}`, node.id, nodes[index + 1].id));
+  return { version: 2, nodes, edges };
 }
 
-function parseGraph(value: string | null, fallback: FlowGraph) {
+function migrateGraph(value: string | null, fallback: FlowGraph): FlowGraph {
   if (!value) return fallback;
   try {
-    const graph = JSON.parse(value) as FlowGraph;
-    return Array.isArray(graph.nodes) && Array.isArray(graph.edges) ? graph : fallback;
+    const raw = JSON.parse(value) as { nodes?: Array<Record<string, unknown>>; edges?: Array<Record<string, unknown>>; viewport?: Viewport };
+    if (!Array.isArray(raw.nodes) || !Array.isArray(raw.edges)) return fallback;
+    const nodes: RebaNode[] = raw.nodes.map((item, index) => {
+      const data = item.data as Partial<RebaNodeData> | undefined;
+      const legacyKind = typeof item.type === "string" && item.type !== "reba" ? item.type as NodeKind : undefined;
+      const kind = data?.kind ?? legacyKind ?? "activity";
+      const position = item.position as { x?: number; y?: number } | undefined;
+      return {
+        id: String(item.id ?? `node-${index + 1}`), type: "reba",
+        position: { x: position?.x ?? (typeof item.x === "number" ? item.x : 90 + (index % 3) * 310), y: position?.y ?? (typeof item.y === "number" ? item.y : 80 + Math.floor(index / 3) * 145) },
+        data: { kind, label: data?.label ?? String(item.label ?? "Actividad"), role: data?.role ?? String(item.role ?? "Responsable") },
+        style: nodeDimensions(kind),
+      };
+    });
+    const edges = raw.edges.map((item, index) => {
+      const data = item.data as { route?: EdgeRoute } | undefined;
+      const route = data?.route ?? (item.route === "return" ? "return" : "normal");
+      return makeEdge(String(item.id ?? `edge-${index + 1}`), String(item.source ?? item.from ?? ""), String(item.target ?? item.to ?? ""), route, typeof item.label === "string" ? item.label : "", typeof item.sourceHandle === "string" ? item.sourceHandle : null);
+    }).filter((edge) => edge.source && edge.target);
+    return { version: 2, nodes, edges, viewport: raw.viewport };
   } catch {
     return fallback;
   }
 }
 
-function edgePath(from: FlowNode, to: FlowNode) {
-  const fromSize = nodeSize(from.type);
-  const toSize = nodeSize(to.type);
-  const x1 = from.x + fromSize.width / 2;
-  const y1 = from.y + fromSize.height;
-  const x2 = to.x + toSize.width / 2;
-  const y2 = to.y;
-  const bend = Math.max(45, Math.abs(y2 - y1) * 0.45);
-  return {
-    path: `M ${x1} ${y1} C ${x1} ${y1 + bend}, ${x2} ${y2 - bend}, ${x2} ${y2}`,
-    labelX: (x1 + x2) / 2,
-    labelY: (y1 + y2) / 2,
-  };
-}
-
-export function FlowchartEditor({ area, subarea, onClose }: { area: Area; subarea: Subarea; onClose: () => void }) {
-  const storageKey = `reba-flowchart-${subarea.code}`;
-  const initialGraph = useMemo(() => buildInitialGraph(subarea), [subarea]);
-  const subscribe = useCallback((onStoreChange: () => void) => {
-    const handleStorage = (event: StorageEvent) => {
-      if (!event.key || event.key === storageKey) onStoreChange();
-    };
-    window.addEventListener("storage", handleStorage);
-    window.addEventListener(storageKey, onStoreChange);
-    return () => {
-      window.removeEventListener("storage", handleStorage);
-      window.removeEventListener(storageKey, onStoreChange);
-    };
-  }, [storageKey]);
-  const getSnapshot = useCallback(() => window.localStorage.getItem(storageKey), [storageKey]);
-  const storedValue = useSyncExternalStore(subscribe, getSnapshot, () => null);
-  const storedGraph = useMemo(() => parseGraph(storedValue, initialGraph), [storedValue, initialGraph]);
-  const effectiveCanvasHeight = Math.max(canvasHeight, 280 + subarea.flow.length * 130);
-  const [draft, setDraft] = useState<FlowGraph | null>(null);
+function FlowchartCanvas({ area, subarea, initialGraph, storageKey, onClose }: { area: Area; subarea: Subarea; initialGraph: FlowGraph; storageKey: string; onClose: () => void }) {
+  const [nodes, setNodes, onNodesChange] = useNodesState<RebaNode>(initialGraph.nodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<RebaEdge>(initialGraph.edges);
+  const [instance, setInstance] = useState<ReactFlowInstance<RebaNode, RebaEdge> | null>(null);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(null);
-  const [connectMode, setConnectMode] = useState(false);
-  const [connectFrom, setConnectFrom] = useState<string | null>(null);
-  const [notice, setNotice] = useState("Selecciona y arrastra un cuadro para comenzar.");
-  const surfaceRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef<{ id: string; offsetX: number; offsetY: number } | null>(null);
-  const graph = draft ?? storedGraph;
-  const selectedNode = graph.nodes.find((node) => node.id === selectedNodeId) ?? null;
-  const selectedEdge = graph.edges.find((edge) => edge.id === selectedEdgeId) ?? null;
+  const [notice, setNotice] = useState("Arrastra el lienzo, usa la rueda para acercar y une los puntos de conexión.");
+  const [dirty, setDirty] = useState(false);
+  const selectedNode = nodes.find((node) => node.id === selectedNodeId) ?? null;
+  const selectedEdge = edges.find((edge) => edge.id === selectedEdgeId) ?? null;
 
-  const updateGraph = (updater: (current: FlowGraph) => FlowGraph) => {
-    setDraft((current) => updater(current ?? graph));
-  };
+  const markDirty = useCallback(() => setDirty(true), []);
+  const handleNodesChange = useCallback((changes: Parameters<typeof onNodesChange>[0]) => {
+    onNodesChange(changes);
+    if (changes.some((change) => change.type !== "select" && change.type !== "dimensions")) markDirty();
+  }, [onNodesChange, markDirty]);
+  const handleEdgesChange = useCallback((changes: Parameters<typeof onEdgesChange>[0]) => {
+    onEdgesChange(changes);
+    if (changes.some((change) => change.type !== "select")) markDirty();
+  }, [onEdgesChange, markDirty]);
 
-  const addNode = (type: NodeType) => {
+  const onConnect = useCallback((connection: Connection) => {
+    setEdges((current) => addEdge(makeEdge(`edge-${Date.now()}`, connection.source, connection.target, "normal", "", connection.sourceHandle), current));
+    setDirty(true);
+    setNotice("Conexión creada. Selecciona la línea para añadir Sí/No o marcarla como retorno.");
+  }, [setEdges]);
+
+  const addNode = (kind: NodeKind) => {
+    const labels: Record<NodeKind, string> = { start: "Inicio del proceso", activity: "Nueva actividad", decision: "¿Decisión?", evidence: "Evidencia o documento", end: "Fin del proceso" };
+    const center = instance?.screenToFlowPosition({ x: window.innerWidth * 0.48, y: window.innerHeight * 0.48 }) ?? { x: 250, y: 180 };
     const id = `node-${Date.now()}`;
-    const column = graph.nodes.length % 3;
-    const row = Math.floor(graph.nodes.length / 3) % 5;
-    const labels: Record<NodeType, string> = {
-      start: "Inicio del proceso",
-      activity: "Nueva actividad",
-      decision: "¿Decisión?",
-      evidence: "Evidencia o documento",
-      end: "Fin del proceso",
-    };
-    updateGraph((current) => ({
-      ...current,
-      nodes: [...current.nodes, { id, type, label: labels[type], role: subarea.owner, x: 90 + column * 330, y: 95 + row * 145 }],
-    }));
-    setSelectedNodeId(id);
-    setSelectedEdgeId(null);
-    setNotice("Cuadro añadido. Edita su texto en el panel derecho.");
+    const node: RebaNode = { id, type: "reba", position: center, data: { kind, label: labels[kind], role: subarea.owner }, style: nodeDimensions(kind), selected: true };
+    setNodes((current) => [...current.map((item) => ({ ...item, selected: false })), node]);
+    setSelectedNodeId(id); setSelectedEdgeId(null); setDirty(true);
+    setNotice("Cuadro añadido. Edita su contenido en el panel derecho y conéctalo desde sus puntos.");
   };
 
-  const chooseNode = (nodeId: string) => {
-    setSelectedNodeId(nodeId);
-    setSelectedEdgeId(null);
-    if (!connectMode) return;
-    if (!connectFrom) {
-      setConnectFrom(nodeId);
-      setNotice("Ahora selecciona el cuadro de destino.");
-      return;
-    }
-    if (connectFrom !== nodeId) {
-      updateGraph((current) => ({
-        ...current,
-        edges: [...current.edges, { id: `edge-${Date.now()}`, from: connectFrom, to: nodeId, label: "", route: "normal" }],
-      }));
-      setNotice("Línea creada. Puedes seleccionarla para añadir una etiqueta o marcarla como retorno.");
-    }
-    setConnectFrom(null);
-    setConnectMode(false);
-  };
-
-  const startDrag = (event: ReactPointerEvent<HTMLButtonElement>, node: FlowNode) => {
-    if (connectMode) {
-      chooseNode(node.id);
-      return;
-    }
-    const rect = event.currentTarget.getBoundingClientRect();
-    dragRef.current = { id: node.id, offsetX: event.clientX - rect.left, offsetY: event.clientY - rect.top };
-    event.currentTarget.setPointerCapture(event.pointerId);
-    chooseNode(node.id);
-  };
-
-  const moveNode = (event: ReactPointerEvent<HTMLDivElement>) => {
-    const dragging = dragRef.current;
-    const surface = surfaceRef.current;
-    if (!dragging || !surface) return;
-    const rect = surface.getBoundingClientRect();
-    updateGraph((current) => ({
-      ...current,
-      nodes: current.nodes.map((node) => {
-        if (node.id !== dragging.id) return node;
-        const size = nodeSize(node.type);
-        return {
-          ...node,
-          x: Math.max(12, Math.min(canvasWidth - size.width - 12, event.clientX - rect.left - dragging.offsetX)),
-          y: Math.max(12, Math.min(effectiveCanvasHeight - size.height - 12, event.clientY - rect.top - dragging.offsetY)),
-        };
-      }),
-    }));
-  };
-
-  const stopDrag = () => { dragRef.current = null; };
-
-  const updateSelectedNode = (patch: Partial<FlowNode>) => {
+  const updateSelectedNode = (patch: Partial<RebaNodeData>) => {
     if (!selectedNodeId) return;
-    updateGraph((current) => ({ ...current, nodes: current.nodes.map((node) => node.id === selectedNodeId ? { ...node, ...patch } : node) }));
+    setNodes((current) => current.map((node) => {
+      if (node.id !== selectedNodeId) return node;
+      const data = { ...node.data, ...patch };
+      return { ...node, data, style: nodeDimensions(data.kind) };
+    }));
+    setDirty(true);
   };
 
-  const updateSelectedEdge = (patch: Partial<FlowEdge>) => {
+  const updateSelectedEdge = (patch: { label?: string; route?: EdgeRoute }) => {
     if (!selectedEdgeId) return;
-    updateGraph((current) => ({ ...current, edges: current.edges.map((edge) => edge.id === selectedEdgeId ? { ...edge, ...patch } : edge) }));
+    setEdges((current) => current.map((edge) => edge.id === selectedEdgeId ? makeEdge(edge.id, edge.source, edge.target, patch.route ?? edge.data?.route ?? "normal", patch.label ?? String(edge.label ?? ""), edge.sourceHandle) : edge));
+    setDirty(true);
   };
 
   const removeSelection = () => {
     if (selectedNodeId) {
-      updateGraph((current) => ({
-        nodes: current.nodes.filter((node) => node.id !== selectedNodeId),
-        edges: current.edges.filter((edge) => edge.from !== selectedNodeId && edge.to !== selectedNodeId),
-      }));
+      setNodes((current) => current.filter((node) => node.id !== selectedNodeId));
+      setEdges((current) => current.filter((edge) => edge.source !== selectedNodeId && edge.target !== selectedNodeId));
       setSelectedNodeId(null);
     } else if (selectedEdgeId) {
-      updateGraph((current) => ({ ...current, edges: current.edges.filter((edge) => edge.id !== selectedEdgeId) }));
+      setEdges((current) => current.filter((edge) => edge.id !== selectedEdgeId));
       setSelectedEdgeId(null);
     }
-  };
-
-  const save = () => {
-    const value = JSON.stringify(graph);
-    window.localStorage.setItem(storageKey, value);
-    window.dispatchEvent(new Event(storageKey));
-    setDraft(null);
-    setNotice("Flujograma guardado en este navegador.");
+    setDirty(true);
   };
 
   const restoreTemplate = () => {
-    setDraft(initialGraph);
-    setSelectedNodeId(null);
-    setSelectedEdgeId(null);
+    setNodes(initialGraph.nodes); setEdges(initialGraph.edges); setSelectedNodeId(null); setSelectedEdgeId(null); setDirty(true);
+    window.setTimeout(() => instance?.fitView({ padding: 0.16, duration: 350 }), 0);
     setNotice("Plantilla restaurada. Presiona Guardar para confirmar el cambio.");
+  };
+
+  const save = () => {
+    const flow = instance?.toObject();
+    const graph: FlowGraph = { version: 2, nodes, edges, viewport: flow?.viewport };
+    window.localStorage.setItem(storageKey, JSON.stringify(graph));
+    window.dispatchEvent(new Event(storageKey));
+    setDirty(false); setNotice("Flujograma guardado en este navegador.");
   };
 
   return <div className="flowchart-modal" role="dialog" aria-modal="true" aria-label={`Editor de ${subarea.name}`}>
@@ -231,7 +186,7 @@ export function FlowchartEditor({ area, subarea, onClose }: { area: Area; subare
       <header className="flowchart-editor-head">
         <div className="flowchart-title-mark" style={{ background: area.color }}>{area.code}</div>
         <div><span>{area.name} · {subarea.code}</span><h2>{subarea.name}</h2></div>
-        <div className="flowchart-save-state">{draft ? <><i/> Cambios sin guardar</> : <><i className="saved"/> Guardado</>}</div>
+        <div className="flowchart-save-state">{dirty ? <><i/> Cambios sin guardar</> : <><i className="saved"/> Guardado</>}</div>
         <button className="icon-button" aria-label="Cerrar editor" onClick={onClose}><X size={21}/></button>
       </header>
 
@@ -242,61 +197,59 @@ export function FlowchartEditor({ area, subarea, onClose }: { area: Area; subare
         <button onClick={() => addNode("end")}><Circle size={16}/> Fin</button>
         <button onClick={() => addNode("evidence")}><FileText size={16}/> Evidencia</button>
         <span className="toolbar-divider"/>
-        <button className={connectMode ? "active" : ""} onClick={() => { setConnectMode((current) => !current); setConnectFrom(null); }}><Link2 size={16}/> Conectar</button>
+        <span className="xy-connect-tip"><Link2 size={15}/> Arrastra entre los puntos para conectar</span>
         <button disabled={!selectedNodeId && !selectedEdgeId} onClick={removeSelection}><Trash2 size={16}/> Eliminar</button>
         <button onClick={restoreTemplate}><RotateCcw size={16}/> Restaurar</button>
         <button className="toolbar-save" onClick={save}><Save size={16}/> Guardar</button>
       </div>
 
       <div className="flowchart-workspace">
-        <div className="flowchart-scroll">
-          <div className={`flowchart-surface ${connectMode ? "is-connecting" : ""}`} ref={surfaceRef} style={{ width: canvasWidth, height: effectiveCanvasHeight }} onPointerMove={moveNode} onPointerUp={stopDrag} onPointerCancel={stopDrag}>
-            <svg className="flowchart-edges" width={canvasWidth} height={effectiveCanvasHeight} aria-hidden="true">
-              <defs>
-                <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z"/></marker>
-                <marker id="flow-arrow-return" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z"/></marker>
-              </defs>
-              {graph.edges.map((edge) => {
-                const from = graph.nodes.find((node) => node.id === edge.from);
-                const to = graph.nodes.find((node) => node.id === edge.to);
-                if (!from || !to) return null;
-                const geometry = edgePath(from, to);
-                return <g key={edge.id} className={`flowchart-edge ${edge.route === "return" ? "return" : ""} ${selectedEdgeId === edge.id ? "selected" : ""}`} onClick={() => { setSelectedEdgeId(edge.id); setSelectedNodeId(null); }}>
-                  <path className="edge-hitbox" d={geometry.path}/>
-                  <path className="edge-line" d={geometry.path} markerEnd={`url(#${edge.route === "return" ? "flow-arrow-return" : "flow-arrow"})`}/>
-                  {edge.label && <text x={geometry.labelX} y={geometry.labelY - 7}>{edge.label}</text>}
-                </g>;
-              })}
-            </svg>
-            {graph.nodes.map((node) => <button
-              type="button"
-              key={node.id}
-              className={`canvas-node node-${node.type} ${selectedNodeId === node.id ? "selected" : ""} ${connectFrom === node.id ? "connect-source" : ""}`}
-              style={{ left: node.x, top: node.y, ...nodeSize(node.type) }}
-              onPointerDown={(event) => startDrag(event, node)}
-              onDoubleClick={() => chooseNode(node.id)}
-            >
-              <span className="canvas-node-content"><small>{node.role}</small><strong>{node.label}</strong></span>
-            </button>)}
-          </div>
+        <div className="xyflow-canvas">
+          <ReactFlow<RebaNode, RebaEdge>
+            nodes={nodes} edges={edges} nodeTypes={nodeTypes}
+            onNodesChange={handleNodesChange} onEdgesChange={handleEdgesChange} onConnect={onConnect} onInit={setInstance}
+            onNodeClick={(_, node) => { setSelectedNodeId(node.id); setSelectedEdgeId(null); }}
+            onEdgeClick={(_, edge) => { setSelectedEdgeId(edge.id); setSelectedNodeId(null); }}
+            onPaneClick={() => { setSelectedNodeId(null); setSelectedEdgeId(null); }}
+            defaultViewport={initialGraph.viewport ?? defaultViewport} fitView={!initialGraph.viewport} fitViewOptions={{ padding: 0.16, maxZoom: 1.1 }}
+            minZoom={0.18} maxZoom={2.4} snapToGrid snapGrid={[16, 16]} selectionOnDrag deleteKeyCode={["Backspace", "Delete"]} multiSelectionKeyCode={["Meta", "Control"]}
+          >
+            <Background variant={BackgroundVariant.Dots} gap={18} size={1.4} color="#cfd7e2"/>
+            <Controls position="bottom-left" showInteractive={false}/>
+            <MiniMap position="bottom-right" pannable zoomable nodeColor={(node) => nodeColors[(node.data as RebaNodeData).kind]} maskColor="rgba(240,243,248,.72)"/>
+          </ReactFlow>
         </div>
 
         <aside className="flowchart-properties">
-          <div className="properties-head"><MousePointer2 size={16}/><div><strong>Propiedades</strong><span>Edita el elemento seleccionado</span></div></div>
+          <div className="properties-head"><GitBranch size={16}/><div><strong>Propiedades</strong><span>Edita el elemento seleccionado</span></div></div>
           {selectedNode ? <div className="properties-form">
-            <label><span>Tipo de cuadro</span><select value={selectedNode.type} onChange={(event) => updateSelectedNode({ type: event.target.value as NodeType })}><option value="activity">Actividad</option><option value="decision">Decisión</option><option value="start">Inicio</option><option value="end">Fin</option><option value="evidence">Evidencia</option></select></label>
-            <label><span>Responsable / carril</span><input value={selectedNode.role} onChange={(event) => updateSelectedNode({ role: event.target.value })}/></label>
-            <label><span>Texto del cuadro</span><textarea rows={5} value={selectedNode.label} onChange={(event) => updateSelectedNode({ label: event.target.value })}/></label>
+            <label><span>Tipo de cuadro</span><select value={selectedNode.data.kind} onChange={(event) => updateSelectedNode({ kind: event.target.value as NodeKind })}><option value="activity">Actividad</option><option value="decision">Decisión</option><option value="start">Inicio</option><option value="end">Fin</option><option value="evidence">Evidencia</option></select></label>
+            <label><span>Responsable / carril</span><input value={selectedNode.data.role} onChange={(event) => updateSelectedNode({ role: event.target.value })}/></label>
+            <label><span>Texto del cuadro</span><textarea rows={5} value={selectedNode.data.label} onChange={(event) => updateSelectedNode({ label: event.target.value })}/></label>
             <button className="button button-secondary danger-button" onClick={removeSelection}><Trash2 size={15}/> Eliminar cuadro</button>
           </div> : selectedEdge ? <div className="properties-form">
-            <label><span>Etiqueta de línea</span><input placeholder="Ej. Sí / No" value={selectedEdge.label} onChange={(event) => updateSelectedEdge({ label: event.target.value })}/></label>
-            <label><span>Tipo de ruta</span><select value={selectedEdge.route} onChange={(event) => updateSelectedEdge({ route: event.target.value as FlowEdge["route"] })}><option value="normal">Ruta normal</option><option value="return">Observación / retorno</option></select></label>
+            <label><span>Etiqueta de línea</span><input placeholder="Ej. Sí / No" value={String(selectedEdge.label ?? "")} onChange={(event) => updateSelectedEdge({ label: event.target.value })}/></label>
+            <label><span>Tipo de ruta</span><select value={selectedEdge.data?.route ?? "normal"} onChange={(event) => updateSelectedEdge({ route: event.target.value as EdgeRoute })}><option value="normal">Ruta normal</option><option value="return">Observación / retorno</option></select></label>
             <button className="button button-secondary danger-button" onClick={removeSelection}><Trash2 size={15}/> Eliminar línea</button>
-          </div> : <div className="properties-empty"><GitBranch size={30}/><strong>Selecciona un elemento</strong><p>Haz clic en un cuadro o una línea. Para unir dos cuadros activa “Conectar” y selecciona origen y destino.</p></div>}
-          <div className="properties-tip"><strong>Cómo usar el lienzo</strong><span>Arrastra cuadros para moverlos. Añade decisiones, evidencias o actividades desde la barra. Las rutas de observación se muestran en rojo.</span></div>
+          </div> : <div className="properties-empty"><GitBranch size={30}/><strong>Selecciona un elemento</strong><p>Haz clic en un cuadro o línea. Arrastra desde un punto del cuadro de origen hacia el destino para conectarlos.</p></div>}
+          <div className="properties-tip"><strong>Editor avanzado XYFlow</strong><span>Rueda: zoom · Arrastrar fondo: desplazarse · Ctrl/Cmd: selección múltiple · Supr: eliminar · Minimap: navegación rápida.</span></div>
         </aside>
       </div>
-      <footer className="flowchart-status"><span>{notice}</span><span>Formato inspirado en los flujogramas de Contabilidad · Lienzo {canvasWidth} × {effectiveCanvasHeight}</span></footer>
+      <footer className="flowchart-status"><span>{notice}</span><span>Motor XYFlow · JSON estructurado · Formato visual REBA</span></footer>
     </div>
   </div>;
+}
+
+export function FlowchartEditor({ area, subarea, onClose }: { area: Area; subarea: Subarea; onClose: () => void }) {
+  const storageKey = `reba-flowchart-${subarea.code}`;
+  const template = useMemo(() => buildInitialGraph(subarea), [subarea]);
+  const subscribe = useCallback((onStoreChange: () => void) => {
+    const handleStorage = (event: StorageEvent) => { if (!event.key || event.key === storageKey) onStoreChange(); };
+    window.addEventListener("storage", handleStorage); window.addEventListener(storageKey, onStoreChange);
+    return () => { window.removeEventListener("storage", handleStorage); window.removeEventListener(storageKey, onStoreChange); };
+  }, [storageKey]);
+  const getSnapshot = useCallback(() => window.localStorage.getItem(storageKey), [storageKey]);
+  const storedValue = useSyncExternalStore(subscribe, getSnapshot, () => null);
+  const initialGraph = useMemo(() => migrateGraph(storedValue, template), [storedValue, template]);
+  return <FlowchartCanvas key={storedValue ?? subarea.code} area={area} subarea={subarea} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose}/>;
 }
