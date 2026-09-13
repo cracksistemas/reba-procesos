@@ -2,16 +2,12 @@
 
 import Link from "next/link";
 import { FormEvent, useCallback, useMemo, useState, useSyncExternalStore } from "react";
-import { ArrowRight, CheckCircle2, GitBranch, Pencil, Plus, Save, X } from "lucide-react";
+import { ArrowRight, CheckCircle2, GitBranch, Plus, Save, X } from "lucide-react";
 import { FlowchartEditor } from "@/components/flowchart-editor";
 import { mergeSubareas, type Area, type Process, type Subarea } from "@/lib/data";
-import { getMarketingFlowcharts, type MarketingFlowchart } from "@/lib/marketing-flowcharts";
+import { getMarketingFlowcharts } from "@/lib/marketing-flowcharts";
 
-type SubareaManagerProps = {
-  area: Area;
-  initialSubareas: Subarea[];
-  areaProcesses: Process[];
-};
+type SubareaManagerProps = { area: Area; initialSubareas: Subarea[]; areaProcesses: Process[] };
 
 const splitFlow = (value: string) => value
   .split(/[\n,>→]+/)
@@ -24,7 +20,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
   const [showForm, setShowForm] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
-  const [activeFlowchart, setActiveFlowchart] = useState<{ subarea: Subarea; flowchart?: MarketingFlowchart } | null>(null);
+  const [customCanvas, setCustomCanvas] = useState<Subarea | null>(null);
 
   const subscribe = useCallback((onStoreChange: () => void) => {
     const handleStorage = (event: StorageEvent) => {
@@ -42,8 +38,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
   const items = useMemo(() => {
     if (!storedValue) return initialSubareas;
     try {
-      const stored = JSON.parse(storedValue) as Subarea[];
-      return mergeSubareas(initialSubareas, stored);
+      return mergeSubareas(initialSubareas, JSON.parse(storedValue) as Subarea[]);
     } catch {
       return initialSubareas;
     }
@@ -82,13 +77,19 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
     window.setTimeout(() => setNotice(""), 4500);
   };
 
+  const documentedFlows = items.reduce((total, subarea) => {
+    const imported = area.code === "MKT" ? getMarketingFlowcharts(subarea.code).length : 0;
+    const related = areaProcesses.filter((process) => process.subareaCode === subarea.code).length;
+    return total + (imported || related || 1);
+  }, 0);
+
   return <>
     <div className="page-heading area-detail-heading">
       <div>
         <div className="breadcrumb"><Link href="/areas">Áreas</Link> / <span>{area.code}</span></div>
-        <p className="eyebrow">Estructura organizacional</p>
+        <p className="eyebrow">Área · elige una unidad para continuar</p>
         <h1>{area.name}</h1>
-        <p>{area.description} Dueño: {area.owner}.</p>
+        <p>{area.description} Cada subárea reúne sus procesos, programas y flujogramas.</p>
       </div>
       <button className="button button-primary" onClick={() => setShowForm((current) => !current)}>
         {showForm ? <X size={16}/> : <Plus size={16}/>} {showForm ? "Cancelar" : "Nueva subárea"}
@@ -109,35 +110,46 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
       <div className="form-actions"><button type="button" className="button button-secondary" onClick={() => setShowForm(false)}>Cancelar</button><button className="button button-primary" type="submit"><Save size={15}/> Guardar subárea</button></div>
     </form>}
 
-    <section className="card area-structure" aria-label={`Estructura de ${area.name}`}>
-      <div className="card-header"><div><h2>Mapa de subáreas</h2><p>Secuencia referencial de coordinación interna.</p></div><span className="structure-count">{items.length} subáreas</span></div>
-      <div className="subarea-map">
-        <div className="flow-node start">{area.name}</div>
-        <ArrowRight className="flow-arrow" size={18}/>
-        <div className="subarea-map-list">{items.map((item) => <a href={`#${item.code}`} className="map-node" key={item.code}>{item.name}</a>)}</div>
-      </div>
+    <section className="area-directory-summary" aria-label={`Resumen de ${area.name}`}>
+      <div><strong>{items.length}</strong><span>Subáreas</span></div>
+      <div><strong>{documentedFlows}</strong><span>Procesos y programas</span></div>
+      <div><strong>{area.owner}</strong><span>Responsable del área</span></div>
     </section>
 
-    <section className="subarea-grid" aria-label="Subáreas">
+    <div className="directory-heading">
+      <div><h2>Subáreas de {area.name}</h2><p>Selecciona una tarjeta para abrir su menú de procesos y visualizar el flujograma completo.</p></div>
+      <span>{items.length} disponibles</span>
+    </div>
+
+    <section className="subarea-grid subarea-directory-grid" aria-label="Subáreas">
       {items.map((subarea) => {
         const related = areaProcesses.filter((process) => process.subareaCode === subarea.code);
-        const importedFlowcharts = area.code === "MKT" ? getMarketingFlowcharts(subarea.code) : [];
-        const openFlowchart = (flowchart?: MarketingFlowchart) => setActiveFlowchart({ subarea, flowchart });
-        return <article className="card subarea-card" id={subarea.code} key={subarea.code}>
+        const imported = area.code === "MKT" ? getMarketingFlowcharts(subarea.code) : [];
+        const total = imported.length || related.length || 1;
+        const preview = imported.length ? imported.slice(0, 2).map((flow) => flow.title) : subarea.flow.slice(0, 2);
+        const isCustom = subarea.source === "Usuario";
+
+        return <article className="card subarea-browser-card" key={subarea.code}>
           <div className="subarea-card-head">
             <div className="subarea-icon" style={{ background: area.color }}><GitBranch size={18}/></div>
             <div><span className="detail-code">{subarea.code}</span><h2>{subarea.name}</h2></div>
             <span className={`source-label ${subarea.source === "Drive" ? "source-drive" : ""}`}>{subarea.source}</span>
           </div>
           <p className="subarea-description">{subarea.description}</p>
-          <div className="subarea-meta"><span>Responsable</span><strong>{subarea.owner}</strong><span>Procesos vinculados</span><strong>{related.length}</strong></div>
-          <div className="mini-flow-header"><strong>{importedFlowcharts.length ? `${importedFlowcharts.length} ${importedFlowcharts.length === 1 ? "flujograma oficial" : "flujogramas oficiales"}` : "Flujograma de la subárea"}</strong><button className="text-button" onClick={() => openFlowchart(importedFlowcharts[0])}><Pencil size={13}/> Editar visualmente</button></div>
-          <div className="mini-flow"><div className="mini-flow-terminal">Inicio</div>{subarea.flow.map((step, index) => <div className="mini-flow-step" key={`${subarea.code}-${step}`}><ArrowRight size={14}/><strong>{step}</strong>{index === subarea.flow.length - 1 && <><ArrowRight size={14}/><div className="mini-flow-terminal end">Fin</div></>}</div>)}</div>
-          {importedFlowcharts.length > 0 && <div className="subarea-flow-list">{importedFlowcharts.map((flowchart) => <button key={flowchart.code} onClick={() => openFlowchart(flowchart)}><span>{flowchart.code}</span><strong>{flowchart.title}</strong><ArrowRight size={13}/></button>)}</div>}
-          <div className="subarea-footer"><span>{related.length ? related.map((process) => process.code).join(" · ") : "Lista para vincular procesos"}</span><div><button className="button button-secondary" onClick={() => openFlowchart(importedFlowcharts[0])}><GitBranch size={14}/> Abrir lienzo</button><Link className="button button-ghost" href={`/procesos?area=${area.code}&subarea=${subarea.code}`}>Ver procesos <ArrowRight size={14}/></Link></div></div>
+          <div className="subarea-process-preview">
+            <div><strong>{total}</strong><span>{total === 1 ? "Proceso o programa" : "Procesos y programas"}</span></div>
+            <ul>{preview.map((title) => <li key={title}>{title}</li>)}</ul>
+          </div>
+          <div className="subarea-browser-footer">
+            <span>Responsable<br/><strong>{subarea.owner}</strong></span>
+            {isCustom
+              ? <button className="button button-ghost" onClick={() => setCustomCanvas(subarea)}>Abrir lienzo <ArrowRight size={14}/></button>
+              : <Link className="button button-ghost" href={`/areas/${area.code}/${subarea.code}`}>Ver subárea <ArrowRight size={14}/></Link>}
+          </div>
         </article>;
       })}
     </section>
-    {activeFlowchart && <FlowchartEditor area={area} subarea={activeFlowchart.subarea} flowchart={activeFlowchart.flowchart} onClose={() => setActiveFlowchart(null)}/>} 
+
+    {customCanvas && <FlowchartEditor area={area} subarea={customCanvas} onClose={() => setCustomCanvas(null)}/>}
   </>;
 }

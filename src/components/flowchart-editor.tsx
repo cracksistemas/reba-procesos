@@ -155,7 +155,7 @@ function migrateGraph(value: string | null, fallback: FlowGraph): FlowGraph {
   }
 }
 
-function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, storageKey, onClose }: { area: Area; subarea: Subarea; flowCode: string; flowTitle: string; initialGraph: FlowGraph; storageKey: string; onClose: () => void }) {
+function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, storageKey, onClose, embedded = false }: { area: Area; subarea: Subarea; flowCode: string; flowTitle: string; initialGraph: FlowGraph; storageKey: string; onClose?: () => void; embedded?: boolean }) {
   const [nodes, setNodes, onNodesChange] = useNodesState<RebaNode>(initialGraph.nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState<RebaEdge>(initialGraph.edges);
   const [instance, setInstance] = useState<ReactFlowInstance<RebaNode, RebaEdge> | null>(null);
@@ -235,13 +235,13 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
     setDirty(false); setNotice("Flujograma guardado en este navegador.");
   };
 
-  return <div className="flowchart-modal" role="dialog" aria-modal="true" aria-label={`Editor de ${flowTitle}`}>
+  return <div className={`flowchart-modal${embedded ? " flowchart-embedded" : ""}`} role={embedded ? "region" : "dialog"} aria-modal={embedded ? undefined : true} aria-label={`Editor de ${flowTitle}`}>
     <div className="flowchart-editor-shell">
       <header className="flowchart-editor-head">
         <div className="flowchart-title-mark" style={{ background: area.color }}>{area.code}</div>
         <div><span>{area.name} · {subarea.name} · {flowCode}</span><h2>{flowTitle}</h2></div>
         <div className="flowchart-save-state">{dirty ? <><i/> Cambios sin guardar</> : <><i className="saved"/> Guardado</>}</div>
-        <button className="icon-button" aria-label="Cerrar editor" onClick={onClose}><X size={21}/></button>
+        {!embedded && <button className="icon-button" aria-label="Cerrar editor" onClick={onClose}><X size={21}/></button>}
       </header>
 
       <div className="flowchart-toolbar" aria-label="Herramientas del flujograma">
@@ -294,7 +294,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
   </div>;
 }
 
-export function FlowchartEditor({ area, subarea, flowchart, onClose }: { area: Area; subarea: Subarea; flowchart?: MarketingFlowchart; onClose: () => void }) {
+export function FlowchartEditor({ area, subarea, flowchart, onClose, embedded = false }: { area: Area; subarea: Subarea; flowchart?: MarketingFlowchart; onClose?: () => void; embedded?: boolean }) {
   const flowCode = flowchart?.code ?? subarea.code;
   const flowTitle = flowchart?.title ?? subarea.name;
   const storageKey = `reba-flowchart-${flowCode}`;
@@ -307,5 +307,5 @@ export function FlowchartEditor({ area, subarea, flowchart, onClose }: { area: A
   const getSnapshot = useCallback(() => window.localStorage.getItem(storageKey), [storageKey]);
   const storedValue = useSyncExternalStore(subscribe, getSnapshot, () => null);
   const initialGraph = useMemo(() => migrateGraph(storedValue, template), [storedValue, template]);
-  return <FlowchartCanvas key={storedValue ?? flowCode} area={area} subarea={subarea} flowCode={flowCode} flowTitle={flowTitle} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose}/>;
+  return <FlowchartCanvas key={storedValue ?? flowCode} area={area} subarea={subarea} flowCode={flowCode} flowTitle={flowTitle} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose} embedded={embedded}/>;
 }
