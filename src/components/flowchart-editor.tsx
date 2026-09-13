@@ -21,7 +21,7 @@ import {
   useNodesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { Box, Circle, Diamond, FileText, GitBranch, Link2, RotateCcw, Save, Trash2, X } from "lucide-react";
+import { Box, Circle, Diamond, FileText, GitBranch, Link2, PanelRightClose, PanelRightOpen, RotateCcw, Save, Trash2, X } from "lucide-react";
 import type { Area, Subarea } from "@/lib/data";
 import type { MarketingFlowchart } from "@/lib/marketing-flowcharts";
 
@@ -163,6 +163,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
   const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(null);
   const [notice, setNotice] = useState("Arrastra el lienzo, usa la rueda para acercar y une los puntos de conexión.");
   const [dirty, setDirty] = useState(false);
+  const [propertiesCollapsed, setPropertiesCollapsed] = useState(false);
   const selectedNode = nodes.find((node) => node.id === selectedNodeId) ?? null;
   const selectedEdge = edges.find((edge) => edge.id === selectedEdgeId) ?? null;
 
@@ -254,10 +255,11 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
         <span className="xy-connect-tip"><Link2 size={15}/> Arrastra entre los puntos para conectar</span>
         <button disabled={!selectedNodeId && !selectedEdgeId} onClick={removeSelection}><Trash2 size={16}/> Eliminar</button>
         <button onClick={restoreTemplate}><RotateCcw size={16}/> Restaurar</button>
+        <button onClick={() => setPropertiesCollapsed((current) => !current)} aria-expanded={!propertiesCollapsed} aria-controls={`properties-${flowCode}`}>{propertiesCollapsed ? <PanelRightOpen size={16}/> : <PanelRightClose size={16}/>} {propertiesCollapsed ? "Mostrar panel" : "Ocultar panel"}</button>
         <button className="toolbar-save" onClick={save}><Save size={16}/> Guardar</button>
       </div>
 
-      <div className="flowchart-workspace">
+      <div className={`flowchart-workspace ${propertiesCollapsed ? "properties-collapsed" : ""}`}>
         <div className="xyflow-canvas">
           <ReactFlow<RebaNode, RebaEdge>
             nodes={nodes} edges={edges} nodeTypes={nodeTypes}
@@ -274,7 +276,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
           </ReactFlow>
         </div>
 
-        <aside className="flowchart-properties">
+        <aside id={`properties-${flowCode}`} className="flowchart-properties" hidden={propertiesCollapsed}>
           <div className="properties-head"><GitBranch size={16}/><div><strong>Propiedades</strong><span>Edita el elemento seleccionado</span></div></div>
           {selectedNode ? <div className="properties-form">
             <label><span>Tipo de cuadro</span><select value={selectedNode.data.kind} onChange={(event) => updateSelectedNode({ kind: event.target.value as NodeKind })}><option value="activity">Actividad</option><option value="decision">Decisión</option><option value="start">Inicio</option><option value="end">Fin</option><option value="evidence">Evidencia</option><option value="exception">Excepción</option></select></label>

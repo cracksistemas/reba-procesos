@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, CheckCircle2, GitBranch, LayoutGrid, ListTree, UserRound } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, GitBranch, LayoutGrid, ListTree, PanelLeftClose, PanelLeftOpen, UserRound } from "lucide-react";
 import { FlowchartEditor } from "@/components/flowchart-editor";
 import type { Area, Subarea } from "@/lib/data";
 import type { MarketingFlowchart } from "@/lib/marketing-flowcharts";
@@ -17,6 +17,7 @@ type SubareaWorkspaceProps = {
 
 export function SubareaWorkspace({ area, subarea, siblings, flowcharts, flowCounts }: SubareaWorkspaceProps) {
   const [activeCode, setActiveCode] = useState(flowcharts[0]?.code ?? subarea.code);
+  const [navigatorCollapsed, setNavigatorCollapsed] = useState(false);
   const activeFlow = useMemo(() => flowcharts.find((flowchart) => flowchart.code === activeCode), [activeCode, flowcharts]);
   const activePosition = activeFlow ? flowcharts.findIndex((flowchart) => flowchart.code === activeFlow.code) + 1 : 1;
   const totalFlows = flowcharts.length || 1;
@@ -27,7 +28,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, flowCoun
   return <>
     <div className="subarea-workspace-heading">
       <div className="breadcrumb"><Link href="/areas">Áreas</Link> / <Link href={`/areas/${area.code}`}>{area.name}</Link> / <span>{subarea.name}</span></div>
-      <Link className="button button-secondary" href={`/areas/${area.code}`}><ArrowLeft size={14}/> Todas las subáreas</Link>
+      <div className="subarea-workspace-actions"><button className="button button-secondary" onClick={() => setNavigatorCollapsed((current) => !current)} aria-expanded={!navigatorCollapsed} aria-controls="subarea-navigator">{navigatorCollapsed ? <PanelLeftOpen size={14}/> : <PanelLeftClose size={14}/>} {navigatorCollapsed ? "Mostrar menú" : "Ocultar menú"}</button><Link className="button button-secondary" href={`/areas/${area.code}`}><ArrowLeft size={14}/> Todas las subáreas</Link></div>
     </div>
 
     <section className="subarea-hero card">
@@ -36,8 +37,8 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, flowCoun
       <div className="subarea-hero-facts"><span><UserRound size={14}/> {subarea.owner}</span><strong>{totalFlows} {totalFlows === 1 ? "flujo documentado" : "flujos documentados"}</strong></div>
     </section>
 
-    <div className="subarea-workspace-layout">
-      <aside className="workspace-navigator card" aria-label="Navegación de la subárea">
+    <div className={`subarea-workspace-layout ${navigatorCollapsed ? "navigator-collapsed" : ""}`}>
+      <aside id="subarea-navigator" className="workspace-navigator card" aria-label="Navegación de la subárea" hidden={navigatorCollapsed}>
         <div className="workspace-process-head"><ListTree size={15}/><div><strong>Procesos y programas</strong><span>{subarea.name}</span></div></div>
         <div className="workspace-flow-list">
           {flowcharts.length ? flowcharts.map((flowchart, index) => <button className={flowchart.code === activeCode ? "active" : ""} key={flowchart.code} onClick={() => setActiveCode(flowchart.code)} aria-pressed={flowchart.code === activeCode}>

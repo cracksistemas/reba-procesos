@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { BarChart3, Bell, BookOpen, Building2, ChevronDown, FileText, FolderKanban, GitBranch, Home, Menu, Search, Settings, ShieldCheck, Workflow, X } from "lucide-react";
+import { BarChart3, Bell, BookOpen, Building2, ChevronDown, FileText, FolderKanban, GitBranch, Home, Menu, PanelLeftClose, PanelLeftOpen, Search, Settings, ShieldCheck, Workflow, X } from "lucide-react";
 
 const nav = [
   { href: "/", label: "Inicio", icon: Home }, { href: "/procesos", label: "Procesos", icon: FolderKanban },
@@ -13,13 +13,13 @@ const nav = [
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname(); const [open, setOpen] = useState(false);
+  const pathname = usePathname(); const [open, setOpen] = useState(false); const [collapsed, setCollapsed] = useState(false);
   if (pathname === "/ingreso") return <>{children}</>;
-  return <div className="app-shell">
+  return <div className={`app-shell ${collapsed ? "sidebar-is-collapsed" : ""}`}>
     {open && <button className="sidebar-scrim" aria-label="Cerrar menú" onClick={() => setOpen(false)} />}
-    <aside className={`sidebar ${open ? "sidebar-open" : ""}`}>
-      <div className="brand"><div className="brand-mark" aria-hidden="true"><span>R</span></div><div><strong>REBA</strong><small>PROCESOS</small></div><button className="icon-button mobile-only" aria-label="Cerrar menú" onClick={() => setOpen(false)}><X size={20}/></button></div>
-      <nav aria-label="Navegación principal"><p className="nav-label">GESTIÓN</p>{nav.map((item) => { const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href); const Icon = item.icon; return <Link key={item.href} href={item.href} className={`nav-item ${active ? "active" : ""}`} onClick={() => setOpen(false)}><Icon size={19}/><span>{item.label}</span>{item.badge && <em>{item.badge}</em>}</Link>; })}<p className="nav-label nav-label-admin">SISTEMA</p><Link href="/administracion" className={`nav-item ${pathname.startsWith("/administracion") ? "active" : ""}`} onClick={() => setOpen(false)}><Settings size={19}/><span>Administración</span></Link></nav>
+    <aside className={`sidebar ${open ? "sidebar-open" : ""} ${collapsed ? "sidebar-collapsed" : ""}`}>
+      <div className="brand"><div className="brand-mark" aria-hidden="true"><span>R</span></div><div className="brand-copy"><strong>REBA</strong><small>PROCESOS</small></div><button className="icon-button sidebar-collapse-button" aria-label={collapsed ? "Expandir barra lateral" : "Contraer barra lateral"} title={collapsed ? "Expandir barra lateral" : "Contraer barra lateral"} aria-expanded={!collapsed} onClick={() => setCollapsed((current) => !current)}>{collapsed ? <PanelLeftOpen size={18}/> : <PanelLeftClose size={18}/>}</button><button className="icon-button mobile-only" aria-label="Cerrar menú" onClick={() => setOpen(false)}><X size={20}/></button></div>
+      <nav aria-label="Navegación principal"><p className="nav-label">GESTIÓN</p>{nav.map((item) => { const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href); const Icon = item.icon; return <Link key={item.href} href={item.href} className={`nav-item ${active ? "active" : ""}`} title={collapsed ? item.label : undefined} onClick={() => setOpen(false)}><Icon size={19}/><span>{item.label}</span>{item.badge && <em>{item.badge}</em>}</Link>; })}<p className="nav-label nav-label-admin">SISTEMA</p><Link href="/administracion" className={`nav-item ${pathname.startsWith("/administracion") ? "active" : ""}`} title={collapsed ? "Administración" : undefined} onClick={() => setOpen(false)}><Settings size={19}/><span>Administración</span></Link></nav>
       <div className="sidebar-help"><BookOpen size={18}/><div><strong>Centro de ayuda</strong><span>Guías y convenciones</span></div></div>
       <div className="sidebar-user"><div className="avatar">AS</div><div><strong>Andrea Salazar</strong><span>Administradora</span></div><ChevronDown size={16}/></div>
     </aside>
