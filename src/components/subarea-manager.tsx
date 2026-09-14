@@ -5,7 +5,7 @@ import { FormEvent, useCallback, useMemo, useState, useSyncExternalStore } from 
 import { ArrowRight, CheckCircle2, GitBranch, Plus, Save, X } from "lucide-react";
 import { FlowchartEditor } from "@/components/flowchart-editor";
 import { mergeSubareas, type Area, type Process, type Subarea } from "@/lib/data";
-import { getMarketingFlowcharts } from "@/lib/marketing-flowcharts";
+import { getFlowcharts } from "@/lib/flowcharts";
 
 type SubareaManagerProps = { area: Area; initialSubareas: Subarea[]; areaProcesses: Process[] };
 
@@ -78,7 +78,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
   };
 
   const documentedFlows = items.reduce((total, subarea) => {
-    const imported = area.code === "MKT" ? getMarketingFlowcharts(subarea.code).length : 0;
+    const imported = getFlowcharts(subarea.code).length;
     const related = areaProcesses.filter((process) => process.subareaCode === subarea.code).length;
     return total + (imported || related || 1);
   }, 0);
@@ -124,7 +124,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
     <section className="subarea-grid subarea-directory-grid" aria-label="Subáreas">
       {items.map((subarea) => {
         const related = areaProcesses.filter((process) => process.subareaCode === subarea.code);
-        const imported = area.code === "MKT" ? getMarketingFlowcharts(subarea.code) : [];
+        const imported = getFlowcharts(subarea.code);
         const total = imported.length || related.length || 1;
         const isCustom = subarea.source === "Usuario";
 

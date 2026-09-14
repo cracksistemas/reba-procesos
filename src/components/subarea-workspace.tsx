@@ -5,13 +5,13 @@ import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock3, Download, FileText, GitBranch, LayoutGrid, Pencil, ShieldCheck, UserRound, X } from "lucide-react";
 import { FlowchartEditor } from "@/components/flowchart-editor";
 import type { Area, Process, Subarea } from "@/lib/data";
-import type { MarketingFlowchart } from "@/lib/marketing-flowcharts";
+import type { Flowchart } from "@/lib/flowcharts";
 
 type SubareaWorkspaceProps = {
   area: Area;
   subarea: Subarea;
   siblings: Subarea[];
-  flowcharts: MarketingFlowchart[];
+  flowcharts: Flowchart[];
   linkedProcesses: Process[];
   flowCounts: Record<string, number>;
   initialFlowCode?: string;
@@ -27,6 +27,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
   const [editing, setEditing] = useState(false);
   const activeFlow = useMemo(() => flowcharts.find((flowchart) => flowchart.code === activeCode) ?? null, [activeCode, flowcharts]);
   const totalEntries = flowcharts.length || linkedProcesses.length || 1;
+  const activeVersion = activeFlow?.code.startsWith("COM-") ? "2.0" : "3.0";
 
   const openFlow = (code: string) => {
     setActiveCode(code);
@@ -53,7 +54,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
           {flowcharts.length > 0 ? flowcharts.map((flowchart, index) => <button key={flowchart.code} className="process-directory-row" onClick={() => openFlow(flowchart.code)}>
             <span className="process-directory-index">{String(index + 1).padStart(2, "0")}</span>
             <div className="process-directory-main"><small>{flowchart.code}</small><strong>{flowchart.title}</strong><span>{flowchart.description}</span></div>
-            <div className="process-directory-meta"><span className="status approved">Documentado</span><span>v3.0</span><span>{flowchart.owner}</span></div>
+            <div className="process-directory-meta"><span className="status approved">Documentado</span><span>v{flowchart.code.startsWith("COM-") ? "2.0" : "3.0"}</span><span>{flowchart.owner}</span></div>
             <ArrowRight size={16}/>
           </button>) : linkedProcesses.length > 0 ? linkedProcesses.map((process, index) => <Link key={process.code} className="process-directory-row" href={`/procesos/${process.code}`}>
             <span className="process-directory-index">{String(index + 1).padStart(2, "0")}</span>
@@ -70,7 +71,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
       <div className="process-viewer-top card">
         <button className="icon-button viewer-back" onClick={() => { setActiveCode(null); setEditing(false); }} aria-label="Volver a la lista"><ArrowLeft size={18}/></button>
         <div><div className="viewer-context">{area.name} / {subarea.name} / {activeFlow?.code ?? `${subarea.code}-F01`}</div><h2>{activeFlow?.title ?? `Flujograma general de ${subarea.name}`}</h2><p>{activeFlow?.description ?? subarea.description}</p></div>
-        <div className="viewer-metadata"><span><UserRound size={13}/> {activeFlow?.owner ?? subarea.owner}</span><span><ShieldCheck size={13}/> {activeFlow ? "Documentado" : "Borrador"}</span><span><Clock3 size={13}/> Versión {activeFlow ? "3.0" : "0.1"}</span></div>
+        <div className="viewer-metadata"><span><UserRound size={13}/> {activeFlow?.owner ?? subarea.owner}</span><span><ShieldCheck size={13}/> {activeFlow ? "Documentado" : "Borrador"}</span><span><Clock3 size={13}/> Versión {activeFlow ? activeVersion : "0.1"}</span></div>
         <button className={`button ${editing ? "button-secondary" : "button-primary"}`} onClick={() => setEditing((current) => !current)}>{editing ? <X size={15}/> : <Pencil size={15}/>} {editing ? "Salir de edición" : "Editar"}</button>
       </div>
 
@@ -81,8 +82,8 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
         {(editing || tab === "Diagrama") && <FlowchartEditor key={`${activeCode}-${editing ? "edit" : "read"}`} area={area} subarea={subarea} flowchart={activeFlow ?? undefined} embedded readOnly={!editing}/>}
         {!editing && tab === "Ficha" && <div className="summary-grid"><div><section className="summary-section"><h3>Objetivo</h3><p>{activeFlow?.description ?? subarea.description}</p></section><section className="summary-section"><h3>Alcance</h3><p>Desde el inicio documentado hasta el cierre del flujo, incluyendo decisiones, retornos, responsables y evidencias representadas.</p></section><section className="summary-section"><h3>Vista lineal accesible</h3><ol className="linear-flow">{(activeFlow?.nodes ?? []).map((node) => <li key={node.id}><strong>{node.role || "Actividad"}</strong><span>{node.label}</span></li>)}</ol></section></div><aside className="facts"><div className="fact"><span>Área</span><strong>{area.name}</strong></div><div className="fact"><span>Subárea</span><strong>{subarea.name}</strong></div><div className="fact"><span>Responsable</span><strong>{activeFlow?.owner ?? subarea.owner}</strong></div><div className="fact"><span>Nivel</span><strong>N2 · Operativo</strong></div><div className="fact"><span>Tipo</span><strong>Soporte / gestión</strong></div></aside></div>}
         {!editing && tab === "KPI" && <div className="viewer-placeholder"><CheckCircle2 size={24}/><h3>Indicadores vinculados</h3><p>Este flujo todavía no tiene indicadores publicados. La ficha está preparada para asociar meta, frecuencia, fuente y responsable.</p></div>}
-        {!editing && tab === "Documentos" && <div className="viewer-placeholder"><FileText size={24}/><h3>Documentación relacionada</h3><p>Versión fuente importada del paquete de Innovación y Marketing v3.0.</p><button className="button button-secondary"><Download size={15}/> Descargar desde el diagrama</button></div>}
-        {!editing && tab === "Historial" && <div className="activity-list viewer-history"><div className="activity-item"><strong>Versión 3.0 incorporada a la biblioteca</strong><span>Importación institucional · fuente HTML</span></div><div className="activity-item"><strong>Flujograma estructurado para edición visual</strong><span>Nodos y conexiones convertidos a formato XYFlow</span></div></div>}
+        {!editing && tab === "Documentos" && <div className="viewer-placeholder"><FileText size={24}/><h3>Documentación relacionada</h3><p>Versión fuente {activeVersion} importada del documento HTML institucional.</p><button className="button button-secondary"><Download size={15}/> Descargar desde el diagrama</button></div>}
+        {!editing && tab === "Historial" && <div className="activity-list viewer-history"><div className="activity-item"><strong>Versión {activeVersion} incorporada a la biblioteca</strong><span>Importación institucional · fuente HTML</span></div><div className="activity-item"><strong>Flujograma estructurado para edición visual</strong><span>Nodos y conexiones convertidos a formato XYFlow</span></div></div>}
       </div>
     </section>}
   </>;

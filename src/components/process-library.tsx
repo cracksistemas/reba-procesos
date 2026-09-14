@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowRight, Clock3, GitBranch, LayoutGrid, Network, Search, Star } from "lucide-react";
 import { areas, getSubareas, processes, subareas } from "@/lib/data";
-import { marketingFlowcharts } from "@/lib/marketing-flowcharts";
+import { flowcharts, getAreaFlowcharts } from "@/lib/flowcharts";
 
 type LibraryMode = "areas" | "map";
 
@@ -27,7 +27,7 @@ export function ProcessLibrary({ initialQuery = "" }: { initialQuery?: string })
         return matches(`${item.code} ${item.name} ${item.description} ${item.owner} ${area?.name ?? ""}`);
       }),
       processes: processes.filter((item) => matches(`${item.code} ${item.name} ${item.area} ${item.subarea} ${item.owner} ${item.objective}`)),
-      flows: marketingFlowcharts.filter((item) => matches(`${item.code} ${item.title} ${item.description} ${item.owner} ${item.subareaName} Marketing`)),
+      flows: flowcharts.filter((item) => { const area = areas.find((candidate) => item.subareaCode.startsWith(`${candidate.code}-`)); return matches(`${item.code} ${item.title} ${item.description} ${item.owner} ${item.subareaName} ${area?.name ?? ""}`); }),
     };
   }, [term]);
 
@@ -48,14 +48,15 @@ export function ProcessLibrary({ initialQuery = "" }: { initialQuery?: string })
         {results.areas.length > 0 && <ResultGroup title="Áreas" count={results.areas.length}>{results.areas.map((area) => <ResultLink key={area.code} href={`/areas/${area.code}`} code={area.code} title={area.name} context={`Biblioteca / ${area.name}`} meta={`${getSubareas(area.code).length} subáreas · Responsable: ${area.owner}`}/>)}</ResultGroup>}
         {results.subareas.length > 0 && <ResultGroup title="Subáreas" count={results.subareas.length}>{results.subareas.map((item) => { const area = areas.find((candidate) => candidate.code === item.areaCode)!; return <ResultLink key={item.code} href={`/areas/${area.code}/${item.code}`} code={item.code} title={item.name} context={`Biblioteca / ${area.name} / ${item.name}`} meta={`Responsable: ${item.owner}`}/>; })}</ResultGroup>}
         {results.processes.length > 0 && <ResultGroup title="Procesos" count={results.processes.length}>{results.processes.map((item) => <ResultLink key={item.code} href={`/procesos/${item.code}`} code={item.code} title={item.name} context={`Biblioteca / ${item.area} / ${item.subarea}`} meta={`${item.status} · v${item.version} · ${item.owner}`}/>)}</ResultGroup>}
-        {results.flows.length > 0 && <ResultGroup title="Flujogramas y programas" count={results.flows.length}>{results.flows.map((item) => <ResultLink key={item.code} href={`/areas/MKT/${item.subareaCode}?flujo=${item.code}`} code={item.code} title={item.title} context={`Biblioteca / Marketing / ${item.subareaName}`} meta={`Documentado · v3.0 · ${item.owner}`}/>)}</ResultGroup>}
+        {results.flows.length > 0 && <ResultGroup title="Flujogramas y programas" count={results.flows.length}>{results.flows.map((item) => { const area = areas.find((candidate) => item.subareaCode.startsWith(`${candidate.code}-`))!; return <ResultLink key={item.code} href={`/areas/${area.code}/${item.subareaCode}?flujo=${item.code}`} code={item.code} title={item.title} context={`Biblioteca / ${area.name} / ${item.subareaName}`} meta={`Documentado · ${item.code.startsWith("COM-") ? "v2.0" : "v3.0"} · ${item.owner}`}/>; })}</ResultGroup>}
       </div>}
     </section> : mode === "areas" ? <>
       <div className="directory-heading"><div><h2>Explorar por áreas</h2><p>Primero elige un área; luego verás únicamente sus subáreas.</p></div><span>{areas.length} áreas</span></div>
       <section className="area-grid library-area-grid" aria-label="Áreas institucionales">
         {areas.map((area) => {
           const areaSubareas = getSubareas(area.code);
-          const flowCount = area.code === "MKT" ? marketingFlowcharts.length : processes.filter((item) => item.area === area.name).length;
+          const importedCount = getAreaFlowcharts(area.code).length;
+          const flowCount = importedCount || processes.filter((item) => item.area === area.name).length;
           return <Link href={`/areas/${area.code}`} className="card area-card" key={area.code}>
             <div className="area-card-top"><div className="area-symbol" style={{ background: area.color }}>{area.code}</div><ArrowRight size={17}/></div>
             <h2>{area.name}</h2><p>{area.description}</p>

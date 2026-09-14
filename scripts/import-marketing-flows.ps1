@@ -1,20 +1,33 @@
 param(
   [Parameter(Mandatory = $true)][string]$SourceHtml,
-  [Parameter(Mandatory = $true)][string]$OutputJson
+  [Parameter(Mandatory = $true)][string]$OutputJson,
+  [ValidateSet("Marketing", "Sales")][string]$Profile = "Marketing"
 )
 
 $ErrorActionPreference = "Stop"
 $html = Get-Content -Raw -LiteralPath $SourceHtml
 $decoder = [System.Net.WebUtility]
-$subareas = @{
-  JM = @{ code = "MKT-S01"; name = "Jefatura de Marketing"; owner = "Jefatura de Marketing" }
-  CO = @{ code = "MKT-S02"; name = "Coordinación / Asistencia"; owner = "Coordinador / Asistente" }
-  PE = @{ code = "MKT-S03"; name = "Traffic y Performance"; owner = "Traffic y Performance" }
-  CM = @{ code = "MKT-S04"; name = "Community Manager"; owner = "Community Manager" }
-  DG = @{ code = "MKT-S05"; name = "Diseño Gráfico"; owner = "Diseño Gráfico" }
-  AV = @{ code = "MKT-S06"; name = "Producción Audiovisual"; owner = "Producción Audiovisual" }
-  CRM = @{ code = "MKT-S07"; name = "CRM, Web y Automatización"; owner = "CRM, Web y Automatización" }
-  RRPP = @{ code = "MKT-S08"; name = "RRPP, Campo y Alianzas"; owner = "RRPP, Campo y Alianzas" }
+$subareas = if ($Profile -eq "Sales") {
+  @{
+    "01" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
+    "02" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
+    "03" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
+    "04" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
+    "05" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
+    "06" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
+    "07" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
+  }
+} else {
+  @{
+    JM = @{ code = "MKT-S01"; name = "Jefatura de Marketing"; owner = "Jefatura de Marketing" }
+    CO = @{ code = "MKT-S02"; name = "Coordinación / Asistencia"; owner = "Coordinador / Asistente" }
+    PE = @{ code = "MKT-S03"; name = "Traffic y Performance"; owner = "Traffic y Performance" }
+    CM = @{ code = "MKT-S04"; name = "Community Manager"; owner = "Community Manager" }
+    DG = @{ code = "MKT-S05"; name = "Diseño Gráfico"; owner = "Diseño Gráfico" }
+    AV = @{ code = "MKT-S06"; name = "Producción Audiovisual"; owner = "Producción Audiovisual" }
+    CRM = @{ code = "MKT-S07"; name = "CRM, Web y Automatización"; owner = "CRM, Web y Automatización" }
+    RRPP = @{ code = "MKT-S08"; name = "RRPP, Campo y Alianzas"; owner = "RRPP, Campo y Alianzas" }
+  }
 }
 
 function Decode([string]$value) {
@@ -38,8 +51,8 @@ foreach ($sectionMatch in $sections) {
   $subarea = $subareas[$prefix]
   if (-not $subarea) { continue }
 
-  $flowNumber = [regex]::Match($sectionId, '^[A-Z]+_(\d+)').Groups[1].Value
-  $flowCode = "MKT-$prefix-$flowNumber"
+  $flowNumber = if ($Profile -eq "Sales") { $prefix } else { [regex]::Match($sectionId, '^[A-Z]+_(\d+)').Groups[1].Value }
+  $flowCode = if ($Profile -eq "Sales") { "COM-JV-$flowNumber" } else { "MKT-$prefix-$flowNumber" }
   $title = Decode ([regex]::Match($section, '<h2>([\s\S]*?)</h2>').Groups[1].Value)
   $description = Decode ([regex]::Match($section, '<h2>[\s\S]*?</h2>\s*<p>([\s\S]*?)</p>').Groups[1].Value)
   $svg = [regex]::Match($section, '<svg[\s\S]*?</svg>').Value

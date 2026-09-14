@@ -24,7 +24,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import { AlignHorizontalSpaceBetween, AlignVerticalSpaceBetween, Box, CheckCircle2, Circle, Columns3, Diamond, Download, Eye, FileText, GitBranch, Link2, Maximize2, Minimize2, PanelRightClose, PanelRightOpen, Redo2, RotateCcw, Rows3, Save, Trash2, Undo2, WandSparkles, X } from "lucide-react";
 import type { Area, Subarea } from "@/lib/data";
-import type { MarketingFlowchart } from "@/lib/marketing-flowcharts";
+import type { Flowchart } from "@/lib/flowcharts";
 
 type NodeKind = "start" | "activity" | "decision" | "evidence" | "exception" | "end";
 type EdgeRoute = "normal" | "return";
@@ -128,7 +128,7 @@ function makeEdge(id: string, source: string, target: string, route: EdgeRoute =
   };
 }
 
-function buildInitialGraph(subarea: Subarea, imported?: MarketingFlowchart): FlowGraph {
+function buildInitialGraph(subarea: Subarea, imported?: Flowchart): FlowGraph {
   if (imported) {
     return {
       version: 2,
@@ -677,7 +677,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
   </div>;
 }
 
-export function FlowchartEditor({ area, subarea, flowchart, onClose, embedded = false, readOnly = false }: { area: Area; subarea: Subarea; flowchart?: MarketingFlowchart; onClose?: () => void; embedded?: boolean; readOnly?: boolean }) {
+export function FlowchartEditor({ area, subarea, flowchart, onClose, embedded = false, readOnly = false }: { area: Area; subarea: Subarea; flowchart?: Flowchart; onClose?: () => void; embedded?: boolean; readOnly?: boolean }) {
   const flowCode = flowchart?.code ?? subarea.code;
   const flowTitle = flowchart?.title ?? subarea.name;
   const storageKey = `reba-flowchart-${flowCode}`;

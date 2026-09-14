@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { SubareaWorkspace } from "@/components/subarea-workspace";
 import { getArea, getSubareas, processes, subareas } from "@/lib/data";
-import { getMarketingFlowcharts } from "@/lib/marketing-flowcharts";
+import { getFlowcharts } from "@/lib/flowcharts";
 
 export function generateStaticParams() {
   return subareas.map((subarea) => ({ code: subarea.areaCode, subarea: subarea.code }));
@@ -23,9 +23,9 @@ export default async function SubareaPage(props: { params: Promise<{ code: strin
   const subarea = siblings.find((candidate) => candidate.code.toLowerCase() === params.subarea.toLowerCase());
   if (!subarea) notFound();
 
-  const flowcharts = area.code === "MKT" ? getMarketingFlowcharts(subarea.code) : [];
+  const flowcharts = getFlowcharts(subarea.code);
   const flowCounts = Object.fromEntries(siblings.map((item) => {
-    const imported = area.code === "MKT" ? getMarketingFlowcharts(item.code).length : 0;
+    const imported = getFlowcharts(item.code).length;
     const linked = processes.filter((process) => process.subareaCode === item.code).length;
     return [item.code, imported || linked || 1];
   }));
