@@ -1,0 +1,1803 @@
+[
+  {
+    "code": "COM-LC-01",
+    "sourceId": "01_macro_del_turno_comercial",
+    "subareaCode": "COM-S05",
+    "subareaName": "Encargado / Líder Comercial",
+    "owner": "Encargado / Líder Comercial",
+    "title": "Macro del turno comercial",
+    "description": "El Líder gobierna la operación cotidiana; el Jefe de Ventas recibe solo las excepciones que exceden la autoridad del turno.",
+    "canvas": {
+      "width": 808.65,
+      "height": 898.2
+    },
+    "nodes": [
+      {
+        "id": "COM-LC-01-s",
+        "kind": "start",
+        "label": "Inicio del turno / relevo recibido",
+        "role": "",
+        "position": {
+          "y": 49.6,
+          "x": 172.84
+        },
+        "size": {
+          "width": 195,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-01-l1",
+        "kind": "activity",
+        "label": "Valida equipo, accesos,\nprioridades, promesas,\ncampañas y carga inicial",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 132.6,
+          "x": 22.6
+        },
+        "size": {
+          "width": 495,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-01-crm",
+        "kind": "activity",
+        "label": "Muestra/asigna leads,\npropietarios, estados y\ntiempos",
+        "role": "CRM / SISTEMA",
+        "position": {
+          "y": 215.6,
+          "x": 81.6
+        },
+        "size": {
+          "width": 377,
+          "height": 36
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-01-e1",
+        "kind": "activity",
+        "label": "Gestiona leads, registra\ncontacto, promesa, siguiente\nacción y cierre",
+        "role": "EJECUTIVO COMERCIAL",
+        "position": {
+          "y": 298.6,
+          "x": 23.6
+        },
+        "size": {
+          "width": 493,
+          "height": 36
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-01-l2",
+        "kind": "activity",
+        "label": "Controla SLA, balance de\ncarga, clientes calientes,\npromesas y relevo",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 381.6,
+          "x": 28.1
+        },
+        "size": {
+          "width": 484,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-01-d",
+        "kind": "decision",
+        "label": "¿Puede resolverse dentro\nde reglas del turno?",
+        "role": "",
+        "position": {
+          "y": 464.6,
+          "x": 66.84
+        },
+        "size": {
+          "width": 407,
+          "height": 36
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-01-fix",
+        "kind": "activity",
+        "label": "Reasigna, corrige, hace\ncoaching o coordina soporte y\ndeja evidencia",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 615.6,
+          "x": 21.6
+        },
+        "size": {
+          "width": 483,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-01-x",
+        "kind": "exception",
+        "label": "Excepción: conflicto de\ncapacidad, prioridad,\npolítica, desempeño o\nriesgo",
+        "role": "",
+        "position": {
+          "y": 556.6,
+          "x": 295.21
+        },
+        "size": {
+          "width": 492,
+          "height": 36
+        },
+        "fill": "#ffe7e7",
+        "stroke": "#b42318",
+        "textColor": "#7a1b14"
+      },
+      {
+        "id": "COM-LC-01-ev",
+        "kind": "evidence",
+        "label": "Dashboard/CRM + incidencias\n+ relevo + responsable",
+        "role": "",
+        "position": {
+          "y": 757.6,
+          "x": 167.1
+        },
+        "size": {
+          "width": 278,
+          "height": 36
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-01-j",
+        "kind": "activity",
+        "label": "Resuelve excepción o activa\nplan correctivo",
+        "role": "JEFE DE VENTAS",
+        "position": {
+          "y": 674.6,
+          "x": 351.1
+        },
+        "size": {
+          "width": 332,
+          "height": 36
+        },
+        "fill": "#eee9ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-01-end",
+        "kind": "start",
+        "label": "Turno cerrado y transferido",
+        "role": "",
+        "position": {
+          "y": 840.6,
+          "x": 220.21
+        },
+        "size": {
+          "width": 172,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "COM-LC-01-edge-1",
+        "source": "COM-LC-01-s",
+        "target": "COM-LC-01-l1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-01-edge-2",
+        "source": "COM-LC-01-l1",
+        "target": "COM-LC-01-crm",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-01-edge-3",
+        "source": "COM-LC-01-crm",
+        "target": "COM-LC-01-e1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-01-edge-4",
+        "source": "COM-LC-01-e1",
+        "target": "COM-LC-01-l2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-01-edge-5",
+        "source": "COM-LC-01-l2",
+        "target": "COM-LC-01-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-01-edge-6",
+        "source": "COM-LC-01-d",
+        "target": "COM-LC-01-fix",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-01-edge-7",
+        "source": "COM-LC-01-d",
+        "target": "COM-LC-01-x",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "COM-LC-01-edge-8",
+        "source": "COM-LC-01-fix",
+        "target": "COM-LC-01-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-01-edge-9",
+        "source": "COM-LC-01-x",
+        "target": "COM-LC-01-j",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-01-edge-10",
+        "source": "COM-LC-01-j",
+        "target": "COM-LC-01-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "COM-LC-01-edge-11",
+        "source": "COM-LC-01-ev",
+        "target": "COM-LC-01-end",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "COM-LC-02",
+    "sourceId": "02_apertura_y_organizaci_n_del_turno",
+    "subareaCode": "COM-S05",
+    "subareaName": "Encargado / Líder Comercial",
+    "owner": "Encargado / Líder Comercial",
+    "title": "Apertura y organización del turno",
+    "description": "Asegura que el turno inicie con responsables, herramientas, carga y prioridades visibles.",
+    "canvas": {
+      "width": 823.7,
+      "height": 789.2
+    },
+    "nodes": [
+      {
+        "id": "COM-LC-02-s",
+        "kind": "start",
+        "label": "10-15 min antes del turno",
+        "role": "",
+        "position": {
+          "y": 49.6,
+          "x": 412.63
+        },
+        "size": {
+          "width": 163,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-02-l1",
+        "kind": "activity",
+        "label": "Recibe relevo y verifica\nasistencia, accesos, equipos y\nfallas",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 132.6,
+          "x": 275.6
+        },
+        "size": {
+          "width": 437,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-02-l2",
+        "kind": "activity",
+        "label": "Revisa campañas prioritarias,\nleads nuevos, promesas y\nclientes calientes",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 215.6,
+          "x": 242.6
+        },
+        "size": {
+          "width": 503,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-02-d",
+        "kind": "decision",
+        "label": "¿Existe ausencia,\nsobrecarga o riesgo de\ncontinuidad?",
+        "role": "",
+        "position": {
+          "y": 298.6,
+          "x": 253.42
+        },
+        "size": {
+          "width": 481,
+          "height": 36
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-02-bal",
+        "kind": "activity",
+        "label": "Ajusta carga dentro de reglas\ny registra motivo",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 390.6,
+          "x": 194.6
+        },
+        "size": {
+          "width": 367,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-02-view",
+        "kind": "activity",
+        "label": "Abre/valida Pizarra o\ndashboard con responsables,\ncarga, equipos y alertas",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 565.6,
+          "x": 290.1
+        },
+        "size": {
+          "width": 512,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-02-j",
+        "kind": "activity",
+        "label": "Interviene solo si el ajuste\ncambia estructura/prioridad\nfuera de autoridad",
+        "role": "JEFE DE VENTAS",
+        "position": {
+          "y": 482.6,
+          "x": 21.6
+        },
+        "size": {
+          "width": 477,
+          "height": 36
+        },
+        "fill": "#eee9ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-02-ev",
+        "kind": "evidence",
+        "label": "Vista de apertura +\nresponsables + excepciones\nregistradas",
+        "role": "",
+        "position": {
+          "y": 648.6,
+          "x": 389.1
+        },
+        "size": {
+          "width": 314,
+          "height": 36
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-02-end",
+        "kind": "start",
+        "label": "Turno operativo",
+        "role": "",
+        "position": {
+          "y": 731.6,
+          "x": 491.79
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "COM-LC-02-edge-1",
+        "source": "COM-LC-02-s",
+        "target": "COM-LC-02-l1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-02-edge-2",
+        "source": "COM-LC-02-l1",
+        "target": "COM-LC-02-l2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-02-edge-3",
+        "source": "COM-LC-02-l2",
+        "target": "COM-LC-02-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-02-edge-4",
+        "source": "COM-LC-02-d",
+        "target": "COM-LC-02-bal",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "COM-LC-02-edge-5",
+        "source": "COM-LC-02-d",
+        "target": "COM-LC-02-view",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-02-edge-6",
+        "source": "COM-LC-02-bal",
+        "target": "COM-LC-02-j",
+        "label": "Solo si excede autoridad",
+        "route": "return",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "COM-LC-02-edge-7",
+        "source": "COM-LC-02-bal",
+        "target": "COM-LC-02-view",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-02-edge-8",
+        "source": "COM-LC-02-j",
+        "target": "COM-LC-02-view",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "COM-LC-02-edge-9",
+        "source": "COM-LC-02-view",
+        "target": "COM-LC-02-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-02-edge-10",
+        "source": "COM-LC-02-ev",
+        "target": "COM-LC-02-end",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "COM-LC-03",
+    "sourceId": "03_asignaci_n_de_leads_y_sla",
+    "subareaCode": "COM-S05",
+    "subareaName": "Encargado / Líder Comercial",
+    "owner": "Encargado / Líder Comercial",
+    "title": "Asignación de leads y SLA",
+    "description": "El CRM asigna o registra; el Líder controla cero leads sin dueño y corrige excepciones.",
+    "canvas": {
+      "width": 795.7,
+      "height": 824.2
+    },
+    "nodes": [
+      {
+        "id": "COM-LC-03-s",
+        "kind": "start",
+        "label": "Ingreso de lead / preinscrito",
+        "role": "",
+        "position": {
+          "y": 49.6,
+          "x": 149.68
+        },
+        "size": {
+          "width": 176,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-03-crm",
+        "kind": "activity",
+        "label": "Registra fuente, producto,\nhora, propietario y regla de\nasignación",
+        "role": "CRM / SISTEMA",
+        "position": {
+          "y": 132.6,
+          "x": 21.6
+        },
+        "size": {
+          "width": 432,
+          "height": 36
+        },
+        "fill": "#e7f5ff",
+        "stroke": "#086b9c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-03-e",
+        "kind": "activity",
+        "label": "Realiza primer contacto y\nactualiza estado",
+        "role": "EJECUTIVO COMERCIAL",
+        "position": {
+          "y": 215.6,
+          "x": 56.6
+        },
+        "size": {
+          "width": 362,
+          "height": 36
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-03-d",
+        "kind": "decision",
+        "label": "¿Contacto dentro del SLA\ny con siguiente acción?",
+        "role": "",
+        "position": {
+          "y": 298.6,
+          "x": 21.87
+        },
+        "size": {
+          "width": 431,
+          "height": 36
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-03-ok",
+        "kind": "activity",
+        "label": "Mantiene seguimiento y control\npor corte",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 449.6,
+          "x": 46.1
+        },
+        "size": {
+          "width": 339,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-03-re",
+        "kind": "activity",
+        "label": "Alerta/reasigna con motivo:\nausencia, falta de atención,\ncarga o fin de turno",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 390.6,
+          "x": 263.1
+        },
+        "size": {
+          "width": 511,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-03-ev",
+        "kind": "evidence",
+        "label": "Lead con dueño + contacto +\nestado + siguiente acción",
+        "role": "",
+        "position": {
+          "y": 683.6,
+          "x": 274.1
+        },
+        "size": {
+          "width": 285,
+          "height": 36
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-03-d2",
+        "kind": "decision",
+        "label": "¿Es recurrente o\nestructural?",
+        "role": "",
+        "position": {
+          "y": 508.6,
+          "x": 384.54
+        },
+        "size": {
+          "width": 268,
+          "height": 36
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-03-j",
+        "kind": "activity",
+        "label": "Corrige capacidad, regla o\ndesempeño",
+        "role": "JEFE DE VENTAS",
+        "position": {
+          "y": 600.6,
+          "x": 262.1
+        },
+        "size": {
+          "width": 309,
+          "height": 36
+        },
+        "fill": "#eee9ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-03-end",
+        "kind": "start",
+        "label": "Lead controlado",
+        "role": "",
+        "position": {
+          "y": 766.6,
+          "x": 361.43
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "COM-LC-03-edge-1",
+        "source": "COM-LC-03-s",
+        "target": "COM-LC-03-crm",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-03-edge-2",
+        "source": "COM-LC-03-crm",
+        "target": "COM-LC-03-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-03-edge-3",
+        "source": "COM-LC-03-e",
+        "target": "COM-LC-03-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-03-edge-4",
+        "source": "COM-LC-03-d",
+        "target": "COM-LC-03-ok",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-03-edge-5",
+        "source": "COM-LC-03-d",
+        "target": "COM-LC-03-re",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "COM-LC-03-edge-6",
+        "source": "COM-LC-03-ok",
+        "target": "COM-LC-03-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-03-edge-7",
+        "source": "COM-LC-03-re",
+        "target": "COM-LC-03-d2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-03-edge-8",
+        "source": "COM-LC-03-d2",
+        "target": "COM-LC-03-j",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "COM-LC-03-edge-9",
+        "source": "COM-LC-03-d2",
+        "target": "COM-LC-03-ev",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-03-edge-10",
+        "source": "COM-LC-03-j",
+        "target": "COM-LC-03-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-03-edge-11",
+        "source": "COM-LC-03-ev",
+        "target": "COM-LC-03-end",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "COM-LC-04",
+    "sourceId": "04_promesas_clientes_calientes_y_pagos_por_confirmar",
+    "subareaCode": "COM-S05",
+    "subareaName": "Encargado / Líder Comercial",
+    "owner": "Encargado / Líder Comercial",
+    "title": "Promesas, clientes calientes y pagos por confirmar",
+    "description": "El Líder asegura seguimiento y deriva pagos sin asumir funciones de Cobranzas/Finanzas.",
+    "canvas": {
+      "width": 697.2,
+      "height": 824.2
+    },
+    "nodes": [
+      {
+        "id": "COM-LC-04-s",
+        "kind": "start",
+        "label": "Promesa / cliente caliente / voucher recibido",
+        "role": "",
+        "position": {
+          "y": 49.6,
+          "x": 114.02
+        },
+        "size": {
+          "width": 266,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-04-e",
+        "kind": "activity",
+        "label": "Registra hora, estado,\nevidencia y siguiente acción\nen CRM",
+        "role": "EJECUTIVO COMERCIAL",
+        "position": {
+          "y": 132.6,
+          "x": 21.6
+        },
+        "size": {
+          "width": 451,
+          "height": 36
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-04-l",
+        "kind": "activity",
+        "label": "Controla vencimientos y\nprioridad según corte",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 215.6,
+          "x": 65.1
+        },
+        "size": {
+          "width": 364,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-04-d",
+        "kind": "decision",
+        "label": "¿Es pago por confirmar?",
+        "role": "",
+        "position": {
+          "y": 298.6,
+          "x": 135.49
+        },
+        "size": {
+          "width": 223,
+          "height": 36
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-04-cf",
+        "kind": "activity",
+        "label": "Valida comprobante o estado\ndel pago",
+        "role": "COBRANZAS / FINANZAS",
+        "position": {
+          "y": 449.6,
+          "x": 52.6
+        },
+        "size": {
+          "width": 345,
+          "height": 36
+        },
+        "fill": "#e1ecff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-04-seg",
+        "kind": "activity",
+        "label": "Realiza seguimiento comercial\nsegún hora pactada",
+        "role": "EJECUTIVO COMERCIAL",
+        "position": {
+          "y": 390.6,
+          "x": 272.6
+        },
+        "size": {
+          "width": 403,
+          "height": 36
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-04-ev",
+        "kind": "evidence",
+        "label": "Estado actualizado +\nresponsable + próxima acción\n/ derivación",
+        "role": "",
+        "position": {
+          "y": 683.6,
+          "x": 274.1
+        },
+        "size": {
+          "width": 330,
+          "height": 36
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-04-d2",
+        "kind": "decision",
+        "label": "¿Existe riesgo de\npérdida / caso sensible?",
+        "role": "",
+        "position": {
+          "y": 508.6,
+          "x": 288.31
+        },
+        "size": {
+          "width": 372,
+          "height": 36
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-04-j",
+        "kind": "activity",
+        "label": "Interviene en excepción\ncomercial relevante",
+        "role": "JEFE DE VENTAS",
+        "position": {
+          "y": 600.6,
+          "x": 272.6
+        },
+        "size": {
+          "width": 333,
+          "height": 36
+        },
+        "fill": "#eee9ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-04-end",
+        "kind": "start",
+        "label": "Caso controlado",
+        "role": "",
+        "position": {
+          "y": 766.6,
+          "x": 383.25
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "COM-LC-04-edge-1",
+        "source": "COM-LC-04-s",
+        "target": "COM-LC-04-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-04-edge-2",
+        "source": "COM-LC-04-e",
+        "target": "COM-LC-04-l",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-04-edge-3",
+        "source": "COM-LC-04-l",
+        "target": "COM-LC-04-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-04-edge-4",
+        "source": "COM-LC-04-d",
+        "target": "COM-LC-04-cf",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-04-edge-5",
+        "source": "COM-LC-04-d",
+        "target": "COM-LC-04-seg",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "COM-LC-04-edge-6",
+        "source": "COM-LC-04-cf",
+        "target": "COM-LC-04-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-04-edge-7",
+        "source": "COM-LC-04-seg",
+        "target": "COM-LC-04-d2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-04-edge-8",
+        "source": "COM-LC-04-d2",
+        "target": "COM-LC-04-j",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-04-edge-9",
+        "source": "COM-LC-04-d2",
+        "target": "COM-LC-04-ev",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-04-edge-10",
+        "source": "COM-LC-04-j",
+        "target": "COM-LC-04-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-04-edge-11",
+        "source": "COM-LC-04-ev",
+        "target": "COM-LC-04-end",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "COM-LC-05",
+    "sourceId": "05_control_de_equipos_m_viles",
+    "subareaCode": "COM-S05",
+    "subareaName": "Encargado / Líder Comercial",
+    "owner": "Encargado / Líder Comercial",
+    "title": "Control de equipos móviles",
+    "description": "La custodia y transferencia quedan registradas por turno y finalidad.",
+    "canvas": {
+      "width": 590.7,
+      "height": 789.2
+    },
+    "nodes": [
+      {
+        "id": "COM-LC-05-s",
+        "kind": "start",
+        "label": "Inicio / cambio de turno",
+        "role": "",
+        "position": {
+          "y": 49.6,
+          "x": 277.58
+        },
+        "size": {
+          "width": 149,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-05-l1",
+        "kind": "activity",
+        "label": "Asigna equipo, línea,\nfinalidad, responsable, hora y\nestado",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 132.6,
+          "x": 137.1
+        },
+        "size": {
+          "width": 430,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-05-e",
+        "kind": "activity",
+        "label": "Usa el equipo solo para la\nfinalidad comercial asignada",
+        "role": "EJECUTIVO COMERCIAL",
+        "position": {
+          "y": 215.6,
+          "x": 140.6
+        },
+        "size": {
+          "width": 423,
+          "height": 36
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-05-d",
+        "kind": "decision",
+        "label": "¿Hay falla, mal uso o\ncambio de responsable?",
+        "role": "",
+        "position": {
+          "y": 298.6,
+          "x": 151.34
+        },
+        "size": {
+          "width": 402,
+          "height": 36
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-05-inc",
+        "kind": "activity",
+        "label": "Registra incidencia,\nretira/reasigna o coordina\nsoporte",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 390.6,
+          "x": 21.6
+        },
+        "size": {
+          "width": 409,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-05-ret",
+        "kind": "activity",
+        "label": "Devuelve equipo con estado,\npendientes y hora",
+        "role": "EJECUTIVO COMERCIAL",
+        "position": {
+          "y": 565.6,
+          "x": 181.1
+        },
+        "size": {
+          "width": 388,
+          "height": 36
+        },
+        "fill": "#e9f7ef",
+        "stroke": "#147d4c",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-05-sys",
+        "kind": "activity",
+        "label": "Atiende falla técnica cuando\ncorresponde",
+        "role": "SISTEMAS",
+        "position": {
+          "y": 482.6,
+          "x": 128.6
+        },
+        "size": {
+          "width": 287,
+          "height": 36
+        },
+        "fill": "#dff7f4",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-05-ev",
+        "kind": "evidence",
+        "label": "Entrega/devolución +\nincidencia si aplica",
+        "role": "",
+        "position": {
+          "y": 648.6,
+          "x": 267.6
+        },
+        "size": {
+          "width": 215,
+          "height": 36
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-05-end",
+        "kind": "start",
+        "label": "Equipo controlado",
+        "role": "",
+        "position": {
+          "y": 731.6,
+          "x": 314.34
+        },
+        "size": {
+          "width": 122,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "COM-LC-05-edge-1",
+        "source": "COM-LC-05-s",
+        "target": "COM-LC-05-l1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-05-edge-2",
+        "source": "COM-LC-05-l1",
+        "target": "COM-LC-05-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-05-edge-3",
+        "source": "COM-LC-05-e",
+        "target": "COM-LC-05-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-05-edge-4",
+        "source": "COM-LC-05-d",
+        "target": "COM-LC-05-inc",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "COM-LC-05-edge-5",
+        "source": "COM-LC-05-d",
+        "target": "COM-LC-05-ret",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-05-edge-6",
+        "source": "COM-LC-05-inc",
+        "target": "COM-LC-05-sys",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-05-edge-7",
+        "source": "COM-LC-05-sys",
+        "target": "COM-LC-05-ret",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "COM-LC-05-edge-8",
+        "source": "COM-LC-05-ret",
+        "target": "COM-LC-05-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-05-edge-9",
+        "source": "COM-LC-05-ev",
+        "target": "COM-LC-05-end",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "COM-LC-06",
+    "sourceId": "06_coaching_e_incidencias",
+    "subareaCode": "COM-S05",
+    "subareaName": "Encargado / Líder Comercial",
+    "owner": "Encargado / Líder Comercial",
+    "title": "Coaching e incidencias",
+    "description": "El Líder corrige lo operativo; RR. HH. gestiona lo laboral formal.",
+    "canvas": {
+      "width": 682.28,
+      "height": 741.2
+    },
+    "nodes": [
+      {
+        "id": "COM-LC-06-s",
+        "kind": "start",
+        "label": "Error de speech / bajo SLA / reincidencia / incidencia",
+        "role": "",
+        "position": {
+          "y": 49.6,
+          "x": 74.72
+        },
+        "size": {
+          "width": 313,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-06-l1",
+        "kind": "activity",
+        "label": "Reúne evidencia y aplica\ncoaching correctivo inmediato",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 132.6,
+          "x": 26.89
+        },
+        "size": {
+          "width": 409,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-06-d",
+        "kind": "decision",
+        "label": "¿El problema se corrige\ndentro del seguimiento?",
+        "role": "",
+        "position": {
+          "y": 215.6,
+          "x": 21.81
+        },
+        "size": {
+          "width": 419,
+          "height": 36
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-06-ok",
+        "kind": "activity",
+        "label": "Documenta mejora y replica\naprendizaje",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 366.6,
+          "x": 33.89
+        },
+        "size": {
+          "width": 337,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-06-j",
+        "kind": "activity",
+        "label": "Define plan comercial\ncorrectivo o cambio operativo",
+        "role": "JEFE DE VENTAS",
+        "position": {
+          "y": 307.6,
+          "x": 259.89
+        },
+        "size": {
+          "width": 369,
+          "height": 36
+        },
+        "fill": "#eee9ff",
+        "stroke": "#6941c6",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-06-ev",
+        "kind": "evidence",
+        "label": "Incidencia + acción +\nresultado + responsable",
+        "role": "",
+        "position": {
+          "y": 600.6,
+          "x": 264.39
+        },
+        "size": {
+          "width": 240,
+          "height": 36
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-06-d2",
+        "kind": "decision",
+        "label": "¿Tiene naturaleza\nlaboral o disciplinaria\nformal?",
+        "role": "",
+        "position": {
+          "y": 425.6,
+          "x": 236.32
+        },
+        "size": {
+          "width": 424,
+          "height": 36
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-06-rr",
+        "kind": "activity",
+        "label": "Gestiona procedimiento laboral\ncon evidencia",
+        "role": "RR. HH.",
+        "position": {
+          "y": 517.6,
+          "x": 236.89
+        },
+        "size": {
+          "width": 295,
+          "height": 36
+        },
+        "fill": "#fff0f6",
+        "stroke": "#b42369",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-06-end",
+        "kind": "start",
+        "label": "Caso cerrado",
+        "role": "",
+        "position": {
+          "y": 683.6,
+          "x": 336.53
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "COM-LC-06-edge-1",
+        "source": "COM-LC-06-s",
+        "target": "COM-LC-06-l1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-06-edge-2",
+        "source": "COM-LC-06-l1",
+        "target": "COM-LC-06-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-06-edge-3",
+        "source": "COM-LC-06-d",
+        "target": "COM-LC-06-ok",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-06-edge-4",
+        "source": "COM-LC-06-d",
+        "target": "COM-LC-06-j",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "COM-LC-06-edge-5",
+        "source": "COM-LC-06-ok",
+        "target": "COM-LC-06-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-06-edge-6",
+        "source": "COM-LC-06-j",
+        "target": "COM-LC-06-d2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-06-edge-7",
+        "source": "COM-LC-06-d2",
+        "target": "COM-LC-06-rr",
+        "label": "Sí",
+        "route": "return",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-06-edge-8",
+        "source": "COM-LC-06-d2",
+        "target": "COM-LC-06-ev",
+        "label": "No",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-06-edge-9",
+        "source": "COM-LC-06-rr",
+        "target": "COM-LC-06-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-06-edge-10",
+        "source": "COM-LC-06-ev",
+        "target": "COM-LC-06-end",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "COM-LC-07",
+    "sourceId": "07_cierre_y_relevo_de_turno",
+    "subareaCode": "COM-S05",
+    "subareaName": "Encargado / Líder Comercial",
+    "owner": "Encargado / Líder Comercial",
+    "title": "Cierre y relevo de turno",
+    "description": "El turno siguiente recibe contexto suficiente para continuar sin reconstruir información.",
+    "canvas": {
+      "width": 700.2,
+      "height": 697.2
+    },
+    "nodes": [
+      {
+        "id": "COM-LC-07-s",
+        "kind": "start",
+        "label": "Último corte del turno",
+        "role": "",
+        "position": {
+          "y": 49.6,
+          "x": 326.68
+        },
+        "size": {
+          "width": 139,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-07-l1",
+        "kind": "activity",
+        "label": "Consolida clientes calientes,\npromesas, pagos, incidencias,\nequipos y leads pendientes",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 132.6,
+          "x": 113.6
+        },
+        "size": {
+          "width": 565,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-07-d",
+        "kind": "decision",
+        "label": "¿Todos los pendientes\ncríticos tienen\nresponsable y hora?",
+        "role": "",
+        "position": {
+          "y": 215.6,
+          "x": 142.28
+        },
+        "size": {
+          "width": 508,
+          "height": 36
+        },
+        "fill": "#fff4cc",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-07-fix",
+        "kind": "activity",
+        "label": "Asigna responsable, completa\nevidencia y define próxima\nacción",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 307.6,
+          "x": 21.6
+        },
+        "size": {
+          "width": 457,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-07-l2",
+        "kind": "activity",
+        "label": "Entrega relevo al siguiente\nturno y actualiza vista\noperativa",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 390.6,
+          "x": 179.1
+        },
+        "size": {
+          "width": 432,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-07-next",
+        "kind": "activity",
+        "label": "Turno entrante confirma\nrecepción de pendientes\ncríticos",
+        "role": "LÍDER / ENCARGADO",
+        "position": {
+          "y": 473.6,
+          "x": 183.6
+        },
+        "size": {
+          "width": 423,
+          "height": 36
+        },
+        "fill": "#eaf6fc",
+        "stroke": "#0077a8",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-07-ev",
+        "kind": "evidence",
+        "label": "Relevo + equipos + alertas +\npróximos pasos",
+        "role": "",
+        "position": {
+          "y": 556.6,
+          "x": 277.1
+        },
+        "size": {
+          "width": 236,
+          "height": 36
+        },
+        "fill": "#f4f7fa",
+        "stroke": "#52616b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "COM-LC-07-end",
+        "kind": "start",
+        "label": "Turno cerrado",
+        "role": "",
+        "position": {
+          "y": 639.6,
+          "x": 345.7
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e8f8f2",
+        "stroke": "#13795b",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "COM-LC-07-edge-1",
+        "source": "COM-LC-07-s",
+        "target": "COM-LC-07-l1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-07-edge-2",
+        "source": "COM-LC-07-l1",
+        "target": "COM-LC-07-d",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-07-edge-3",
+        "source": "COM-LC-07-d",
+        "target": "COM-LC-07-fix",
+        "label": "No",
+        "route": "return",
+        "sourceHandle": "left"
+      },
+      {
+        "id": "COM-LC-07-edge-4",
+        "source": "COM-LC-07-d",
+        "target": "COM-LC-07-l2",
+        "label": "Sí",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-07-edge-5",
+        "source": "COM-LC-07-fix",
+        "target": "COM-LC-07-l2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "right"
+      },
+      {
+        "id": "COM-LC-07-edge-6",
+        "source": "COM-LC-07-l2",
+        "target": "COM-LC-07-next",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-07-edge-7",
+        "source": "COM-LC-07-next",
+        "target": "COM-LC-07-ev",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "COM-LC-07-edge-8",
+        "source": "COM-LC-07-ev",
+        "target": "COM-LC-07-end",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  }
+]

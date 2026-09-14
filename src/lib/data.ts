@@ -20,7 +20,7 @@ export type Process = {
 export const driveRoot = "https://drive.google.com/drive/folders/1YoIFfdcoQn107r0juIKyQk6fhaQWkT1H";
 
 export const areas: Area[] = [
-  { code: "COM", name: "Comercial", description: "Captación, seguimiento y conversión de oportunidades.", owner: "Jefatura Comercial", processCount: 11, approved: 1, color: "#00A7EB" },
+  { code: "COM", name: "Comercial", description: "Captación, seguimiento y conversión de oportunidades.", owner: "Jefatura Comercial", processCount: 18, approved: 1, color: "#00A7EB" },
   { code: "ACA", name: "Coordinación Académica", description: "Programación, ejecución académica y certificación.", owner: "Coordinación Académica", processCount: 3, approved: 2, color: "#7E57C2" },
   { code: "GER", name: "Gerencia", description: "Planeamiento, dirección y gobierno institucional.", owner: "Gerencia General", processCount: 37, approved: 1, color: "#01017B" },
   { code: "LOG", name: "Logística", description: "Compras, inventario y soporte operativo.", owner: "Jefatura de Logística", processCount: 1, approved: 0, color: "#D49A00" },
@@ -34,6 +34,7 @@ export const subareas: Subarea[] = [
   { code:"COM-S02", areaCode:"COM", name:"Ventas y seguimiento", description:"Gestión de contactos, propuestas y compromisos comerciales.", owner:"Jefatura Comercial", flow:["Contactar prospecto","Identificar necesidad","Presentar propuesta","Registrar seguimiento"], source:"Propuesta" },
   { code:"COM-S03", areaCode:"COM", name:"Cierre, matrícula y convenios", description:"Formalización de ventas y transferencia del expediente.", owner:"Coordinación de Matrículas", flow:["Confirmar decisión","Validar condiciones","Registrar matrícula","Transferir expediente"], source:"Propuesta" },
   { code:"COM-S04", areaCode:"COM", name:"Jefatura de Ventas", description:"Gobierno de metas, forecast, líderes, excepciones y resultados comerciales.", owner:"Jefe de Ventas", flow:["Traducir metas comerciales","Definir reglas y umbrales","Supervisar forecast","Resolver excepciones","Presentar resultados"], source:"Drive" },
+  { code:"COM-S05", areaCode:"COM", name:"Encargado / Líder Comercial", description:"Gobierno del turno, asignación operativa, SLA, relevo, equipos y coaching cotidiano.", owner:"Encargado / Líder Comercial", flow:["Abrir y organizar el turno","Asignar leads y controlar SLA","Resolver incidencias operativas","Cerrar y transferir el turno"], source:"Drive" },
   { code:"ACA-S01", areaCode:"ACA", name:"Programación académica", description:"Planificación de programas, docentes, aulas y cronogramas.", owner:"Coordinación Académica", flow:["Recibir programación","Asignar docente","Validar recursos","Publicar cronograma"], source:"Propuesta" },
   { code:"ACA-S02", areaCode:"ACA", name:"Operaciones académicas", description:"Ejecución, asistencia y seguimiento de las actividades académicas.", owner:"Responsable Académico", flow:["Aperturar sesión","Registrar asistencia","Atender incidencias","Cerrar sesión"], source:"Propuesta" },
   { code:"ACA-S03", areaCode:"ACA", name:"Certificación y calidad", description:"Verificación de requisitos, emisión y entrega de certificados.", owner:"Coordinación de Certificación", flow:["Validar requisitos","Revisar expediente","Emitir certificado","Registrar entrega"], source:"Propuesta" },

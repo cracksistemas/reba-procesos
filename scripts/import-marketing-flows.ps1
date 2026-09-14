@@ -1,7 +1,7 @@
 param(
   [Parameter(Mandatory = $true)][string]$SourceHtml,
   [Parameter(Mandatory = $true)][string]$OutputJson,
-  [ValidateSet("Marketing", "Sales", "Administration", "Finance")][string]$Profile = "Marketing"
+  [ValidateSet("Marketing", "Sales", "CommercialLeader", "Administration", "Finance")][string]$Profile = "Marketing"
 )
 
 $ErrorActionPreference = "Stop"
@@ -16,6 +16,16 @@ $subareas = if ($Profile -eq "Sales") {
     "05" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
     "06" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
     "07" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
+  }
+} elseif ($Profile -eq "CommercialLeader") {
+  @{
+    "01" = @{ code = "COM-S05"; name = "Encargado / Líder Comercial"; owner = "Encargado / Líder Comercial" }
+    "02" = @{ code = "COM-S05"; name = "Encargado / Líder Comercial"; owner = "Encargado / Líder Comercial" }
+    "03" = @{ code = "COM-S05"; name = "Encargado / Líder Comercial"; owner = "Encargado / Líder Comercial" }
+    "04" = @{ code = "COM-S05"; name = "Encargado / Líder Comercial"; owner = "Encargado / Líder Comercial" }
+    "05" = @{ code = "COM-S05"; name = "Encargado / Líder Comercial"; owner = "Encargado / Líder Comercial" }
+    "06" = @{ code = "COM-S05"; name = "Encargado / Líder Comercial"; owner = "Encargado / Líder Comercial" }
+    "07" = @{ code = "COM-S05"; name = "Encargado / Líder Comercial"; owner = "Encargado / Líder Comercial" }
   }
 } elseif ($Profile -eq "Administration") {
   @{
@@ -93,9 +103,10 @@ foreach ($sectionMatch in $sections) {
   $subarea = $subareas[$prefix]
   if (-not $subarea) { continue }
 
-  $flowNumber = if ($Profile -in @("Sales", "Administration", "Finance")) { $prefix } else { [regex]::Match($sectionId, '^[A-Z]+_(\d+)').Groups[1].Value }
+  $flowNumber = if ($Profile -in @("Sales", "CommercialLeader", "Administration", "Finance")) { $prefix } else { [regex]::Match($sectionId, '^[A-Z]+_(\d+)').Groups[1].Value }
   $flowCode = switch ($Profile) {
     "Sales" { "COM-JV-$flowNumber" }
+    "CommercialLeader" { "COM-LC-$flowNumber" }
     "Administration" { "GER-ARH-$flowNumber" }
     "Finance" { "GER-CFT-$flowNumber" }
     default { "MKT-$prefix-$flowNumber" }
