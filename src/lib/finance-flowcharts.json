@@ -1,0 +1,3973 @@
+[
+  {
+    "code": "GER-CFT-01",
+    "sourceId": "01_posici_n_diaria_de_tesorer_a",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Posición diaria de tesorería",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 387.4,
+      "height": 542.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-01-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 160.49,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-01-n1",
+        "kind": "activity",
+        "label": "Descargar/revisar saldos por\ncuenta y razón social.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 25.2,
+          "y": 101.2
+        },
+        "size": {
+          "width": 337,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-01-n2",
+        "kind": "activity",
+        "label": "Registrar movimientos relevantes\ndel día.",
+        "role": "CFT",
+        "position": {
+          "x": 74.2,
+          "y": 177.2
+        },
+        "size": {
+          "width": 239,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-01-n3",
+        "kind": "activity",
+        "label": "Identificar depósitos\npendientes.",
+        "role": "CFT",
+        "position": {
+          "x": 94.2,
+          "y": 253.2
+        },
+        "size": {
+          "width": 199,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-01-n4",
+        "kind": "activity",
+        "label": "Revisar pagos y vencimientos\ninmediatos.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 52.7,
+          "y": 329.2
+        },
+        "size": {
+          "width": 282,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-01-n5",
+        "kind": "activity",
+        "label": "Emitir posición de caja y\nalertas a Gerencia.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 51.7,
+          "y": 405.2
+        },
+        "size": {
+          "width": 284,
+          "height": 36
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-01-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 46.57,
+          "y": 481.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-01-edge-1",
+        "source": "GER-CFT-01-s",
+        "target": "GER-CFT-01-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-01-edge-2",
+        "source": "GER-CFT-01-n1",
+        "target": "GER-CFT-01-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-01-edge-3",
+        "source": "GER-CFT-01-n2",
+        "target": "GER-CFT-01-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-01-edge-4",
+        "source": "GER-CFT-01-n3",
+        "target": "GER-CFT-01-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-01-edge-5",
+        "source": "GER-CFT-01-n4",
+        "target": "GER-CFT-01-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-01-edge-6",
+        "source": "GER-CFT-01-n5",
+        "target": "GER-CFT-01-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-02",
+    "sourceId": "02_flujo_de_caja_de_13_semanas",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Flujo de caja de 13 semanas",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 365.4,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-02-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 149.49,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-02-n1",
+        "kind": "activity",
+        "label": "Tomar saldo inicial.",
+        "role": "CFT",
+        "position": {
+          "x": 114.7,
+          "y": 101.2
+        },
+        "size": {
+          "width": 136,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-02-n2",
+        "kind": "activity",
+        "label": "Incorporar cobros esperados por\ncartera y ventas.",
+        "role": "CFT",
+        "position": {
+          "x": 45.7,
+          "y": 177.2
+        },
+        "size": {
+          "width": 274,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-02-n3",
+        "kind": "activity",
+        "label": "Incorporar pagos/obligaciones\npor semana.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 41.2,
+          "y": 253.2
+        },
+        "size": {
+          "width": 283,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-02-n4",
+        "kind": "activity",
+        "label": "Calcular saldo proyectado y\nbrechas.",
+        "role": "CFT",
+        "position": {
+          "x": 72.7,
+          "y": 329.2
+        },
+        "size": {
+          "width": 220,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-02-n5",
+        "kind": "activity",
+        "label": "Simular escenario\nbase/conservador.",
+        "role": "CFT",
+        "position": {
+          "x": 73.2,
+          "y": 405.2
+        },
+        "size": {
+          "width": 219,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-02-n6",
+        "kind": "activity",
+        "label": "Actualizar semanalmente y cuando\nexista cambio material.",
+        "role": "CFT",
+        "position": {
+          "x": 25.2,
+          "y": 481.2
+        },
+        "size": {
+          "width": 315,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-02-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 35.57,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-02-edge-1",
+        "source": "GER-CFT-02-s",
+        "target": "GER-CFT-02-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-02-edge-2",
+        "source": "GER-CFT-02-n1",
+        "target": "GER-CFT-02-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-02-edge-3",
+        "source": "GER-CFT-02-n2",
+        "target": "GER-CFT-02-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-02-edge-4",
+        "source": "GER-CFT-02-n3",
+        "target": "GER-CFT-02-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-02-edge-5",
+        "source": "GER-CFT-02-n4",
+        "target": "GER-CFT-02-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-02-edge-6",
+        "source": "GER-CFT-02-n5",
+        "target": "GER-CFT-02-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-02-edge-7",
+        "source": "GER-CFT-02-n6",
+        "target": "GER-CFT-02-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-03",
+    "sourceId": "03_solicitud_validaci_n_aprobaci_n_y_pago",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Solicitud, validación, aprobación y pago",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 455.4,
+      "height": 694.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-03-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 194.49,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-03-n1",
+        "kind": "activity",
+        "label": "Área solicitante entrega\nexpediente y conformidad.",
+        "role": "CFT",
+        "position": {
+          "x": 88.7,
+          "y": 101.2
+        },
+        "size": {
+          "width": 278,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-03-n2",
+        "kind": "activity",
+        "label": "CFT verifica documento,\npresupuesto, centro de costo\naplicable y caja.",
+        "role": "FINANZAS",
+        "position": {
+          "x": 25.2,
+          "y": 177.2
+        },
+        "size": {
+          "width": 405,
+          "height": 36
+        },
+        "fill": "#e6e8ff",
+        "stroke": "#4f5db3",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-03-n3",
+        "kind": "activity",
+        "label": "Si falta sustento, devolver para\nregularización.",
+        "role": "CFT",
+        "position": {
+          "x": 98.2,
+          "y": 253.2
+        },
+        "size": {
+          "width": 259,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-03-n4",
+        "kind": "activity",
+        "label": "Gerencia aprueba según nivel.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 118.7,
+          "y": 329.2
+        },
+        "size": {
+          "width": 218,
+          "height": 36
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-03-n5",
+        "kind": "activity",
+        "label": "Tesorería programa y ejecuta\npago.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 102.7,
+          "y": 405.2
+        },
+        "size": {
+          "width": 250,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-03-n6",
+        "kind": "activity",
+        "label": "Descargar constancia y vincular\nal expediente.",
+        "role": "CFT",
+        "position": {
+          "x": 96.7,
+          "y": 481.2
+        },
+        "size": {
+          "width": 262,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-03-n7",
+        "kind": "activity",
+        "label": "Contabilidad registra y\nconcilia.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 103.2,
+          "y": 557.2
+        },
+        "size": {
+          "width": 249,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-03-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 80.57,
+          "y": 633.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-03-edge-1",
+        "source": "GER-CFT-03-s",
+        "target": "GER-CFT-03-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-03-edge-2",
+        "source": "GER-CFT-03-n1",
+        "target": "GER-CFT-03-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-03-edge-3",
+        "source": "GER-CFT-03-n2",
+        "target": "GER-CFT-03-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-03-edge-4",
+        "source": "GER-CFT-03-n3",
+        "target": "GER-CFT-03-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-03-edge-5",
+        "source": "GER-CFT-03-n4",
+        "target": "GER-CFT-03-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-03-edge-6",
+        "source": "GER-CFT-03-n5",
+        "target": "GER-CFT-03-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-03-edge-7",
+        "source": "GER-CFT-03-n6",
+        "target": "GER-CFT-03-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-03-edge-8",
+        "source": "GER-CFT-03-n7",
+        "target": "GER-CFT-03-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-04",
+    "sourceId": "04_registro_contable_de_compras_y_gastos",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Registro contable de compras y gastos",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 366.4,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-04-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 149.99,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-04-n1",
+        "kind": "activity",
+        "label": "Recibir comprobante y sustento.",
+        "role": "CFT",
+        "position": {
+          "x": 86.2,
+          "y": 101.2
+        },
+        "size": {
+          "width": 194,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-04-n2",
+        "kind": "activity",
+        "label": "Validar requisitos y razón\nsocial.",
+        "role": "CFT",
+        "position": {
+          "x": 83.7,
+          "y": 177.2
+        },
+        "size": {
+          "width": 199,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-04-n3",
+        "kind": "activity",
+        "label": "Determinar cuenta y centro de\ncosto aplicable.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 25.2,
+          "y": 253.2
+        },
+        "size": {
+          "width": 316,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-04-n4",
+        "kind": "activity",
+        "label": "Registrar compra/gasto.",
+        "role": "CFT",
+        "position": {
+          "x": 104.7,
+          "y": 329.2
+        },
+        "size": {
+          "width": 157,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-04-n5",
+        "kind": "activity",
+        "label": "Vincular documento.",
+        "role": "CFT",
+        "position": {
+          "x": 112.2,
+          "y": 405.2
+        },
+        "size": {
+          "width": 142,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-04-n6",
+        "kind": "activity",
+        "label": "Observar y regularizar\ndiferencias.",
+        "role": "CFT",
+        "position": {
+          "x": 79.7,
+          "y": 481.2
+        },
+        "size": {
+          "width": 207,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-04-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 36.07,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-04-edge-1",
+        "source": "GER-CFT-04-s",
+        "target": "GER-CFT-04-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-04-edge-2",
+        "source": "GER-CFT-04-n1",
+        "target": "GER-CFT-04-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-04-edge-3",
+        "source": "GER-CFT-04-n2",
+        "target": "GER-CFT-04-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-04-edge-4",
+        "source": "GER-CFT-04-n3",
+        "target": "GER-CFT-04-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-04-edge-5",
+        "source": "GER-CFT-04-n4",
+        "target": "GER-CFT-04-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-04-edge-6",
+        "source": "GER-CFT-04-n5",
+        "target": "GER-CFT-04-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-04-edge-7",
+        "source": "GER-CFT-04-n6",
+        "target": "GER-CFT-04-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-05",
+    "sourceId": "05_registro_de_ventas_e_ingresos",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Registro de ventas e ingresos",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 456.4,
+      "height": 542.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-05-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 194.99,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-05-n1",
+        "kind": "activity",
+        "label": "Recibir información de\nventa/ingreso y comprobante.",
+        "role": "CFT",
+        "position": {
+          "x": 84.7,
+          "y": 101.2
+        },
+        "size": {
+          "width": 287,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-05-n2",
+        "kind": "activity",
+        "label": "Relacionar con alumno/cliente y\nprograma, curso, diplomado,\nevento o edición.",
+        "role": "CFT",
+        "position": {
+          "x": 25.2,
+          "y": 177.2
+        },
+        "size": {
+          "width": 406,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-05-n3",
+        "kind": "activity",
+        "label": "Registrar ingreso/venta en\nperiodo y razón social.",
+        "role": "CFT",
+        "position": {
+          "x": 91.2,
+          "y": 253.2
+        },
+        "size": {
+          "width": 274,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-05-n4",
+        "kind": "activity",
+        "label": "Vincular comprobante y origen.",
+        "role": "CFT",
+        "position": {
+          "x": 134.7,
+          "y": 329.2
+        },
+        "size": {
+          "width": 187,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-05-n5",
+        "kind": "activity",
+        "label": "Controlar diferencias con\nbanco/campus.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 90.7,
+          "y": 405.2
+        },
+        "size": {
+          "width": 275,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-05-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 81.07,
+          "y": 481.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-05-edge-1",
+        "source": "GER-CFT-05-s",
+        "target": "GER-CFT-05-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-05-edge-2",
+        "source": "GER-CFT-05-n1",
+        "target": "GER-CFT-05-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-05-edge-3",
+        "source": "GER-CFT-05-n2",
+        "target": "GER-CFT-05-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-05-edge-4",
+        "source": "GER-CFT-05-n3",
+        "target": "GER-CFT-05-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-05-edge-5",
+        "source": "GER-CFT-05-n4",
+        "target": "GER-CFT-05-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-05-edge-6",
+        "source": "GER-CFT-05-n5",
+        "target": "GER-CFT-05-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-06",
+    "sourceId": "06_identificaci_n_y_conciliaci_n_de_ingresos",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Identificación y conciliación de ingresos",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 408.4,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-06-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 170.99,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-06-n1",
+        "kind": "activity",
+        "label": "Importar banco y fuentes\ncampus/CRM.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 68.2,
+          "y": 101.2
+        },
+        "size": {
+          "width": 272,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-06-n2",
+        "kind": "activity",
+        "label": "Relacionar movimientos con\nalumno/cliente, evento y\ncomprobante.",
+        "role": "CFT",
+        "position": {
+          "x": 25.2,
+          "y": 177.2
+        },
+        "size": {
+          "width": 358,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-06-n3",
+        "kind": "activity",
+        "label": "Separar conciliación financiera\ny contable.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 56.2,
+          "y": 253.2
+        },
+        "size": {
+          "width": 296,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-06-n4",
+        "kind": "activity",
+        "label": "Clasificar no\nidentificado/duplicado/diferencia.",
+        "role": "CFT",
+        "position": {
+          "x": 75.7,
+          "y": 329.2
+        },
+        "size": {
+          "width": 257,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-06-n5",
+        "kind": "activity",
+        "label": "Asignar responsable y fecha.",
+        "role": "CFT",
+        "position": {
+          "x": 114.7,
+          "y": 405.2
+        },
+        "size": {
+          "width": 179,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-06-n6",
+        "kind": "activity",
+        "label": "Cerrar cuando fuentes coincidan\no diferencia quede sustentada.",
+        "role": "CFT",
+        "position": {
+          "x": 36.7,
+          "y": 481.2
+        },
+        "size": {
+          "width": 335,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-06-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 57.07,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-06-edge-1",
+        "source": "GER-CFT-06-s",
+        "target": "GER-CFT-06-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-06-edge-2",
+        "source": "GER-CFT-06-n1",
+        "target": "GER-CFT-06-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-06-edge-3",
+        "source": "GER-CFT-06-n2",
+        "target": "GER-CFT-06-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-06-edge-4",
+        "source": "GER-CFT-06-n3",
+        "target": "GER-CFT-06-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-06-edge-5",
+        "source": "GER-CFT-06-n4",
+        "target": "GER-CFT-06-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-06-edge-6",
+        "source": "GER-CFT-06-n5",
+        "target": "GER-CFT-06-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-06-edge-7",
+        "source": "GER-CFT-06-n6",
+        "target": "GER-CFT-06-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-07",
+    "sourceId": "07_cuentas_por_cobrar_y_cobranza",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Cuentas por cobrar y cobranza",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 345.03,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-07-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 139.31,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-07-n1",
+        "kind": "activity",
+        "label": "Recibir/actualizar cartera.",
+        "role": "CFT",
+        "position": {
+          "x": 90.52,
+          "y": 101.2
+        },
+        "size": {
+          "width": 164,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-07-n2",
+        "kind": "activity",
+        "label": "Clasificar\nvigente/vencida/compromiso.",
+        "role": "CFT",
+        "position": {
+          "x": 58.02,
+          "y": 177.2
+        },
+        "size": {
+          "width": 229,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-07-n3",
+        "kind": "activity",
+        "label": "Coordinar seguimiento de\ncobranza.",
+        "role": "CFT",
+        "position": {
+          "x": 65.52,
+          "y": 253.2
+        },
+        "size": {
+          "width": 214,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-07-n4",
+        "kind": "activity",
+        "label": "Incorporar recuperación esperada\nal flujo.",
+        "role": "CFT",
+        "position": {
+          "x": 54.02,
+          "y": 329.2
+        },
+        "size": {
+          "width": 237,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-07-n5",
+        "kind": "activity",
+        "label": "Conciliar pagos recibidos.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 70.52,
+          "y": 405.2
+        },
+        "size": {
+          "width": 204,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-07-n6",
+        "kind": "activity",
+        "label": "Reportar morosidad y\nrecuperación.",
+        "role": "CFT",
+        "position": {
+          "x": 66.02,
+          "y": 481.2
+        },
+        "size": {
+          "width": 213,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-07-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.39,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-07-edge-1",
+        "source": "GER-CFT-07-s",
+        "target": "GER-CFT-07-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-07-edge-2",
+        "source": "GER-CFT-07-n1",
+        "target": "GER-CFT-07-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-07-edge-3",
+        "source": "GER-CFT-07-n2",
+        "target": "GER-CFT-07-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-07-edge-4",
+        "source": "GER-CFT-07-n3",
+        "target": "GER-CFT-07-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-07-edge-5",
+        "source": "GER-CFT-07-n4",
+        "target": "GER-CFT-07-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-07-edge-6",
+        "source": "GER-CFT-07-n5",
+        "target": "GER-CFT-07-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-07-edge-7",
+        "source": "GER-CFT-07-n6",
+        "target": "GER-CFT-07-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-08",
+    "sourceId": "08_cuentas_por_pagar_y_obligaciones",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Cuentas por pagar y obligaciones",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 405.4,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-08-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 169.49,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-08-n1",
+        "kind": "activity",
+        "label": "Registrar obligación con\ndocumento y vencimiento.",
+        "role": "CFT",
+        "position": {
+          "x": 62.7,
+          "y": 101.2
+        },
+        "size": {
+          "width": 280,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-08-n2",
+        "kind": "activity",
+        "label": "Validar monto, beneficiario y\ntratamiento contable.",
+        "role": "CFT",
+        "position": {
+          "x": 65.2,
+          "y": 177.2
+        },
+        "size": {
+          "width": 275,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-08-n3",
+        "kind": "activity",
+        "label": "Finanzas revisa disponibilidad y\npriorización.",
+        "role": "FINANZAS",
+        "position": {
+          "x": 61.2,
+          "y": 253.2
+        },
+        "size": {
+          "width": 283,
+          "height": 36
+        },
+        "fill": "#e6e8ff",
+        "stroke": "#4f5db3",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-08-n4",
+        "kind": "activity",
+        "label": "Programar pago aprobado.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 99.7,
+          "y": 329.2
+        },
+        "size": {
+          "width": 206,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-08-n5",
+        "kind": "activity",
+        "label": "Tesorería ejecuta y adjunta\nconstancia.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 68.7,
+          "y": 405.2
+        },
+        "size": {
+          "width": 268,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-08-n6",
+        "kind": "activity",
+        "label": "Contabilidad\ncancela/conciliación de cuenta\npor pagar.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 25.2,
+          "y": 481.2
+        },
+        "size": {
+          "width": 355,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-08-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 55.57,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-08-edge-1",
+        "source": "GER-CFT-08-s",
+        "target": "GER-CFT-08-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-08-edge-2",
+        "source": "GER-CFT-08-n1",
+        "target": "GER-CFT-08-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-08-edge-3",
+        "source": "GER-CFT-08-n2",
+        "target": "GER-CFT-08-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-08-edge-4",
+        "source": "GER-CFT-08-n3",
+        "target": "GER-CFT-08-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-08-edge-5",
+        "source": "GER-CFT-08-n4",
+        "target": "GER-CFT-08-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-08-edge-6",
+        "source": "GER-CFT-08-n5",
+        "target": "GER-CFT-08-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-08-edge-7",
+        "source": "GER-CFT-08-n6",
+        "target": "GER-CFT-08-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-09",
+    "sourceId": "09_conciliaciones_bancarias_y_contables",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Conciliaciones bancarias y contables",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 345.03,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-09-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 139.31,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-09-n1",
+        "kind": "activity",
+        "label": "Definir cuentas a conciliar y\ncorte.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 41.52,
+          "y": 101.2
+        },
+        "size": {
+          "width": 262,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-09-n2",
+        "kind": "activity",
+        "label": "Comparar\nmayor/auxiliar/banco/documentos.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 26.52,
+          "y": 177.2
+        },
+        "size": {
+          "width": 292,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-09-n3",
+        "kind": "activity",
+        "label": "Identificar diferencias.",
+        "role": "CFT",
+        "position": {
+          "x": 98.52,
+          "y": 253.2
+        },
+        "size": {
+          "width": 148,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-09-n4",
+        "kind": "activity",
+        "label": "Crear partida pendiente con\ncausa/responsable/fecha.",
+        "role": "CFT",
+        "position": {
+          "x": 26.52,
+          "y": 329.2
+        },
+        "size": {
+          "width": 292,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-09-n5",
+        "kind": "activity",
+        "label": "Regularizar o sustentar.",
+        "role": "CFT",
+        "position": {
+          "x": 94.02,
+          "y": 405.2
+        },
+        "size": {
+          "width": 157,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-09-n6",
+        "kind": "activity",
+        "label": "Cerrar conciliación y archivar\nevidencia.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 29.52,
+          "y": 481.2
+        },
+        "size": {
+          "width": 286,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-09-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.39,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-09-edge-1",
+        "source": "GER-CFT-09-s",
+        "target": "GER-CFT-09-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-09-edge-2",
+        "source": "GER-CFT-09-n1",
+        "target": "GER-CFT-09-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-09-edge-3",
+        "source": "GER-CFT-09-n2",
+        "target": "GER-CFT-09-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-09-edge-4",
+        "source": "GER-CFT-09-n3",
+        "target": "GER-CFT-09-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-09-edge-5",
+        "source": "GER-CFT-09-n4",
+        "target": "GER-CFT-09-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-09-edge-6",
+        "source": "GER-CFT-09-n5",
+        "target": "GER-CFT-09-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-09-edge-7",
+        "source": "GER-CFT-09-n6",
+        "target": "GER-CFT-09-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-10",
+    "sourceId": "10_planilla_locadores_y_beneficios",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Planilla, locadores y beneficios",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 388.4,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-10-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 160.99,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-10-n1",
+        "kind": "activity",
+        "label": "Recibir de Administración y RR.\nHH. paquete aprobado.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 25.2,
+          "y": 101.2
+        },
+        "size": {
+          "width": 338,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-10-n2",
+        "kind": "activity",
+        "label": "Tesorería programa y ejecuta\npagos autorizados.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 39.7,
+          "y": 177.2
+        },
+        "size": {
+          "width": 309,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-10-n3",
+        "kind": "activity",
+        "label": "Devolver constancias a RR. HH.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 77.7,
+          "y": 253.2
+        },
+        "size": {
+          "width": 233,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-10-n4",
+        "kind": "activity",
+        "label": "Contabilidad registra\nplanilla/honorarios/beneficios.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 27.7,
+          "y": 329.2
+        },
+        "size": {
+          "width": 333,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-10-n5",
+        "kind": "activity",
+        "label": "Conciliar pagos y obligaciones.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 80.7,
+          "y": 405.2
+        },
+        "size": {
+          "width": 227,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-10-n6",
+        "kind": "activity",
+        "label": "Archivar sustento.",
+        "role": "CFT",
+        "position": {
+          "x": 128.2,
+          "y": 481.2
+        },
+        "size": {
+          "width": 132,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-10-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 47.07,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-10-edge-1",
+        "source": "GER-CFT-10-s",
+        "target": "GER-CFT-10-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-10-edge-2",
+        "source": "GER-CFT-10-n1",
+        "target": "GER-CFT-10-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-10-edge-3",
+        "source": "GER-CFT-10-n2",
+        "target": "GER-CFT-10-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-10-edge-4",
+        "source": "GER-CFT-10-n3",
+        "target": "GER-CFT-10-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-10-edge-5",
+        "source": "GER-CFT-10-n4",
+        "target": "GER-CFT-10-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-10-edge-6",
+        "source": "GER-CFT-10-n5",
+        "target": "GER-CFT-10-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-10-edge-7",
+        "source": "GER-CFT-10-n6",
+        "target": "GER-CFT-10-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-11",
+    "sourceId": "11_presupuesto_mensual_y_forecast",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Presupuesto mensual y forecast",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 345.4,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-11-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 139.49,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-11-n1",
+        "kind": "activity",
+        "label": "Cargar presupuesto aprobado.",
+        "role": "FINANZAS",
+        "position": {
+          "x": 65.7,
+          "y": 101.2
+        },
+        "size": {
+          "width": 214,
+          "height": 36
+        },
+        "fill": "#e6e8ff",
+        "stroke": "#4f5db3",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-11-n2",
+        "kind": "activity",
+        "label": "Actualizar comprometido y\nejecutado.",
+        "role": "CFT",
+        "position": {
+          "x": 61.7,
+          "y": 177.2
+        },
+        "size": {
+          "width": 222,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-11-n3",
+        "kind": "activity",
+        "label": "Calcular saldo disponible.",
+        "role": "CFT",
+        "position": {
+          "x": 90.7,
+          "y": 253.2
+        },
+        "size": {
+          "width": 164,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-11-n4",
+        "kind": "activity",
+        "label": "Actualizar forecast con\nrealidad.",
+        "role": "FINANZAS",
+        "position": {
+          "x": 58.2,
+          "y": 329.2
+        },
+        "size": {
+          "width": 229,
+          "height": 36
+        },
+        "fill": "#e6e8ff",
+        "stroke": "#4f5db3",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-11-n5",
+        "kind": "activity",
+        "label": "Analizar desviaciones y causas.",
+        "role": "CFT",
+        "position": {
+          "x": 76.2,
+          "y": 405.2
+        },
+        "size": {
+          "width": 193,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-11-n6",
+        "kind": "activity",
+        "label": "Proponer reprogramación/acciones\na Gerencia.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 25.2,
+          "y": 481.2
+        },
+        "size": {
+          "width": 295,
+          "height": 36
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-11-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.57,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-11-edge-1",
+        "source": "GER-CFT-11-s",
+        "target": "GER-CFT-11-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-11-edge-2",
+        "source": "GER-CFT-11-n1",
+        "target": "GER-CFT-11-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-11-edge-3",
+        "source": "GER-CFT-11-n2",
+        "target": "GER-CFT-11-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-11-edge-4",
+        "source": "GER-CFT-11-n3",
+        "target": "GER-CFT-11-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-11-edge-5",
+        "source": "GER-CFT-11-n4",
+        "target": "GER-CFT-11-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-11-edge-6",
+        "source": "GER-CFT-11-n5",
+        "target": "GER-CFT-11-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-11-edge-7",
+        "source": "GER-CFT-11-n6",
+        "target": "GER-CFT-11-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-12",
+    "sourceId": "12_costeo_rentabilidad_y_cac",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Costeo, rentabilidad y CAC",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 379.4,
+      "height": 694.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-12-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 156.49,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-12-n1",
+        "kind": "activity",
+        "label": "Definir unidad de análisis:\ncliente, alumno, programa,\nevento.",
+        "role": "CFT",
+        "position": {
+          "x": 25.2,
+          "y": 101.2
+        },
+        "size": {
+          "width": 329,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-12-n2",
+        "kind": "activity",
+        "label": "Capturar costos directos y\nvariables.",
+        "role": "CFT",
+        "position": {
+          "x": 80.7,
+          "y": 177.2
+        },
+        "size": {
+          "width": 218,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-12-n3",
+        "kind": "activity",
+        "label": "Asignar publicidad y costos de\nadquisición.",
+        "role": "CFT",
+        "position": {
+          "x": 66.7,
+          "y": 253.2
+        },
+        "size": {
+          "width": 246,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-12-n4",
+        "kind": "activity",
+        "label": "Aplicar drivers de overhead\naprobados.",
+        "role": "CFT",
+        "position": {
+          "x": 76.2,
+          "y": 329.2
+        },
+        "size": {
+          "width": 227,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-12-n5",
+        "kind": "activity",
+        "label": "Calcular margen, punto de\nequilibrio, precio piso y CAC.",
+        "role": "CFT",
+        "position": {
+          "x": 38.2,
+          "y": 405.2
+        },
+        "size": {
+          "width": 303,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-12-n6",
+        "kind": "activity",
+        "label": "Comparar real vs proyectado.",
+        "role": "CFT",
+        "position": {
+          "x": 99.2,
+          "y": 481.2
+        },
+        "size": {
+          "width": 181,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-12-n7",
+        "kind": "activity",
+        "label": "Emitir recomendación.",
+        "role": "CFT",
+        "position": {
+          "x": 114.7,
+          "y": 557.2
+        },
+        "size": {
+          "width": 150,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-12-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 42.57,
+          "y": 633.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-12-edge-1",
+        "source": "GER-CFT-12-s",
+        "target": "GER-CFT-12-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-12-edge-2",
+        "source": "GER-CFT-12-n1",
+        "target": "GER-CFT-12-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-12-edge-3",
+        "source": "GER-CFT-12-n2",
+        "target": "GER-CFT-12-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-12-edge-4",
+        "source": "GER-CFT-12-n3",
+        "target": "GER-CFT-12-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-12-edge-5",
+        "source": "GER-CFT-12-n4",
+        "target": "GER-CFT-12-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-12-edge-6",
+        "source": "GER-CFT-12-n5",
+        "target": "GER-CFT-12-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-12-edge-7",
+        "source": "GER-CFT-12-n6",
+        "target": "GER-CFT-12-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-12-edge-8",
+        "source": "GER-CFT-12-n7",
+        "target": "GER-CFT-12-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-13",
+    "sourceId": "13_pre_cierre_financiero_d_2",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Pre-cierre financiero D+2",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 369.4,
+      "height": 542.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-13-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 151.49,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-13-n1",
+        "kind": "activity",
+        "label": "Cerrar movimientos preliminares\ndel mes.",
+        "role": "CFT",
+        "position": {
+          "x": 65.2,
+          "y": 101.2
+        },
+        "size": {
+          "width": 239,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-13-n2",
+        "kind": "activity",
+        "label": "Consolidar ingresos, gastos,\ncaja, cartera y pagos.",
+        "role": "TESORERIA",
+        "position": {
+          "x": 25.2,
+          "y": 177.2
+        },
+        "size": {
+          "width": 319,
+          "height": 36
+        },
+        "fill": "#d9f4f3",
+        "stroke": "#158a89",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-13-n3",
+        "kind": "activity",
+        "label": "Comparar presupuesto/forecast.",
+        "role": "FINANZAS",
+        "position": {
+          "x": 73.2,
+          "y": 253.2
+        },
+        "size": {
+          "width": 223,
+          "height": 36
+        },
+        "fill": "#e6e8ff",
+        "stroke": "#4f5db3",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-13-n4",
+        "kind": "activity",
+        "label": "Listar diferencias y pendientes.",
+        "role": "CFT",
+        "position": {
+          "x": 90.7,
+          "y": 329.2
+        },
+        "size": {
+          "width": 188,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-13-n5",
+        "kind": "activity",
+        "label": "Emitir pre-cierre D+2 a\nGerencia.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 67.2,
+          "y": 405.2
+        },
+        "size": {
+          "width": 235,
+          "height": 36
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-13-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 37.57,
+          "y": 481.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-13-edge-1",
+        "source": "GER-CFT-13-s",
+        "target": "GER-CFT-13-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-13-edge-2",
+        "source": "GER-CFT-13-n1",
+        "target": "GER-CFT-13-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-13-edge-3",
+        "source": "GER-CFT-13-n2",
+        "target": "GER-CFT-13-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-13-edge-4",
+        "source": "GER-CFT-13-n3",
+        "target": "GER-CFT-13-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-13-edge-5",
+        "source": "GER-CFT-13-n4",
+        "target": "GER-CFT-13-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-13-edge-6",
+        "source": "GER-CFT-13-n5",
+        "target": "GER-CFT-13-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-14",
+    "sourceId": "14_cierre_contable_d_5",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Cierre contable D+5",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 354.4,
+      "height": 694.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-14-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 143.99,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-14-n1",
+        "kind": "activity",
+        "label": "Procesar registros del periodo.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 57.2,
+          "y": 101.2
+        },
+        "size": {
+          "width": 240,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-14-n2",
+        "kind": "activity",
+        "label": "Completar conciliaciones.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 67.2,
+          "y": 177.2
+        },
+        "size": {
+          "width": 220,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-14-n3",
+        "kind": "activity",
+        "label": "Verificar documentación\nsustentatoria.",
+        "role": "CFT",
+        "position": {
+          "x": 65.2,
+          "y": 253.2
+        },
+        "size": {
+          "width": 224,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-14-n4",
+        "kind": "activity",
+        "label": "Identificar diferencias\nrelevantes.",
+        "role": "CFT",
+        "position": {
+          "x": 76.2,
+          "y": 329.2
+        },
+        "size": {
+          "width": 202,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-14-n5",
+        "kind": "activity",
+        "label": "Mantener partidas pendientes con\nresponsable y fecha.",
+        "role": "CFT",
+        "position": {
+          "x": 28.2,
+          "y": 405.2
+        },
+        "size": {
+          "width": 298,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-14-n6",
+        "kind": "activity",
+        "label": "Preparar paquete de cierre y\ncoordinar contador.",
+        "role": "CONTADOR",
+        "position": {
+          "x": 25.2,
+          "y": 481.2
+        },
+        "size": {
+          "width": 304,
+          "height": 36
+        },
+        "fill": "#fbe7d5",
+        "stroke": "#a65f18",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-14-n7",
+        "kind": "activity",
+        "label": "Cerrar D+5 cuando se cumplen\ncriterios.",
+        "role": "CFT",
+        "position": {
+          "x": 59.7,
+          "y": 557.2
+        },
+        "size": {
+          "width": 235,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-14-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 30.07,
+          "y": 633.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-14-edge-1",
+        "source": "GER-CFT-14-s",
+        "target": "GER-CFT-14-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-14-edge-2",
+        "source": "GER-CFT-14-n1",
+        "target": "GER-CFT-14-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-14-edge-3",
+        "source": "GER-CFT-14-n2",
+        "target": "GER-CFT-14-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-14-edge-4",
+        "source": "GER-CFT-14-n3",
+        "target": "GER-CFT-14-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-14-edge-5",
+        "source": "GER-CFT-14-n4",
+        "target": "GER-CFT-14-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-14-edge-6",
+        "source": "GER-CFT-14-n5",
+        "target": "GER-CFT-14-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-14-edge-7",
+        "source": "GER-CFT-14-n6",
+        "target": "GER-CFT-14-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-14-edge-8",
+        "source": "GER-CFT-14-n7",
+        "target": "GER-CFT-14-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-15",
+    "sourceId": "15_obligaciones_tributarias_y_contador_externo",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Obligaciones tributarias y contador externo",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 411.4,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-15-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 172.49,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-15-n1",
+        "kind": "activity",
+        "label": "Preparar comprobantes, registros\ny conciliaciones.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 39.2,
+          "y": 101.2
+        },
+        "size": {
+          "width": 333,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-15-n2",
+        "kind": "activity",
+        "label": "Controlar\ndetracciones/retenciones\naplicables.",
+        "role": "CFT",
+        "position": {
+          "x": 73.7,
+          "y": 177.2
+        },
+        "size": {
+          "width": 264,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-15-n3",
+        "kind": "activity",
+        "label": "Entregar información a\ncontador/responsable.",
+        "role": "CONTADOR",
+        "position": {
+          "x": 59.7,
+          "y": 253.2
+        },
+        "size": {
+          "width": 292,
+          "height": 36
+        },
+        "fill": "#fbe7d5",
+        "stroke": "#a65f18",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-15-n4",
+        "kind": "activity",
+        "label": "Recibir cálculo/declaración para\nrevisión de consistencia con\nfuente.",
+        "role": "CFT",
+        "position": {
+          "x": 25.2,
+          "y": 329.2
+        },
+        "size": {
+          "width": 361,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-15-n5",
+        "kind": "activity",
+        "label": "Corregir observaciones antes de\nvencimiento.",
+        "role": "CFT",
+        "position": {
+          "x": 77.2,
+          "y": 405.2
+        },
+        "size": {
+          "width": 257,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-15-n6",
+        "kind": "activity",
+        "label": "Conservar cargo/constancia\nfinal.",
+        "role": "CFT",
+        "position": {
+          "x": 103.7,
+          "y": 481.2
+        },
+        "size": {
+          "width": 204,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-15-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 58.57,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-15-edge-1",
+        "source": "GER-CFT-15-s",
+        "target": "GER-CFT-15-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-15-edge-2",
+        "source": "GER-CFT-15-n1",
+        "target": "GER-CFT-15-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-15-edge-3",
+        "source": "GER-CFT-15-n2",
+        "target": "GER-CFT-15-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-15-edge-4",
+        "source": "GER-CFT-15-n3",
+        "target": "GER-CFT-15-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-15-edge-5",
+        "source": "GER-CFT-15-n4",
+        "target": "GER-CFT-15-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-15-edge-6",
+        "source": "GER-CFT-15-n5",
+        "target": "GER-CFT-15-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-15-edge-7",
+        "source": "GER-CFT-15-n6",
+        "target": "GER-CFT-15-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-16",
+    "sourceId": "16_seguimiento_de_partidas_contables_pendientes",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Seguimiento de partidas contables pendientes",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 345.03,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-16-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 139.31,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-16-n1",
+        "kind": "activity",
+        "label": "Registrar cada partida pendiente\ncon origen y monto.",
+        "role": "CFT",
+        "position": {
+          "x": 28.52,
+          "y": 101.2
+        },
+        "size": {
+          "width": 288,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-16-n2",
+        "kind": "activity",
+        "label": "Asignar causa, responsable y\nfecha.",
+        "role": "CFT",
+        "position": {
+          "x": 64.02,
+          "y": 177.2
+        },
+        "size": {
+          "width": 217,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-16-n3",
+        "kind": "activity",
+        "label": "Solicitar sustento o corrección.",
+        "role": "CFT",
+        "position": {
+          "x": 79.02,
+          "y": 253.2
+        },
+        "size": {
+          "width": 187,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-16-n4",
+        "kind": "activity",
+        "label": "Revisar impacto/materialidad.",
+        "role": "CFT",
+        "position": {
+          "x": 81.52,
+          "y": 329.2
+        },
+        "size": {
+          "width": 182,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-16-n5",
+        "kind": "activity",
+        "label": "Regularizar o documentar\ntratamiento.",
+        "role": "CFT",
+        "position": {
+          "x": 60.52,
+          "y": 405.2
+        },
+        "size": {
+          "width": 224,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-16-n6",
+        "kind": "activity",
+        "label": "Cerrar solo con evidencia.",
+        "role": "CFT",
+        "position": {
+          "x": 89.52,
+          "y": 481.2
+        },
+        "size": {
+          "width": 166,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-16-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.39,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-16-edge-1",
+        "source": "GER-CFT-16-s",
+        "target": "GER-CFT-16-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-16-edge-2",
+        "source": "GER-CFT-16-n1",
+        "target": "GER-CFT-16-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-16-edge-3",
+        "source": "GER-CFT-16-n2",
+        "target": "GER-CFT-16-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-16-edge-4",
+        "source": "GER-CFT-16-n3",
+        "target": "GER-CFT-16-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-16-edge-5",
+        "source": "GER-CFT-16-n4",
+        "target": "GER-CFT-16-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-16-edge-6",
+        "source": "GER-CFT-16-n5",
+        "target": "GER-CFT-16-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-16-edge-7",
+        "source": "GER-CFT-16-n6",
+        "target": "GER-CFT-16-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-17",
+    "sourceId": "17_archivo_contable_financiero_tesorer_a",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Archivo contable-financiero-tesorería",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 345.03,
+      "height": 542.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-17-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 139.31,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-17-n1",
+        "kind": "activity",
+        "label": "Definir nomenclatura y\nrepositorio.",
+        "role": "CFT",
+        "position": {
+          "x": 69.02,
+          "y": 101.2
+        },
+        "size": {
+          "width": 207,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-17-n2",
+        "kind": "activity",
+        "label": "Guardar documentos por\nperiodo/razón social/tipo.",
+        "role": "CFT",
+        "position": {
+          "x": 34.02,
+          "y": 177.2
+        },
+        "size": {
+          "width": 277,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-17-n3",
+        "kind": "activity",
+        "label": "Relacionar a\nregistro/transacción.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 43.02,
+          "y": 253.2
+        },
+        "size": {
+          "width": 259,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-17-n4",
+        "kind": "activity",
+        "label": "Controlar permisos y versiones.",
+        "role": "CFT",
+        "position": {
+          "x": 77.02,
+          "y": 329.2
+        },
+        "size": {
+          "width": 191,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-17-n5",
+        "kind": "activity",
+        "label": "Verificar recuperabilidad y\nexcepciones físicas.",
+        "role": "CFT",
+        "position": {
+          "x": 41.52,
+          "y": 405.2
+        },
+        "size": {
+          "width": 262,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-17-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.39,
+          "y": 481.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-17-edge-1",
+        "source": "GER-CFT-17-s",
+        "target": "GER-CFT-17-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-17-edge-2",
+        "source": "GER-CFT-17-n1",
+        "target": "GER-CFT-17-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-17-edge-3",
+        "source": "GER-CFT-17-n2",
+        "target": "GER-CFT-17-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-17-edge-4",
+        "source": "GER-CFT-17-n3",
+        "target": "GER-CFT-17-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-17-edge-5",
+        "source": "GER-CFT-17-n4",
+        "target": "GER-CFT-17-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-17-edge-6",
+        "source": "GER-CFT-17-n5",
+        "target": "GER-CFT-17-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-18",
+    "sourceId": "18_inversiones_reserva_y_casos_econ_micos",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Inversiones, reserva y casos económicos",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 345.03,
+      "height": 694.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-18-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 139.31,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-18-n1",
+        "kind": "activity",
+        "label": "Registrar caso de inversión.",
+        "role": "CFT",
+        "position": {
+          "x": 85.02,
+          "y": 101.2
+        },
+        "size": {
+          "width": 175,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-18-n2",
+        "kind": "activity",
+        "label": "Estimar inversión inicial y\ncosto mensual.",
+        "role": "CFT",
+        "position": {
+          "x": 53.02,
+          "y": 177.2
+        },
+        "size": {
+          "width": 239,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-18-n3",
+        "kind": "activity",
+        "label": "Proyectar ingresos/ahorros.",
+        "role": "CFT",
+        "position": {
+          "x": 86.52,
+          "y": 253.2
+        },
+        "size": {
+          "width": 172,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-18-n4",
+        "kind": "activity",
+        "label": "Calcular payback/retorno y\nriesgo.",
+        "role": "CFT",
+        "position": {
+          "x": 69.02,
+          "y": 329.2
+        },
+        "size": {
+          "width": 207,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-18-n5",
+        "kind": "activity",
+        "label": "Evaluar impacto en caja y\nreserva.",
+        "role": "FINANZAS",
+        "position": {
+          "x": 52.52,
+          "y": 405.2
+        },
+        "size": {
+          "width": 240,
+          "height": 36
+        },
+        "fill": "#e6e8ff",
+        "stroke": "#4f5db3",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-18-n6",
+        "kind": "activity",
+        "label": "Gerencia decide.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 92.52,
+          "y": 481.2
+        },
+        "size": {
+          "width": 160,
+          "height": 36
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-18-n7",
+        "kind": "activity",
+        "label": "Controlar resultado real.",
+        "role": "CFT",
+        "position": {
+          "x": 94.02,
+          "y": 557.2
+        },
+        "size": {
+          "width": 157,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-18-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.39,
+          "y": 633.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-18-edge-1",
+        "source": "GER-CFT-18-s",
+        "target": "GER-CFT-18-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-18-edge-2",
+        "source": "GER-CFT-18-n1",
+        "target": "GER-CFT-18-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-18-edge-3",
+        "source": "GER-CFT-18-n2",
+        "target": "GER-CFT-18-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-18-edge-4",
+        "source": "GER-CFT-18-n3",
+        "target": "GER-CFT-18-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-18-edge-5",
+        "source": "GER-CFT-18-n4",
+        "target": "GER-CFT-18-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-18-edge-6",
+        "source": "GER-CFT-18-n5",
+        "target": "GER-CFT-18-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-18-edge-7",
+        "source": "GER-CFT-18-n6",
+        "target": "GER-CFT-18-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-18-edge-8",
+        "source": "GER-CFT-18-n7",
+        "target": "GER-CFT-18-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-CFT-19",
+    "sourceId": "19_continuidad_operativa_del_rea",
+    "subareaCode": "GER-S03",
+    "subareaName": "Contabilidad, Finanzas y Tesorería",
+    "owner": "Responsable de Finanzas",
+    "title": "Continuidad operativa del área",
+    "description": "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 384.4,
+      "height": 618.4
+    },
+    "nodes": [
+      {
+        "id": "GER-CFT-19-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 158.99,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-19-n1",
+        "kind": "activity",
+        "label": "Mantener lista de funciones\ncríticas y alternos.",
+        "role": "CFT",
+        "position": {
+          "x": 61.2,
+          "y": 101.2
+        },
+        "size": {
+          "width": 262,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-19-n2",
+        "kind": "activity",
+        "label": "Revisar calendario y accesos\nsemanalmente.",
+        "role": "CFT",
+        "position": {
+          "x": 64.2,
+          "y": 177.2
+        },
+        "size": {
+          "width": 256,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-19-n3",
+        "kind": "activity",
+        "label": "Actualizar kit de continuidad.",
+        "role": "CFT",
+        "position": {
+          "x": 103.2,
+          "y": 253.2
+        },
+        "size": {
+          "width": 178,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-19-n4",
+        "kind": "activity",
+        "label": "Probar proceso crítico\ntrimestralmente.",
+        "role": "CFT",
+        "position": {
+          "x": 78.7,
+          "y": 329.2
+        },
+        "size": {
+          "width": 227,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-19-n5",
+        "kind": "activity",
+        "label": "Activar contingencia según\nescenario.",
+        "role": "CFT",
+        "position": {
+          "x": 80.7,
+          "y": 405.2
+        },
+        "size": {
+          "width": 223,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-19-n6",
+        "kind": "activity",
+        "label": "Conciliar diferencias\nposteriores y registrar mejora.",
+        "role": "CONTABILIDAD",
+        "position": {
+          "x": 25.2,
+          "y": 481.2
+        },
+        "size": {
+          "width": 334,
+          "height": 36
+        },
+        "fill": "#ffe3c6",
+        "stroke": "#c56a11",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-CFT-19-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 45.07,
+          "y": 557.2
+        },
+        "size": {
+          "width": 294,
+          "height": 36
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-CFT-19-edge-1",
+        "source": "GER-CFT-19-s",
+        "target": "GER-CFT-19-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-19-edge-2",
+        "source": "GER-CFT-19-n1",
+        "target": "GER-CFT-19-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-19-edge-3",
+        "source": "GER-CFT-19-n2",
+        "target": "GER-CFT-19-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-19-edge-4",
+        "source": "GER-CFT-19-n3",
+        "target": "GER-CFT-19-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-19-edge-5",
+        "source": "GER-CFT-19-n4",
+        "target": "GER-CFT-19-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-19-edge-6",
+        "source": "GER-CFT-19-n5",
+        "target": "GER-CFT-19-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-CFT-19-edge-7",
+        "source": "GER-CFT-19-n6",
+        "target": "GER-CFT-19-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  }
+]

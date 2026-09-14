@@ -1,0 +1,3855 @@
+[
+  {
+    "code": "GER-ARH-01",
+    "sourceId": "01_planeamiento_de_personas_y_capacidad_administrativa",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Planeamiento de personas y capacidad administrativa",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 623.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-01-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-01-n1",
+        "kind": "activity",
+        "label": "Área/Jefatura identifica\nnecesidad o brecha de capacidad.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 47.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 173,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-01-n2",
+        "kind": "activity",
+        "label": "Administración y RR. HH. revisa\ncarga, perfil, criticidad y\nposibilidad de\nredistribución/automatización.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 49.59,
+          "y": 188.2
+        },
+        "size": {
+          "width": 169,
+          "height": 69
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-01-n3",
+        "kind": "activity",
+        "label": "CFT valida impacto presupuestal.",
+        "role": "CFT",
+        "position": {
+          "x": 48.09,
+          "y": 297.2
+        },
+        "size": {
+          "width": 172,
+          "height": 36
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-01-n4",
+        "kind": "activity",
+        "label": "Gerencia aprueba dotación o\najuste.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 59.59,
+          "y": 373.2
+        },
+        "size": {
+          "width": 149,
+          "height": 47
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-01-n5",
+        "kind": "activity",
+        "label": "RR. HH. registra decisión, fecha\ny responsable.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 50.09,
+          "y": 460.2
+        },
+        "size": {
+          "width": 168,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-01-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 547.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-01-edge-1",
+        "source": "GER-ARH-01-s",
+        "target": "GER-ARH-01-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-01-edge-2",
+        "source": "GER-ARH-01-n1",
+        "target": "GER-ARH-01-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-01-edge-3",
+        "source": "GER-ARH-01-n2",
+        "target": "GER-ARH-01-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-01-edge-4",
+        "source": "GER-ARH-01-n3",
+        "target": "GER-ARH-01-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-01-edge-5",
+        "source": "GER-ARH-01-n4",
+        "target": "GER-ARH-01-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-01-edge-6",
+        "source": "GER-ARH-01-n5",
+        "target": "GER-ARH-01-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-02",
+    "sourceId": "02_reclutamiento_y_selecci_n",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Reclutamiento y selección",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 851.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-02-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-02-n1",
+        "kind": "activity",
+        "label": "Registrar vacante aprobada y\nperfil.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 57.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 153,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-02-n2",
+        "kind": "activity",
+        "label": "Definir cronograma y canales.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 56.59,
+          "y": 188.2
+        },
+        "size": {
+          "width": 155,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-02-n3",
+        "kind": "activity",
+        "label": "Recibir y registrar\npostulaciones.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 83.09,
+          "y": 264.2
+        },
+        "size": {
+          "width": 120,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-02-n4",
+        "kind": "activity",
+        "label": "Aplicar filtro curricular y\nentrevista de RR. HH.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 70.59,
+          "y": 351.2
+        },
+        "size": {
+          "width": 127,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-02-n5",
+        "kind": "activity",
+        "label": "Solicitar evaluación técnica al\nlíder cuando corresponda.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 57.09,
+          "y": 438.2
+        },
+        "size": {
+          "width": 154,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-02-n6",
+        "kind": "activity",
+        "label": "Consolidar resultados y\nrecomendación.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 70.59,
+          "y": 525.2
+        },
+        "size": {
+          "width": 127,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-02-n7",
+        "kind": "activity",
+        "label": "Gerencia aprueba contratación.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 54.09,
+          "y": 612.2
+        },
+        "size": {
+          "width": 160,
+          "height": 36
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-02-n8",
+        "kind": "activity",
+        "label": "Comunicar selección/descarte y\nactivar ingreso.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 51.59,
+          "y": 688.2
+        },
+        "size": {
+          "width": 165,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-02-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 775.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-02-edge-1",
+        "source": "GER-ARH-02-s",
+        "target": "GER-ARH-02-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-02-edge-2",
+        "source": "GER-ARH-02-n1",
+        "target": "GER-ARH-02-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-02-edge-3",
+        "source": "GER-ARH-02-n2",
+        "target": "GER-ARH-02-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-02-edge-4",
+        "source": "GER-ARH-02-n3",
+        "target": "GER-ARH-02-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-02-edge-5",
+        "source": "GER-ARH-02-n4",
+        "target": "GER-ARH-02-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-02-edge-6",
+        "source": "GER-ARH-02-n5",
+        "target": "GER-ARH-02-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-02-edge-7",
+        "source": "GER-ARH-02-n6",
+        "target": "GER-ARH-02-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-02-edge-8",
+        "source": "GER-ARH-02-n7",
+        "target": "GER-ARH-02-n8",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-02-edge-9",
+        "source": "GER-ARH-02-n8",
+        "target": "GER-ARH-02-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-03",
+    "sourceId": "03_ingreso_alta_e_inducci_n",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Ingreso, alta e inducción",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 840.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-03-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-03-n1",
+        "kind": "activity",
+        "label": "Confirmar puesto, modalidad,\ncondiciones y fecha aprobadas.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 52.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 163,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-03-n2",
+        "kind": "activity",
+        "label": "Solicitar checklist documental.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 55.09,
+          "y": 188.2
+        },
+        "size": {
+          "width": 158,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-03-n3",
+        "kind": "activity",
+        "label": "Registrar persona una sola vez\nen maestro.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 54.09,
+          "y": 264.2
+        },
+        "size": {
+          "width": 160,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-03-n4",
+        "kind": "activity",
+        "label": "Preparar contrato/anexos y\ngestionar firma.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 63.09,
+          "y": 351.2
+        },
+        "size": {
+          "width": 142,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-03-n5",
+        "kind": "activity",
+        "label": "Coordinar alta legal, Vida Ley y\nregistros aplicables.",
+        "role": "LEGAL",
+        "position": {
+          "x": 53.59,
+          "y": 438.2
+        },
+        "size": {
+          "width": 161,
+          "height": 47
+        },
+        "fill": "#ffdcdc",
+        "stroke": "#b53333",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-03-n6",
+        "kind": "activity",
+        "label": "Solicitar accesos/activos.",
+        "role": "LOGISTICA",
+        "position": {
+          "x": 65.59,
+          "y": 525.2
+        },
+        "size": {
+          "width": 137,
+          "height": 36
+        },
+        "fill": "#e8edf2",
+        "stroke": "#5d6d7e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-03-n7",
+        "kind": "activity",
+        "label": "Realizar inducción general y\ncoordinar inducción técnica.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 60.09,
+          "y": 601.2
+        },
+        "size": {
+          "width": 148,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-03-n8",
+        "kind": "activity",
+        "label": "Cerrar checklist y expediente.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 56.59,
+          "y": 688.2
+        },
+        "size": {
+          "width": 155,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-03-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 764.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-03-edge-1",
+        "source": "GER-ARH-03-s",
+        "target": "GER-ARH-03-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-03-edge-2",
+        "source": "GER-ARH-03-n1",
+        "target": "GER-ARH-03-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-03-edge-3",
+        "source": "GER-ARH-03-n2",
+        "target": "GER-ARH-03-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-03-edge-4",
+        "source": "GER-ARH-03-n3",
+        "target": "GER-ARH-03-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-03-edge-5",
+        "source": "GER-ARH-03-n4",
+        "target": "GER-ARH-03-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-03-edge-6",
+        "source": "GER-ARH-03-n5",
+        "target": "GER-ARH-03-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-03-edge-7",
+        "source": "GER-ARH-03-n6",
+        "target": "GER-ARH-03-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-03-edge-8",
+        "source": "GER-ARH-03-n7",
+        "target": "GER-ARH-03-n8",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-03-edge-9",
+        "source": "GER-ARH-03-n8",
+        "target": "GER-ARH-03-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-04",
+    "sourceId": "04_administraci_n_de_personal_y_contratos",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Administración de personal y contratos",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 677.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-04-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-04-n1",
+        "kind": "activity",
+        "label": "Revisar vencimientos 60/30/15.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 52.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 163,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-04-n2",
+        "kind": "activity",
+        "label": "Verificar documentación,\ndesempeño/incidencias y\nnecesidad de continuidad.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 65.09,
+          "y": 177.2
+        },
+        "size": {
+          "width": 138,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-04-n3",
+        "kind": "activity",
+        "label": "Preparar recomendación.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 67.59,
+          "y": 275.2
+        },
+        "size": {
+          "width": 133,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-04-n4",
+        "kind": "activity",
+        "label": "Gerencia decide.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 85.09,
+          "y": 351.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-04-n5",
+        "kind": "activity",
+        "label": "Gestionar documento y firma\nantes de vencimiento.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 58.59,
+          "y": 427.2
+        },
+        "size": {
+          "width": 151,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-04-n6",
+        "kind": "activity",
+        "label": "Actualizar maestro, expediente y\npróxima alerta.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 50.09,
+          "y": 514.2
+        },
+        "size": {
+          "width": 168,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-04-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 601.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-04-edge-1",
+        "source": "GER-ARH-04-s",
+        "target": "GER-ARH-04-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-04-edge-2",
+        "source": "GER-ARH-04-n1",
+        "target": "GER-ARH-04-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-04-edge-3",
+        "source": "GER-ARH-04-n2",
+        "target": "GER-ARH-04-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-04-edge-4",
+        "source": "GER-ARH-04-n3",
+        "target": "GER-ARH-04-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-04-edge-5",
+        "source": "GER-ARH-04-n4",
+        "target": "GER-ARH-04-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-04-edge-6",
+        "source": "GER-ARH-04-n5",
+        "target": "GER-ARH-04-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-04-edge-7",
+        "source": "GER-ARH-04-n6",
+        "target": "GER-ARH-04-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-05",
+    "sourceId": "05_asistencia_y_novedades",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Asistencia y novedades",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 710.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-05-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-05-n1",
+        "kind": "activity",
+        "label": "Revisar fuente institucional\ndiariamente.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 62.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 143,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-05-n2",
+        "kind": "activity",
+        "label": "Registrar tardanzas, faltas,\npermisos, horas extras,\ndescansos y demás novedades.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 51.09,
+          "y": 188.2
+        },
+        "size": {
+          "width": 166,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-05-n3",
+        "kind": "activity",
+        "label": "Consultar diferencia al\ncolaborador y pedir dato puntual\nal líder si se requiere.",
+        "role": "COLABORADOR",
+        "position": {
+          "x": 52.59,
+          "y": 286.2
+        },
+        "size": {
+          "width": 163,
+          "height": 58
+        },
+        "fill": "#f6e7f0",
+        "stroke": "#9a4f75",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-05-n4",
+        "kind": "activity",
+        "label": "Verificar sustento.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 82.59,
+          "y": 384.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-05-n5",
+        "kind": "activity",
+        "label": "Determinar novedad para\nplanilla.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 67.09,
+          "y": 460.2
+        },
+        "size": {
+          "width": 134,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-05-n6",
+        "kind": "activity",
+        "label": "Conciliar novedades antes del\ncorte.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 56.09,
+          "y": 547.2
+        },
+        "size": {
+          "width": 156,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-05-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 634.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-05-edge-1",
+        "source": "GER-ARH-05-s",
+        "target": "GER-ARH-05-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-05-edge-2",
+        "source": "GER-ARH-05-n1",
+        "target": "GER-ARH-05-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-05-edge-3",
+        "source": "GER-ARH-05-n2",
+        "target": "GER-ARH-05-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-05-edge-4",
+        "source": "GER-ARH-05-n3",
+        "target": "GER-ARH-05-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-05-edge-5",
+        "source": "GER-ARH-05-n4",
+        "target": "GER-ARH-05-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-05-edge-6",
+        "source": "GER-ARH-05-n5",
+        "target": "GER-ARH-05-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-05-edge-7",
+        "source": "GER-ARH-05-n6",
+        "target": "GER-ARH-05-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-06",
+    "sourceId": "06_vacaciones_relevos_y_continuidad",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Vacaciones, relevos y continuidad",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 786.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-06-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-06-n1",
+        "kind": "activity",
+        "label": "Desde julio, identificar saldos\ny periodos críticos.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 57.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 153,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-06-n2",
+        "kind": "activity",
+        "label": "Construir propuesta julio-\nseptiembre.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 67.59,
+          "y": 188.2
+        },
+        "size": {
+          "width": 133,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-06-n3",
+        "kind": "activity",
+        "label": "Validar cobertura con líderes\nsolo cuando afecte operación.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 56.59,
+          "y": 275.2
+        },
+        "size": {
+          "width": 155,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-06-n4",
+        "kind": "activity",
+        "label": "Resolver cruces y comunicar\ncalendario.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 58.09,
+          "y": 362.2
+        },
+        "size": {
+          "width": 152,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-06-n5",
+        "kind": "activity",
+        "label": "Alertar 7 días antes; exigir\ncorreo de pendientes y suplente.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 51.09,
+          "y": 449.2
+        },
+        "size": {
+          "width": 166,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-06-n6",
+        "kind": "activity",
+        "label": "Escalar si no existe cobertura.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 55.59,
+          "y": 536.2
+        },
+        "size": {
+          "width": 157,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-06-n7",
+        "kind": "activity",
+        "label": "Al retorno, documentar\ntransferencia y actualizar\nsaldo.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 67.09,
+          "y": 612.2
+        },
+        "size": {
+          "width": 134,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-06-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 710.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-06-edge-1",
+        "source": "GER-ARH-06-s",
+        "target": "GER-ARH-06-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-06-edge-2",
+        "source": "GER-ARH-06-n1",
+        "target": "GER-ARH-06-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-06-edge-3",
+        "source": "GER-ARH-06-n2",
+        "target": "GER-ARH-06-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-06-edge-4",
+        "source": "GER-ARH-06-n3",
+        "target": "GER-ARH-06-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-06-edge-5",
+        "source": "GER-ARH-06-n4",
+        "target": "GER-ARH-06-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-06-edge-6",
+        "source": "GER-ARH-06-n5",
+        "target": "GER-ARH-06-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-06-edge-7",
+        "source": "GER-ARH-06-n6",
+        "target": "GER-ARH-06-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-06-edge-8",
+        "source": "GER-ARH-06-n7",
+        "target": "GER-ARH-06-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-07",
+    "sourceId": "07_planilla_beneficios_y_pagos_laborales",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Planilla, beneficios y pagos laborales",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 960.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-07-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-07-n1",
+        "kind": "activity",
+        "label": "Mantener novedades durante el\nmes.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 53.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 161,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-07-n2",
+        "kind": "activity",
+        "label": "Cerrar altas, bajas, vacaciones,\ndescansos, horas, bonos,\ncomisiones y cambios.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 52.59,
+          "y": 188.2
+        },
+        "size": {
+          "width": 163,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-07-n3",
+        "kind": "activity",
+        "label": "Preparar paquete para cálculo\ntécnico.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 57.09,
+          "y": 286.2
+        },
+        "size": {
+          "width": 154,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-07-n4",
+        "kind": "activity",
+        "label": "Recibir cálculo y revisar\npoblación, fechas, conceptos y\nconsistencia.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 54.09,
+          "y": 373.2
+        },
+        "size": {
+          "width": 160,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-07-n5",
+        "kind": "activity",
+        "label": "Corregir diferencias.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 78.09,
+          "y": 471.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-07-n6",
+        "kind": "activity",
+        "label": "Presentar paquete a Gerencia.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 55.59,
+          "y": 547.2
+        },
+        "size": {
+          "width": 157,
+          "height": 36
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-07-n7",
+        "kind": "activity",
+        "label": "Gerencia aprueba.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 82.09,
+          "y": 623.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-07-n8",
+        "kind": "activity",
+        "label": "Entregar instrucción autorizada\na Tesorería.",
+        "role": "CFT",
+        "position": {
+          "x": 54.09,
+          "y": 699.2
+        },
+        "size": {
+          "width": 160,
+          "height": 47
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-07-n9",
+        "kind": "activity",
+        "label": "Verificar evidencia de pago,\ndistribuir boletas/documentos y\narchivar.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 54.09,
+          "y": 786.2
+        },
+        "size": {
+          "width": 160,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-07-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 884.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-07-edge-1",
+        "source": "GER-ARH-07-s",
+        "target": "GER-ARH-07-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-07-edge-2",
+        "source": "GER-ARH-07-n1",
+        "target": "GER-ARH-07-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-07-edge-3",
+        "source": "GER-ARH-07-n2",
+        "target": "GER-ARH-07-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-07-edge-4",
+        "source": "GER-ARH-07-n3",
+        "target": "GER-ARH-07-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-07-edge-5",
+        "source": "GER-ARH-07-n4",
+        "target": "GER-ARH-07-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-07-edge-6",
+        "source": "GER-ARH-07-n5",
+        "target": "GER-ARH-07-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-07-edge-7",
+        "source": "GER-ARH-07-n6",
+        "target": "GER-ARH-07-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-07-edge-8",
+        "source": "GER-ARH-07-n7",
+        "target": "GER-ARH-07-n8",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-07-edge-9",
+        "source": "GER-ARH-07-n8",
+        "target": "GER-ARH-07-n9",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-07-edge-10",
+        "source": "GER-ARH-07-n9",
+        "target": "GER-ARH-07-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-08",
+    "sourceId": "08_desempeno_capacitaci_n_y_desarrollo",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Desempeño, capacitación y desarrollo",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 797.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-08-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-08-n1",
+        "kind": "activity",
+        "label": "Definir calendario, criterios y\nformatos.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 59.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 149,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-08-n2",
+        "kind": "activity",
+        "label": "Revisar información objetiva del\nperiodo.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 52.09,
+          "y": 188.2
+        },
+        "size": {
+          "width": 164,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-08-n3",
+        "kind": "activity",
+        "label": "Entrevistar y recopilar\ninformación técnica cuando se\nrequiera.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 55.59,
+          "y": 275.2
+        },
+        "size": {
+          "width": 157,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-08-n4",
+        "kind": "activity",
+        "label": "Documentar resultados,\nfortalezas y brechas.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 69.59,
+          "y": 373.2
+        },
+        "size": {
+          "width": 129,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-08-n5",
+        "kind": "activity",
+        "label": "Proponer capacitación,\nreconocimiento o plan de mejora.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 49.59,
+          "y": 460.2
+        },
+        "size": {
+          "width": 169,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-08-n6",
+        "kind": "activity",
+        "label": "Gerencia aprueba\ndecisiones/presupuesto.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 69.09,
+          "y": 547.2
+        },
+        "size": {
+          "width": 130,
+          "height": 47
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-08-n7",
+        "kind": "activity",
+        "label": "Ejecutar seguimiento y medir\naplicación.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 58.59,
+          "y": 634.2
+        },
+        "size": {
+          "width": 151,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-08-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 721.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-08-edge-1",
+        "source": "GER-ARH-08-s",
+        "target": "GER-ARH-08-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-08-edge-2",
+        "source": "GER-ARH-08-n1",
+        "target": "GER-ARH-08-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-08-edge-3",
+        "source": "GER-ARH-08-n2",
+        "target": "GER-ARH-08-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-08-edge-4",
+        "source": "GER-ARH-08-n3",
+        "target": "GER-ARH-08-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-08-edge-5",
+        "source": "GER-ARH-08-n4",
+        "target": "GER-ARH-08-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-08-edge-6",
+        "source": "GER-ARH-08-n5",
+        "target": "GER-ARH-08-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-08-edge-7",
+        "source": "GER-ARH-08-n6",
+        "target": "GER-ARH-08-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-08-edge-8",
+        "source": "GER-ARH-08-n7",
+        "target": "GER-ARH-08-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-09",
+    "sourceId": "09_relaciones_laborales_y_casos_sensibles",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Relaciones laborales y casos sensibles",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 677.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-09-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-09-n1",
+        "kind": "activity",
+        "label": "Registrar caso y hechos.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 67.09,
+          "y": 101.2
+        },
+        "size": {
+          "width": 134,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-09-n2",
+        "kind": "activity",
+        "label": "Entrevistar involucrados y\nrecopilar evidencia.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 65.09,
+          "y": 177.2
+        },
+        "size": {
+          "width": 138,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-09-n3",
+        "kind": "activity",
+        "label": "Solicitar criterio legal cuando\nexista riesgo.",
+        "role": "LEGAL",
+        "position": {
+          "x": 59.09,
+          "y": 264.2
+        },
+        "size": {
+          "width": 150,
+          "height": 47
+        },
+        "fill": "#ffdcdc",
+        "stroke": "#b53333",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-09-n4",
+        "kind": "activity",
+        "label": "Proponer medida o plan.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 69.09,
+          "y": 351.2
+        },
+        "size": {
+          "width": 130,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-09-n5",
+        "kind": "activity",
+        "label": "Gerencia aprueba cuando\ncorresponda.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 66.09,
+          "y": 427.2
+        },
+        "size": {
+          "width": 136,
+          "height": 47
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-09-n6",
+        "kind": "activity",
+        "label": "Comunicar, hacer seguimiento y\ncerrar con evidencia.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 51.09,
+          "y": 514.2
+        },
+        "size": {
+          "width": 166,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-09-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 601.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-09-edge-1",
+        "source": "GER-ARH-09-s",
+        "target": "GER-ARH-09-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-09-edge-2",
+        "source": "GER-ARH-09-n1",
+        "target": "GER-ARH-09-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-09-edge-3",
+        "source": "GER-ARH-09-n2",
+        "target": "GER-ARH-09-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-09-edge-4",
+        "source": "GER-ARH-09-n3",
+        "target": "GER-ARH-09-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-09-edge-5",
+        "source": "GER-ARH-09-n4",
+        "target": "GER-ARH-09-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-09-edge-6",
+        "source": "GER-ARH-09-n5",
+        "target": "GER-ARH-09-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-09-edge-7",
+        "source": "GER-ARH-09-n6",
+        "target": "GER-ARH-09-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-10",
+    "sourceId": "10_cumplimiento_laboral_y_entidades",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Cumplimiento laboral y entidades",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 808.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-10-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-10-n1",
+        "kind": "activity",
+        "label": "Revisar diariamente\ncasilla/canales y calendario de\nobligaciones.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 55.09,
+          "y": 101.2
+        },
+        "size": {
+          "width": 158,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-10-n2",
+        "kind": "activity",
+        "label": "Registrar notificación, plazo y\nresponsable.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 57.09,
+          "y": 199.2
+        },
+        "size": {
+          "width": 154,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-10-n3",
+        "kind": "activity",
+        "label": "Comunicar el mismo día a\nGerencia y especialistas\nrequeridos.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 64.59,
+          "y": 286.2
+        },
+        "size": {
+          "width": 139,
+          "height": 58
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-10-n4",
+        "kind": "activity",
+        "label": "Armar expediente e hitos\nintermedios.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 67.59,
+          "y": 384.2
+        },
+        "size": {
+          "width": 133,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-10-n5",
+        "kind": "activity",
+        "label": "Asesoría legal/contador lidera\ncriterio técnico cuando\ncorresponda.",
+        "role": "CONTADOR",
+        "position": {
+          "x": 57.09,
+          "y": 471.2
+        },
+        "size": {
+          "width": 154,
+          "height": 58
+        },
+        "fill": "#fbe7d5",
+        "stroke": "#a65f18",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-10-n6",
+        "kind": "activity",
+        "label": "Controlar entregables y\npresentación.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 71.09,
+          "y": 569.2
+        },
+        "size": {
+          "width": 126,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-10-n7",
+        "kind": "activity",
+        "label": "Archivar cargo y cerrar alerta.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 57.09,
+          "y": 656.2
+        },
+        "size": {
+          "width": 154,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-10-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 732.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-10-edge-1",
+        "source": "GER-ARH-10-s",
+        "target": "GER-ARH-10-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-10-edge-2",
+        "source": "GER-ARH-10-n1",
+        "target": "GER-ARH-10-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-10-edge-3",
+        "source": "GER-ARH-10-n2",
+        "target": "GER-ARH-10-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-10-edge-4",
+        "source": "GER-ARH-10-n3",
+        "target": "GER-ARH-10-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-10-edge-5",
+        "source": "GER-ARH-10-n4",
+        "target": "GER-ARH-10-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-10-edge-6",
+        "source": "GER-ARH-10-n5",
+        "target": "GER-ARH-10-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-10-edge-7",
+        "source": "GER-ARH-10-n6",
+        "target": "GER-ARH-10-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-10-edge-8",
+        "source": "GER-ARH-10-n7",
+        "target": "GER-ARH-10-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-11",
+    "sourceId": "11_salida_y_transferencia",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Salida y transferencia",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 884.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-11-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-11-n1",
+        "kind": "activity",
+        "label": "Recibir decisión/renuncia y\nvalidar sustento.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 63.09,
+          "y": 101.2
+        },
+        "size": {
+          "width": 142,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-11-n2",
+        "kind": "activity",
+        "label": "Definir último día y checklist.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 58.09,
+          "y": 188.2
+        },
+        "size": {
+          "width": 152,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-11-n3",
+        "kind": "activity",
+        "label": "Documentar transferencia de\nconocimiento.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 58.59,
+          "y": 264.2
+        },
+        "size": {
+          "width": 151,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-11-n4",
+        "kind": "activity",
+        "label": "Coordinar devolución de activos\ny revocación de accesos.",
+        "role": "LOGISTICA",
+        "position": {
+          "x": 52.09,
+          "y": 351.2
+        },
+        "size": {
+          "width": 164,
+          "height": 47
+        },
+        "fill": "#e8edf2",
+        "stroke": "#5d6d7e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-11-n5",
+        "kind": "activity",
+        "label": "Enviar datos para\nliquidación/cálculo.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 80.59,
+          "y": 438.2
+        },
+        "size": {
+          "width": 120,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-11-n6",
+        "kind": "activity",
+        "label": "Revisar documentación y\npresentar a Gerencia.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 66.09,
+          "y": 525.2
+        },
+        "size": {
+          "width": 136,
+          "height": 47
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-11-n7",
+        "kind": "activity",
+        "label": "Tesorería ejecuta pago aprobado;\nContabilidad registra.",
+        "role": "CFT",
+        "position": {
+          "x": 49.59,
+          "y": 612.2
+        },
+        "size": {
+          "width": 169,
+          "height": 47
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-11-n8",
+        "kind": "activity",
+        "label": "Cerrar Vida Ley/registros, mover\nexpediente a inactivos y\nrealizar entrevista de salida\ncuando aplique.",
+        "role": "LOGISTICA",
+        "position": {
+          "x": 51.09,
+          "y": 699.2
+        },
+        "size": {
+          "width": 166,
+          "height": 69
+        },
+        "fill": "#e8edf2",
+        "stroke": "#5d6d7e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-11-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 808.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-11-edge-1",
+        "source": "GER-ARH-11-s",
+        "target": "GER-ARH-11-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-11-edge-2",
+        "source": "GER-ARH-11-n1",
+        "target": "GER-ARH-11-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-11-edge-3",
+        "source": "GER-ARH-11-n2",
+        "target": "GER-ARH-11-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-11-edge-4",
+        "source": "GER-ARH-11-n3",
+        "target": "GER-ARH-11-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-11-edge-5",
+        "source": "GER-ARH-11-n4",
+        "target": "GER-ARH-11-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-11-edge-6",
+        "source": "GER-ARH-11-n5",
+        "target": "GER-ARH-11-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-11-edge-7",
+        "source": "GER-ARH-11-n6",
+        "target": "GER-ARH-11-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-11-edge-8",
+        "source": "GER-ARH-11-n7",
+        "target": "GER-ARH-11-n8",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-11-edge-9",
+        "source": "GER-ARH-11-n8",
+        "target": "GER-ARH-11-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-12",
+    "sourceId": "12_gesti_n_documental_administrativa",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Gestión documental administrativa",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 677.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-12-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-12-n1",
+        "kind": "activity",
+        "label": "Recibir documento por canal\noficial.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 59.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 149,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-12-n2",
+        "kind": "activity",
+        "label": "Clasificar tipo, área,\nconfidencialidad y plazo.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 68.09,
+          "y": 188.2
+        },
+        "size": {
+          "width": 132,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-12-n3",
+        "kind": "activity",
+        "label": "Registrar\nID/fecha/remitente/responsable/estado.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 36.09,
+          "y": 275.2
+        },
+        "size": {
+          "width": 196,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-12-n4",
+        "kind": "activity",
+        "label": "Derivar sin perder trazabilidad.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 55.59,
+          "y": 362.2
+        },
+        "size": {
+          "width": 157,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-12-n5",
+        "kind": "activity",
+        "label": "Controlar respuesta o acción.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 57.59,
+          "y": 438.2
+        },
+        "size": {
+          "width": 153,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-12-n6",
+        "kind": "activity",
+        "label": "Archivar versión final y\nevidencia de cierre.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 72.09,
+          "y": 514.2
+        },
+        "size": {
+          "width": 124,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-12-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 601.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-12-edge-1",
+        "source": "GER-ARH-12-s",
+        "target": "GER-ARH-12-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-12-edge-2",
+        "source": "GER-ARH-12-n1",
+        "target": "GER-ARH-12-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-12-edge-3",
+        "source": "GER-ARH-12-n2",
+        "target": "GER-ARH-12-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-12-edge-4",
+        "source": "GER-ARH-12-n3",
+        "target": "GER-ARH-12-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-12-edge-5",
+        "source": "GER-ARH-12-n4",
+        "target": "GER-ARH-12-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-12-edge-6",
+        "source": "GER-ARH-12-n5",
+        "target": "GER-ARH-12-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-12-edge-7",
+        "source": "GER-ARH-12-n6",
+        "target": "GER-ARH-12-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-13",
+    "sourceId": "13_contratos_y_servicios_administrativos",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Contratos y servicios administrativos",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 688.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-13-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-13-n1",
+        "kind": "activity",
+        "label": "Registrar contrato/servicio y\nresponsable interno.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 60.09,
+          "y": 101.2
+        },
+        "size": {
+          "width": 148,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-13-n2",
+        "kind": "activity",
+        "label": "Verificar objeto, vigencia,\nentregables, monto y documentos.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 46.59,
+          "y": 188.2
+        },
+        "size": {
+          "width": 175,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-13-n3",
+        "kind": "activity",
+        "label": "Programar alertas de\nvencimiento.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 76.59,
+          "y": 275.2
+        },
+        "size": {
+          "width": 120,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-13-n4",
+        "kind": "activity",
+        "label": "Solicitar conformidad del\nservicio.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 68.09,
+          "y": 362.2
+        },
+        "size": {
+          "width": 132,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-13-n5",
+        "kind": "activity",
+        "label": "Preparar expediente de\nrenovación/cierre/pago.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 71.09,
+          "y": 449.2
+        },
+        "size": {
+          "width": 126,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-13-n6",
+        "kind": "activity",
+        "label": "Archivar contrato y evidencias.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 54.09,
+          "y": 536.2
+        },
+        "size": {
+          "width": 160,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-13-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 612.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-13-edge-1",
+        "source": "GER-ARH-13-s",
+        "target": "GER-ARH-13-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-13-edge-2",
+        "source": "GER-ARH-13-n1",
+        "target": "GER-ARH-13-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-13-edge-3",
+        "source": "GER-ARH-13-n2",
+        "target": "GER-ARH-13-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-13-edge-4",
+        "source": "GER-ARH-13-n3",
+        "target": "GER-ARH-13-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-13-edge-5",
+        "source": "GER-ARH-13-n4",
+        "target": "GER-ARH-13-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-13-edge-6",
+        "source": "GER-ARH-13-n5",
+        "target": "GER-ARH-13-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-13-edge-7",
+        "source": "GER-ARH-13-n6",
+        "target": "GER-ARH-13-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-14",
+    "sourceId": "14_tr_mites_licencias_p_lizas_y_documentaci_n_corporativa",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Trámites, licencias, pólizas y documentación corporativa",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 699.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-14-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-14-n1",
+        "kind": "activity",
+        "label": "Registrar obligación/trámite y\nfecha límite.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 58.09,
+          "y": 101.2
+        },
+        "size": {
+          "width": 152,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-14-n2",
+        "kind": "activity",
+        "label": "Preparar requisitos y\nresponsables.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 76.59,
+          "y": 188.2
+        },
+        "size": {
+          "width": 120,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-14-n3",
+        "kind": "activity",
+        "label": "Obtener aprobaciones/firma\ncuando corresponda.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 61.59,
+          "y": 275.2
+        },
+        "size": {
+          "width": 145,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-14-n4",
+        "kind": "activity",
+        "label": "Presentar ante\nentidad/proveedor.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 81.59,
+          "y": 362.2
+        },
+        "size": {
+          "width": 120,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-14-n5",
+        "kind": "activity",
+        "label": "Controlar observaciones y\nsubsanar.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 64.59,
+          "y": 449.2
+        },
+        "size": {
+          "width": 139,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-14-n6",
+        "kind": "activity",
+        "label": "Archivar constancia, vigencia y\nnueva alerta.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 53.59,
+          "y": 536.2
+        },
+        "size": {
+          "width": 161,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-14-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 623.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-14-edge-1",
+        "source": "GER-ARH-14-s",
+        "target": "GER-ARH-14-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-14-edge-2",
+        "source": "GER-ARH-14-n1",
+        "target": "GER-ARH-14-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-14-edge-3",
+        "source": "GER-ARH-14-n2",
+        "target": "GER-ARH-14-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-14-edge-4",
+        "source": "GER-ARH-14-n3",
+        "target": "GER-ARH-14-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-14-edge-5",
+        "source": "GER-ARH-14-n4",
+        "target": "GER-ARH-14-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-14-edge-6",
+        "source": "GER-ARH-14-n5",
+        "target": "GER-ARH-14-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-14-edge-7",
+        "source": "GER-ARH-14-n6",
+        "target": "GER-ARH-14-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-15",
+    "sourceId": "15_solicitudes_administrativas_y_expediente_para_pago",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Solicitudes administrativas y expediente para pago",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 830.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-15-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-15-n1",
+        "kind": "activity",
+        "label": "Área solicitante define\nnecesidad y conformidad.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 66.09,
+          "y": 101.2
+        },
+        "size": {
+          "width": 136,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-15-n2",
+        "kind": "activity",
+        "label": "Administración verifica\nexpediente mínimo y datos del\nproveedor.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 55.09,
+          "y": 188.2
+        },
+        "size": {
+          "width": 158,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-15-n3",
+        "kind": "activity",
+        "label": "Si falta información, devolver\npara subsanación.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 58.59,
+          "y": 286.2
+        },
+        "size": {
+          "width": 151,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-15-n4",
+        "kind": "activity",
+        "label": "Remitir a CFT con centro de\ncosto/proyecto cuando\ncorresponda.",
+        "role": "CFT",
+        "position": {
+          "x": 59.59,
+          "y": 373.2
+        },
+        "size": {
+          "width": 149,
+          "height": 58
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-15-n5",
+        "kind": "activity",
+        "label": "Finanzas valida presupuesto/caja\ny Gerencia aprueba según\npolítica.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 49.09,
+          "y": 471.2
+        },
+        "size": {
+          "width": 170,
+          "height": 58
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-15-n6",
+        "kind": "activity",
+        "label": "Tesorería paga; Contabilidad\nregistra.",
+        "role": "CFT",
+        "position": {
+          "x": 59.59,
+          "y": 569.2
+        },
+        "size": {
+          "width": 149,
+          "height": 47
+        },
+        "fill": "#ddf4e5",
+        "stroke": "#2b7a4b",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-15-n7",
+        "kind": "activity",
+        "label": "Administración conserva\nevidencia administrativa y\nconformidad.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 65.09,
+          "y": 656.2
+        },
+        "size": {
+          "width": 138,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-15-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 754.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-15-edge-1",
+        "source": "GER-ARH-15-s",
+        "target": "GER-ARH-15-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-15-edge-2",
+        "source": "GER-ARH-15-n1",
+        "target": "GER-ARH-15-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-15-edge-3",
+        "source": "GER-ARH-15-n2",
+        "target": "GER-ARH-15-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-15-edge-4",
+        "source": "GER-ARH-15-n3",
+        "target": "GER-ARH-15-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-15-edge-5",
+        "source": "GER-ARH-15-n4",
+        "target": "GER-ARH-15-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-15-edge-6",
+        "source": "GER-ARH-15-n5",
+        "target": "GER-ARH-15-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-15-edge-7",
+        "source": "GER-ARH-15-n6",
+        "target": "GER-ARH-15-n7",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-15-edge-8",
+        "source": "GER-ARH-15-n7",
+        "target": "GER-ARH-15-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-16",
+    "sourceId": "16_actas_acuerdos_y_seguimiento_gerencial",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Actas, acuerdos y seguimiento gerencial",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 666.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-16-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-16-n1",
+        "kind": "activity",
+        "label": "Registrar acuerdo con fecha,\nresponsable y plazo.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 58.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 151,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-16-n2",
+        "kind": "activity",
+        "label": "Notificar responsable.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 74.09,
+          "y": 188.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-16-n3",
+        "kind": "activity",
+        "label": "Revisar avances antes del\nvencimiento.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 63.59,
+          "y": 264.2
+        },
+        "size": {
+          "width": 141,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-16-n4",
+        "kind": "activity",
+        "label": "Escalar bloqueos.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 82.59,
+          "y": 351.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-16-n5",
+        "kind": "activity",
+        "label": "Adjuntar evidencia y marcar\ncierre.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 61.09,
+          "y": 427.2
+        },
+        "size": {
+          "width": 146,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-16-n6",
+        "kind": "activity",
+        "label": "Reportar pendientes a Gerencia.",
+        "role": "GERENCIA",
+        "position": {
+          "x": 51.09,
+          "y": 514.2
+        },
+        "size": {
+          "width": 166,
+          "height": 36
+        },
+        "fill": "#fff0c7",
+        "stroke": "#b77900",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-16-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 590.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-16-edge-1",
+        "source": "GER-ARH-16-s",
+        "target": "GER-ARH-16-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-16-edge-2",
+        "source": "GER-ARH-16-n1",
+        "target": "GER-ARH-16-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-16-edge-3",
+        "source": "GER-ARH-16-n2",
+        "target": "GER-ARH-16-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-16-edge-4",
+        "source": "GER-ARH-16-n3",
+        "target": "GER-ARH-16-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-16-edge-5",
+        "source": "GER-ARH-16-n4",
+        "target": "GER-ARH-16-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-16-edge-6",
+        "source": "GER-ARH-16-n5",
+        "target": "GER-ARH-16-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-16-edge-7",
+        "source": "GER-ARH-16-n6",
+        "target": "GER-ARH-16-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  },
+  {
+    "code": "GER-ARH-17",
+    "sourceId": "17_continuidad_operativa_del_rea",
+    "subareaCode": "GER-S02",
+    "subareaName": "Administración y Recursos Humanos",
+    "owner": "Responsable de Recursos Humanos",
+    "title": "Continuidad operativa del área",
+    "description": "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre.",
+    "canvas": {
+      "width": 268.19,
+      "height": 710.31
+    },
+    "nodes": [
+      {
+        "id": "GER-ARH-17-s",
+        "kind": "start",
+        "label": "Inicio",
+        "role": "",
+        "position": {
+          "x": 100.88,
+          "y": 25.2
+        },
+        "size": {
+          "width": 120,
+          "height": 36
+        },
+        "fill": "#e6f7f5",
+        "stroke": "#0f766e",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-17-n1",
+        "kind": "activity",
+        "label": "Mantener mapa de funciones\ncríticas y alternos.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 58.59,
+          "y": 101.2
+        },
+        "size": {
+          "width": 151,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-17-n2",
+        "kind": "activity",
+        "label": "Revisar semanalmente próximos\nhitos y capacidad.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 50.09,
+          "y": 188.2
+        },
+        "size": {
+          "width": 168,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-17-n3",
+        "kind": "activity",
+        "label": "Actualizar kit de continuidad y\nrepositorios.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 56.09,
+          "y": 275.2
+        },
+        "size": {
+          "width": 156,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-17-n4",
+        "kind": "activity",
+        "label": "Probar trimestralmente un\nproceso crítico.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 65.59,
+          "y": 362.2
+        },
+        "size": {
+          "width": 137,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-17-n5",
+        "kind": "activity",
+        "label": "Activar alterno ante\nausencia/incidente.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 79.59,
+          "y": 449.2
+        },
+        "size": {
+          "width": 120,
+          "height": 47
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-17-n6",
+        "kind": "activity",
+        "label": "Registrar recuperación,\ndiferencias y mejora preventiva\nposterior.",
+        "role": "ADM/RRHH",
+        "position": {
+          "x": 54.09,
+          "y": 536.2
+        },
+        "size": {
+          "width": 160,
+          "height": 58
+        },
+        "fill": "#ddebff",
+        "stroke": "#2563a9",
+        "textColor": "#243447"
+      },
+      {
+        "id": "GER-ARH-17-e",
+        "kind": "start",
+        "label": "Cierre con evidencia y estado\nactualizado",
+        "role": "",
+        "position": {
+          "x": 25.3,
+          "y": 634.24
+        },
+        "size": {
+          "width": 218,
+          "height": 51
+        },
+        "fill": "#eaf7ea",
+        "stroke": "#2e7d32",
+        "textColor": "#243447"
+      }
+    ],
+    "edges": [
+      {
+        "id": "GER-ARH-17-edge-1",
+        "source": "GER-ARH-17-s",
+        "target": "GER-ARH-17-n1",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-17-edge-2",
+        "source": "GER-ARH-17-n1",
+        "target": "GER-ARH-17-n2",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-17-edge-3",
+        "source": "GER-ARH-17-n2",
+        "target": "GER-ARH-17-n3",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-17-edge-4",
+        "source": "GER-ARH-17-n3",
+        "target": "GER-ARH-17-n4",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-17-edge-5",
+        "source": "GER-ARH-17-n4",
+        "target": "GER-ARH-17-n5",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-17-edge-6",
+        "source": "GER-ARH-17-n5",
+        "target": "GER-ARH-17-n6",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      },
+      {
+        "id": "GER-ARH-17-edge-7",
+        "source": "GER-ARH-17-n6",
+        "target": "GER-ARH-17-e",
+        "label": "",
+        "route": "normal",
+        "sourceHandle": "bottom"
+      }
+    ]
+  }
+]

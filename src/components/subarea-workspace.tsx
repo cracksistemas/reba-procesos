@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock3, Download, FileText, GitBranch, LayoutGrid, Pencil, ShieldCheck, UserRound, X } from "lucide-react";
 import { FlowchartEditor } from "@/components/flowchart-editor";
 import type { Area, Process, Subarea } from "@/lib/data";
-import type { Flowchart } from "@/lib/flowcharts";
+import { getFlowchartVersion, type Flowchart } from "@/lib/flowcharts";
 
 type SubareaWorkspaceProps = {
   area: Area;
@@ -27,7 +27,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
   const [editing, setEditing] = useState(false);
   const activeFlow = useMemo(() => flowcharts.find((flowchart) => flowchart.code === activeCode) ?? null, [activeCode, flowcharts]);
   const totalEntries = flowcharts.length || linkedProcesses.length || 1;
-  const activeVersion = activeFlow?.code.startsWith("COM-") ? "2.0" : "3.0";
+  const activeVersion = activeFlow ? getFlowchartVersion(activeFlow) : "0.1";
 
   const openFlow = (code: string) => {
     setActiveCode(code);
@@ -54,7 +54,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
           {flowcharts.length > 0 ? flowcharts.map((flowchart, index) => <button key={flowchart.code} className="process-directory-row" onClick={() => openFlow(flowchart.code)}>
             <span className="process-directory-index">{String(index + 1).padStart(2, "0")}</span>
             <div className="process-directory-main"><small>{flowchart.code}</small><strong>{flowchart.title}</strong><span>{flowchart.description}</span></div>
-            <div className="process-directory-meta"><span className="status approved">Documentado</span><span>v{flowchart.code.startsWith("COM-") ? "2.0" : "3.0"}</span><span>{flowchart.owner}</span></div>
+            <div className="process-directory-meta"><span className="status approved">Documentado</span><span>v{getFlowchartVersion(flowchart)}</span><span>{flowchart.owner}</span></div>
             <ArrowRight size={16}/>
           </button>) : linkedProcesses.length > 0 ? linkedProcesses.map((process, index) => <Link key={process.code} className="process-directory-row" href={`/procesos/${process.code}`}>
             <span className="process-directory-index">{String(index + 1).padStart(2, "0")}</span>

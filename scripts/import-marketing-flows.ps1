@@ -1,7 +1,7 @@
 param(
   [Parameter(Mandatory = $true)][string]$SourceHtml,
   [Parameter(Mandatory = $true)][string]$OutputJson,
-  [ValidateSet("Marketing", "Sales")][string]$Profile = "Marketing"
+  [ValidateSet("Marketing", "Sales", "Administration", "Finance")][string]$Profile = "Marketing"
 )
 
 $ErrorActionPreference = "Stop"
@@ -16,6 +16,48 @@ $subareas = if ($Profile -eq "Sales") {
     "05" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
     "06" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
     "07" = @{ code = "COM-S04"; name = "Jefatura de Ventas"; owner = "Jefe de Ventas" }
+  }
+} elseif ($Profile -eq "Administration") {
+  @{
+    "01" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "02" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "03" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "04" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "05" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "06" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "07" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "08" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "09" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "10" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "11" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "12" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "13" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "14" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "15" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "16" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+    "17" = @{ code = "GER-S02"; name = "Administración y Recursos Humanos"; owner = "Responsable de Recursos Humanos" }
+  }
+} elseif ($Profile -eq "Finance") {
+  @{
+    "01" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "02" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "03" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "04" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "05" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "06" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "07" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "08" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "09" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "10" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "11" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "12" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "13" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "14" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "15" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "16" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "17" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "18" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
+    "19" = @{ code = "GER-S03"; name = "Contabilidad, Finanzas y Tesorería"; owner = "Responsable de Finanzas" }
   }
 } else {
   @{
@@ -43,7 +85,7 @@ function BoundsFromPairs([double[]]$numbers) {
 }
 
 $flows = @()
-$sections = [regex]::Matches($html, '<section class="flow-card"[\s\S]*?</section>')
+$sections = [regex]::Matches($html, '<section[^>]*class="[^"]*(?:flow-card|card)[^"]*"[^>]*>[\s\S]*?</section>')
 foreach ($sectionMatch in $sections) {
   $section = $sectionMatch.Value
   $sectionId = [regex]::Match($section, 'id="([^"]+)"').Groups[1].Value
@@ -51,10 +93,17 @@ foreach ($sectionMatch in $sections) {
   $subarea = $subareas[$prefix]
   if (-not $subarea) { continue }
 
-  $flowNumber = if ($Profile -eq "Sales") { $prefix } else { [regex]::Match($sectionId, '^[A-Z]+_(\d+)').Groups[1].Value }
-  $flowCode = if ($Profile -eq "Sales") { "COM-JV-$flowNumber" } else { "MKT-$prefix-$flowNumber" }
+  $flowNumber = if ($Profile -in @("Sales", "Administration", "Finance")) { $prefix } else { [regex]::Match($sectionId, '^[A-Z]+_(\d+)').Groups[1].Value }
+  $flowCode = switch ($Profile) {
+    "Sales" { "COM-JV-$flowNumber" }
+    "Administration" { "GER-ARH-$flowNumber" }
+    "Finance" { "GER-CFT-$flowNumber" }
+    default { "MKT-$prefix-$flowNumber" }
+  }
   $title = Decode ([regex]::Match($section, '<h2>([\s\S]*?)</h2>').Groups[1].Value)
-  $description = Decode ([regex]::Match($section, '<h2>[\s\S]*?</h2>\s*<p>([\s\S]*?)</p>').Groups[1].Value)
+  if ($Profile -in @("Administration", "Finance")) { $title = $title -replace '^\d+\.\s*', '' }
+  $descriptionMatch = [regex]::Match($section, '<h2>[\s\S]*?</h2>\s*<p>([\s\S]*?)</p>')
+  $description = if ($descriptionMatch.Success) { Decode $descriptionMatch.Groups[1].Value } elseif ($Profile -eq "Administration") { "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre." } elseif ($Profile -eq "Finance") { "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre." } else { "Flujograma institucional documentado para edición visual." }
   $svg = [regex]::Match($section, '<svg[\s\S]*?</svg>').Value
   $viewBoxNumbers = [regex]::Match($svg, 'viewBox="([^"]+)"').Groups[1].Value.Split(' ', [System.StringSplitOptions]::RemoveEmptyEntries)
   $transform = [regex]::Match($svg, 'translate\(([-\d.]+)\s+([-\d.]+)\)')
@@ -66,9 +115,9 @@ foreach ($sectionMatch in $sections) {
   foreach ($nodeMatch in [regex]::Matches($svg, '<g id="node\d+" class="node">[\s\S]*?</g>')) {
     $nodeSvg = $nodeMatch.Value
     $rawId = Decode ([regex]::Match($nodeSvg, '<title>([\s\S]*?)</title>').Groups[1].Value)
-    $textMatch = [regex]::Match($nodeSvg, '<text([^>]*)>([\s\S]*?)</text>')
-    $text = Decode $textMatch.Groups[2].Value
-    $parts = @($text -split '\\n' | ForEach-Object { $_.Trim() } | Where-Object { $_ })
+    $textMatches = [regex]::Matches($nodeSvg, '<text([^>]*)>([\s\S]*?)</text>')
+    $textMatch = if ($textMatches.Count -gt 0) { $textMatches[0] } else { $null }
+    $parts = @($textMatches | ForEach-Object { Decode $_.Groups[2].Value } | ForEach-Object { $_ -split '\\n' } | ForEach-Object { $_.Trim() } | Where-Object { $_ })
     $role = ""
     if ($parts.Count -gt 1 -and $parts[0] -cmatch '^[A-ZÁÉÍÓÚÜÑ0-9 /,+.-]{2,}$') {
       $role = $parts[0]
@@ -83,7 +132,8 @@ foreach ($sectionMatch in $sections) {
     $attributes = $shapeMatch.Groups[2].Value
     $fill = [regex]::Match($attributes, 'fill="([^"]+)"').Groups[1].Value
     $stroke = [regex]::Match($attributes, 'stroke="([^"]+)"').Groups[1].Value
-    $textColorMatch = [regex]::Match($textMatch.Groups[1].Value, 'fill="([^"]+)"')
+    $textAttributes = if ($textMatch) { $textMatch.Groups[1].Value } else { "" }
+    $textColorMatch = [regex]::Match($textAttributes, 'fill="([^"]+)"')
     $textColor = if ($textColorMatch.Success) { $textColorMatch.Groups[1].Value } else { "#243447" }
 
     if ($shape -eq 'ellipse') {

@@ -22,7 +22,7 @@ export const driveRoot = "https://drive.google.com/drive/folders/1YoIFfdcoQn107r
 export const areas: Area[] = [
   { code: "COM", name: "Comercial", description: "Captación, seguimiento y conversión de oportunidades.", owner: "Jefatura Comercial", processCount: 11, approved: 1, color: "#00A7EB" },
   { code: "ACA", name: "Coordinación Académica", description: "Programación, ejecución académica y certificación.", owner: "Coordinación Académica", processCount: 3, approved: 2, color: "#7E57C2" },
-  { code: "GER", name: "Gerencia", description: "Planeamiento, dirección y gobierno institucional.", owner: "Gerencia General", processCount: 1, approved: 1, color: "#01017B" },
+  { code: "GER", name: "Gerencia", description: "Planeamiento, dirección y gobierno institucional.", owner: "Gerencia General", processCount: 37, approved: 1, color: "#01017B" },
   { code: "LOG", name: "Logística", description: "Compras, inventario y soporte operativo.", owner: "Jefatura de Logística", processCount: 1, approved: 0, color: "#D49A00" },
   { code: "MKT", name: "Marketing", description: "Campañas, contenidos y generación de demanda.", owner: "Jefatura de Marketing", processCount: 17, approved: 1, color: "#E85D75" },
   { code: "REC", name: "Recepción", description: "Atención, validación documental y orientación.", owner: "Coordinación de Recepción", processCount: 1, approved: 1, color: "#2E8B57" },
