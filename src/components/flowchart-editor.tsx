@@ -274,13 +274,27 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
   const autoArrange = () => {
     const nodeIds = new Set(nodes.map((node) => node.id));
     const nodesById = new Map(nodes.map((node) => [node.id, node]));
-    const hierarchyEdges = edges.filter((edge) => {
-      if (!nodeIds.has(edge.source) || !nodeIds.has(edge.target)) return false;
-      if (edge.data?.route !== "return") return true;
-      const source = nodesById.get(edge.source);
-      const target = nodesById.get(edge.target);
-      return Boolean(source && target && target.position.y > source.position.y);
-    });
+    const hierarchyEdges: RebaEdge[] = [];
+    const hierarchyOutgoing = new Map(nodes.map((node) => [node.id, [] as string[]]));
+    const createsCycle = (sourceId: string, targetId: string) => {
+      const pending = [targetId];
+      const visited = new Set<string>();
+      while (pending.length) {
+        const current = pending.pop()!;
+        if (current === sourceId) return true;
+        if (visited.has(current)) continue;
+        visited.add(current);
+        pending.push(...(hierarchyOutgoing.get(current) ?? []));
+      }
+      return false;
+    };
+    [...edges]
+      .sort((a, b) => Number(a.data?.route === "return") - Number(b.data?.route === "return"))
+      .forEach((edge) => {
+        if (!nodeIds.has(edge.source) || !nodeIds.has(edge.target) || createsCycle(edge.source, edge.target)) return;
+        hierarchyEdges.push(edge);
+        hierarchyOutgoing.get(edge.source)?.push(edge.target);
+      });
     const incoming = new Map(nodes.map((node) => [node.id, 0]));
     const outgoing = new Map(nodes.map((node) => [node.id, [] as string[]]));
     hierarchyEdges.forEach((edge) => {
