@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, useCallback, useMemo, useState, useSyncExternalStore } from "react";
+import { CSSProperties, useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   addEdge,
   Background,
@@ -8,6 +8,7 @@ import {
   Connection,
   Controls,
   Edge,
+  getViewportForBounds,
   Handle,
   MarkerType,
   MiniMap,
@@ -21,13 +22,14 @@ import {
   useNodesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { AlignHorizontalSpaceBetween, AlignVerticalSpaceBetween, Box, Circle, Columns3, Diamond, FileText, GitBranch, Link2, PanelRightClose, PanelRightOpen, RotateCcw, Rows3, Save, Trash2, WandSparkles, X } from "lucide-react";
+import { AlignHorizontalSpaceBetween, AlignVerticalSpaceBetween, Box, Circle, Columns3, Diamond, Download, FileText, GitBranch, Link2, Maximize2, Minimize2, PanelRightClose, PanelRightOpen, RotateCcw, Rows3, Save, Trash2, WandSparkles, X } from "lucide-react";
 import type { Area, Subarea } from "@/lib/data";
 import type { MarketingFlowchart } from "@/lib/marketing-flowcharts";
 
 type NodeKind = "start" | "activity" | "decision" | "evidence" | "exception" | "end";
 type EdgeRoute = "normal" | "return";
 type AlignmentMode = "row" | "column" | "distribute-horizontal" | "distribute-vertical";
+type ExportFormat = "png" | "jpg" | "pdf" | "docx";
 
 type RebaNodeData = { label: string; role: string; kind: NodeKind; fill?: string; stroke?: string; textColor?: string };
 type RebaNode = Node<RebaNodeData, "reba">;
@@ -51,6 +53,25 @@ function getNodeSize(node: RebaNode) {
 
 function snapCoordinate(value: number) {
   return Math.round(value / 16) * 16;
+}
+
+function safeFileName(value: string) {
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9_-]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+function downloadUrl(url: string, fileName: string) {
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = fileName;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+}
+
+function downloadBlob(blob: Blob, fileName: string) {
+  const url = URL.createObjectURL(blob);
+  downloadUrl(url, fileName);
+  window.setTimeout(() => URL.revokeObjectURL(url), 1_000);
 }
 
 function nodeDimensions(kind: NodeKind, label = "", role = "", preferredWidth?: number) {
@@ -168,6 +189,7 @@ function migrateGraph(value: string | null, fallback: FlowGraph): FlowGraph {
 }
 
 function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, storageKey, onClose, embedded = false }: { area: Area; subarea: Subarea; flowCode: string; flowTitle: string; initialGraph: FlowGraph; storageKey: string; onClose?: () => void; embedded?: boolean }) {
+  const canvasRef = useRef<HTMLDivElement>(null);
   const [nodes, setNodes, onNodesChange] = useNodesState<RebaNode>(initialGraph.nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState<RebaEdge>(initialGraph.edges);
   const [instance, setInstance] = useState<ReactFlowInstance<RebaNode, RebaEdge> | null>(null);
@@ -176,9 +198,25 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
   const [notice, setNotice] = useState("Arrastra el lienzo, usa la rueda para acercar y une los puntos de conexión.");
   const [dirty, setDirty] = useState(false);
   const [propertiesCollapsed, setPropertiesCollapsed] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [exporting, setExporting] = useState<ExportFormat | null>(null);
   const selectedNode = nodes.find((node) => node.id === selectedNodeId) ?? null;
   const selectedEdge = edges.find((edge) => edge.id === selectedEdgeId) ?? null;
   const selectedNodes = nodes.filter((node) => node.selected);
+
+  useEffect(() => {
+    if (!isFullscreen) return;
+    const previousOverflow = document.body.style.overflow;
+    const exitOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsFullscreen(false);
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", exitOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", exitOnEscape);
+    };
+  }, [isFullscreen]);
 
   const markDirty = useCallback(() => setDirty(true), []);
   const handleNodesChange = useCallback((changes: Parameters<typeof onNodesChange>[0]) => {
@@ -368,6 +406,96 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
     window.setTimeout(() => instance?.fitView({ padding: 0.14, duration: 450 }), 0);
   };
 
+  const toggleFullscreen = () => {
+    setIsFullscreen((current) => !current);
+    window.setTimeout(() => instance?.fitView({ padding: 0.14, duration: 350 }), 0);
+  };
+
+  const captureFlowchart = async (format: "png" | "jpg") => {
+    const viewport = canvasRef.current?.querySelector<HTMLElement>(".react-flow__viewport");
+    if (!viewport || !instance) throw new Error("No se encontró el lienzo para exportar.");
+    await document.fonts.ready;
+    const bounds = instance.getNodesBounds(nodes);
+    const width = Math.min(2_200, Math.max(1_200, Math.ceil(bounds.width + 240)));
+    const height = Math.min(3_200, Math.max(800, Math.ceil(bounds.height + 240)));
+    const exportViewport = getViewportForBounds(bounds, width, height, 0.1, 2, 0.1);
+    const { toJpeg, toPng } = await import("html-to-image");
+    const options = {
+      width,
+      height,
+      pixelRatio: 2,
+      cacheBust: true,
+      backgroundColor: "#f7f9fc",
+      style: {
+        width: `${width}px`,
+        height: `${height}px`,
+        transform: `translate(${exportViewport.x}px, ${exportViewport.y}px) scale(${exportViewport.zoom})`,
+        transformOrigin: "top left",
+        backgroundColor: "#f7f9fc",
+        backgroundImage: "radial-gradient(#cfd7e2 1px, transparent 1px)",
+        backgroundSize: "18px 18px",
+      },
+    };
+    const dataUrl = format === "jpg" ? await toJpeg(viewport, { ...options, quality: 0.96 }) : await toPng(viewport, options);
+    return { dataUrl, width, height };
+  };
+
+  const exportFlowchart = async (format: ExportFormat) => {
+    if (exporting) return;
+    setExporting(format);
+    setNotice(`Preparando ${format === "docx" ? "Word" : format.toUpperCase()}…`);
+    const fileBase = safeFileName(`${flowCode}-${flowTitle}`);
+    try {
+      if (format === "png" || format === "jpg") {
+        const { dataUrl } = await captureFlowchart(format);
+        downloadBlob(await (await fetch(dataUrl)).blob(), `${fileBase}.${format}`);
+      } else if (format === "pdf") {
+        const { dataUrl, width, height } = await captureFlowchart("png");
+        const { jsPDF } = await import("jspdf");
+        const orientation = width >= height ? "landscape" : "portrait";
+        const pdf = new jsPDF({ orientation, unit: "pt", format: "a4", compress: true });
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const margin = 28;
+        const headerHeight = 34;
+        const scale = Math.min((pageWidth - margin * 2) / width, (pageHeight - margin * 2 - headerHeight) / height);
+        const imageWidth = width * scale;
+        const imageHeight = height * scale;
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(13);
+        pdf.setTextColor(24, 32, 82);
+        pdf.text(`${flowCode} · ${flowTitle}`, margin, margin + 12);
+        pdf.addImage(dataUrl, "PNG", (pageWidth - imageWidth) / 2, margin + headerHeight, imageWidth, imageHeight, undefined, "FAST");
+        pdf.save(`${fileBase}.pdf`);
+      } else {
+        const { dataUrl, width, height } = await captureFlowchart("png");
+        const imageBytes = new Uint8Array(await (await fetch(dataUrl)).arrayBuffer());
+        const { AlignmentType, Document: WordDocument, ImageRun, Packer, PageOrientation, Paragraph, TextRun } = await import("docx");
+        const maxWidth = 900;
+        const maxHeight = 570;
+        const scale = Math.min(maxWidth / width, maxHeight / height);
+        const imageWidth = Math.round(width * scale);
+        const imageHeight = Math.round(height * scale);
+        const document = new WordDocument({
+          sections: [{
+            properties: { page: { size: { orientation: PageOrientation.LANDSCAPE }, margin: { top: 500, right: 500, bottom: 500, left: 500 } } },
+            children: [
+              new Paragraph({ children: [new TextRun({ text: `${flowCode} · ${flowTitle}`, bold: true, size: 28, color: "181852" })], spacing: { after: 180 } }),
+              new Paragraph({ children: [new ImageRun({ data: imageBytes, transformation: { width: imageWidth, height: imageHeight }, type: "png" })], alignment: AlignmentType.CENTER }),
+            ],
+          }],
+        });
+        downloadBlob(await Packer.toBlob(document), `${fileBase}.docx`);
+      }
+      setNotice(`Flujograma descargado en ${format === "docx" ? "Word" : format.toUpperCase()}.`);
+    } catch (error) {
+      console.error("No se pudo exportar el flujograma", error);
+      setNotice("No se pudo generar el archivo. Intenta nuevamente o usa PNG.");
+    } finally {
+      setExporting(null);
+    }
+  };
+
   const restoreTemplate = () => {
     setNodes(initialGraph.nodes); setEdges(initialGraph.edges); setSelectedNodeId(null); setSelectedEdgeId(null); setDirty(true);
     window.setTimeout(() => instance?.fitView({ padding: 0.16, duration: 350 }), 0);
@@ -382,7 +510,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
     setDirty(false); setNotice("Flujograma guardado en este navegador.");
   };
 
-  return <div className={`flowchart-modal${embedded ? " flowchart-embedded" : ""}`} role={embedded ? "region" : "dialog"} aria-modal={embedded ? undefined : true} aria-label={`Editor de ${flowTitle}`}>
+  return <div className={`flowchart-modal${embedded ? " flowchart-embedded" : ""}${isFullscreen ? " flowchart-fullscreen" : ""}`} role={embedded ? "region" : "dialog"} aria-modal={embedded ? undefined : true} aria-label={`Editor de ${flowTitle}`}>
     <div className="flowchart-editor-shell">
       <header className="flowchart-editor-head">
         <div className="flowchart-title-mark" style={{ background: area.color }}>{area.code}</div>
@@ -402,6 +530,17 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
         <button disabled={!selectedNodeId && !selectedEdgeId} onClick={removeSelection}><Trash2 size={16}/> Eliminar</button>
         <button onClick={restoreTemplate}><RotateCcw size={16}/> Restaurar</button>
         <button onClick={() => setPropertiesCollapsed((current) => !current)} aria-expanded={!propertiesCollapsed} aria-controls={`properties-${flowCode}`}>{propertiesCollapsed ? <PanelRightOpen size={16}/> : <PanelRightClose size={16}/>} {propertiesCollapsed ? "Mostrar panel" : "Ocultar panel"}</button>
+        <button className="toolbar-fullscreen" onClick={toggleFullscreen} aria-pressed={isFullscreen}>{isFullscreen ? <Minimize2 size={16}/> : <Maximize2 size={16}/>} {isFullscreen ? "Salir de pantalla completa" : "Pantalla completa"}</button>
+        <label className={`flowchart-export-select${exporting ? " is-exporting" : ""}`}>
+          <Download size={16}/>
+          <select aria-label="Descargar flujograma" value="" disabled={Boolean(exporting)} onChange={(event) => { if (event.target.value) void exportFlowchart(event.target.value as ExportFormat); }}>
+            <option value="">{exporting ? "Preparando…" : "Descargar"}</option>
+            <option value="png">Imagen PNG</option>
+            <option value="jpg">Imagen JPG</option>
+            <option value="pdf">Documento PDF</option>
+            <option value="docx">Documento Word</option>
+          </select>
+        </label>
         <button className="toolbar-save" onClick={save}><Save size={16}/> Guardar</button>
       </div>
 
@@ -415,7 +554,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
       </div>
 
       <div className={`flowchart-workspace ${propertiesCollapsed ? "properties-collapsed" : ""}`}>
-        <div className="xyflow-canvas">
+        <div ref={canvasRef} className="xyflow-canvas">
           <ReactFlow<RebaNode, RebaEdge>
             nodes={nodes} edges={edges} nodeTypes={nodeTypes}
             onNodesChange={handleNodesChange} onEdgesChange={handleEdgesChange} onConnect={onConnect} onInit={setInstance}
