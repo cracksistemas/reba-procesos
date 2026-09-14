@@ -22,7 +22,7 @@ import {
   useNodesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { AlignHorizontalSpaceBetween, AlignVerticalSpaceBetween, Box, Circle, Columns3, Diamond, Download, FileText, GitBranch, Link2, Maximize2, Minimize2, PanelRightClose, PanelRightOpen, RotateCcw, Rows3, Save, Trash2, WandSparkles, X } from "lucide-react";
+import { AlignHorizontalSpaceBetween, AlignVerticalSpaceBetween, Box, CheckCircle2, Circle, Columns3, Diamond, Download, Eye, FileText, GitBranch, Link2, Maximize2, Minimize2, PanelRightClose, PanelRightOpen, Redo2, RotateCcw, Rows3, Save, Trash2, Undo2, WandSparkles, X } from "lucide-react";
 import type { Area, Subarea } from "@/lib/data";
 import type { MarketingFlowchart } from "@/lib/marketing-flowcharts";
 
@@ -188,7 +188,15 @@ function migrateGraph(value: string | null, fallback: FlowGraph): FlowGraph {
   }
 }
 
-function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, storageKey, onClose, embedded = false }: { area: Area; subarea: Subarea; flowCode: string; flowTitle: string; initialGraph: FlowGraph; storageKey: string; onClose?: () => void; embedded?: boolean }) {
+function historySnapshot(nodes: RebaNode[], edges: RebaEdge[]): FlowGraph {
+  return {
+    version: 2,
+    nodes: nodes.map((node) => ({ id: node.id, type: node.type, position: { ...node.position }, data: { ...node.data }, style: { ...node.style } })),
+    edges: edges.map((edge) => makeEdge(edge.id, edge.source, edge.target, edge.data?.route ?? "normal", String(edge.label ?? ""), edge.sourceHandle)),
+  };
+}
+
+function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, storageKey, onClose, embedded = false, readOnly = false }: { area: Area; subarea: Subarea; flowCode: string; flowTitle: string; initialGraph: FlowGraph; storageKey: string; onClose?: () => void; embedded?: boolean; readOnly?: boolean }) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const toolbarRef = useRef<HTMLDivElement>(null);
   const [nodes, setNodes, onNodesChange] = useNodesState<RebaNode>(initialGraph.nodes);
@@ -198,9 +206,13 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
   const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(null);
   const [notice, setNotice] = useState("Arrastra el lienzo, usa la rueda para acercar y une los puntos de conexión.");
   const [dirty, setDirty] = useState(false);
-  const [propertiesCollapsed, setPropertiesCollapsed] = useState(false);
+  const [propertiesCollapsed, setPropertiesCollapsed] = useState(readOnly);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [exporting, setExporting] = useState<ExportFormat | null>(null);
+  const historyRef = useRef<FlowGraph[]>([historySnapshot(initialGraph.nodes, initialGraph.edges)]);
+  const applyingHistoryRef = useRef(false);
+  const [historyPosition, setHistoryPosition] = useState(0);
+  const [historyLength, setHistoryLength] = useState(1);
   const selectedNode = nodes.find((node) => node.id === selectedNodeId) ?? null;
   const selectedEdge = edges.find((edge) => edge.id === selectedEdgeId) ?? null;
   const selectedNodes = nodes.filter((node) => node.selected);
@@ -218,6 +230,24 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
       document.removeEventListener("keydown", exitOnEscape);
     };
   }, [isFullscreen]);
+
+  useEffect(() => {
+    if (readOnly) return;
+    const timeout = window.setTimeout(() => {
+      if (applyingHistoryRef.current) {
+        applyingHistoryRef.current = false;
+        return;
+      }
+      const next = historySnapshot(nodes, edges);
+      const current = historyRef.current[historyPosition];
+      if (JSON.stringify(current) === JSON.stringify(next)) return;
+      const updated = [...historyRef.current.slice(0, historyPosition + 1), next].slice(-40);
+      historyRef.current = updated;
+      setHistoryLength(updated.length);
+      setHistoryPosition(updated.length - 1);
+    }, 220);
+    return () => window.clearTimeout(timeout);
+  }, [nodes, edges, historyPosition, readOnly]);
 
   const markDirty = useCallback(() => setDirty(true), []);
   const handleNodesChange = useCallback((changes: Parameters<typeof onNodesChange>[0]) => {
@@ -407,6 +437,32 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
     window.setTimeout(() => instance?.fitView({ padding: 0.14, duration: 450 }), 0);
   };
 
+  const moveThroughHistory = (direction: -1 | 1) => {
+    const target = historyPosition + direction;
+    const snapshot = historyRef.current[target];
+    if (!snapshot) return;
+    applyingHistoryRef.current = true;
+    setNodes(snapshot.nodes.map((node) => ({ ...node, data: { ...node.data }, position: { ...node.position }, style: { ...node.style } })));
+    setEdges(snapshot.edges.map((edge) => ({ ...edge, data: edge.data ? { ...edge.data } : undefined, style: edge.style ? { ...edge.style } : undefined })));
+    setHistoryPosition(target);
+    setSelectedNodeId(null);
+    setSelectedEdgeId(null);
+    setDirty(true);
+    setNotice(direction < 0 ? "Último cambio deshecho." : "Cambio rehecho.");
+  };
+
+  const validateGraph = () => {
+    const starts = nodes.filter((node) => node.data.kind === "start").length;
+    const ends = nodes.filter((node) => node.data.kind === "end").length;
+    const connected = new Set(edges.flatMap((edge) => [edge.source, edge.target]));
+    const disconnected = nodes.filter((node) => !connected.has(node.id)).length;
+    if (starts !== 1 || ends < 1 || disconnected > 0) {
+      setNotice(`Validación: ${starts === 1 ? "inicio correcto" : `${starts} inicios`}, ${ends} fin(es) y ${disconnected} cuadro(s) sin conexión.`);
+      return;
+    }
+    setNotice("Validación completada: inicio, fin y conexiones básicas correctas.");
+  };
+
   const toggleFullscreen = () => {
     setIsFullscreen((current) => !current);
     window.setTimeout(() => {
@@ -514,17 +570,29 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
     setDirty(false); setNotice("Flujograma guardado en este navegador.");
   };
 
-  return <div className={`flowchart-modal${embedded ? " flowchart-embedded" : ""}${isFullscreen ? " flowchart-fullscreen" : ""}`} role={embedded ? "region" : "dialog"} aria-modal={embedded ? undefined : true} aria-label={`Editor de ${flowTitle}`}>
+  useEffect(() => {
+    if (readOnly || !dirty) return;
+    const timeout = window.setTimeout(() => {
+      const flow = instance?.toObject();
+      const graph: FlowGraph = { version: 2, nodes, edges, viewport: flow?.viewport };
+      window.localStorage.setItem(storageKey, JSON.stringify(graph));
+      setDirty(false);
+      setNotice("Borrador guardado automáticamente en este navegador.");
+    }, 1_400);
+    return () => window.clearTimeout(timeout);
+  }, [dirty, edges, instance, nodes, readOnly, storageKey]);
+
+  return <div className={`flowchart-modal${embedded ? " flowchart-embedded" : ""}${isFullscreen ? " flowchart-fullscreen" : ""}${readOnly ? " flowchart-readonly" : ""}`} role={embedded ? "region" : "dialog"} aria-modal={embedded ? undefined : true} aria-label={`${readOnly ? "Vista" : "Editor"} de ${flowTitle}`}>
     <div className="flowchart-editor-shell">
       <header className="flowchart-editor-head">
         <div className="flowchart-title-mark" style={{ background: area.color }}>{area.code}</div>
         <div><span>{area.name} · {subarea.name} · {flowCode}</span><h2>{flowTitle}</h2></div>
-        <div className="flowchart-save-state">{dirty ? <><i/> Cambios sin guardar</> : <><i className="saved"/> Guardado</>}</div>
+        <div className="flowchart-save-state">{readOnly ? <><Eye size={14}/> Modo consulta</> : dirty ? <><i/> Cambios sin guardar</> : <><i className="saved"/> Guardado</>}</div>
         {!embedded && <button className="icon-button" aria-label="Cerrar editor" onClick={onClose}><X size={21}/></button>}
       </header>
 
-      <div ref={toolbarRef} className="flowchart-toolbar" aria-label="Herramientas del flujograma">
-        <button onClick={() => addNode("activity")}><Box size={16}/> Actividad</button>
+      <div ref={toolbarRef} className="flowchart-toolbar" aria-label={readOnly ? "Controles de consulta" : "Herramientas del flujograma"}>
+        {!readOnly && <><button onClick={() => addNode("activity")}><Box size={16}/> Actividad</button>
         <button onClick={() => addNode("decision")}><Diamond size={16}/> Decisión</button>
         <button onClick={() => addNode("start")}><Circle size={16}/> Inicio</button>
         <button onClick={() => addNode("end")}><Circle size={16}/> Fin</button>
@@ -532,8 +600,12 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
         <span className="toolbar-divider"/>
         <span className="xy-connect-tip"><Link2 size={15}/> Arrastra entre los puntos para conectar</span>
         <button disabled={!selectedNodeId && !selectedEdgeId} onClick={removeSelection}><Trash2 size={16}/> Eliminar</button>
+        <button onClick={() => moveThroughHistory(-1)} disabled={historyPosition === 0}><Undo2 size={16}/> Deshacer</button>
+        <button onClick={() => moveThroughHistory(1)} disabled={historyPosition >= historyLength - 1}><Redo2 size={16}/> Rehacer</button>
         <button onClick={restoreTemplate}><RotateCcw size={16}/> Restaurar</button>
-        <button onClick={() => setPropertiesCollapsed((current) => !current)} aria-expanded={!propertiesCollapsed} aria-controls={`properties-${flowCode}`}>{propertiesCollapsed ? <PanelRightOpen size={16}/> : <PanelRightClose size={16}/>} {propertiesCollapsed ? "Mostrar panel" : "Ocultar panel"}</button>
+        <button onClick={validateGraph}><CheckCircle2 size={16}/> Validar</button>
+        <button onClick={() => setPropertiesCollapsed((current) => !current)} aria-expanded={!propertiesCollapsed} aria-controls={`properties-${flowCode}`}>{propertiesCollapsed ? <PanelRightOpen size={16}/> : <PanelRightClose size={16}/>} {propertiesCollapsed ? "Mostrar panel" : "Ocultar panel"}</button></>}
+        {readOnly && <span className="readonly-toolbar-copy"><Eye size={15}/> Desplaza el lienzo, usa el zoom o descarga la versión visible.</span>}
         <button className="toolbar-fullscreen" onClick={toggleFullscreen} aria-pressed={isFullscreen}>{isFullscreen ? <Minimize2 size={16}/> : <Maximize2 size={16}/>} {isFullscreen ? "Salir de pantalla completa" : "Pantalla completa"}</button>
         <label className={`flowchart-export-select${exporting ? " is-exporting" : ""}`}>
           <Download size={16}/>
@@ -545,24 +617,24 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
             <option value="docx">Documento Word</option>
           </select>
         </label>
-        <button className="toolbar-save" onClick={save}><Save size={16}/> Guardar</button>
+        {!readOnly && <button className="toolbar-save" onClick={save}><Save size={16}/> Guardar</button>}
       </div>
 
-      <div className="flowchart-alignment-bar" aria-label="Herramientas de alineación">
+      {!readOnly && <div className="flowchart-alignment-bar" aria-label="Herramientas de alineación">
         <strong>Alineación</strong><span>{selectedNodes.length ? `${selectedNodes.length} seleccionados` : "Ctrl/Cmd + clic para seleccionar varios"}</span>
         <button disabled={selectedNodes.length < 2} onClick={() => alignSelection("row")} title="Alinear los centros en una fila"><Rows3 size={15}/> Fila</button>
         <button disabled={selectedNodes.length < 2} onClick={() => alignSelection("column")} title="Alinear los centros sobre un eje vertical para enderezar las conexiones"><Columns3 size={15}/> Columna / línea recta</button>
         <button disabled={selectedNodes.length < 3} onClick={() => alignSelection("distribute-horizontal")} title="Distribuir horizontalmente con espacios iguales"><AlignHorizontalSpaceBetween size={15}/> Espacio horizontal</button>
         <button disabled={selectedNodes.length < 3} onClick={() => alignSelection("distribute-vertical")} title="Distribuir verticalmente con espacios iguales"><AlignVerticalSpaceBetween size={15}/> Espacio vertical</button>
         <button className="auto-arrange-button" onClick={autoArrange} title="Ordenar automáticamente todo el flujograma"><WandSparkles size={15}/> Ordenar todo</button>
-      </div>
+      </div>}
 
-      <div className={`flowchart-workspace ${propertiesCollapsed ? "properties-collapsed" : ""}`}>
+      <div className={`flowchart-workspace ${propertiesCollapsed || readOnly ? "properties-collapsed" : ""}`}>
         <div ref={canvasRef} className="xyflow-canvas">
           <ReactFlow<RebaNode, RebaEdge>
             nodes={nodes} edges={edges} nodeTypes={nodeTypes}
-            onNodesChange={handleNodesChange} onEdgesChange={handleEdgesChange} onConnect={onConnect} onInit={setInstance}
-            onNodeClick={(event, node) => {
+            onNodesChange={readOnly ? undefined : handleNodesChange} onEdgesChange={readOnly ? undefined : handleEdgesChange} onConnect={readOnly ? undefined : onConnect} onInit={setInstance}
+            onNodeClick={readOnly ? undefined : (event, node) => {
               if (event.ctrlKey || event.metaKey) {
                 const selectedBeforeClick = new Set(selectedNodes.map((item) => item.id));
                 const wasSelected = selectedBeforeClick.has(node.id);
@@ -574,10 +646,10 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
               setSelectedNodeId(node.id);
               setSelectedEdgeId(null);
             }}
-            onEdgeClick={(_, edge) => { setSelectedEdgeId(edge.id); setSelectedNodeId(null); }}
+            onEdgeClick={readOnly ? undefined : (_, edge) => { setSelectedEdgeId(edge.id); setSelectedNodeId(null); }}
             onPaneClick={() => { setSelectedNodeId(null); setSelectedEdgeId(null); }}
             defaultViewport={initialGraph.viewport ?? defaultViewport} fitView={!initialGraph.viewport} fitViewOptions={{ padding: 0.16, maxZoom: 1.1 }}
-            minZoom={0.18} maxZoom={2.4} snapToGrid snapGrid={[16, 16]} selectionOnDrag deleteKeyCode={["Backspace", "Delete"]}
+            minZoom={0.18} maxZoom={2.4} snapToGrid snapGrid={[16, 16]} selectionOnDrag={!readOnly} nodesDraggable={!readOnly} nodesConnectable={!readOnly} elementsSelectable={!readOnly} deleteKeyCode={readOnly ? null : ["Backspace", "Delete"]}
           >
             <Background variant={BackgroundVariant.Dots} gap={18} size={1.4} color="#cfd7e2"/>
             <Controls position="bottom-left" showInteractive={false}/>
@@ -585,7 +657,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
           </ReactFlow>
         </div>
 
-        <aside id={`properties-${flowCode}`} className="flowchart-properties" hidden={propertiesCollapsed}>
+        {!readOnly && <aside id={`properties-${flowCode}`} className="flowchart-properties" hidden={propertiesCollapsed}>
           <div className="properties-head"><GitBranch size={16}/><div><strong>Propiedades</strong><span>Edita el elemento seleccionado</span></div></div>
           {selectedNode ? <div className="properties-form">
             <label><span>Tipo de cuadro</span><select value={selectedNode.data.kind} onChange={(event) => updateSelectedNode({ kind: event.target.value as NodeKind })}><option value="activity">Actividad</option><option value="decision">Decisión</option><option value="start">Inicio</option><option value="end">Fin</option><option value="evidence">Evidencia</option><option value="exception">Excepción</option></select></label>
@@ -598,14 +670,14 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
             <button className="button button-secondary danger-button" onClick={removeSelection}><Trash2 size={15}/> Eliminar línea</button>
           </div> : <div className="properties-empty"><GitBranch size={30}/><strong>Selecciona un elemento</strong><p>Haz clic en un cuadro o línea. Arrastra desde un punto del cuadro de origen hacia el destino para conectarlos.</p></div>}
           <div className="properties-tip"><strong>Editor avanzado XYFlow</strong><span>Rueda: zoom · Arrastrar fondo: desplazarse · Ctrl/Cmd: selección múltiple · Supr: eliminar · Minimap: navegación rápida.</span></div>
-        </aside>
+        </aside>}
       </div>
-      <footer className="flowchart-status"><span>{notice}</span><span>Motor XYFlow · JSON estructurado · Formato visual REBA</span></footer>
+      <footer className="flowchart-status"><span>{readOnly ? "Vista de consulta: el diagrama no puede modificarse en este modo." : notice}</span><span>{readOnly ? "Versión documentada · Selecciona Editar para crear un borrador" : "Motor XYFlow · JSON estructurado · Formato visual REBA"}</span></footer>
     </div>
   </div>;
 }
 
-export function FlowchartEditor({ area, subarea, flowchart, onClose, embedded = false }: { area: Area; subarea: Subarea; flowchart?: MarketingFlowchart; onClose?: () => void; embedded?: boolean }) {
+export function FlowchartEditor({ area, subarea, flowchart, onClose, embedded = false, readOnly = false }: { area: Area; subarea: Subarea; flowchart?: MarketingFlowchart; onClose?: () => void; embedded?: boolean; readOnly?: boolean }) {
   const flowCode = flowchart?.code ?? subarea.code;
   const flowTitle = flowchart?.title ?? subarea.name;
   const storageKey = `reba-flowchart-${flowCode}`;
@@ -617,6 +689,6 @@ export function FlowchartEditor({ area, subarea, flowchart, onClose, embedded = 
   }, [storageKey]);
   const getSnapshot = useCallback(() => window.localStorage.getItem(storageKey), [storageKey]);
   const storedValue = useSyncExternalStore(subscribe, getSnapshot, () => null);
-  const initialGraph = useMemo(() => migrateGraph(storedValue, template), [storedValue, template]);
-  return <FlowchartCanvas key={storedValue ?? flowCode} area={area} subarea={subarea} flowCode={flowCode} flowTitle={flowTitle} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose} embedded={embedded}/>;
+  const initialGraph = useMemo(() => readOnly ? template : migrateGraph(storedValue, template), [storedValue, template, readOnly]);
+  return <FlowchartCanvas key={storedValue ?? flowCode} area={area} subarea={subarea} flowCode={flowCode} flowTitle={flowTitle} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose} embedded={embedded} readOnly={readOnly}/>;
 }

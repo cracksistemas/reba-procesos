@@ -14,8 +14,9 @@ export async function generateMetadata(props: { params: Promise<{ code: string; 
   return { title: item && area ? `${item.name} · ${area.name}` : "Subárea" };
 }
 
-export default async function SubareaPage(props: { params: Promise<{ code: string; subarea: string }> }) {
+export default async function SubareaPage(props: { params: Promise<{ code: string; subarea: string }>; searchParams: Promise<{ flujo?: string | string[] }> }) {
   const params = await props.params;
+  const query = await props.searchParams;
   const area = getArea(params.code);
   if (!area) notFound();
   const siblings = getSubareas(area.code);
@@ -29,5 +30,7 @@ export default async function SubareaPage(props: { params: Promise<{ code: strin
     return [item.code, imported || linked || 1];
   }));
 
-  return <SubareaWorkspace area={area} subarea={subarea} siblings={siblings} flowcharts={flowcharts} flowCounts={flowCounts}/>;
+  const linkedProcesses = processes.filter((process) => process.subareaCode === subarea.code);
+  const initialFlowCode = typeof query.flujo === "string" ? query.flujo : undefined;
+  return <SubareaWorkspace area={area} subarea={subarea} siblings={siblings} flowcharts={flowcharts} linkedProcesses={linkedProcesses} flowCounts={flowCounts} initialFlowCode={initialFlowCode}/>;
 }

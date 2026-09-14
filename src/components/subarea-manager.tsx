@@ -86,7 +86,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
   return <>
     <div className="page-heading area-detail-heading">
       <div>
-        <div className="breadcrumb"><Link href="/areas">Áreas</Link> / <span>{area.code}</span></div>
+        <div className="breadcrumb"><Link href="/biblioteca">Biblioteca</Link> / <Link href="/areas">Áreas</Link> / <span>{area.code}</span></div>
         <p className="eyebrow">Área · elige una unidad para continuar</p>
         <h1>{area.name}</h1>
         <p>{area.description} Cada subárea reúne sus procesos, programas y flujogramas.</p>
@@ -117,7 +117,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
     </section>
 
     <div className="directory-heading">
-      <div><h2>Subáreas de {area.name}</h2><p>Selecciona una tarjeta para abrir su menú de procesos y visualizar el flujograma completo.</p></div>
+      <div><h2>Subáreas de {area.name}</h2><p>Selecciona una unidad para ver únicamente sus procesos y programas.</p></div>
       <span>{items.length} disponibles</span>
     </div>
 
@@ -126,7 +126,6 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
         const related = areaProcesses.filter((process) => process.subareaCode === subarea.code);
         const imported = area.code === "MKT" ? getMarketingFlowcharts(subarea.code) : [];
         const total = imported.length || related.length || 1;
-        const preview = imported.length ? imported.slice(0, 2).map((flow) => flow.title) : subarea.flow.slice(0, 2);
         const isCustom = subarea.source === "Usuario";
 
         return <article className="card subarea-browser-card" key={subarea.code}>
@@ -136,10 +135,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
             <span className={`source-label ${subarea.source === "Drive" ? "source-drive" : ""}`}>{subarea.source}</span>
           </div>
           <p className="subarea-description">{subarea.description}</p>
-          <div className="subarea-process-preview">
-            <div><strong>{total}</strong><span>{total === 1 ? "Proceso o programa" : "Procesos y programas"}</span></div>
-            <ul>{preview.map((title) => <li key={title}>{title}</li>)}</ul>
-          </div>
+          <div className="subarea-card-facts"><span><strong>{total}</strong>{total === 1 ? " proceso o programa" : " procesos y programas"}</span><span>Madurez documental: <strong>{subarea.source === "Drive" ? "Documentada" : "En construcción"}</strong></span></div>
           <div className="subarea-browser-footer">
             <span>Responsable<br/><strong>{subarea.owner}</strong></span>
             {isCustom
