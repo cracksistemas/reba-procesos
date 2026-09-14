@@ -190,6 +190,7 @@ function migrateGraph(value: string | null, fallback: FlowGraph): FlowGraph {
 
 function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, storageKey, onClose, embedded = false }: { area: Area; subarea: Subarea; flowCode: string; flowTitle: string; initialGraph: FlowGraph; storageKey: string; onClose?: () => void; embedded?: boolean }) {
   const canvasRef = useRef<HTMLDivElement>(null);
+  const toolbarRef = useRef<HTMLDivElement>(null);
   const [nodes, setNodes, onNodesChange] = useNodesState<RebaNode>(initialGraph.nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState<RebaEdge>(initialGraph.edges);
   const [instance, setInstance] = useState<ReactFlowInstance<RebaNode, RebaEdge> | null>(null);
@@ -408,7 +409,10 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
 
   const toggleFullscreen = () => {
     setIsFullscreen((current) => !current);
-    window.setTimeout(() => instance?.fitView({ padding: 0.14, duration: 350 }), 0);
+    window.setTimeout(() => {
+      toolbarRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+      instance?.fitView({ padding: 0.14, duration: 350 });
+    }, 0);
   };
 
   const captureFlowchart = async (format: "png" | "jpg") => {
@@ -519,7 +523,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
         {!embedded && <button className="icon-button" aria-label="Cerrar editor" onClick={onClose}><X size={21}/></button>}
       </header>
 
-      <div className="flowchart-toolbar" aria-label="Herramientas del flujograma">
+      <div ref={toolbarRef} className="flowchart-toolbar" aria-label="Herramientas del flujograma">
         <button onClick={() => addNode("activity")}><Box size={16}/> Actividad</button>
         <button onClick={() => addNode("decision")}><Diamond size={16}/> Decisión</button>
         <button onClick={() => addNode("start")}><Circle size={16}/> Inicio</button>
