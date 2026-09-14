@@ -245,24 +245,24 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
 
     const positions = new Map<string, { x: number; y: number }>();
     if (mode === "row") {
-      const centerY = chosen.reduce((sum, node) => sum + node.position.y + getNodeSize(node).height / 2, 0) / chosen.length;
-      chosen.forEach((node) => positions.set(node.id, { x: node.position.x, y: snapCoordinate(centerY - getNodeSize(node).height / 2) }));
+      const centerY = snapCoordinate(chosen.reduce((sum, node) => sum + node.position.y + getNodeSize(node).height / 2, 0) / chosen.length);
+      chosen.forEach((node) => positions.set(node.id, { x: node.position.x, y: centerY - getNodeSize(node).height / 2 }));
     } else if (mode === "column") {
-      const centerX = chosen.reduce((sum, node) => sum + node.position.x + getNodeSize(node).width / 2, 0) / chosen.length;
-      chosen.forEach((node) => positions.set(node.id, { x: snapCoordinate(centerX - getNodeSize(node).width / 2), y: node.position.y }));
+      const centerX = snapCoordinate(chosen.reduce((sum, node) => sum + node.position.x + getNodeSize(node).width / 2, 0) / chosen.length);
+      chosen.forEach((node) => positions.set(node.id, { x: centerX - getNodeSize(node).width / 2, y: node.position.y }));
     } else {
       const horizontal = mode === "distribute-horizontal";
       const ordered = [...chosen].sort((a, b) => horizontal ? a.position.x - b.position.x : a.position.y - b.position.y);
       const first = ordered[0];
       const last = ordered[ordered.length - 1];
-      const firstCenter = horizontal ? first.position.x + getNodeSize(first).width / 2 : first.position.y + getNodeSize(first).height / 2;
-      const lastCenter = horizontal ? last.position.x + getNodeSize(last).width / 2 : last.position.y + getNodeSize(last).height / 2;
+      const firstCenter = snapCoordinate(horizontal ? first.position.x + getNodeSize(first).width / 2 : first.position.y + getNodeSize(first).height / 2);
+      const lastCenter = snapCoordinate(horizontal ? last.position.x + getNodeSize(last).width / 2 : last.position.y + getNodeSize(last).height / 2);
       const step = (lastCenter - firstCenter) / (ordered.length - 1);
       ordered.forEach((node, index) => {
         const size = getNodeSize(node);
         positions.set(node.id, horizontal
-          ? { x: snapCoordinate(firstCenter + step * index - size.width / 2), y: node.position.y }
-          : { x: node.position.x, y: snapCoordinate(firstCenter + step * index - size.height / 2) });
+          ? { x: firstCenter + step * index - size.width / 2, y: node.position.y }
+          : { x: node.position.x, y: firstCenter + step * index - size.height / 2 });
       });
     }
 
@@ -274,10 +274,16 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
   const autoArrange = () => {
     const nodeIds = new Set(nodes.map((node) => node.id));
     const nodesById = new Map(nodes.map((node) => [node.id, node]));
-    const normalEdges = edges.filter((edge) => edge.data?.route !== "return" && nodeIds.has(edge.source) && nodeIds.has(edge.target));
+    const hierarchyEdges = edges.filter((edge) => {
+      if (!nodeIds.has(edge.source) || !nodeIds.has(edge.target)) return false;
+      if (edge.data?.route !== "return") return true;
+      const source = nodesById.get(edge.source);
+      const target = nodesById.get(edge.target);
+      return Boolean(source && target && target.position.y > source.position.y);
+    });
     const incoming = new Map(nodes.map((node) => [node.id, 0]));
     const outgoing = new Map(nodes.map((node) => [node.id, [] as string[]]));
-    normalEdges.forEach((edge) => {
+    hierarchyEdges.forEach((edge) => {
       incoming.set(edge.target, (incoming.get(edge.target) ?? 0) + 1);
       outgoing.get(edge.source)?.push(edge.target);
     });
@@ -315,7 +321,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
       const size = getNodeSize(node);
       return { left: Math.min(result.left, node.position.x), right: Math.max(result.right, node.position.x + size.width) };
     }, { left: Number.POSITIVE_INFINITY, right: Number.NEGATIVE_INFINITY });
-    const canvasCenter = Math.max(650, Number.isFinite(bounds.left) ? (bounds.left + bounds.right) / 2 : 650);
+    const canvasCenter = snapCoordinate(Math.max(650, Number.isFinite(bounds.left) ? (bounds.left + bounds.right) / 2 : 650));
     const positions = new Map<string, { x: number; y: number }>();
     let y = 48;
     [...layers.entries()].sort(([a], [b]) => a - b).forEach(([, layer]) => {
@@ -323,12 +329,14 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
       const gap = 96;
       const totalWidth = ordered.reduce((sum, node) => sum + getNodeSize(node).width, 0) + gap * Math.max(0, ordered.length - 1);
       const layerHeight = Math.max(...ordered.map((node) => getNodeSize(node).height));
-      let x = Math.max(48, canvasCenter - totalWidth / 2);
+      const layerCenterY = snapCoordinate(y + layerHeight / 2);
+      let x = canvasCenter - totalWidth / 2;
       ordered.forEach((node) => {
-        positions.set(node.id, { x: snapCoordinate(x), y: snapCoordinate(y + (layerHeight - getNodeSize(node).height) / 2) });
+        const size = getNodeSize(node);
+        positions.set(node.id, { x, y: layerCenterY - size.height / 2 });
         x += getNodeSize(node).width + gap;
       });
-      y += layerHeight + 112;
+      y = layerCenterY + layerHeight / 2 + 112;
     });
 
     setNodes((current) => current.map((node) => ({ ...node, position: positions.get(node.id) ?? node.position })));
@@ -386,7 +394,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
       <div className="flowchart-alignment-bar" aria-label="Herramientas de alineación">
         <strong>Alineación</strong><span>{selectedNodes.length ? `${selectedNodes.length} seleccionados` : "Ctrl/Cmd + clic para seleccionar varios"}</span>
         <button disabled={selectedNodes.length < 2} onClick={() => alignSelection("row")} title="Alinear los centros en una fila"><Rows3 size={15}/> Fila</button>
-        <button disabled={selectedNodes.length < 2} onClick={() => alignSelection("column")} title="Alinear los centros en una columna"><Columns3 size={15}/> Columna</button>
+        <button disabled={selectedNodes.length < 2} onClick={() => alignSelection("column")} title="Alinear los centros sobre un eje vertical para enderezar las conexiones"><Columns3 size={15}/> Columna / línea recta</button>
         <button disabled={selectedNodes.length < 3} onClick={() => alignSelection("distribute-horizontal")} title="Distribuir horizontalmente con espacios iguales"><AlignHorizontalSpaceBetween size={15}/> Espacio horizontal</button>
         <button disabled={selectedNodes.length < 3} onClick={() => alignSelection("distribute-vertical")} title="Distribuir verticalmente con espacios iguales"><AlignVerticalSpaceBetween size={15}/> Espacio vertical</button>
         <button className="auto-arrange-button" onClick={autoArrange} title="Ordenar automáticamente todo el flujograma"><WandSparkles size={15}/> Ordenar todo</button>
