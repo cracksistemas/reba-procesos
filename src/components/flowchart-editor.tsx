@@ -21,12 +21,13 @@ import {
   useNodesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { Box, Circle, Diamond, FileText, GitBranch, Link2, PanelRightClose, PanelRightOpen, RotateCcw, Save, Trash2, X } from "lucide-react";
+import { AlignHorizontalSpaceBetween, AlignVerticalSpaceBetween, Box, Circle, Columns3, Diamond, FileText, GitBranch, Link2, PanelRightClose, PanelRightOpen, RotateCcw, Rows3, Save, Trash2, WandSparkles, X } from "lucide-react";
 import type { Area, Subarea } from "@/lib/data";
 import type { MarketingFlowchart } from "@/lib/marketing-flowcharts";
 
 type NodeKind = "start" | "activity" | "decision" | "evidence" | "exception" | "end";
 type EdgeRoute = "normal" | "return";
+type AlignmentMode = "row" | "column" | "distribute-horizontal" | "distribute-vertical";
 
 type RebaNodeData = { label: string; role: string; kind: NodeKind; fill?: string; stroke?: string; textColor?: string };
 type RebaNode = Node<RebaNodeData, "reba">;
@@ -39,6 +40,17 @@ const nodeColors: Record<NodeKind, string> = { start: "#0f766e", activity: "#565
 
 function numericSize(value: unknown, fallback: number) {
   return typeof value === "number" && Number.isFinite(value) ? value : fallback;
+}
+
+function getNodeSize(node: RebaNode) {
+  return {
+    width: numericSize(node.measured?.width, numericSize(node.style?.width, 250)),
+    height: numericSize(node.measured?.height, numericSize(node.style?.height, 58)),
+  };
+}
+
+function snapCoordinate(value: number) {
+  return Math.round(value / 16) * 16;
 }
 
 function nodeDimensions(kind: NodeKind, label = "", role = "", preferredWidth?: number) {
@@ -166,6 +178,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
   const [propertiesCollapsed, setPropertiesCollapsed] = useState(false);
   const selectedNode = nodes.find((node) => node.id === selectedNodeId) ?? null;
   const selectedEdge = edges.find((edge) => edge.id === selectedEdgeId) ?? null;
+  const selectedNodes = nodes.filter((node) => node.selected);
 
   const markDirty = useCallback(() => setDirty(true), []);
   const handleNodesChange = useCallback((changes: Parameters<typeof onNodesChange>[0]) => {
@@ -222,6 +235,117 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
     setDirty(true);
   };
 
+  const alignSelection = (mode: AlignmentMode) => {
+    const chosen = nodes.filter((node) => node.selected);
+    const required = mode.startsWith("distribute") ? 3 : 2;
+    if (chosen.length < required) {
+      setNotice(`Selecciona al menos ${required} cuadros con Ctrl/Cmd + clic para usar esta alineación.`);
+      return;
+    }
+
+    const positions = new Map<string, { x: number; y: number }>();
+    if (mode === "row") {
+      const centerY = chosen.reduce((sum, node) => sum + node.position.y + getNodeSize(node).height / 2, 0) / chosen.length;
+      chosen.forEach((node) => positions.set(node.id, { x: node.position.x, y: snapCoordinate(centerY - getNodeSize(node).height / 2) }));
+    } else if (mode === "column") {
+      const centerX = chosen.reduce((sum, node) => sum + node.position.x + getNodeSize(node).width / 2, 0) / chosen.length;
+      chosen.forEach((node) => positions.set(node.id, { x: snapCoordinate(centerX - getNodeSize(node).width / 2), y: node.position.y }));
+    } else {
+      const horizontal = mode === "distribute-horizontal";
+      const ordered = [...chosen].sort((a, b) => horizontal ? a.position.x - b.position.x : a.position.y - b.position.y);
+      const first = ordered[0];
+      const last = ordered[ordered.length - 1];
+      const firstCenter = horizontal ? first.position.x + getNodeSize(first).width / 2 : first.position.y + getNodeSize(first).height / 2;
+      const lastCenter = horizontal ? last.position.x + getNodeSize(last).width / 2 : last.position.y + getNodeSize(last).height / 2;
+      const step = (lastCenter - firstCenter) / (ordered.length - 1);
+      ordered.forEach((node, index) => {
+        const size = getNodeSize(node);
+        positions.set(node.id, horizontal
+          ? { x: snapCoordinate(firstCenter + step * index - size.width / 2), y: node.position.y }
+          : { x: node.position.x, y: snapCoordinate(firstCenter + step * index - size.height / 2) });
+      });
+    }
+
+    setNodes((current) => current.map((node) => positions.has(node.id) ? { ...node, position: positions.get(node.id)! } : node));
+    setDirty(true);
+    setNotice(mode === "row" ? "Cuadros alineados en una fila." : mode === "column" ? "Cuadros alineados en una columna." : "Espaciado uniforme aplicado a la selección.");
+  };
+
+  const autoArrange = () => {
+    const nodeIds = new Set(nodes.map((node) => node.id));
+    const nodesById = new Map(nodes.map((node) => [node.id, node]));
+    const normalEdges = edges.filter((edge) => edge.data?.route !== "return" && nodeIds.has(edge.source) && nodeIds.has(edge.target));
+    const incoming = new Map(nodes.map((node) => [node.id, 0]));
+    const outgoing = new Map(nodes.map((node) => [node.id, [] as string[]]));
+    normalEdges.forEach((edge) => {
+      incoming.set(edge.target, (incoming.get(edge.target) ?? 0) + 1);
+      outgoing.get(edge.source)?.push(edge.target);
+    });
+
+    const depth = new Map<string, number>();
+    const queue = nodes
+      .filter((node) => (incoming.get(node.id) ?? 0) === 0)
+      .sort((a, b) => Number(b.data.kind === "start") - Number(a.data.kind === "start") || a.position.y - b.position.y);
+    queue.forEach((node) => depth.set(node.id, 0));
+    for (let index = 0; index < queue.length; index += 1) {
+      const node = queue[index];
+      const nodeDepth = depth.get(node.id) ?? 0;
+      (outgoing.get(node.id) ?? []).forEach((targetId) => {
+        depth.set(targetId, Math.max(depth.get(targetId) ?? 0, nodeDepth + 1));
+        const nextIncoming = (incoming.get(targetId) ?? 1) - 1;
+        incoming.set(targetId, nextIncoming);
+        if (nextIncoming === 0) {
+          const target = nodesById.get(targetId);
+          if (target) queue.push(target);
+        }
+      });
+    }
+
+    let fallbackDepth = Math.max(0, ...depth.values());
+    nodes.filter((node) => !depth.has(node.id)).sort((a, b) => a.position.y - b.position.y).forEach((node) => {
+      fallbackDepth += 1;
+      depth.set(node.id, fallbackDepth);
+    });
+    const layers = new Map<number, RebaNode[]>();
+    nodes.forEach((node) => {
+      const nodeDepth = depth.get(node.id) ?? 0;
+      layers.set(nodeDepth, [...(layers.get(nodeDepth) ?? []), node]);
+    });
+    const bounds = nodes.reduce((result, node) => {
+      const size = getNodeSize(node);
+      return { left: Math.min(result.left, node.position.x), right: Math.max(result.right, node.position.x + size.width) };
+    }, { left: Number.POSITIVE_INFINITY, right: Number.NEGATIVE_INFINITY });
+    const canvasCenter = Math.max(650, Number.isFinite(bounds.left) ? (bounds.left + bounds.right) / 2 : 650);
+    const positions = new Map<string, { x: number; y: number }>();
+    let y = 48;
+    [...layers.entries()].sort(([a], [b]) => a - b).forEach(([, layer]) => {
+      const ordered = [...layer].sort((a, b) => a.position.x - b.position.x);
+      const gap = 96;
+      const totalWidth = ordered.reduce((sum, node) => sum + getNodeSize(node).width, 0) + gap * Math.max(0, ordered.length - 1);
+      const layerHeight = Math.max(...ordered.map((node) => getNodeSize(node).height));
+      let x = Math.max(48, canvasCenter - totalWidth / 2);
+      ordered.forEach((node) => {
+        positions.set(node.id, { x: snapCoordinate(x), y: snapCoordinate(y + (layerHeight - getNodeSize(node).height) / 2) });
+        x += getNodeSize(node).width + gap;
+      });
+      y += layerHeight + 112;
+    });
+
+    setNodes((current) => current.map((node) => ({ ...node, position: positions.get(node.id) ?? node.position })));
+    setEdges((current) => current.map((edge) => {
+      const route = edge.data?.route ?? "normal";
+      const sourceDepth = depth.get(edge.source) ?? 0;
+      const targetDepth = depth.get(edge.target) ?? sourceDepth;
+      const sourcePosition = positions.get(edge.source);
+      const targetPosition = positions.get(edge.target);
+      const sourceHandle = route === "return" ? "right" : targetDepth > sourceDepth ? "bottom" : (targetPosition?.x ?? 0) >= (sourcePosition?.x ?? 0) ? "right" : "left";
+      return makeEdge(edge.id, edge.source, edge.target, route, String(edge.label ?? ""), sourceHandle);
+    }));
+    setDirty(true);
+    setNotice("Flujo ordenado por niveles; cuadros, espacios y rutas fueron realineados.");
+    window.setTimeout(() => instance?.fitView({ padding: 0.14, duration: 450 }), 0);
+  };
+
   const restoreTemplate = () => {
     setNodes(initialGraph.nodes); setEdges(initialGraph.edges); setSelectedNodeId(null); setSelectedEdgeId(null); setDirty(true);
     window.setTimeout(() => instance?.fitView({ padding: 0.16, duration: 350 }), 0);
@@ -259,16 +383,36 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
         <button className="toolbar-save" onClick={save}><Save size={16}/> Guardar</button>
       </div>
 
+      <div className="flowchart-alignment-bar" aria-label="Herramientas de alineación">
+        <strong>Alineación</strong><span>{selectedNodes.length ? `${selectedNodes.length} seleccionados` : "Ctrl/Cmd + clic para seleccionar varios"}</span>
+        <button disabled={selectedNodes.length < 2} onClick={() => alignSelection("row")} title="Alinear los centros en una fila"><Rows3 size={15}/> Fila</button>
+        <button disabled={selectedNodes.length < 2} onClick={() => alignSelection("column")} title="Alinear los centros en una columna"><Columns3 size={15}/> Columna</button>
+        <button disabled={selectedNodes.length < 3} onClick={() => alignSelection("distribute-horizontal")} title="Distribuir horizontalmente con espacios iguales"><AlignHorizontalSpaceBetween size={15}/> Espacio horizontal</button>
+        <button disabled={selectedNodes.length < 3} onClick={() => alignSelection("distribute-vertical")} title="Distribuir verticalmente con espacios iguales"><AlignVerticalSpaceBetween size={15}/> Espacio vertical</button>
+        <button className="auto-arrange-button" onClick={autoArrange} title="Ordenar automáticamente todo el flujograma"><WandSparkles size={15}/> Ordenar todo</button>
+      </div>
+
       <div className={`flowchart-workspace ${propertiesCollapsed ? "properties-collapsed" : ""}`}>
         <div className="xyflow-canvas">
           <ReactFlow<RebaNode, RebaEdge>
             nodes={nodes} edges={edges} nodeTypes={nodeTypes}
             onNodesChange={handleNodesChange} onEdgesChange={handleEdgesChange} onConnect={onConnect} onInit={setInstance}
-            onNodeClick={(_, node) => { setSelectedNodeId(node.id); setSelectedEdgeId(null); }}
+            onNodeClick={(event, node) => {
+              if (event.ctrlKey || event.metaKey) {
+                const selectedBeforeClick = new Set(selectedNodes.map((item) => item.id));
+                const wasSelected = selectedBeforeClick.has(node.id);
+                setNodes((current) => current.map((item) => ({
+                  ...item,
+                  selected: item.id === node.id ? !wasSelected : selectedBeforeClick.has(item.id),
+                })));
+              }
+              setSelectedNodeId(node.id);
+              setSelectedEdgeId(null);
+            }}
             onEdgeClick={(_, edge) => { setSelectedEdgeId(edge.id); setSelectedNodeId(null); }}
             onPaneClick={() => { setSelectedNodeId(null); setSelectedEdgeId(null); }}
             defaultViewport={initialGraph.viewport ?? defaultViewport} fitView={!initialGraph.viewport} fitViewOptions={{ padding: 0.16, maxZoom: 1.1 }}
-            minZoom={0.18} maxZoom={2.4} snapToGrid snapGrid={[16, 16]} selectionOnDrag deleteKeyCode={["Backspace", "Delete"]} multiSelectionKeyCode={["Meta", "Control"]}
+            minZoom={0.18} maxZoom={2.4} snapToGrid snapGrid={[16, 16]} selectionOnDrag deleteKeyCode={["Backspace", "Delete"]}
           >
             <Background variant={BackgroundVariant.Dots} gap={18} size={1.4} color="#cfd7e2"/>
             <Controls position="bottom-left" showInteractive={false}/>
