@@ -108,6 +108,23 @@ export function deleteProcess(code: string) {
   persistProcesses(nextStored);
 }
 
+export function updateProcessStatus(process: Process, status: Process["status"]): Process {
+  const now = new Date();
+  const updated: Process = {
+    ...process,
+    status,
+    updated: `Hoy, ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`,
+  };
+  const stored = getStoredProcesses();
+  const existingIndex = stored.findIndex((item) => item.code.toLowerCase() === process.code.toLowerCase());
+  const nextStored = existingIndex >= 0
+    ? stored.map((item, index) => index === existingIndex ? updated : item)
+    : [...stored, updated];
+  persistProcesses(nextStored);
+  void saveProcessToCloud(updated);
+  return updated;
+}
+
 export function useProcesses(initialProcesses: Process[] = defaultProcesses): Process[] {
   const [cloudProcesses, setCloudProcesses] = useState<Process[]>([]);
   const subscribe = useCallback((onStoreChange: () => void) => {
