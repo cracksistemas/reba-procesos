@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
-import { ArrowRight, CheckCircle2, Filter, Plus, Save, Search, X } from "lucide-react";
+import { ArrowRight, CheckCircle2, Plus, Save, Search, X } from "lucide-react";
 import { StatusBadge } from "@/components/status-badge";
 import { areas, processes as defaultProcesses, subareas as defaultSubareas, type ProcessType } from "@/lib/data";
 import { saveProcess, useProcesses } from "@/lib/process-store";
@@ -257,7 +257,7 @@ export function ProcessCatalog({ initialArea = "Todas", initialSubarea = "Todas"
       {filtered.length === 0 && (
         <div className="empty-state">
           <strong>No encontramos procesos ni tareas</strong>
-          <p>Prueba con otro término o usa el botón "Crear proceso o tarea" para agregar uno nuevo.</p>
+          <p>Prueba con otro término o usa el botón &quot;Crear proceso o tarea&quot; para agregar uno nuevo.</p>
         </div>
       )}
     </div>

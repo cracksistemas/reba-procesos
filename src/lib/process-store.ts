@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { mergeProcesses, processes as defaultProcesses, type Process, type ProcessType } from "@/lib/data";
 import type { Flowchart } from "@/lib/flowcharts";
 import type { ImportedFlowNode, ImportedFlowEdge } from "@/lib/marketing-flowcharts";
+import { loadCloudProcesses, saveProcessToCloud } from "@/lib/workspace-cloud";
 
 export const PROCESS_STORAGE_KEY = "reba-custom-processes";
 export const PROCESS_EVENT_NAME = "reba-processes-changed";
@@ -97,6 +98,7 @@ export function saveProcess(
   }
 
   persistProcesses(nextStored);
+  void saveProcessToCloud(newProcess);
   return newProcess;
 }
 
@@ -107,6 +109,7 @@ export function deleteProcess(code: string) {
 }
 
 export function useProcesses(initialProcesses: Process[] = defaultProcesses): Process[] {
+  const [cloudProcesses, setCloudProcesses] = useState<Process[]>([]);
   const subscribe = useCallback((onStoreChange: () => void) => {
     if (typeof window === "undefined") return () => {};
     const handleStorage = (event: StorageEvent) => {
@@ -129,6 +132,12 @@ export function useProcesses(initialProcesses: Process[] = defaultProcesses): Pr
 
   const storedRaw = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
+  useEffect(() => {
+    let active = true;
+    void loadCloudProcesses().then((items) => { if (active && items.length) setCloudProcesses(items); });
+    return () => { active = false; };
+  }, []);
+
   let stored: Process[] = [];
   try {
     if (storedRaw) {
@@ -138,7 +147,7 @@ export function useProcesses(initialProcesses: Process[] = defaultProcesses): Pr
     stored = [];
   }
 
-  return mergeProcesses(initialProcesses, stored);
+  return mergeProcesses(mergeProcesses(initialProcesses, cloudProcesses), stored);
 }
 
 export function processToFlowchart(process: Process): Flowchart {

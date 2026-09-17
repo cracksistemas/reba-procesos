@@ -25,6 +25,7 @@ import "@xyflow/react/dist/style.css";
 import { AlignHorizontalSpaceBetween, AlignVerticalSpaceBetween, Box, CheckCircle2, Circle, Columns3, Diamond, Download, Eye, FileText, GitBranch, Link2, Maximize2, Minimize2, PanelRightClose, PanelRightOpen, Redo2, RotateCcw, Rows3, Save, Trash2, Undo2, WandSparkles, X } from "lucide-react";
 import type { Area, Subarea } from "@/lib/data";
 import type { Flowchart } from "@/lib/flowcharts";
+import { loadFlowchartFromCloud, saveFlowchartToCloud } from "@/lib/workspace-cloud";
 
 type NodeKind = "start" | "activity" | "decision" | "evidence" | "exception" | "end";
 type EdgeRoute = "normal" | "return";
@@ -586,12 +587,17 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
     setNotice("Plantilla restaurada. Presiona Guardar para confirmar el cambio.");
   };
 
-  const save = () => {
+  const save = async () => {
     const flow = instance?.toObject();
     const graph: FlowGraph = { version: 2, nodes, edges, viewport: flow?.viewport };
     window.localStorage.setItem(storageKey, JSON.stringify(graph));
     window.dispatchEvent(new Event(storageKey));
-    setDirty(false); setNotice("Flujograma guardado en este navegador.");
+    setDirty(false);
+    const result = await saveFlowchartToCloud({
+      flowCode, areaCode: area.code, subareaCode: subarea.code, title: flowTitle,
+      description: flowDescription ?? "", snapshot: graph,
+    });
+    setNotice(result.synced ? "Flujograma guardado en Supabase y en este navegador." : `Borrador guardado en este navegador. ${result.message ?? ""}`.trim());
   };
 
   useEffect(() => {
@@ -649,7 +655,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
             <option value="docx">Documento Word</option>
           </select>
         </label>
-        {!readOnly && <button className="toolbar-save" onClick={save}><Save size={16}/> Guardar</button>}
+        {!readOnly && <button className="toolbar-save" onClick={() => void save()}><Save size={16}/> Guardar</button>}
       </div>
 
       {!readOnly && <div className="flowchart-alignment-bar" aria-label="Herramientas de alineación">
@@ -721,6 +727,13 @@ export function FlowchartEditor({ area, subarea, flowchart, onClose, embedded = 
   }, [storageKey]);
   const getSnapshot = useCallback(() => window.localStorage.getItem(storageKey), [storageKey]);
   const storedValue = useSyncExternalStore(subscribe, getSnapshot, () => null);
-  const initialGraph = useMemo(() => readOnly ? template : migrateGraph(storedValue, template), [storedValue, template, readOnly]);
-  return <FlowchartCanvas key={storedValue ?? flowCode} area={area} subarea={subarea} flowCode={flowCode} flowTitle={flowTitle} flowDescription={flowchart?.description} flowContext={flowchart?.context} flowClosure={flowchart?.closure} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose} embedded={embedded} readOnly={readOnly}/>;
+  const [cloudValue, setCloudValue] = useState<string | null>(null);
+  useEffect(() => {
+    let active = true;
+    void loadFlowchartFromCloud(flowCode).then((snapshot) => { if (active && snapshot) setCloudValue(snapshot); });
+    return () => { active = false; };
+  }, [flowCode]);
+  const savedValue = storedValue ?? cloudValue;
+  const initialGraph = useMemo(() => migrateGraph(savedValue, template), [savedValue, template]);
+  return <FlowchartCanvas key={savedValue ?? flowCode} area={area} subarea={subarea} flowCode={flowCode} flowTitle={flowTitle} flowDescription={flowchart?.description} flowContext={flowchart?.context} flowClosure={flowchart?.closure} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose} embedded={embedded} readOnly={readOnly}/>;
 }

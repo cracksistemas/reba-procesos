@@ -26,7 +26,7 @@ const splitTasks = (value: string) => value
   .map((step) => step.trim())
   .filter(Boolean);
 
-export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedProcesses, flowCounts, initialFlowCode }: SubareaWorkspaceProps) {
+export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedProcesses, initialFlowCode }: SubareaWorkspaceProps) {
   const allProcesses = useProcesses(linkedProcesses);
   const subareaProcesses = useMemo(
     () => allProcesses.filter((p) => p.subareaCode.toLowerCase() === subarea.code.toLowerCase()),

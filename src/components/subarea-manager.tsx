@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useCallback, useMemo, useState, useSyncExternalStore } from "react";
-import { ArrowRight, CheckCircle2, GitBranch, Layers, LayoutGrid, ListChecks, Plus, Save, Search, X } from "lucide-react";
+import { ArrowRight, CheckCircle2, GitBranch, Layers, LayoutGrid, Plus, Save, Search, X } from "lucide-react";
 import { FlowchartEditor } from "@/components/flowchart-editor";
 import { StatusBadge } from "@/components/status-badge";
 import { mergeSubareas, type Area, type Process, type ProcessType, type Subarea } from "@/lib/data";
@@ -401,7 +401,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
         {filteredProcesses.length === 0 && (
           <div className="empty-state">
             <strong>No se encontraron procesos ni tareas</strong>
-            <p>Usa el botón superior "Añadir proceso / tarea" para crear el primero en esta área.</p>
+            <p>Usa el botón superior &quot;Añadir proceso / tarea&quot; para crear el primero en esta área.</p>
           </div>
         )}
       </div>

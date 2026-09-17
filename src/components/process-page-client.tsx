@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ProcessDetail } from "@/components/process-detail";
@@ -14,11 +14,7 @@ type ProcessPageClientProps = {
 
 export function ProcessPageClient({ code, staticProcess }: ProcessPageClientProps) {
   const allProcesses = useProcesses();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
 
   const process = useMemo(() => {
     if (staticProcess) return staticProcess;

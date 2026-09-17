@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useCallback, useMemo, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { SubareaWorkspace } from "@/components/subarea-workspace";
@@ -24,23 +24,20 @@ export function SubareaPageClient({
   staticProcesses,
   initialFlowCode,
 }: SubareaPageClientProps) {
-  const [storedSubareas, setStoredSubareas] = useState<Subarea[]>([]);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    try {
-      const raw = window.localStorage.getItem(`reba-subareas-${area.code}`);
-      if (raw) {
-        const parsed = JSON.parse(raw) as Subarea[];
-        if (Array.isArray(parsed)) {
-          setStoredSubareas(parsed);
-        }
-      }
-    } catch {
-      // ignore
-    }
-  }, [area.code]);
+  const storageKey = `reba-subareas-${area.code}`;
+  const subscribe = useCallback((onStoreChange: () => void) => {
+    const onStorage = (event: StorageEvent) => { if (!event.key || event.key === storageKey) onStoreChange(); };
+    window.addEventListener("storage", onStorage);
+    window.addEventListener(storageKey, onStoreChange);
+    return () => { window.removeEventListener("storage", onStorage); window.removeEventListener(storageKey, onStoreChange); };
+  }, [storageKey]);
+  const getSnapshot = useCallback(() => window.localStorage.getItem(storageKey) ?? "", [storageKey]);
+  const storedRaw = useSyncExternalStore(subscribe, getSnapshot, () => null);
+  const mounted = storedRaw !== null;
+  const storedSubareas = useMemo(() => {
+    if (!storedRaw) return [];
+    try { const parsed = JSON.parse(storedRaw) as Subarea[]; return Array.isArray(parsed) ? parsed : []; } catch { return []; }
+  }, [storedRaw]);
 
   const allSiblings = useMemo(() => {
     return mergeSubareas(staticSiblings, storedSubareas);
