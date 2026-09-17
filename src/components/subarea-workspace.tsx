@@ -16,17 +16,13 @@ type SubareaWorkspaceProps = {
   linkedProcesses: Process[];
   flowCounts: Record<string, number>;
   initialFlowCode?: string;
+  initialEdit?: boolean;
 };
 
 const viewerTabs = ["Diagrama", "Ficha", "KPI", "Documentos", "Historial"] as const;
 type ViewerTab = typeof viewerTabs[number];
 
-const splitTasks = (value: string) => value
-  .split(/[\n,>→]+/)
-  .map((step) => step.trim())
-  .filter(Boolean);
-
-export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedProcesses, initialFlowCode }: SubareaWorkspaceProps) {
+export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedProcesses, initialFlowCode, initialEdit = false }: SubareaWorkspaceProps) {
   const isAreaRoot = area.code === "LOG" && subarea.code === "LOG";
   const allProcesses = useProcesses(linkedProcesses);
   const subareaProcesses = useMemo(
@@ -52,7 +48,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
   const initial = initialFlowCode && unifiedFlowcharts.some((item) => item.code === initialFlowCode) ? initialFlowCode : null;
   const [activeCode, setActiveCode] = useState<string | null>(initial);
   const [tab, setTab] = useState<ViewerTab>("Diagrama");
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(initialEdit && Boolean(initial));
   const [showAddForm, setShowAddForm] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
@@ -84,7 +80,6 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
     const owner = String(form.get("owner") ?? "").trim() || subarea.owner;
     const criticality = (form.get("criticality") as "Baja" | "Media" | "Alta") || "Media";
     const objective = String(form.get("objective") ?? "").trim();
-    const tasks = splitTasks(String(form.get("tasks") ?? ""));
 
     if (!name) {
       setError("Indica el nombre del proceso o tarea.");
@@ -103,7 +98,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
         criticality,
         status: "Borrador",
         objective,
-        tasks: tasks.length > 0 ? tasks : undefined,
+        tasks: [],
       },
       allProcesses
     );
@@ -111,7 +106,9 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
     event.currentTarget.reset();
     setError("");
     setShowAddForm(false);
-    setNotice(`${saved.code} · ${saved.name} se agregó correctamente a ${subarea.name}.`);
+    setActiveCode(saved.code);
+    setEditing(true);
+    setNotice(`${saved.code} · ${saved.name} fue creado. Ahora dibuja el flujo visualmente.`);
     window.setTimeout(() => setNotice(""), 4500);
   };
 
@@ -134,7 +131,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
       <div className="card-header">
         <div>
           <h2>Añadir proceso o tarea a {subarea.name}</h2>
-          <p>Se creará con codificación automática dentro de {subarea.code} y estará listo para consultar o editar su diagrama.</p>
+          <p>Se creará con codificación automática dentro de {subarea.code}. Al guardar se abrirá un lienzo vacío para diagramar visualmente.</p>
         </div>
       </div>
       <div className="form-grid">
@@ -165,18 +162,10 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
           <span>Objetivo y alcance</span>
           <textarea name="objective" rows={2} placeholder="Propósito, resultado esperado y alcance del proceso o tarea." />
         </label>
-        <label className="form-span">
-          <span>Tareas o etapas del flujo (una por línea)</span>
-          <textarea
-            name="tasks"
-            rows={4}
-            placeholder={"Paso 1: Recepción de solicitud o necesidad\nPaso 2: Validación de datos y antecedentes\nPaso 3: Ejecución de la actividad técnica\nPaso 4: Registro de evidencia y cierre"}
-          />
-        </label>
       </div>
       <div className="form-actions">
         <button type="button" className="button button-secondary" onClick={() => setShowAddForm(false)}>Cancelar</button>
-        <button className="button button-primary" type="submit"><Save size={15}/> Guardar en {isAreaRoot ? "área" : "subárea"}</button>
+        <button className="button button-primary" type="submit"><Save size={15}/> Crear y dibujar flujo</button>
       </div>
     </form>}
 

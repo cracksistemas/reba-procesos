@@ -15,7 +15,7 @@ export async function generateMetadata(props: { params: Promise<{ code: string; 
   return { title: item && area ? `${item.name} · ${area.name}` : "Subárea" };
 }
 
-export default async function SubareaPage(props: { params: Promise<{ code: string; subarea: string }>; searchParams: Promise<{ flujo?: string | string[] }> }) {
+export default async function SubareaPage(props: { params: Promise<{ code: string; subarea: string }>; searchParams: Promise<{ flujo?: string | string[]; editar?: string | string[] }> }) {
   const params = await props.params;
   const query = await props.searchParams;
   const area = getArea(params.code);
@@ -34,6 +34,7 @@ export default async function SubareaPage(props: { params: Promise<{ code: strin
       staticSiblings={siblings}
       staticProcesses={processes}
       initialFlowCode={initialFlowCode}
+      initialEdit={query.editar === "1"}
     />
   );
 }

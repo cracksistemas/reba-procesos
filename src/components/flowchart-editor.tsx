@@ -284,10 +284,14 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
   }, [onEdgesChange, markDirty]);
 
   const onConnect = useCallback((connection: Connection) => {
-    setEdges((current) => addEdge(makeEdge(`edge-${Date.now()}`, connection.source, connection.target, "normal", "", connection.sourceHandle, connection.targetHandle), current));
+    const source = nodes.find((node) => node.id === connection.source);
+    const decisionLabel = source?.data.kind === "decision"
+      ? connection.sourceHandle === "left" ? "No" : "Sí"
+      : "";
+    setEdges((current) => addEdge(makeEdge(`edge-${Date.now()}`, connection.source, connection.target, "normal", decisionLabel, connection.sourceHandle, connection.targetHandle), current));
     setDirty(true);
-    setNotice("Conexión creada. Selecciona la línea para añadir Sí/No o marcarla como retorno.");
-  }, [setEdges]);
+    setNotice(source?.data.kind === "decision" ? `Rama ${decisionLabel} creada. Selecciona la línea para cambiar su etiqueta si es necesario.` : "Conexión creada. Selecciona la línea para añadir una etiqueta o marcarla como retorno.");
+  }, [nodes, setEdges]);
 
   const addNode = (kind: NodeKind) => {
     const labels: Record<NodeKind, string> = { start: "Inicio del proceso", activity: "Nueva actividad", decision: "¿Decisión?", evidence: "Evidencia o documento", exception: "Excepción o escalamiento", end: "Fin del proceso" };
@@ -637,6 +641,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
         <button onClick={() => addNode("evidence")}><FileText size={16}/> Evidencia</button>
         <span className="toolbar-divider"/>
         <span className="xy-connect-tip"><Link2 size={15}/> Arrastra entre los puntos para conectar</span>
+        <span className="xy-connect-tip decision-tip"><Diamond size={14}/> Decisión: izquierda = No · derecha = Sí</span>
         <button disabled={!selectedNodeId && !selectedEdgeId} onClick={removeSelection}><Trash2 size={16}/> Eliminar</button>
         <button onClick={() => moveThroughHistory(-1)} disabled={historyPosition === 0}><Undo2 size={16}/> Deshacer</button>
         <button onClick={() => moveThroughHistory(1)} disabled={historyPosition >= historyLength - 1}><Redo2 size={16}/> Rehacer</button>

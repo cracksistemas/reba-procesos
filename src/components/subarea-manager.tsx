@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { ArrowRight, CheckCircle2, GitBranch, Layers, LayoutGrid, Plus, Save, Search, X } from "lucide-react";
 import { FlowchartEditor } from "@/components/flowchart-editor";
@@ -18,6 +19,7 @@ const splitLines = (value: string) => value
   .slice(0, 10);
 
 export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly = false }: SubareaManagerProps) {
+  const router = useRouter();
   const storageKey = `reba-subareas-${area.code}`;
   const [activeTab, setActiveTab] = useState<"subareas" | "processes">(areaOnly ? "processes" : "subareas");
   const [showSubareaForm, setShowSubareaForm] = useState(false);
@@ -102,7 +104,6 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
     const owner = String(form.get("owner") ?? "").trim() || targetSub?.owner || area.owner;
     const criticality = (form.get("criticality") as "Baja" | "Media" | "Alta") || "Media";
     const objective = String(form.get("objective") ?? "").trim();
-    const tasks = splitLines(String(form.get("tasks") ?? ""));
 
     if (!name || !targetSub) {
       setError(areaOnly ? "Completa el nombre del proceso o tarea." : "Completa el nombre y selecciona la subárea correspondiente.");
@@ -121,7 +122,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
         criticality,
         status: "Borrador",
         objective,
-        tasks: tasks.length > 0 ? tasks : undefined,
+        tasks: [],
       },
       allProcesses
     );
@@ -129,8 +130,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
     event.currentTarget.reset();
     setError("");
     setShowProcessForm(false);
-    setNotice(`${saved.code} · ${saved.name} se agregó con éxito a ${targetSub.name}.`);
-    window.setTimeout(() => setNotice(""), 4500);
+    router.push(`/areas/${area.code}/${targetSub.code}?flujo=${saved.code}&editar=1`);
   };
 
   const documentedFlows = items.reduce((total, subarea) => {
@@ -203,7 +203,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
       <div className="card-header">
         <div>
           <h2>Añadir proceso o tarea al área {area.name}</h2>
-          <p>{areaOnly ? "Crea una nueva tarea o proceso directamente en Logística, con sus etapas operativas." : "Crea una nueva tarea o proceso y asígnalo a una de sus subáreas con sus etapas operativas."}</p>
+          <p>{areaOnly ? "Crea una nueva tarea o proceso directamente en Logística. Al guardarlo se abrirá un lienzo para diagramarlo." : "Crea una nueva tarea o proceso y asígnalo a una subárea. Al guardarlo se abrirá un lienzo para diagramarlo."}</p>
         </div>
       </div>
       <div className="form-grid">
@@ -247,18 +247,10 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
           <span>Objetivo</span>
           <input name="objective" placeholder="Propósito del proceso o tarea" />
         </label>
-        <label className="form-span">
-          <span>Tareas o etapas del flujo (una por línea)</span>
-          <textarea
-            name="tasks"
-            rows={4}
-            placeholder={"Paso 1: Recepción del requerimiento\nPaso 2: Validación y control previo\nPaso 3: Ejecución de la tarea\nPaso 4: Conformidad y registro"}
-          />
-        </label>
       </div>
       <div className="form-actions">
         <button type="button" className="button button-secondary" onClick={() => setShowProcessForm(false)}>Cancelar</button>
-        <button className="button button-primary" type="submit"><Save size={15}/> Guardar proceso / tarea</button>
+        <button className="button button-primary" type="submit"><Save size={15}/> Crear y dibujar flujo</button>
       </div>
     </form>}
 

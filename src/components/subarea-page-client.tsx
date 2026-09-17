@@ -14,6 +14,7 @@ type SubareaPageClientProps = {
   staticSiblings: Subarea[];
   staticProcesses: Process[];
   initialFlowCode?: string;
+  initialEdit?: boolean;
 };
 
 export function SubareaPageClient({
@@ -23,6 +24,7 @@ export function SubareaPageClient({
   staticSiblings,
   staticProcesses,
   initialFlowCode,
+  initialEdit,
 }: SubareaPageClientProps) {
   const storageKey = `reba-subareas-${area.code}`;
   const subscribe = useCallback((onStoreChange: () => void) => {
@@ -85,6 +87,7 @@ export function SubareaPageClient({
       linkedProcesses={linkedProcesses}
       flowCounts={flowCounts}
       initialFlowCode={initialFlowCode}
+      initialEdit={initialEdit}
     />
   );
 }

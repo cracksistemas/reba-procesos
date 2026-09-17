@@ -81,9 +81,9 @@ export function saveProcess(
     objective: data.objective?.trim() || `Gestión de ${data.name.toLowerCase()} para ${data.subarea || data.area}.`,
     scope: data.scope?.trim() || "Desde la recepción de la tarea hasta la verificación y registro de evidencia.",
     nextReview: "Sin programar",
-    completion: data.tasks && data.tasks.length > 0 ? 80 : 50,
+    completion: data.tasks && data.tasks.length > 0 ? 80 : 20,
     type,
-    tasks: data.tasks && data.tasks.length > 0 ? data.tasks : ["Registrar solicitud o inicio", "Ejecutar actividad principal", "Validar cumplimiento y evidencias", "Cerrar y reportar resultado"],
+    tasks: data.tasks && data.tasks.length > 0 ? data.tasks : [],
     source: "Usuario",
   };
 
@@ -168,9 +168,7 @@ export function useProcesses(initialProcesses: Process[] = defaultProcesses): Pr
 }
 
 export function processToFlowchart(process: Process): Flowchart {
-  const tasks = process.tasks && process.tasks.length > 0
-    ? process.tasks
-    : ["Registrar solicitud o inicio", "Ejecutar actividad principal", "Validar cumplimiento y evidencias", "Cerrar y reportar resultado"];
+  const tasks = process.tasks ?? [];
 
   const nodes: ImportedFlowNode[] = [
     {
@@ -209,7 +207,7 @@ export function processToFlowchart(process: Process): Flowchart {
   ];
 
   const edges: ImportedFlowEdge[] = [];
-  for (let i = 0; i < nodes.length - 1; i++) {
+  for (let i = 0; i < nodes.length - 1 && tasks.length > 0; i++) {
     edges.push({
       id: `edge-${nodes[i].id}-${nodes[i + 1].id}`,
       source: nodes[i].id,
@@ -231,7 +229,7 @@ export function processToFlowchart(process: Process): Flowchart {
     description: process.objective,
     context: process.scope,
     closure: `Cierre: ${process.name} concluido satisfactoriamente y registrado en el sistema.`,
-    canvas: { width: 1000, height: 260 + tasks.length * 140 },
+    canvas: { width: 1000, height: Math.max(420, 260 + tasks.length * 140) },
     nodes,
     edges,
   };
