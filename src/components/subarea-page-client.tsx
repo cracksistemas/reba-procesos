@@ -40,8 +40,8 @@ export function SubareaPageClient({
   }, [storedRaw]);
 
   const allSiblings = useMemo(() => {
-    return mergeSubareas(staticSiblings, storedSubareas);
-  }, [staticSiblings, storedSubareas]);
+    return area.code === "LOG" ? staticSiblings : mergeSubareas(staticSiblings, storedSubareas);
+  }, [area.code, staticSiblings, storedSubareas]);
 
   const subarea = useMemo(() => {
     if (staticSubarea) return staticSubarea;

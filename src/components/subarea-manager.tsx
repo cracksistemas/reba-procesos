@@ -9,7 +9,7 @@ import { mergeSubareas, type Area, type Process, type ProcessType, type Subarea 
 import { getFlowcharts } from "@/lib/flowcharts";
 import { saveProcess, useProcesses } from "@/lib/process-store";
 
-type SubareaManagerProps = { area: Area; initialSubareas: Subarea[]; areaProcesses: Process[] };
+type SubareaManagerProps = { area: Area; initialSubareas: Subarea[]; areaProcesses: Process[]; areaOnly?: boolean };
 
 const splitLines = (value: string) => value
   .split(/[\n,>→]+/)
@@ -17,9 +17,9 @@ const splitLines = (value: string) => value
   .filter(Boolean)
   .slice(0, 10);
 
-export function SubareaManager({ area, initialSubareas, areaProcesses }: SubareaManagerProps) {
+export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly = false }: SubareaManagerProps) {
   const storageKey = `reba-subareas-${area.code}`;
-  const [activeTab, setActiveTab] = useState<"subareas" | "processes">("subareas");
+  const [activeTab, setActiveTab] = useState<"subareas" | "processes">(areaOnly ? "processes" : "subareas");
   const [showSubareaForm, setShowSubareaForm] = useState(false);
   const [showProcessForm, setShowProcessForm] = useState(false);
   const [selectedSubareaCode, setSelectedSubareaCode] = useState<string>("");
@@ -44,13 +44,13 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
   const storedValue = useSyncExternalStore(subscribe, getSnapshot, () => null);
 
   const items = useMemo(() => {
-    if (!storedValue) return initialSubareas;
+    if (areaOnly || !storedValue) return initialSubareas;
     try {
       return mergeSubareas(initialSubareas, JSON.parse(storedValue) as Subarea[]);
     } catch {
       return initialSubareas;
     }
-  }, [initialSubareas, storedValue]);
+  }, [areaOnly, initialSubareas, storedValue]);
 
   const persist = (next: Subarea[]) => {
     window.localStorage.setItem(storageKey, JSON.stringify(next));
@@ -95,7 +95,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
   const handleProcessSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const targetSubCode = String(form.get("subareaCode") ?? "").trim() || items[0]?.code;
+    const targetSubCode = areaOnly ? area.code : String(form.get("subareaCode") ?? "").trim() || items[0]?.code;
     const targetSub = items.find((s) => s.code === targetSubCode) || items[0];
     const name = String(form.get("name") ?? "").trim();
     const type = (form.get("type") as ProcessType) || "Proceso";
@@ -105,7 +105,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
     const tasks = splitLines(String(form.get("tasks") ?? ""));
 
     if (!name || !targetSub) {
-      setError("Completa el nombre y selecciona la subárea correspondiente.");
+      setError(areaOnly ? "Completa el nombre del proceso o tarea." : "Completa el nombre y selecciona la subárea correspondiente.");
       return;
     }
 
@@ -136,7 +136,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
   const documentedFlows = items.reduce((total, subarea) => {
     const imported = getFlowcharts(subarea.code).length;
     const related = currentAreaProcesses.filter((process) => process.subareaCode === subarea.code).length;
-    return total + Math.max(1, imported + related);
+    return total + Math.max(1, areaOnly ? Math.max(imported, related) : imported + related);
   }, 0);
 
   const filteredProcesses = useMemo(() => {
@@ -153,15 +153,15 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
         <div className="breadcrumb"><Link href="/biblioteca">Biblioteca</Link> / <Link href="/areas">Áreas</Link> / <span>{area.code}</span></div>
         <p className="eyebrow">Área institucional · Gestión de estructura y flujos</p>
         <h1>{area.name}</h1>
-        <p>{area.description} Administra sus subáreas, múltiples tareas y procesos operativos.</p>
+        <p>{area.description} {areaOnly ? "Sus procesos se gestionan directamente en esta área." : "Administra sus subáreas, múltiples tareas y procesos operativos."}</p>
       </div>
       <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-        <button
+        {!areaOnly && <button
           className="button button-secondary"
           onClick={() => { setShowSubareaForm((curr) => !curr); setShowProcessForm(false); }}
         >
           {showSubareaForm ? <X size={16}/> : <Plus size={16}/>} {showSubareaForm ? "Cancelar" : "Nueva subárea"}
-        </button>
+        </button>}
         <button
           className="button button-primary"
           onClick={() => {
@@ -203,11 +203,11 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
       <div className="card-header">
         <div>
           <h2>Añadir proceso o tarea al área {area.name}</h2>
-          <p>Crea una nueva tarea o proceso y asígnalo a una de sus subáreas con sus etapas operativas.</p>
+          <p>{areaOnly ? "Crea una nueva tarea o proceso directamente en Logística, con sus etapas operativas." : "Crea una nueva tarea o proceso y asígnalo a una de sus subáreas con sus etapas operativas."}</p>
         </div>
       </div>
       <div className="form-grid">
-        <label>
+        {!areaOnly && <label>
           <span>Subárea destino</span>
           <select
             name="subareaCode"
@@ -219,7 +219,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
               <option key={sub.code} value={sub.code}>{sub.code} · {sub.name}</option>
             ))}
           </select>
-        </label>
+        </label>}
         <label>
           <span>Tipo de elemento</span>
           <select name="type" defaultValue="Proceso">
@@ -263,14 +263,14 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
     </form>}
 
     <section className="area-directory-summary" aria-label={`Resumen de ${area.name}`}>
-      <div><strong>{items.length}</strong><span>Subáreas</span></div>
+      {!areaOnly && <div><strong>{items.length}</strong><span>Subáreas</span></div>}
       <div><strong>{documentedFlows}</strong><span>Procesos y programas</span></div>
       <div><strong>{currentAreaProcesses.length}</strong><span>Registros activos</span></div>
       <div><strong>{area.owner}</strong><span>Responsable del área</span></div>
     </section>
 
     {/* Navigation tabs */}
-    <div className="tabs" role="tablist" aria-label="Vistas del área" style={{ marginBottom: "20px" }}>
+    {!areaOnly && <div className="tabs" role="tablist" aria-label="Vistas del área" style={{ marginBottom: "20px" }}>
       <button
         className={`tab ${activeTab === "subareas" ? "active" : ""}`}
         onClick={() => setActiveTab("subareas")}
@@ -287,9 +287,9 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
       >
         <Layers size={15}/> Procesos y tareas del área ({currentAreaProcesses.length})
       </button>
-    </div>
+    </div>}
 
-    {activeTab === "subareas" ? <>
+    {!areaOnly && activeTab === "subareas" ? <>
       <div className="directory-heading">
         <div><h2>Subáreas de {area.name}</h2><p>Selecciona una subárea para ver sus procesos, tareas y flujogramas.</p></div>
         <span>{items.length} disponibles</span>
@@ -354,7 +354,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
             <tr>
               <th>Código</th>
               <th>Proceso / Tarea</th>
-              <th>Subárea</th>
+              {!areaOnly && <th>Subárea</th>}
               <th>Tipo</th>
               <th>Estado</th>
               <th>Versión</th>
@@ -366,14 +366,14 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
             {filteredProcesses.map((item) => (
               <tr key={item.code}>
                 <td>
-                  <Link className="table-code" href={`/areas/${area.code}/${item.subareaCode}?flujo=${item.code}`}>
+                  <Link className="table-code" href={`/areas/${area.code}/${areaOnly ? area.code : item.subareaCode}?flujo=${item.code}`}>
                     {item.code}
                   </Link>
                 </td>
-                <td>
+                {!areaOnly && <td>
                   <span className="table-primary">{item.name}</span>
                   <span className="table-secondary">{item.objective}</span>
-                </td>
+                </td>}
                 <td>
                   <span>{item.subarea}</span>
                   <span className="table-secondary">{item.subareaCode}</span>
@@ -387,9 +387,9 @@ export function SubareaManager({ area, initialSubareas, areaProcesses }: Subarea
                 <td className="table-actions">
                   <Link
                     className="icon-button"
-                    href={`/areas/${area.code}/${item.subareaCode}?flujo=${item.code}`}
+                    href={`/areas/${area.code}/${areaOnly ? area.code : item.subareaCode}?flujo=${item.code}`}
                     aria-label={`Abrir ${item.name}`}
-                    title="Abrir en subárea"
+                    title={areaOnly ? "Abrir proceso" : "Abrir en subárea"}
                   >
                     <ArrowRight size={16}/>
                   </Link>

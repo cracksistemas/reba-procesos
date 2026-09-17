@@ -3,11 +3,12 @@ import salesData from "./sales-flowcharts.json";
 import commercialLeaderData from "./commercial-leader-flowcharts.json";
 import administrationData from "./administration-flowcharts.json";
 import financeData from "./finance-flowcharts.json";
+import logisticsData from "./logistics-flowcharts";
 import type { MarketingFlowchart } from "./marketing-flowcharts";
 
 export type Flowchart = MarketingFlowchart;
 
-export const flowcharts = [...marketingData, ...salesData, ...commercialLeaderData, ...administrationData, ...financeData] as Flowchart[];
+export const flowcharts = [...marketingData, ...salesData, ...commercialLeaderData, ...administrationData, ...financeData, ...logisticsData] as Flowchart[];
 
 export function getFlowchartVersion(flowchart: Flowchart) {
   if (flowchart.code.startsWith("MKT-")) return "3.0";

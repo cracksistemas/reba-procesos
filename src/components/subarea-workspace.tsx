@@ -27,6 +27,7 @@ const splitTasks = (value: string) => value
   .filter(Boolean);
 
 export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedProcesses, initialFlowCode }: SubareaWorkspaceProps) {
+  const isAreaRoot = area.code === "LOG" && subarea.code === "LOG";
   const allProcesses = useProcesses(linkedProcesses);
   const subareaProcesses = useMemo(
     () => allProcesses.filter((p) => p.subareaCode.toLowerCase() === subarea.code.toLowerCase()),
@@ -117,12 +118,12 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
   return <>
     <div className="subarea-workspace-heading">
       <div className="breadcrumb"><Link href="/biblioteca">Biblioteca</Link> / <Link href="/areas">Áreas</Link> / <Link href={`/areas/${area.code}`}>{area.name}</Link> / <span>{subarea.name}</span></div>
-      <Link className="button button-secondary" href={`/areas/${area.code}`}><ArrowLeft size={14}/> Todas las subáreas</Link>
+      <Link className="button button-secondary" href={`/areas/${area.code}`}><ArrowLeft size={14}/> {isAreaRoot ? "Todos los procesos" : "Todas las subáreas"}</Link>
     </div>
 
     <section className="subarea-hero card">
       <div className="subarea-hero-mark" style={{ background: area.color }}><GitBranch size={23}/></div>
-      <div><p className="eyebrow">{subarea.code} · Subárea de {area.name}</p><h1>{subarea.name}</h1><p>{subarea.description}</p></div>
+      <div><p className="eyebrow">{subarea.code} · {isAreaRoot ? "Área institucional" : `Subárea de ${area.name}`}</p><h1>{subarea.name}</h1><p>{subarea.description}</p></div>
       <div className="subarea-hero-facts"><span><UserRound size={14}/> {subarea.owner}</span><strong>{totalEntries} {totalEntries === 1 ? "proceso o tarea" : "procesos y tareas"}</strong></div>
     </section>
 
@@ -175,7 +176,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
       </div>
       <div className="form-actions">
         <button type="button" className="button button-secondary" onClick={() => setShowAddForm(false)}>Cancelar</button>
-        <button className="button button-primary" type="submit"><Save size={15}/> Guardar en subárea</button>
+        <button className="button button-primary" type="submit"><Save size={15}/> Guardar en {isAreaRoot ? "área" : "subárea"}</button>
       </div>
     </form>}
 
@@ -183,7 +184,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
       <main>
         <div className="directory-heading">
           <div>
-            <h2>Procesos y tareas de la subárea</h2>
+            <h2>Procesos y tareas {isAreaRoot ? "del área" : "de la subárea"}</h2>
             <p>Selecciona un elemento para abrir su ficha y su flujograma interactivo.</p>
           </div>
           <button className="button button-primary" onClick={() => setShowAddForm((curr) => !curr)}>
@@ -232,7 +233,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
         </section>
       </main>
 
-      <aside className="card sibling-directory">
+      {!isAreaRoot && <aside className="card sibling-directory">
         <div className="workspace-nav-head">
           <LayoutGrid size={16}/>
           <div><strong>Otras subáreas</strong><span>{area.name}</span></div>
@@ -249,12 +250,12 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
             </Link>;
           })}
         </nav>
-      </aside>
+      </aside>}
     </div> : <section className="process-viewer">
       <div className="process-viewer-top card">
         <button className="icon-button viewer-back" onClick={() => { setActiveCode(null); setEditing(false); }} aria-label="Volver a la lista"><ArrowLeft size={18}/></button>
         <div>
-          <div className="viewer-context">{area.name} / {subarea.name} / {activeFlow?.code ?? `${subarea.code}-F01`}</div>
+          <div className="viewer-context">{area.name} / {isAreaRoot ? "Procesos del área" : subarea.name} / {activeFlow?.code ?? `${subarea.code}-F01`}</div>
           <h2>{activeFlow?.title ?? `Flujograma general de ${subarea.name}`}</h2>
           <p>{activeFlow?.description ?? subarea.description}</p>
         </div>
@@ -294,7 +295,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
           </div>
           <aside className="facts">
             <div className="fact"><span>Área</span><strong>{area.name}</strong></div>
-            <div className="fact"><span>Subárea</span><strong>{subarea.name}</strong></div>
+            <div className="fact"><span>{isAreaRoot ? "Ubicación" : "Subárea"}</span><strong>{isAreaRoot ? "Procesos directos de Logística" : subarea.name}</strong></div>
             <div className="fact"><span>Tipo</span><strong>{activeProcess?.type ?? "Proceso"}</strong></div>
             <div className="fact"><span>Responsable</span><strong>{activeFlow?.owner ?? subarea.owner}</strong></div>
             <div className="fact"><span>Criticidad</span><strong>{activeProcess?.criticality ?? "Media"}</strong></div>

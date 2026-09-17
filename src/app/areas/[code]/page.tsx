@@ -9,12 +9,15 @@ export function generateStaticParams() {
 export async function generateMetadata(props: { params: Promise<{ code: string }> }) {
   const { code } = await props.params;
   const area = getArea(code);
-  return { title: area ? `${area.name} · Subáreas` : "Área" };
+  return { title: area ? `${area.name} · Procesos` : "Área" };
 }
 
 export default async function AreaPage(props: { params: Promise<{ code: string }> }) {
   const { code } = await props.params;
   const area = getArea(code);
   if (!area) notFound();
+  if (area.code === "LOG") {
+    return <SubareaManager area={area} initialSubareas={[{ code: "LOG", areaCode: "LOG", name: "Logística", description: area.description, owner: area.owner, flow: [], source: "Drive" }]} areaProcesses={processes.filter((process) => process.area === area.name)} areaOnly />;
+  }
   return <SubareaManager area={area} initialSubareas={getSubareas(area.code)} areaProcesses={processes.filter((process) => process.area === area.name)} />;
 }
