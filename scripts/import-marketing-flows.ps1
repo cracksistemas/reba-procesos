@@ -86,6 +86,11 @@ function Decode([string]$value) {
   return $decoder::HtmlDecode(($value -replace '<[^>]+>', '')).Trim()
 }
 
+function DecodeBlock([string]$value) {
+  $cleaned = (($value -replace '<[^>]+>', ' ') -replace '\s+', ' ').Trim()
+  return $decoder::HtmlDecode($cleaned)
+}
+
 function BoundsFromPairs([double[]]$numbers) {
   $xs = @(); $ys = @()
   for ($index = 0; $index -lt $numbers.Count - 1; $index += 2) {
@@ -93,6 +98,25 @@ function BoundsFromPairs([double[]]$numbers) {
   }
   return @{ minX = ($xs | Measure-Object -Minimum).Minimum; maxX = ($xs | Measure-Object -Maximum).Maximum; minY = ($ys | Measure-Object -Minimum).Minimum; maxY = ($ys | Measure-Object -Maximum).Maximum }
 }
+
+function ClosestSide($node, [double]$pointX, [double]$pointY) {
+  $left = [double]$node.position.x
+  $top = [double]$node.position.y
+  $right = $left + [double]$node.size.width
+  $bottom = $top + [double]$node.size.height
+  $distances = [ordered]@{
+    top = [math]::Abs($pointY - $top)
+    right = [math]::Abs($pointX - $right)
+    bottom = [math]::Abs($pointY - $bottom)
+    left = [math]::Abs($pointX - $left)
+  }
+  return ($distances.GetEnumerator() | Sort-Object Value | Select-Object -First 1).Key
+}
+
+$headerDescriptionMatch = [regex]::Match($html, '<header[^>]*>[\s\S]*?<p[^>]*>([\s\S]*?)</p>[\s\S]*?</header>')
+$headerDescription = if ($headerDescriptionMatch.Success) { DecodeBlock $headerDescriptionMatch.Groups[1].Value } else { '' }
+$introMatch = [regex]::Match($html, '<section[^>]*class="[^"]*intro[^"]*"[^>]*>([\s\S]*?)</section>')
+$documentContext = if ($introMatch.Success) { DecodeBlock $introMatch.Groups[1].Value } else { $headerDescription }
 
 $flows = @()
 $sections = [regex]::Matches($html, '<section[^>]*class="[^"]*(?:flow-card|card)[^"]*"[^>]*>[\s\S]*?</section>')
@@ -115,6 +139,8 @@ foreach ($sectionMatch in $sections) {
   if ($Profile -in @("Administration", "Finance")) { $title = $title -replace '^\d+\.\s*', '' }
   $descriptionMatch = [regex]::Match($section, '<h2>[\s\S]*?</h2>\s*<p>([\s\S]*?)</p>')
   $description = if ($descriptionMatch.Success) { Decode $descriptionMatch.Groups[1].Value } elseif ($Profile -eq "Administration") { "Proceso documentado de Administración y Recursos Humanos con responsables funcionales y evidencia de cierre." } elseif ($Profile -eq "Finance") { "Proceso documentado de Contabilidad, Finanzas y Tesorería con responsables funcionales y evidencia de cierre." } else { "Flujograma institucional documentado para edición visual." }
+  $closureMatch = [regex]::Match($section, '<p[^>]*class="[^"]*evi[^"]*"[^>]*>([\s\S]*?)</p>')
+  $closure = if ($closureMatch.Success) { DecodeBlock $closureMatch.Groups[1].Value } else { '' }
   $svg = [regex]::Match($section, '<svg[\s\S]*?</svg>').Value
   $viewBoxNumbers = [regex]::Match($svg, 'viewBox="([^"]+)"').Groups[1].Value.Split(' ', [System.StringSplitOptions]::RemoveEmptyEntries)
   $transform = [regex]::Match($svg, 'translate\(([-\d.]+)\s+([-\d.]+)\)')
@@ -201,8 +227,21 @@ foreach ($sectionMatch in $sections) {
     $targetCenterY = $targetNode.position.y + ($targetNode.size.height / 2)
     $dx = $targetCenterX - $sourceCenterX
     $dy = $targetCenterY - $sourceCenterY
-    if ([math]::Abs($dx) -gt [math]::Abs($dy)) { $sourceHandle = if ($dx -gt 0) { 'right' } else { 'left' } }
-    else { $sourceHandle = if ($dy -gt 0) { 'bottom' } else { 'right' } }
+    $sourceHandle = if ([math]::Abs($dx) -gt [math]::Abs($dy)) { if ($dx -gt 0) { 'right' } else { 'left' } } else { if ($dy -gt 0) { 'bottom' } else { 'top' } }
+    $targetHandle = if ([math]::Abs($dx) -gt [math]::Abs($dy)) { if ($dx -gt 0) { 'left' } else { 'right' } } else { if ($dy -gt 0) { 'top' } else { 'bottom' } }
+
+    $edgePath = [regex]::Match($edgeSvg, '<path[^>]*d="([^"]+)"')
+    if ($edgePath.Success) {
+      $pathNumbers = @([regex]::Matches($edgePath.Groups[1].Value, '-?\d+(?:\.\d+)?') | ForEach-Object { [double]$_.Value })
+      if ($pathNumbers.Count -ge 4) {
+        $sourcePointX = $translateX + $pathNumbers[0]
+        $sourcePointY = $translateY + $pathNumbers[1]
+        $targetPointX = $translateX + $pathNumbers[$pathNumbers.Count - 2]
+        $targetPointY = $translateY + $pathNumbers[$pathNumbers.Count - 1]
+        $sourceHandle = ClosestSide $sourceNode $sourcePointX $sourcePointY
+        $targetHandle = ClosestSide $targetNode $targetPointX $targetPointY
+      }
+    }
     $edges += [ordered]@{
       id = "$flowCode-edge-$($edges.Count + 1)"
       source = $sourceNode.id
@@ -210,7 +249,14 @@ foreach ($sectionMatch in $sections) {
       label = $label
       route = $route
       sourceHandle = $sourceHandle
+      targetHandle = $targetHandle
     }
+  }
+
+  $nodesWithOutgoing = @{}; $nodesWithIncoming = @{}
+  foreach ($edge in $edges) { $nodesWithOutgoing[$edge.source] = $true; $nodesWithIncoming[$edge.target] = $true }
+  foreach ($node in $nodes) {
+    if ($node.kind -eq 'start' -and $nodesWithIncoming[$node.id] -and -not $nodesWithOutgoing[$node.id]) { $node.kind = 'end' }
   }
 
   $flows += [ordered]@{
@@ -221,6 +267,8 @@ foreach ($sectionMatch in $sections) {
     owner = $subarea.owner
     title = $title
     description = $description
+    context = $documentContext
+    closure = $closure
     canvas = @{ width = [double]$viewBoxNumbers[2]; height = [double]$viewBoxNumbers[3] }
     nodes = $nodes
     edges = $edges

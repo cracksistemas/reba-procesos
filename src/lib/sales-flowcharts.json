@@ -7,6 +7,8 @@
     "owner": "Jefe de Ventas",
     "title": "Flujo macro del Jefe de Ventas",
     "description": "El Jefe gobierna metas, forecast, líderes, excepciones y resultados; los líderes ejecutan la operación diaria.",
+    "context": "Modelo ajustado para que la Jefatura gobierne metas, forecast, líderes, excepciones y resultados, mientras la operación diaria queda en los líderes, ejecutivos y sistemas.",
+    "closure": "",
     "canvas": {
       "width": 732.2,
       "height": 1156.2
@@ -235,7 +237,7 @@
       },
       {
         "id": "COM-JV-01-end",
-        "kind": "start",
+        "kind": "end",
         "label": "Cierre del ciclo comercial",
         "role": "",
         "position": {
@@ -258,7 +260,8 @@
         "target": "COM-JV-01-j1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-2",
@@ -266,7 +269,8 @@
         "target": "COM-JV-01-j2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-3",
@@ -274,7 +278,8 @@
         "target": "COM-JV-01-l1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-4",
@@ -282,7 +287,8 @@
         "target": "COM-JV-01-crm",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-5",
@@ -290,7 +296,8 @@
         "target": "COM-JV-01-e1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-6",
@@ -298,7 +305,8 @@
         "target": "COM-JV-01-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-7",
@@ -306,7 +314,8 @@
         "target": "COM-JV-01-l2",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-8",
@@ -314,7 +323,8 @@
         "target": "COM-JV-01-j3",
         "label": "Sí",
         "route": "return",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-9",
@@ -322,7 +332,8 @@
         "target": "COM-JV-01-j4",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-10",
@@ -330,7 +341,8 @@
         "target": "COM-JV-01-d2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-11",
@@ -338,7 +350,8 @@
         "target": "COM-JV-01-g",
         "label": "Sí",
         "route": "return",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-12",
@@ -346,7 +359,8 @@
         "target": "COM-JV-01-j4",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-13",
@@ -354,7 +368,8 @@
         "target": "COM-JV-01-j4",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-14",
@@ -362,7 +377,8 @@
         "target": "COM-JV-01-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-01-edge-15",
@@ -370,7 +386,8 @@
         "target": "COM-JV-01-end",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -382,6 +399,8 @@
     "owner": "Jefe de Ventas",
     "title": "Meta mensual y forecast",
     "description": "Separa planificación y supervisión de la ejecución diaria.",
+    "context": "Modelo ajustado para que la Jefatura gobierne metas, forecast, líderes, excepciones y resultados, mientras la operación diaria queda en los líderes, ejecutivos y sistemas.",
+    "closure": "",
     "canvas": {
       "width": 826.7,
       "height": 815.2
@@ -525,7 +544,7 @@
       },
       {
         "id": "COM-JV-02-e",
-        "kind": "start",
+        "kind": "end",
         "label": "Forecast actualizado",
         "role": "",
         "position": {
@@ -565,7 +584,8 @@
         "target": "COM-JV-02-j1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-02-edge-2",
@@ -573,7 +593,8 @@
         "target": "COM-JV-02-j2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-02-edge-3",
@@ -581,7 +602,8 @@
         "target": "COM-JV-02-l",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-02-edge-4",
@@ -589,7 +611,8 @@
         "target": "COM-JV-02-j3",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-02-edge-5",
@@ -597,7 +620,8 @@
         "target": "COM-JV-02-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-02-edge-6",
@@ -605,7 +629,8 @@
         "target": "COM-JV-02-ok",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-02-edge-7",
@@ -613,7 +638,8 @@
         "target": "COM-JV-02-pc",
         "label": "Sí",
         "route": "return",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-02-edge-8",
@@ -621,7 +647,8 @@
         "target": "COM-JV-02-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "left"
       },
       {
         "id": "COM-JV-02-edge-9",
@@ -629,7 +656,8 @@
         "target": "COM-JV-02-g",
         "label": "Solo si excede autoridad",
         "route": "return",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-02-edge-10",
@@ -637,7 +665,8 @@
         "target": "COM-JV-02-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "right"
       },
       {
         "id": "COM-JV-02-edge-11",
@@ -645,7 +674,8 @@
         "target": "COM-JV-02-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -657,6 +687,8 @@
     "owner": "Jefe de Ventas",
     "title": "Operación diaria delegada al líder",
     "description": "El Jefe no debe abrir pizarra, asignar cada lead ni hacer cada corte.",
+    "context": "Modelo ajustado para que la Jefatura gobierne metas, forecast, líderes, excepciones y resultados, mientras la operación diaria queda en los líderes, ejecutivos y sistemas.",
+    "closure": "",
     "canvas": {
       "width": 853.2,
       "height": 697.2
@@ -800,7 +832,7 @@
       },
       {
         "id": "COM-JV-03-e",
-        "kind": "start",
+        "kind": "end",
         "label": "Cierre de turno",
         "role": "",
         "position": {
@@ -823,7 +855,8 @@
         "target": "COM-JV-03-l1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-03-edge-2",
@@ -831,7 +864,8 @@
         "target": "COM-JV-03-crm",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-03-edge-3",
@@ -839,7 +873,8 @@
         "target": "COM-JV-03-l2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-03-edge-4",
@@ -847,7 +882,8 @@
         "target": "COM-JV-03-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-03-edge-5",
@@ -855,7 +891,8 @@
         "target": "COM-JV-03-fix",
         "label": "Sí",
         "route": "normal",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-03-edge-6",
@@ -863,7 +900,8 @@
         "target": "COM-JV-03-j",
         "label": "No",
         "route": "return",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-03-edge-7",
@@ -871,7 +909,8 @@
         "target": "COM-JV-03-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-03-edge-8",
@@ -879,7 +918,8 @@
         "target": "COM-JV-03-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-03-edge-9",
@@ -887,7 +927,8 @@
         "target": "COM-JV-03-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -899,6 +940,8 @@
     "owner": "Jefe de Ventas",
     "title": "Asignación de leads y SLA",
     "description": "El sistema y el líder resuelven lo rutinario; el Jefe supervisa la tasa de cumplimiento y excepciones.",
+    "context": "Modelo ajustado para que la Jefatura gobierne metas, forecast, líderes, excepciones y resultados, mientras la operación diaria queda en los líderes, ejecutivos y sistemas.",
+    "closure": "",
     "canvas": {
       "width": 677.13,
       "height": 824.2
@@ -1025,7 +1068,7 @@
       },
       {
         "id": "COM-JV-04-e",
-        "kind": "start",
+        "kind": "end",
         "label": "Lead con dueño y siguiente acción",
         "role": "",
         "position": {
@@ -1082,7 +1125,8 @@
         "target": "COM-JV-04-crm1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-04-edge-2",
@@ -1090,7 +1134,8 @@
         "target": "COM-JV-04-crm2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-04-edge-3",
@@ -1098,7 +1143,8 @@
         "target": "COM-JV-04-exec",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-04-edge-4",
@@ -1106,7 +1152,8 @@
         "target": "COM-JV-04-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-04-edge-5",
@@ -1114,7 +1161,8 @@
         "target": "COM-JV-04-ok",
         "label": "Sí",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-04-edge-6",
@@ -1122,7 +1170,8 @@
         "target": "COM-JV-04-re",
         "label": "No",
         "route": "return",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-04-edge-7",
@@ -1130,7 +1179,8 @@
         "target": "COM-JV-04-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "left"
       },
       {
         "id": "COM-JV-04-edge-8",
@@ -1138,7 +1188,8 @@
         "target": "COM-JV-04-d2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-04-edge-9",
@@ -1146,7 +1197,8 @@
         "target": "COM-JV-04-j",
         "label": "Sí",
         "route": "return",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-04-edge-10",
@@ -1154,7 +1206,8 @@
         "target": "COM-JV-04-e",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-04-edge-11",
@@ -1162,7 +1215,8 @@
         "target": "COM-JV-04-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -1174,6 +1228,8 @@
     "owner": "Jefe de Ventas",
     "title": "Ofertas, descuentos y excepciones",
     "description": "El Jefe aprueba solo dentro de la matriz autorizada; Gerencia entra en excepciones.",
+    "context": "Modelo ajustado para que la Jefatura gobierne metas, forecast, líderes, excepciones y resultados, mientras la operación diaria queda en los líderes, ejecutivos y sistemas.",
+    "closure": "",
     "canvas": {
       "width": 736.7,
       "height": 614.2
@@ -1300,7 +1356,7 @@
       },
       {
         "id": "COM-JV-05-e",
-        "kind": "start",
+        "kind": "end",
         "label": "Venta / condición trazable",
         "role": "",
         "position": {
@@ -1323,7 +1379,8 @@
         "target": "COM-JV-05-l",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-05-edge-2",
@@ -1331,7 +1388,8 @@
         "target": "COM-JV-05-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-05-edge-3",
@@ -1339,7 +1397,8 @@
         "target": "COM-JV-05-j",
         "label": "Sí",
         "route": "normal",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-05-edge-4",
@@ -1347,7 +1406,8 @@
         "target": "COM-JV-05-g",
         "label": "No",
         "route": "return",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-05-edge-5",
@@ -1355,7 +1415,8 @@
         "target": "COM-JV-05-exec",
         "label": "",
         "route": "normal",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-05-edge-6",
@@ -1363,7 +1424,8 @@
         "target": "COM-JV-05-exec",
         "label": "",
         "route": "normal",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-05-edge-7",
@@ -1371,7 +1433,8 @@
         "target": "COM-JV-05-fin",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-05-edge-8",
@@ -1379,7 +1442,8 @@
         "target": "COM-JV-05-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -1391,6 +1455,8 @@
     "owner": "Jefe de Ventas",
     "title": "Comisiones y disputa de propiedad",
     "description": "Separa elegibilidad comercial, validación del pago y liquidación.",
+    "context": "Modelo ajustado para que la Jefatura gobierne metas, forecast, líderes, excepciones y resultados, mientras la operación diaria queda en los líderes, ejecutivos y sistemas.",
+    "closure": "",
     "canvas": {
       "width": 782.2,
       "height": 780.2
@@ -1534,7 +1600,7 @@
       },
       {
         "id": "COM-JV-06-e",
-        "kind": "start",
+        "kind": "end",
         "label": "Comisión cerrada y sustentada",
         "role": "",
         "position": {
@@ -1557,7 +1623,8 @@
         "target": "COM-JV-06-fin1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-06-edge-2",
@@ -1565,7 +1632,8 @@
         "target": "COM-JV-06-crm",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-06-edge-3",
@@ -1573,7 +1641,8 @@
         "target": "COM-JV-06-l",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-06-edge-4",
@@ -1581,7 +1650,8 @@
         "target": "COM-JV-06-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-06-edge-5",
@@ -1589,7 +1659,8 @@
         "target": "COM-JV-06-ok",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-06-edge-6",
@@ -1597,7 +1668,8 @@
         "target": "COM-JV-06-j",
         "label": "Sí",
         "route": "return",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-06-edge-7",
@@ -1605,7 +1677,8 @@
         "target": "COM-JV-06-fin2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-06-edge-8",
@@ -1613,7 +1686,8 @@
         "target": "COM-JV-06-ok",
         "label": "",
         "route": "normal",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-06-edge-9",
@@ -1621,7 +1695,8 @@
         "target": "COM-JV-06-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -1633,6 +1708,8 @@
     "owner": "Jefe de Ventas",
     "title": "Desempeño, coaching e incidencias",
     "description": "Distingue gestión comercial de la gestión laboral formal de RR.HH.",
+    "context": "Modelo ajustado para que la Jefatura gobierne metas, forecast, líderes, excepciones y resultados, mientras la operación diaria queda en los líderes, ejecutivos y sistemas.",
+    "closure": "",
     "canvas": {
       "width": 929.7,
       "height": 658.2
@@ -1725,7 +1802,7 @@
       },
       {
         "id": "COM-JV-07-e",
-        "kind": "start",
+        "kind": "end",
         "label": "Caso cerrado con resultado y prevención",
         "role": "",
         "position": {
@@ -1799,7 +1876,8 @@
         "target": "COM-JV-07-l",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-07-edge-2",
@@ -1807,7 +1885,8 @@
         "target": "COM-JV-07-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-07-edge-3",
@@ -1815,7 +1894,8 @@
         "target": "COM-JV-07-close",
         "label": "Sí",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-07-edge-4",
@@ -1823,7 +1903,8 @@
         "target": "COM-JV-07-j",
         "label": "No",
         "route": "return",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-07-edge-5",
@@ -1831,7 +1912,8 @@
         "target": "COM-JV-07-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-07-edge-6",
@@ -1839,7 +1921,8 @@
         "target": "COM-JV-07-d2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-07-edge-7",
@@ -1847,7 +1930,8 @@
         "target": "COM-JV-07-rr",
         "label": "Sí",
         "route": "return",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-07-edge-8",
@@ -1855,7 +1939,8 @@
         "target": "COM-JV-07-j2",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-07-edge-9",
@@ -1863,7 +1948,8 @@
         "target": "COM-JV-07-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-JV-07-edge-10",
@@ -1871,7 +1957,8 @@
         "target": "COM-JV-07-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   }

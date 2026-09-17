@@ -28,12 +28,13 @@ import type { Flowchart } from "@/lib/flowcharts";
 
 type NodeKind = "start" | "activity" | "decision" | "evidence" | "exception" | "end";
 type EdgeRoute = "normal" | "return";
+type HandleSide = "top" | "right" | "bottom" | "left";
 type AlignmentMode = "row" | "column" | "distribute-horizontal" | "distribute-vertical";
 type ExportFormat = "png" | "jpg" | "pdf" | "docx";
 
 type RebaNodeData = { label: string; role: string; kind: NodeKind; fill?: string; stroke?: string; textColor?: string };
 type RebaNode = Node<RebaNodeData, "reba">;
-type RebaEdge = Edge<{ route: EdgeRoute }>;
+type RebaEdge = Edge<{ route: EdgeRoute }, "smoothstep">;
 type FlowGraph = { version: 2; nodes: RebaNode[]; edges: RebaEdge[]; viewport?: Viewport };
 
 const nodeTypes = { reba: RebaFlowNode };
@@ -102,6 +103,32 @@ function fitNodeBox(kind: NodeKind, label: string, role: string, position: { x: 
   };
 }
 
+function importedNodeLayout(imported: Flowchart) {
+  const horizontalScale = 1.16;
+  const verticalScale = 1.32;
+  const centers = imported.nodes.map((node) => ({
+    x: node.position.x + node.size.width / 2,
+    y: node.position.y + node.size.height / 2,
+  }));
+  const originX = Math.min(...centers.map((center) => center.x));
+  const originY = Math.min(...centers.map((center) => center.y));
+
+  return imported.nodes.map((node, index) => {
+    const style = nodeDimensions(node.kind, node.label, node.role, node.size.width);
+    const center = centers[index];
+    return {
+      id: node.id,
+      type: "reba" as const,
+      position: {
+        x: originX + (center.x - originX) * horizontalScale - style.width / 2,
+        y: originY + (center.y - originY) * verticalScale - style.height / 2,
+      },
+      data: { kind: node.kind, label: node.label, role: node.role, fill: node.fill, stroke: node.stroke, textColor: node.textColor },
+      style,
+    };
+  });
+}
+
 function RebaFlowNode({ data, selected }: NodeProps<RebaNode>) {
   const customColors = data.fill ? {
     "--node-fill": data.fill,
@@ -109,18 +136,22 @@ function RebaFlowNode({ data, selected }: NodeProps<RebaNode>) {
     "--node-text": data.textColor ?? "#243447",
   } as CSSProperties : undefined;
   return <div className={`xy-node node-${data.kind} ${selected ? "selected" : ""}`} style={customColors}>
-    <Handle className="xy-handle" type="target" position={Position.Top}/>
+    <Handle className="xy-handle xy-source-handle xy-handle-top" id="top" type="source" position={Position.Top}/>
     <Handle className="xy-handle xy-handle-left" id="left" type="source" position={Position.Left}/>
     <div className="xy-node-content">{data.role && <small>{data.role}</small>}<strong>{data.label}</strong></div>
     <Handle className="xy-handle" id="bottom" type="source" position={Position.Bottom}/>
     <Handle className="xy-handle xy-handle-right" id="right" type="source" position={Position.Right}/>
+    <Handle className="xy-target-handle xy-target-top" id="target-top" type="target" position={Position.Top}/>
+    <Handle className="xy-target-handle xy-target-right" id="target-right" type="target" position={Position.Right}/>
+    <Handle className="xy-target-handle xy-target-bottom" id="target-bottom" type="target" position={Position.Bottom}/>
+    <Handle className="xy-target-handle xy-target-left" id="target-left" type="target" position={Position.Left}/>
   </div>;
 }
 
-function makeEdge(id: string, source: string, target: string, route: EdgeRoute = "normal", label = "", sourceHandle?: string | null): RebaEdge {
+function makeEdge(id: string, source: string, target: string, route: EdgeRoute = "normal", label = "", sourceHandle?: string | null, targetHandle?: string | null): RebaEdge {
   const color = route === "return" ? "#c0392b" : "#52616b";
   return {
-    id, source, target, sourceHandle, type: "smoothstep", label, data: { route },
+    id, source, target, sourceHandle, targetHandle: targetHandle ? `target-${targetHandle.replace(/^target-/, "")}` : undefined, type: "smoothstep", label, data: { route },
     style: { stroke: color, strokeWidth: route === "return" ? 2.4 : 1.8, strokeDasharray: route === "return" ? "7 4" : undefined },
     labelStyle: { fill: color, fontWeight: 800, fontSize: 11 },
     labelBgStyle: { fill: "#ffffff", fillOpacity: 0.92 },
@@ -132,17 +163,8 @@ function buildInitialGraph(subarea: Subarea, imported?: Flowchart): FlowGraph {
   if (imported) {
     return {
       version: 2,
-      nodes: imported.nodes.map((node) => {
-        const box = fitNodeBox(node.kind, node.label, node.role, node.position, node.size);
-        return {
-          id: node.id,
-          type: "reba",
-          position: box.position,
-          data: { kind: node.kind, label: node.label, role: node.role, fill: node.fill, stroke: node.stroke, textColor: node.textColor },
-          style: box.style,
-        };
-      }),
-      edges: imported.edges.map((edge) => makeEdge(edge.id, edge.source, edge.target, edge.route, edge.label, edge.sourceHandle)),
+      nodes: importedNodeLayout(imported),
+      edges: imported.edges.map((edge) => makeEdge(edge.id, edge.source, edge.target, edge.route, edge.label, edge.sourceHandle, edge.targetHandle)),
     };
   }
   const x = 430;
@@ -180,7 +202,8 @@ function migrateGraph(value: string | null, fallback: FlowGraph): FlowGraph {
     const edges = raw.edges.map((item, index) => {
       const data = item.data as { route?: EdgeRoute } | undefined;
       const route = data?.route ?? (item.route === "return" ? "return" : "normal");
-      return makeEdge(String(item.id ?? `edge-${index + 1}`), String(item.source ?? item.from ?? ""), String(item.target ?? item.to ?? ""), route, typeof item.label === "string" ? item.label : "", typeof item.sourceHandle === "string" ? item.sourceHandle : null);
+      const storedTargetHandle = typeof item.targetHandle === "string" ? item.targetHandle.replace(/^target-/, "") : null;
+      return makeEdge(String(item.id ?? `edge-${index + 1}`), String(item.source ?? item.from ?? ""), String(item.target ?? item.to ?? ""), route, typeof item.label === "string" ? item.label : "", typeof item.sourceHandle === "string" ? item.sourceHandle : null, storedTargetHandle);
     }).filter((edge) => edge.source && edge.target);
     return { version: 2, nodes, edges, viewport: raw.viewport };
   } catch {
@@ -192,11 +215,11 @@ function historySnapshot(nodes: RebaNode[], edges: RebaEdge[]): FlowGraph {
   return {
     version: 2,
     nodes: nodes.map((node) => ({ id: node.id, type: node.type, position: { ...node.position }, data: { ...node.data }, style: { ...node.style } })),
-    edges: edges.map((edge) => makeEdge(edge.id, edge.source, edge.target, edge.data?.route ?? "normal", String(edge.label ?? ""), edge.sourceHandle)),
+    edges: edges.map((edge) => makeEdge(edge.id, edge.source, edge.target, edge.data?.route ?? "normal", String(edge.label ?? ""), edge.sourceHandle, edge.targetHandle)),
   };
 }
 
-function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, storageKey, onClose, embedded = false, readOnly = false }: { area: Area; subarea: Subarea; flowCode: string; flowTitle: string; initialGraph: FlowGraph; storageKey: string; onClose?: () => void; embedded?: boolean; readOnly?: boolean }) {
+function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, flowContext, flowClosure, initialGraph, storageKey, onClose, embedded = false, readOnly = false }: { area: Area; subarea: Subarea; flowCode: string; flowTitle: string; flowDescription?: string; flowContext?: string; flowClosure?: string; initialGraph: FlowGraph; storageKey: string; onClose?: () => void; embedded?: boolean; readOnly?: boolean }) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const toolbarRef = useRef<HTMLDivElement>(null);
   const [nodes, setNodes, onNodesChange] = useNodesState<RebaNode>(initialGraph.nodes);
@@ -260,7 +283,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
   }, [onEdgesChange, markDirty]);
 
   const onConnect = useCallback((connection: Connection) => {
-    setEdges((current) => addEdge(makeEdge(`edge-${Date.now()}`, connection.source, connection.target, "normal", "", connection.sourceHandle), current));
+    setEdges((current) => addEdge(makeEdge(`edge-${Date.now()}`, connection.source, connection.target, "normal", "", connection.sourceHandle, connection.targetHandle), current));
     setDirty(true);
     setNotice("Conexión creada. Selecciona la línea para añadir Sí/No o marcarla como retorno.");
   }, [setEdges]);
@@ -288,7 +311,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
 
   const updateSelectedEdge = (patch: { label?: string; route?: EdgeRoute }) => {
     if (!selectedEdgeId) return;
-    setEdges((current) => current.map((edge) => edge.id === selectedEdgeId ? makeEdge(edge.id, edge.source, edge.target, patch.route ?? edge.data?.route ?? "normal", patch.label ?? String(edge.label ?? ""), edge.sourceHandle) : edge));
+    setEdges((current) => current.map((edge) => edge.id === selectedEdgeId ? makeEdge(edge.id, edge.source, edge.target, patch.route ?? edge.data?.route ?? "normal", patch.label ?? String(edge.label ?? ""), edge.sourceHandle, edge.targetHandle) : edge));
     setDirty(true);
   };
 
@@ -429,8 +452,9 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
       const targetDepth = depth.get(edge.target) ?? sourceDepth;
       const sourcePosition = positions.get(edge.source);
       const targetPosition = positions.get(edge.target);
-      const sourceHandle = route === "return" ? "right" : targetDepth > sourceDepth ? "bottom" : (targetPosition?.x ?? 0) >= (sourcePosition?.x ?? 0) ? "right" : "left";
-      return makeEdge(edge.id, edge.source, edge.target, route, String(edge.label ?? ""), sourceHandle);
+      const sourceHandle: HandleSide = route === "return" ? "right" : targetDepth > sourceDepth ? "bottom" : targetDepth < sourceDepth ? "top" : (targetPosition?.x ?? 0) >= (sourcePosition?.x ?? 0) ? "right" : "left";
+      const targetHandle: HandleSide = targetDepth > sourceDepth ? "top" : targetDepth < sourceDepth ? "bottom" : sourceHandle === "right" ? "left" : "right";
+      return makeEdge(edge.id, edge.source, edge.target, route, String(edge.label ?? ""), sourceHandle, targetHandle);
     }));
     setDirty(true);
     setNotice("Flujo ordenado por niveles; cuadros, espacios y rutas fueron realineados.");
@@ -586,7 +610,15 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, initialGraph, sto
     <div className="flowchart-editor-shell">
       <header className="flowchart-editor-head">
         <div className="flowchart-title-mark" style={{ background: area.color }}>{area.code}</div>
-        <div><span>{area.name} · {subarea.name} · {flowCode}</span><h2>{flowTitle}</h2></div>
+        <div className="flowchart-heading-copy">
+          <span>{area.name} · {subarea.name} · {flowCode}</span><h2>{flowTitle}</h2>
+          {flowDescription && <p>{flowDescription}</p>}
+          {(flowContext || flowClosure) && <details className="flowchart-source-context">
+            <summary>Contexto y criterio de cierre</summary>
+            {flowContext && <p><strong>Contexto:</strong> {flowContext}</p>}
+            {flowClosure && <p><strong>Cierre:</strong> {flowClosure.replace(/^Cierre:\s*/i, "")}</p>}
+          </details>}
+        </div>
         <div className="flowchart-save-state">{readOnly ? <><Eye size={14}/> Modo consulta</> : dirty ? <><i/> Cambios sin guardar</> : <><i className="saved"/> Guardado</>}</div>
         {!embedded && <button className="icon-button" aria-label="Cerrar editor" onClick={onClose}><X size={21}/></button>}
       </header>
@@ -690,5 +722,5 @@ export function FlowchartEditor({ area, subarea, flowchart, onClose, embedded = 
   const getSnapshot = useCallback(() => window.localStorage.getItem(storageKey), [storageKey]);
   const storedValue = useSyncExternalStore(subscribe, getSnapshot, () => null);
   const initialGraph = useMemo(() => readOnly ? template : migrateGraph(storedValue, template), [storedValue, template, readOnly]);
-  return <FlowchartCanvas key={storedValue ?? flowCode} area={area} subarea={subarea} flowCode={flowCode} flowTitle={flowTitle} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose} embedded={embedded} readOnly={readOnly}/>;
+  return <FlowchartCanvas key={storedValue ?? flowCode} area={area} subarea={subarea} flowCode={flowCode} flowTitle={flowTitle} flowDescription={flowchart?.description} flowContext={flowchart?.context} flowClosure={flowchart?.closure} initialGraph={initialGraph} storageKey={storageKey} onClose={onClose} embedded={embedded} readOnly={readOnly}/>;
 }

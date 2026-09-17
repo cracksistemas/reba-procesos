@@ -7,6 +7,8 @@
     "owner": "Encargado / Líder Comercial",
     "title": "Macro del turno comercial",
     "description": "El Líder gobierna la operación cotidiana; el Jefe de Ventas recibe solo las excepciones que exceden la autoridad del turno.",
+    "context": "Regla central: Ejecutivo gestiona el lead; Líder gobierna el turno; Jefe de Ventas gobierna resultados y excepciones; Gerencia decide solo lo que excede política o autoridad. Nivel 1 · Ejecutivo Contacto, seguimiento, promesa y cierre. Nivel 2 · Líder SLA, carga, relevo, equipos, coaching e incidencias operativas. Nivel 3 · Jefe Desviaciones recurrentes, excepciones y capacidad estructural. Nivel 4 · Gerencia Decisiones fuera de política, estructura o autoridad.",
+    "closure": "",
     "canvas": {
       "width": 808.65,
       "height": 898.2
@@ -184,7 +186,7 @@
       },
       {
         "id": "COM-LC-01-end",
-        "kind": "start",
+        "kind": "end",
         "label": "Turno cerrado y transferido",
         "role": "",
         "position": {
@@ -207,7 +209,8 @@
         "target": "COM-LC-01-l1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-01-edge-2",
@@ -215,7 +218,8 @@
         "target": "COM-LC-01-crm",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-01-edge-3",
@@ -223,7 +227,8 @@
         "target": "COM-LC-01-e1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-01-edge-4",
@@ -231,7 +236,8 @@
         "target": "COM-LC-01-l2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-01-edge-5",
@@ -239,7 +245,8 @@
         "target": "COM-LC-01-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-01-edge-6",
@@ -247,7 +254,8 @@
         "target": "COM-LC-01-fix",
         "label": "Sí",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-01-edge-7",
@@ -255,7 +263,8 @@
         "target": "COM-LC-01-x",
         "label": "No",
         "route": "return",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-01-edge-8",
@@ -263,7 +272,8 @@
         "target": "COM-LC-01-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-01-edge-9",
@@ -271,7 +281,8 @@
         "target": "COM-LC-01-j",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-01-edge-10",
@@ -279,7 +290,8 @@
         "target": "COM-LC-01-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-01-edge-11",
@@ -287,7 +299,8 @@
         "target": "COM-LC-01-end",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -299,6 +312,8 @@
     "owner": "Encargado / Líder Comercial",
     "title": "Apertura y organización del turno",
     "description": "Asegura que el turno inicie con responsables, herramientas, carga y prioridades visibles.",
+    "context": "Regla central: Ejecutivo gestiona el lead; Líder gobierna el turno; Jefe de Ventas gobierna resultados y excepciones; Gerencia decide solo lo que excede política o autoridad. Nivel 1 · Ejecutivo Contacto, seguimiento, promesa y cierre. Nivel 2 · Líder SLA, carga, relevo, equipos, coaching e incidencias operativas. Nivel 3 · Jefe Desviaciones recurrentes, excepciones y capacidad estructural. Nivel 4 · Gerencia Decisiones fuera de política, estructura o autoridad.",
+    "closure": "",
     "canvas": {
       "width": 823.7,
       "height": 789.2
@@ -442,7 +457,7 @@
       },
       {
         "id": "COM-LC-02-end",
-        "kind": "start",
+        "kind": "end",
         "label": "Turno operativo",
         "role": "",
         "position": {
@@ -465,7 +480,8 @@
         "target": "COM-LC-02-l1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-02-edge-2",
@@ -473,7 +489,8 @@
         "target": "COM-LC-02-l2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-02-edge-3",
@@ -481,7 +498,8 @@
         "target": "COM-LC-02-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-02-edge-4",
@@ -489,7 +507,8 @@
         "target": "COM-LC-02-bal",
         "label": "Sí",
         "route": "normal",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-02-edge-5",
@@ -497,7 +516,8 @@
         "target": "COM-LC-02-view",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-02-edge-6",
@@ -505,7 +525,8 @@
         "target": "COM-LC-02-j",
         "label": "Solo si excede autoridad",
         "route": "return",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-02-edge-7",
@@ -513,7 +534,8 @@
         "target": "COM-LC-02-view",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-02-edge-8",
@@ -521,7 +543,8 @@
         "target": "COM-LC-02-view",
         "label": "",
         "route": "normal",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-02-edge-9",
@@ -529,7 +552,8 @@
         "target": "COM-LC-02-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-02-edge-10",
@@ -537,7 +561,8 @@
         "target": "COM-LC-02-end",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -549,6 +574,8 @@
     "owner": "Encargado / Líder Comercial",
     "title": "Asignación de leads y SLA",
     "description": "El CRM asigna o registra; el Líder controla cero leads sin dueño y corrige excepciones.",
+    "context": "Regla central: Ejecutivo gestiona el lead; Líder gobierna el turno; Jefe de Ventas gobierna resultados y excepciones; Gerencia decide solo lo que excede política o autoridad. Nivel 1 · Ejecutivo Contacto, seguimiento, promesa y cierre. Nivel 2 · Líder SLA, carga, relevo, equipos, coaching e incidencias operativas. Nivel 3 · Jefe Desviaciones recurrentes, excepciones y capacidad estructural. Nivel 4 · Gerencia Decisiones fuera de política, estructura o autoridad.",
+    "closure": "",
     "canvas": {
       "width": 795.7,
       "height": 824.2
@@ -709,7 +736,7 @@
       },
       {
         "id": "COM-LC-03-end",
-        "kind": "start",
+        "kind": "end",
         "label": "Lead controlado",
         "role": "",
         "position": {
@@ -732,7 +759,8 @@
         "target": "COM-LC-03-crm",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-03-edge-2",
@@ -740,7 +768,8 @@
         "target": "COM-LC-03-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-03-edge-3",
@@ -748,7 +777,8 @@
         "target": "COM-LC-03-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-03-edge-4",
@@ -756,7 +786,8 @@
         "target": "COM-LC-03-ok",
         "label": "Sí",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-03-edge-5",
@@ -764,7 +795,8 @@
         "target": "COM-LC-03-re",
         "label": "No",
         "route": "return",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-03-edge-6",
@@ -772,7 +804,8 @@
         "target": "COM-LC-03-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-03-edge-7",
@@ -780,7 +813,8 @@
         "target": "COM-LC-03-d2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-03-edge-8",
@@ -788,7 +822,8 @@
         "target": "COM-LC-03-j",
         "label": "Sí",
         "route": "return",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-03-edge-9",
@@ -796,7 +831,8 @@
         "target": "COM-LC-03-ev",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-03-edge-10",
@@ -804,7 +840,8 @@
         "target": "COM-LC-03-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-03-edge-11",
@@ -812,7 +849,8 @@
         "target": "COM-LC-03-end",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -824,6 +862,8 @@
     "owner": "Encargado / Líder Comercial",
     "title": "Promesas, clientes calientes y pagos por confirmar",
     "description": "El Líder asegura seguimiento y deriva pagos sin asumir funciones de Cobranzas/Finanzas.",
+    "context": "Regla central: Ejecutivo gestiona el lead; Líder gobierna el turno; Jefe de Ventas gobierna resultados y excepciones; Gerencia decide solo lo que excede política o autoridad. Nivel 1 · Ejecutivo Contacto, seguimiento, promesa y cierre. Nivel 2 · Líder SLA, carga, relevo, equipos, coaching e incidencias operativas. Nivel 3 · Jefe Desviaciones recurrentes, excepciones y capacidad estructural. Nivel 4 · Gerencia Decisiones fuera de política, estructura o autoridad.",
+    "closure": "",
     "canvas": {
       "width": 697.2,
       "height": 824.2
@@ -984,7 +1024,7 @@
       },
       {
         "id": "COM-LC-04-end",
-        "kind": "start",
+        "kind": "end",
         "label": "Caso controlado",
         "role": "",
         "position": {
@@ -1007,7 +1047,8 @@
         "target": "COM-LC-04-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-04-edge-2",
@@ -1015,7 +1056,8 @@
         "target": "COM-LC-04-l",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-04-edge-3",
@@ -1023,7 +1065,8 @@
         "target": "COM-LC-04-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-04-edge-4",
@@ -1031,7 +1074,8 @@
         "target": "COM-LC-04-cf",
         "label": "Sí",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-04-edge-5",
@@ -1039,7 +1083,8 @@
         "target": "COM-LC-04-seg",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-04-edge-6",
@@ -1047,7 +1092,8 @@
         "target": "COM-LC-04-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-04-edge-7",
@@ -1055,7 +1101,8 @@
         "target": "COM-LC-04-d2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-04-edge-8",
@@ -1063,7 +1110,8 @@
         "target": "COM-LC-04-j",
         "label": "Sí",
         "route": "return",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-04-edge-9",
@@ -1071,7 +1119,8 @@
         "target": "COM-LC-04-ev",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-04-edge-10",
@@ -1079,7 +1128,8 @@
         "target": "COM-LC-04-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-04-edge-11",
@@ -1087,7 +1137,8 @@
         "target": "COM-LC-04-end",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -1099,6 +1150,8 @@
     "owner": "Encargado / Líder Comercial",
     "title": "Control de equipos móviles",
     "description": "La custodia y transferencia quedan registradas por turno y finalidad.",
+    "context": "Regla central: Ejecutivo gestiona el lead; Líder gobierna el turno; Jefe de Ventas gobierna resultados y excepciones; Gerencia decide solo lo que excede política o autoridad. Nivel 1 · Ejecutivo Contacto, seguimiento, promesa y cierre. Nivel 2 · Líder SLA, carga, relevo, equipos, coaching e incidencias operativas. Nivel 3 · Jefe Desviaciones recurrentes, excepciones y capacidad estructural. Nivel 4 · Gerencia Decisiones fuera de política, estructura o autoridad.",
+    "closure": "",
     "canvas": {
       "width": 590.7,
       "height": 789.2
@@ -1242,7 +1295,7 @@
       },
       {
         "id": "COM-LC-05-end",
-        "kind": "start",
+        "kind": "end",
         "label": "Equipo controlado",
         "role": "",
         "position": {
@@ -1265,7 +1318,8 @@
         "target": "COM-LC-05-l1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-05-edge-2",
@@ -1273,7 +1327,8 @@
         "target": "COM-LC-05-e",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-05-edge-3",
@@ -1281,7 +1336,8 @@
         "target": "COM-LC-05-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-05-edge-4",
@@ -1289,7 +1345,8 @@
         "target": "COM-LC-05-inc",
         "label": "Sí",
         "route": "return",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-05-edge-5",
@@ -1297,7 +1354,8 @@
         "target": "COM-LC-05-ret",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-05-edge-6",
@@ -1305,7 +1363,8 @@
         "target": "COM-LC-05-sys",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-05-edge-7",
@@ -1313,7 +1372,8 @@
         "target": "COM-LC-05-ret",
         "label": "",
         "route": "normal",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-05-edge-8",
@@ -1321,7 +1381,8 @@
         "target": "COM-LC-05-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-05-edge-9",
@@ -1329,7 +1390,8 @@
         "target": "COM-LC-05-end",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -1341,6 +1403,8 @@
     "owner": "Encargado / Líder Comercial",
     "title": "Coaching e incidencias",
     "description": "El Líder corrige lo operativo; RR. HH. gestiona lo laboral formal.",
+    "context": "Regla central: Ejecutivo gestiona el lead; Líder gobierna el turno; Jefe de Ventas gobierna resultados y excepciones; Gerencia decide solo lo que excede política o autoridad. Nivel 1 · Ejecutivo Contacto, seguimiento, promesa y cierre. Nivel 2 · Líder SLA, carga, relevo, equipos, coaching e incidencias operativas. Nivel 3 · Jefe Desviaciones recurrentes, excepciones y capacidad estructural. Nivel 4 · Gerencia Decisiones fuera de política, estructura o autoridad.",
+    "closure": "",
     "canvas": {
       "width": 682.28,
       "height": 741.2
@@ -1484,7 +1548,7 @@
       },
       {
         "id": "COM-LC-06-end",
-        "kind": "start",
+        "kind": "end",
         "label": "Caso cerrado",
         "role": "",
         "position": {
@@ -1507,7 +1571,8 @@
         "target": "COM-LC-06-l1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-06-edge-2",
@@ -1515,7 +1580,8 @@
         "target": "COM-LC-06-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-06-edge-3",
@@ -1523,7 +1589,8 @@
         "target": "COM-LC-06-ok",
         "label": "Sí",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-06-edge-4",
@@ -1531,7 +1598,8 @@
         "target": "COM-LC-06-j",
         "label": "No",
         "route": "return",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-06-edge-5",
@@ -1539,7 +1607,8 @@
         "target": "COM-LC-06-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-06-edge-6",
@@ -1547,7 +1616,8 @@
         "target": "COM-LC-06-d2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-06-edge-7",
@@ -1555,7 +1625,8 @@
         "target": "COM-LC-06-rr",
         "label": "Sí",
         "route": "return",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-06-edge-8",
@@ -1563,7 +1634,8 @@
         "target": "COM-LC-06-ev",
         "label": "No",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-06-edge-9",
@@ -1571,7 +1643,8 @@
         "target": "COM-LC-06-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-06-edge-10",
@@ -1579,7 +1652,8 @@
         "target": "COM-LC-06-end",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   },
@@ -1591,6 +1665,8 @@
     "owner": "Encargado / Líder Comercial",
     "title": "Cierre y relevo de turno",
     "description": "El turno siguiente recibe contexto suficiente para continuar sin reconstruir información.",
+    "context": "Regla central: Ejecutivo gestiona el lead; Líder gobierna el turno; Jefe de Ventas gobierna resultados y excepciones; Gerencia decide solo lo que excede política o autoridad. Nivel 1 · Ejecutivo Contacto, seguimiento, promesa y cierre. Nivel 2 · Líder SLA, carga, relevo, equipos, coaching e incidencias operativas. Nivel 3 · Jefe Desviaciones recurrentes, excepciones y capacidad estructural. Nivel 4 · Gerencia Decisiones fuera de política, estructura o autoridad.",
+    "closure": "",
     "canvas": {
       "width": 700.2,
       "height": 697.2
@@ -1717,7 +1793,7 @@
       },
       {
         "id": "COM-LC-07-end",
-        "kind": "start",
+        "kind": "end",
         "label": "Turno cerrado",
         "role": "",
         "position": {
@@ -1740,7 +1816,8 @@
         "target": "COM-LC-07-l1",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-07-edge-2",
@@ -1748,7 +1825,8 @@
         "target": "COM-LC-07-d",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-07-edge-3",
@@ -1756,7 +1834,8 @@
         "target": "COM-LC-07-fix",
         "label": "No",
         "route": "return",
-        "sourceHandle": "left"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-07-edge-4",
@@ -1764,7 +1843,8 @@
         "target": "COM-LC-07-l2",
         "label": "Sí",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-07-edge-5",
@@ -1772,7 +1852,8 @@
         "target": "COM-LC-07-l2",
         "label": "",
         "route": "normal",
-        "sourceHandle": "right"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-07-edge-6",
@@ -1780,7 +1861,8 @@
         "target": "COM-LC-07-next",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-07-edge-7",
@@ -1788,7 +1870,8 @@
         "target": "COM-LC-07-ev",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       },
       {
         "id": "COM-LC-07-edge-8",
@@ -1796,7 +1879,8 @@
         "target": "COM-LC-07-end",
         "label": "",
         "route": "normal",
-        "sourceHandle": "bottom"
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ]
   }

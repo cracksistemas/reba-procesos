@@ -10,11 +10,16 @@ export type Subarea = {
   owner: string; flow: string[]; source: "Drive" | "Propuesta" | "Usuario";
 };
 
+export type ProcessType = "Proceso" | "Tarea";
+
 export type Process = {
-  code: string; name: string; area: string; subareaCode: string; subarea: string;
+  code: string; name: string; area: string; areaCode?: string; subareaCode: string; subarea: string;
   owner: string; status: ProcessStatus;
   version: string; updated: string; criticality: "Baja" | "Media" | "Alta";
   objective: string; scope: string; nextReview: string; completion: number;
+  type?: ProcessType;
+  tasks?: string[];
+  source?: "Oficial" | "Usuario";
 };
 
 export const driveRoot = "https://drive.google.com/drive/folders/1YoIFfdcoQn107r0juIKyQk6fhaQWkT1H";
@@ -102,6 +107,14 @@ export function mergeSubareas(official: Subarea[], stored: Subarea[]) {
     nextNumber.set(subarea.areaCode, number);
     const code = `${subarea.areaCode}-S${String(number).padStart(2, "0")}`;
     byCode.set(code, { ...subarea, code });
+  });
+  return Array.from(byCode.values());
+}
+
+export function mergeProcesses(official: Process[], stored: Process[]) {
+  const byCode = new Map(official.map((process) => [process.code.toLowerCase(), process]));
+  stored.forEach((process) => {
+    byCode.set(process.code.toLowerCase(), process);
   });
   return Array.from(byCode.values());
 }

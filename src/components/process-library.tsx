@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { ArrowRight, Clock3, GitBranch, LayoutGrid, Network, Search, Star } from "lucide-react";
 import { areas, getSubareas, processes, subareas } from "@/lib/data";
 import { flowcharts, getAreaFlowcharts, getFlowchartVersion } from "@/lib/flowcharts";
+import { useProcesses } from "@/lib/process-store";
 
 type LibraryMode = "areas" | "map";
 
@@ -13,6 +14,7 @@ function normalize(value: string) {
 }
 
 export function ProcessLibrary({ initialQuery = "" }: { initialQuery?: string }) {
+  const allProcesses = useProcesses(processes);
   const [mode, setMode] = useState<LibraryMode>("areas");
   const [query, setQuery] = useState(initialQuery);
   const term = normalize(query.trim());
@@ -26,10 +28,10 @@ export function ProcessLibrary({ initialQuery = "" }: { initialQuery?: string })
         const area = areas.find((candidate) => candidate.code === item.areaCode);
         return matches(`${item.code} ${item.name} ${item.description} ${item.owner} ${area?.name ?? ""}`);
       }),
-      processes: processes.filter((item) => matches(`${item.code} ${item.name} ${item.area} ${item.subarea} ${item.owner} ${item.objective}`)),
+      processes: allProcesses.filter((item) => matches(`${item.code} ${item.name} ${item.area} ${item.subarea} ${item.owner} ${item.objective}`)),
       flows: flowcharts.filter((item) => { const area = areas.find((candidate) => item.subareaCode.startsWith(`${candidate.code}-`)); return matches(`${item.code} ${item.title} ${item.description} ${item.owner} ${item.subareaName} ${area?.name ?? ""}`); }),
     };
-  }, [term]);
+  }, [term, allProcesses]);
 
   const resultCount = results ? results.areas.length + results.subareas.length + results.processes.length + results.flows.length : 0;
 
@@ -56,7 +58,7 @@ export function ProcessLibrary({ initialQuery = "" }: { initialQuery?: string })
         {areas.map((area) => {
           const areaSubareas = getSubareas(area.code);
           const importedCount = getAreaFlowcharts(area.code).length;
-          const flowCount = importedCount || processes.filter((item) => item.area === area.name).length;
+          const flowCount = importedCount || allProcesses.filter((item) => item.area === area.name || item.areaCode === area.code).length;
           return <Link href={`/areas/${area.code}`} className="card area-card" key={area.code}>
             <div className="area-card-top"><div className="area-symbol" style={{ background: area.color }}>{area.code}</div><ArrowRight size={17}/></div>
             <h2>{area.name}</h2><p>{area.description}</p>

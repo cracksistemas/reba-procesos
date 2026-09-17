@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
-import { SubareaWorkspace } from "@/components/subarea-workspace";
+import { SubareaPageClient } from "@/components/subarea-page-client";
 import { getArea, getSubareas, processes, subareas } from "@/lib/data";
-import { getFlowcharts } from "@/lib/flowcharts";
 
 export function generateStaticParams() {
   return subareas.map((subarea) => ({ code: subarea.areaCode, subarea: subarea.code }));
@@ -19,18 +18,19 @@ export default async function SubareaPage(props: { params: Promise<{ code: strin
   const query = await props.searchParams;
   const area = getArea(params.code);
   if (!area) notFound();
+
   const siblings = getSubareas(area.code);
   const subarea = siblings.find((candidate) => candidate.code.toLowerCase() === params.subarea.toLowerCase());
-  if (!subarea) notFound();
-
-  const flowcharts = getFlowcharts(subarea.code);
-  const flowCounts = Object.fromEntries(siblings.map((item) => {
-    const imported = getFlowcharts(item.code).length;
-    const linked = processes.filter((process) => process.subareaCode === item.code).length;
-    return [item.code, imported || linked || 1];
-  }));
-
-  const linkedProcesses = processes.filter((process) => process.subareaCode === subarea.code);
   const initialFlowCode = typeof query.flujo === "string" ? query.flujo : undefined;
-  return <SubareaWorkspace area={area} subarea={subarea} siblings={siblings} flowcharts={flowcharts} linkedProcesses={linkedProcesses} flowCounts={flowCounts} initialFlowCode={initialFlowCode}/>;
+
+  return (
+    <SubareaPageClient
+      area={area}
+      subareaCode={params.subarea}
+      staticSubarea={subarea}
+      staticSiblings={siblings}
+      staticProcesses={processes}
+      initialFlowCode={initialFlowCode}
+    />
+  );
 }

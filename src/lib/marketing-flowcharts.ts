@@ -20,7 +20,8 @@ export type ImportedFlowEdge = {
   target: string;
   label: string;
   route: "normal" | "return";
-  sourceHandle: "left" | "right" | "bottom";
+  sourceHandle: "top" | "left" | "right" | "bottom";
+  targetHandle?: "top" | "left" | "right" | "bottom";
 };
 
 export type MarketingFlowchart = {
@@ -31,6 +32,8 @@ export type MarketingFlowchart = {
   owner: string;
   title: string;
   description: string;
+  context?: string;
+  closure?: string;
   canvas: { width: number; height: number };
   nodes: ImportedFlowNode[];
   edges: ImportedFlowEdge[];
