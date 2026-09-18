@@ -17,6 +17,7 @@ import {
   Position,
   ReactFlow,
   ReactFlowInstance,
+  reconnectEdge,
   Viewport,
   useEdgesState,
   useNodesState,
@@ -32,6 +33,8 @@ type EdgeRoute = "normal" | "return";
 type HandleSide = "top" | "right" | "bottom" | "left";
 type AlignmentMode = "row" | "column" | "distribute-horizontal" | "distribute-vertical";
 type ExportFormat = "png" | "jpg" | "pdf" | "docx";
+
+const handleSideLabels: Record<HandleSide, string> = { top: "Arriba", right: "Derecha", bottom: "Abajo", left: "Izquierda" };
 
 type RebaNodeData = { label: string; role: string; kind: NodeKind; fill?: string; stroke?: string; textColor?: string };
 type RebaNode = Node<RebaNodeData, "reba">;
@@ -293,6 +296,14 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
     setNotice(source?.data.kind === "decision" ? `Rama ${decisionLabel} creada. Selecciona la línea para cambiar su etiqueta si es necesario.` : "Conexión creada. Selecciona la línea para añadir una etiqueta o marcarla como retorno.");
   }, [nodes, setEdges]);
 
+  const onReconnect = useCallback((oldEdge: RebaEdge, connection: Connection) => {
+    setEdges((current) => reconnectEdge(oldEdge, connection, current));
+    setSelectedEdgeId(oldEdge.id);
+    setSelectedNodeId(null);
+    setDirty(true);
+    setNotice("Conexión reubicada manualmente. Puedes cambiar los anclajes en Propiedades u ordenar todo para normalizar el flujo.");
+  }, [setEdges]);
+
   const addNode = (kind: NodeKind) => {
     const labels: Record<NodeKind, string> = { start: "Inicio del proceso", activity: "Nueva actividad", decision: "¿Decisión?", evidence: "Evidencia o documento", exception: "Excepción o escalamiento", end: "Fin del proceso" };
     const center = instance?.screenToFlowPosition({ x: window.innerWidth * 0.48, y: window.innerHeight * 0.48 }) ?? { x: 250, y: 180 };
@@ -314,10 +325,19 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
     setDirty(true);
   };
 
-  const updateSelectedEdge = (patch: { label?: string; route?: EdgeRoute }) => {
+  const updateSelectedEdge = (patch: { label?: string; route?: EdgeRoute; sourceHandle?: HandleSide; targetHandle?: HandleSide }) => {
     if (!selectedEdgeId) return;
-    setEdges((current) => current.map((edge) => edge.id === selectedEdgeId ? makeEdge(edge.id, edge.source, edge.target, patch.route ?? edge.data?.route ?? "normal", patch.label ?? String(edge.label ?? ""), edge.sourceHandle, edge.targetHandle) : edge));
+    setEdges((current) => current.map((edge) => edge.id === selectedEdgeId ? makeEdge(
+      edge.id,
+      edge.source,
+      edge.target,
+      patch.route ?? edge.data?.route ?? "normal",
+      patch.label ?? String(edge.label ?? ""),
+      patch.sourceHandle ?? edge.sourceHandle,
+      patch.targetHandle ?? edge.targetHandle,
+    ) : edge));
     setDirty(true);
+    if (patch.sourceHandle || patch.targetHandle) setNotice("Anclaje de la flecha actualizado. Puedes usar Ordenar todo para recalcular las rutas automáticamente.");
   };
 
   const removeSelection = () => {
@@ -640,7 +660,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
         <button onClick={() => addNode("end")}><Circle size={16}/> Fin</button>
         <button onClick={() => addNode("evidence")}><FileText size={16}/> Evidencia</button>
         <span className="toolbar-divider"/>
-        <span className="xy-connect-tip"><Link2 size={15}/> Arrastra entre los puntos para conectar</span>
+        <span className="xy-connect-tip"><Link2 size={15}/> Arrastra entre los puntos para conectar o reubicar una flecha</span>
         <span className="xy-connect-tip decision-tip"><Diamond size={14}/> Decisión: izquierda = No · derecha = Sí</span>
         <button disabled={!selectedNodeId && !selectedEdgeId} onClick={removeSelection}><Trash2 size={16}/> Eliminar</button>
         <button onClick={() => moveThroughHistory(-1)} disabled={historyPosition === 0}><Undo2 size={16}/> Deshacer</button>
@@ -676,7 +696,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
         <div ref={canvasRef} className="xyflow-canvas">
           <ReactFlow<RebaNode, RebaEdge>
             nodes={nodes} edges={edges} nodeTypes={nodeTypes}
-            onNodesChange={readOnly ? undefined : handleNodesChange} onEdgesChange={readOnly ? undefined : handleEdgesChange} onConnect={readOnly ? undefined : onConnect} onInit={setInstance}
+            onNodesChange={readOnly ? undefined : handleNodesChange} onEdgesChange={readOnly ? undefined : handleEdgesChange} onConnect={readOnly ? undefined : onConnect} onReconnect={readOnly ? undefined : onReconnect} onInit={setInstance}
             onNodeClick={readOnly ? undefined : (event, node) => {
               if (event.ctrlKey || event.metaKey) {
                 const selectedBeforeClick = new Set(selectedNodes.map((item) => item.id));
@@ -692,7 +712,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
             onEdgeClick={readOnly ? undefined : (_, edge) => { setSelectedEdgeId(edge.id); setSelectedNodeId(null); }}
             onPaneClick={() => { setSelectedNodeId(null); setSelectedEdgeId(null); }}
             defaultViewport={initialGraph.viewport ?? defaultViewport} fitView={!initialGraph.viewport} fitViewOptions={{ padding: 0.16, maxZoom: 1.1 }}
-            minZoom={0.18} maxZoom={2.4} snapToGrid snapGrid={[16, 16]} selectionOnDrag={!readOnly} nodesDraggable={!readOnly} nodesConnectable={!readOnly} elementsSelectable={!readOnly} deleteKeyCode={readOnly ? null : ["Backspace", "Delete"]}
+            minZoom={0.18} maxZoom={2.4} snapToGrid snapGrid={[16, 16]} selectionOnDrag={!readOnly} nodesDraggable={!readOnly} nodesConnectable={!readOnly} edgesReconnectable={!readOnly} reconnectRadius={16} elementsSelectable={!readOnly} deleteKeyCode={readOnly ? null : ["Backspace", "Delete"]}
           >
             <Background variant={BackgroundVariant.Dots} gap={18} size={1.4} color="#cfd7e2"/>
             <Controls position="bottom-left" showInteractive={false}/>
@@ -709,7 +729,10 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
             <button className="button button-secondary danger-button" onClick={removeSelection}><Trash2 size={15}/> Eliminar cuadro</button>
           </div> : selectedEdge ? <div className="properties-form">
             <label><span>Etiqueta de línea</span><input placeholder="Ej. Sí / No" value={String(selectedEdge.label ?? "")} onChange={(event) => updateSelectedEdge({ label: event.target.value })}/></label>
+            <label><span>Punto de salida</span><select value={(selectedEdge.sourceHandle?.replace(/^source-/, "") as HandleSide | undefined) ?? "bottom"} onChange={(event) => updateSelectedEdge({ sourceHandle: event.target.value as HandleSide })}>{(Object.keys(handleSideLabels) as HandleSide[]).map((side) => <option key={side} value={side}>{handleSideLabels[side]}</option>)}</select></label>
+            <label><span>Punto de llegada</span><select value={(selectedEdge.targetHandle?.replace(/^target-/, "") as HandleSide | undefined) ?? "top"} onChange={(event) => updateSelectedEdge({ targetHandle: event.target.value as HandleSide })}>{(Object.keys(handleSideLabels) as HandleSide[]).map((side) => <option key={side} value={side}>{handleSideLabels[side]}</option>)}</select></label>
             <label><span>Tipo de ruta</span><select value={selectedEdge.data?.route ?? "normal"} onChange={(event) => updateSelectedEdge({ route: event.target.value as EdgeRoute })}><option value="normal">Ruta normal</option><option value="return">Observación / retorno</option></select></label>
+            <p className="properties-inline-help">Selecciona la flecha y cambia sus puntos de salida y llegada. “Ordenar todo” recalcula los anclajes según la posición de los cuadros.</p>
             <button className="button button-secondary danger-button" onClick={removeSelection}><Trash2 size={15}/> Eliminar línea</button>
           </div> : <div className="properties-empty"><GitBranch size={30}/><strong>Selecciona un elemento</strong><p>Haz clic en un cuadro o línea. Arrastra desde un punto del cuadro de origen hacia el destino para conectarlos.</p></div>}
           <div className="properties-tip"><strong>Editor avanzado XYFlow</strong><span>Rueda: zoom · Arrastrar fondo: desplazarse · Ctrl/Cmd: selección múltiple · Supr: eliminar · Minimap: navegación rápida.</span></div>
