@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { SubareaWorkspace } from "@/components/subarea-workspace";
 import { mergeSubareas, type Area, type Process, type Subarea } from "@/lib/data";
 import { getFlowcharts, type Flowchart } from "@/lib/flowcharts";
+import { displayArea, displaySubarea, useStructureNameOverrides } from "@/lib/structure-name-store";
 
 type SubareaPageClientProps = {
   area: Area;
@@ -26,6 +27,8 @@ export function SubareaPageClient({
   initialFlowCode,
   initialEdit,
 }: SubareaPageClientProps) {
+  const { overrides } = useStructureNameOverrides();
+  const visibleArea = displayArea(area, overrides);
   const storageKey = `reba-subareas-${area.code}`;
   const subscribe = useCallback((onStoreChange: () => void) => {
     const onStorage = (event: StorageEvent) => { if (!event.key || event.key === storageKey) onStoreChange(); };
@@ -42,13 +45,14 @@ export function SubareaPageClient({
   }, [storedRaw]);
 
   const allSiblings = useMemo(() => {
-    return area.code === "LOG" ? staticSiblings : mergeSubareas(staticSiblings, storedSubareas);
-  }, [area.code, staticSiblings, storedSubareas]);
+    const source = area.code === "LOG" ? staticSiblings : mergeSubareas(staticSiblings, storedSubareas);
+    return source.map((item) => displaySubarea(item, overrides));
+  }, [area.code, staticSiblings, storedSubareas, overrides]);
 
   const subarea = useMemo(() => {
-    if (staticSubarea) return staticSubarea;
+    if (staticSubarea) return displaySubarea(staticSubarea, overrides);
     return allSiblings.find((s) => s.code.toLowerCase() === subareaCode.toLowerCase()) ?? null;
-  }, [staticSubarea, allSiblings, subareaCode]);
+  }, [staticSubarea, allSiblings, subareaCode, overrides]);
 
   if (!subarea) {
     if (!mounted) {
@@ -57,10 +61,10 @@ export function SubareaPageClient({
     return (
       <div className="card empty-state" style={{ margin: "40px auto", maxWidth: "600px", padding: "30px", textAlign: "center" }}>
         <h2>Subárea no encontrada</h2>
-        <p>No pudimos encontrar la subárea con código <strong>{subareaCode}</strong> en el área {area.name}.</p>
+        <p>No pudimos encontrar la subárea con código <strong>{subareaCode}</strong> en el área {visibleArea.name}.</p>
         <div style={{ marginTop: "16px" }}>
           <Link className="button button-primary" href={`/areas/${area.code}`}>
-            <ArrowLeft size={14}/> Volver a {area.name}
+            <ArrowLeft size={14}/> Volver a {visibleArea.name}
           </Link>
         </div>
       </div>
@@ -80,7 +84,7 @@ export function SubareaPageClient({
 
   return (
     <SubareaWorkspace
-      area={area}
+      area={visibleArea}
       subarea={subarea}
       siblings={allSiblings}
       flowcharts={flowcharts}

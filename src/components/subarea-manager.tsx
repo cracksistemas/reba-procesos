@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useCallback, useMemo, useState, useSyncExternalStore } from "react";
-import { ArrowRight, CheckCircle2, GitBranch, Layers, LayoutGrid, Plus, Save, Search, X } from "lucide-react";
+import { ArrowRight, CheckCircle2, GitBranch, Layers, LayoutGrid, Pencil, Plus, Save, Search, X } from "lucide-react";
 import { FlowchartEditor } from "@/components/flowchart-editor";
 import { StatusBadge } from "@/components/status-badge";
 import { mergeSubareas, type Area, type Process, type ProcessType, type Subarea } from "@/lib/data";
 import { getFlowcharts } from "@/lib/flowcharts";
 import { saveProcess, useProcesses } from "@/lib/process-store";
+import { displayArea, displaySubarea, useStructureNameOverrides } from "@/lib/structure-name-store";
 
 type SubareaManagerProps = { area: Area; initialSubareas: Subarea[]; areaProcesses: Process[]; areaOnly?: boolean };
 
@@ -20,6 +21,8 @@ const splitLines = (value: string) => value
 
 export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly = false }: SubareaManagerProps) {
   const router = useRouter();
+  const { overrides, renameArea, renameSubarea } = useStructureNameOverrides();
+  const visibleArea = displayArea(area, overrides);
   const storageKey = `reba-subareas-${area.code}`;
   const [activeTab, setActiveTab] = useState<"subareas" | "processes">(areaOnly ? "processes" : "subareas");
   const [showSubareaForm, setShowSubareaForm] = useState(false);
@@ -29,6 +32,8 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const [customCanvas, setCustomCanvas] = useState<Subarea | null>(null);
+  const [renameTarget, setRenameTarget] = useState<{ type: "area" | "subarea"; code: string; currentName: string } | null>(null);
+  const [renameValue, setRenameValue] = useState("");
 
   // Subareas persistence
   const subscribe = useCallback((onStoreChange: () => void) => {
@@ -45,7 +50,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
   const getSnapshot = useCallback(() => window.localStorage.getItem(storageKey), [storageKey]);
   const storedValue = useSyncExternalStore(subscribe, getSnapshot, () => null);
 
-  const items = useMemo(() => {
+  const baseItems = useMemo(() => {
     if (areaOnly || !storedValue) return initialSubareas;
     try {
       return mergeSubareas(initialSubareas, JSON.parse(storedValue) as Subarea[]);
@@ -53,6 +58,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
       return initialSubareas;
     }
   }, [areaOnly, initialSubareas, storedValue]);
+  const items = useMemo(() => baseItems.map((item) => displaySubarea(item, overrides)), [baseItems, overrides]);
 
   const persist = (next: Subarea[]) => {
     window.localStorage.setItem(storageKey, JSON.stringify(next));
@@ -86,7 +92,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
       return;
     }
     const code = nextSubareaCode();
-    persist([...items, { code, areaCode: area.code, name, owner, description, flow, source: "Usuario" }]);
+    persist([...baseItems, { code, areaCode: area.code, name, owner, description, flow, source: "Usuario" }]);
     event.currentTarget.reset();
     setError("");
     setShowSubareaForm(false);
@@ -114,7 +120,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
       {
         name,
         type,
-        area: area.name,
+        area: visibleArea.name,
         areaCode: area.code,
         subareaCode: targetSub.code,
         subarea: targetSub.name,
@@ -152,10 +158,11 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
       <div>
         <div className="breadcrumb"><Link href="/biblioteca">Biblioteca</Link> / <Link href="/areas">Áreas</Link> / <span>{area.code}</span></div>
         <p className="eyebrow">Área institucional · Gestión de estructura y flujos</p>
-        <h1>{area.name}</h1>
-        <p>{area.description} {areaOnly ? "Sus procesos se gestionan directamente en esta área." : "Administra sus subáreas, múltiples tareas y procesos operativos."}</p>
+        <h1>{visibleArea.name}</h1>
+        <p>{visibleArea.description} {areaOnly ? "Sus procesos se gestionan directamente en esta área." : "Administra sus subáreas, múltiples tareas y procesos operativos."}</p>
       </div>
       <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <button className="button button-secondary" onClick={() => { setRenameTarget({ type: "area", code: area.code, currentName: visibleArea.name }); setRenameValue(visibleArea.name); setShowSubareaForm(false); setShowProcessForm(false); }}><Pencil size={15}/> Renombrar área</button>
         {!areaOnly && <button
           className="button button-secondary"
           onClick={() => { setShowSubareaForm((curr) => !curr); setShowProcessForm(false); }}
@@ -178,12 +185,18 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
     {notice && <div className="pilot-banner" role="status"><CheckCircle2 size={17}/><span>{notice} <strong>Guardado con éxito en este navegador.</strong></span></div>}
     {error && <div className="form-error" role="alert">{error}</div>}
 
+    {renameTarget && <form className="card subarea-form" onSubmit={(event) => { event.preventDefault(); const next = renameValue.trim(); if (!next) { setError("El nombre no puede estar vacío."); return; } if (renameTarget.type === "area") renameArea(renameTarget.code, next); else renameSubarea(renameTarget.code, next); setNotice(`${renameTarget.type === "area" ? "Área" : "Subárea"} renombrada. Los códigos y procesos se mantienen.`); setRenameTarget(null); setError(""); window.setTimeout(() => setNotice(""), 4500); }}>
+      <div className="card-header"><div><h2>Renombrar {renameTarget.type === "area" ? "área" : "subárea"}</h2><p>El código {renameTarget.code} se conserva para no afectar procesos, flujogramas ni enlaces existentes.</p></div></div>
+      <div className="form-grid"><label className="form-span"><span>Nombre visible</span><input autoFocus value={renameValue} onChange={(event) => setRenameValue(event.target.value)} required /></label></div>
+      <div className="form-actions"><button type="button" className="button button-secondary" onClick={() => setRenameTarget(null)}>Cancelar</button><button className="button button-primary" type="submit"><Save size={15}/> Guardar nombre</button></div>
+    </form>}
+
     {/* Form: New Subarea */}
     {showSubareaForm && <form className="card subarea-form" onSubmit={handleSubareaSubmit}>
       <div className="card-header">
         <div>
-          <h2>Añadir subárea a {area.name}</h2>
-          <p>Se creará como {nextSubareaCode()} dentro de {area.name}.</p>
+          <h2>Añadir subárea a {visibleArea.name}</h2>
+          <p>Se creará como {nextSubareaCode()} dentro de {visibleArea.name}.</p>
         </div>
       </div>
       <div className="form-grid">
@@ -202,7 +215,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
     {showProcessForm && <form className="card subarea-form" onSubmit={handleProcessSubmit}>
       <div className="card-header">
         <div>
-          <h2>Añadir proceso o tarea al área {area.name}</h2>
+          <h2>Añadir proceso o tarea al área {visibleArea.name}</h2>
           <p>{areaOnly ? "Crea una nueva tarea o proceso directamente en Logística. Al guardarlo se abrirá un lienzo para diagramarlo." : "Crea una nueva tarea o proceso y asígnalo a una subárea. Al guardarlo se abrirá un lienzo para diagramarlo."}</p>
         </div>
       </div>
@@ -258,7 +271,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
       {!areaOnly && <div><strong>{items.length}</strong><span>Subáreas</span></div>}
       <div><strong>{documentedFlows}</strong><span>Procesos y programas</span></div>
       <div><strong>{currentAreaProcesses.length}</strong><span>Registros activos</span></div>
-      <div><strong>{area.owner}</strong><span>Responsable del área</span></div>
+      <div><strong>{visibleArea.owner}</strong><span>Responsable del área</span></div>
     </section>
 
     {/* Navigation tabs */}
@@ -283,7 +296,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
 
     {!areaOnly && activeTab === "subareas" ? <>
       <div className="directory-heading">
-        <div><h2>Subáreas de {area.name}</h2><p>Selecciona una subárea para ver sus procesos, tareas y flujogramas.</p></div>
+        <div><h2>Subáreas de {visibleArea.name}</h2><p>Selecciona una subárea para ver sus procesos, tareas y flujogramas.</p></div>
         <span>{items.length} disponibles</span>
       </div>
 
@@ -308,6 +321,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
             <div className="subarea-browser-footer">
               <span>Responsable<br/><strong>{subarea.owner}</strong></span>
               <div style={{ display: "flex", gap: "6px" }}>
+                <button className="button button-ghost" title="Renombrar subárea" onClick={() => { setRenameTarget({ type: "subarea", code: subarea.code, currentName: subarea.name }); setRenameValue(subarea.name); }}><Pencil size={14}/> Renombrar</button>
                 <button
                   className="button button-ghost"
                   title="Añadir proceso o tarea a esta subárea"
