@@ -21,9 +21,11 @@ export function getFlowchartVersion(flowchart: Flowchart) {
 }
 
 export function getFlowcharts(subareaCode: string) {
+  if (subareaCode === "REC") return flowcharts.filter((flowchart) => flowchart.code.startsWith("REC-"));
   return flowcharts.filter((flowchart) => flowchart.subareaCode === subareaCode);
 }
 
 export function getAreaFlowcharts(areaCode: string) {
+  if (areaCode === "REC") return getFlowcharts("REC");
   return flowcharts.filter((flowchart) => flowchart.subareaCode.startsWith(`${areaCode}-`));
 }

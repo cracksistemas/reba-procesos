@@ -57,17 +57,12 @@ export const subareas: Subarea[] = [
   { code:"MKT-S06", areaCode:"MKT", name:"Producción Audiovisual", description:"Producción audiovisual completa y respaldo temporal de Diseño.", owner:"Producción Audiovisual", flow:["Recibir brief","Producir contenido","Validar técnicamente","Publicar o entregar"], source:"Drive" },
   { code:"MKT-S07", areaCode:"MKT", name:"CRM, Web y Automatización", description:"Cambios técnicos, integraciones de datos y retiro de controles paralelos.", owner:"CRM, Web y Automatización", flow:["Recibir requerimiento","Clasificar riesgo","Implementar y probar","Monitorear estabilidad"], source:"Drive" },
   { code:"MKT-S08", areaCode:"MKT", name:"RRPP, Campo y Alianzas", description:"Prospección institucional, alianzas y activaciones de campo medibles.", owner:"RRPP, Campo y Alianzas", flow:["Prospectar oportunidad","Calificar alianza o activación","Ejecutar gestión","Registrar resultados"], source:"Drive" },
-  { code:"REC-S01", areaCode:"REC", name:"Atención, orientación e inscripción", description:"Atención institucional, orientación vigente e inscripción en Aula Virtual.", owner:"Personal de Recepción", flow:["Revisar atención y pendientes","Orientar con fuentes oficiales","Registrar inscripción","Cerrar o derivar"], source:"Drive" },
-  { code:"REC-S02", areaCode:"REC", name:"Caja, pagos y certificados", description:"Cobros, comprobantes, cuadre y entrega trazable de certificados.", owner:"Responsable de Caja", flow:["Validar pago","Emitir comprobante","Registrar cuadre","Entregar certificado"], source:"Drive" },
-  { code:"REC-S03", areaCode:"REC", name:"Gestión documentaria y courier", description:"Documentos externos, derivación interna, envíos y devoluciones de courier.", owner:"Personal de Recepción", flow:["Registrar ingreso","Identificar destino","Derivar o coordinar envío","Conservar evidencia"], source:"Drive" },
-  { code:"REC-S04", areaCode:"REC", name:"Atención digital y experiencia", description:"WhatsApp, redes sociales, postventa, sugerencias y reclamos con continuidad.", owner:"Personal de Recepción", flow:["Revisar historial","Atender o derivar","Registrar interacción","Dar seguimiento"], source:"Drive" },
-  { code:"REC-S05", areaCode:"REC", name:"Operación y continuidad", description:"Relevo, equipos, stock, atención de fin de semana y cierre de jornada.", owner:"Personal de Recepción", flow:["Preparar operación","Verificar activos e insumos","Atender contingencias","Transferir turno"], source:"Drive" },
   { code:"SIS-S01", areaCode:"SIS", name:"Infraestructura y soporte", description:"Atención de incidencias y continuidad de los servicios tecnológicos.", owner:"Mesa de Ayuda", flow:["Registrar incidencia","Clasificar prioridad","Resolver o escalar","Validar cierre"], source:"Propuesta" },
   { code:"SIS-S02", areaCode:"SIS", name:"Sistemas y automatización", description:"Desarrollo, integración y mejora de soluciones internas.", owner:"Jefatura de Sistemas", flow:["Recibir requerimiento","Analizar solución","Implementar cambio","Validar entrega"], source:"Propuesta" },
   { code:"SIS-S03", areaCode:"SIS", name:"Datos, seguridad y accesos", description:"Gobierno de datos, altas, bajas y control de permisos.", owner:"Responsable de Seguridad", flow:["Recibir solicitud","Validar autorización","Aplicar acceso","Auditar resultado"], source:"Propuesta" },
 ];
 
-export const processes: Process[] = [
+const processSeed: Process[] = [
   { code: "COM-P01", name: "Gestión de leads", area: "Comercial", subareaCode:"COM-S01", subarea:"Prospección y leads", owner: "Ana Salazar", status: "Aprobado", version: "1.2", updated: "Hoy, 09:42", criticality: "Alta", objective: "Convertir oportunidades calificadas en matrículas mediante un seguimiento oportuno y trazable.", scope: "Desde la asignación del lead hasta su conversión o descarte documentado.", nextReview: "15 mar 2027", completion: 100 },
   { code: "COM-P02", name: "Seguimiento comercial", area: "Comercial", subareaCode:"COM-S02", subarea:"Ventas y seguimiento", owner: "Luis Vega", status: "Borrador", version: "0.4", updated: "Hoy, 08:15", criticality: "Media", objective: "Estandarizar los contactos y compromisos con prospectos.", scope: "Incluye llamadas, mensajería, reuniones y registro de resultados.", nextReview: "Sin programar", completion: 62 },
   { code: "COM-P03", name: "Cierre y matrícula", area: "Comercial", subareaCode:"COM-S03", subarea:"Cierre, matrícula y convenios", owner: "Ana Salazar", status: "En revisión", version: "1.0", updated: "Ayer, 16:30", criticality: "Alta", objective: "Asegurar un cierre correcto y la transferencia del alumno a Académica.", scope: "Desde la decisión de compra hasta la entrega del expediente.", nextReview: "10 sep 2027", completion: 88 },
@@ -104,6 +99,10 @@ export const processes: Process[] = [
   { code: "GER-P01", name: "Aprobación de presupuesto", area: "Gerencia", subareaCode:"GER-S03", subarea:"Contabilidad, Finanzas y Tesorería", owner: "Gerencia General", status: "Aprobado", version: "1.0", updated: "25 ago, 11:15", criticality: "Alta", objective: "Asegurar decisiones presupuestales consistentes y documentadas.", scope: "Solicitudes extraordinarias y presupuesto anual.", nextReview: "25 feb 2027", completion: 100 },
 ];
 
+export const processes: Process[] = processSeed.map((process) => process.area === "Recepción"
+  ? { ...process, areaCode: "REC", subareaCode: "REC", subarea: "Recepción" }
+  : process,
+);
 export const reviews = processes.filter((process) => ["En revisión", "Observado"].includes(process.status));
 export const statusTone: Record<ProcessStatus, string> = { "Borrador": "draft", "En revisión": "review", "Observado": "observed", "Aprobado": "approved", "Obsoleto": "obsolete" };
 export function getProcess(code: string) { return processes.find((process) => process.code.toLowerCase() === code.toLowerCase()); }

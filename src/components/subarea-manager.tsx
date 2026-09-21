@@ -216,7 +216,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
       <div className="card-header">
         <div>
           <h2>Añadir proceso o tarea al área {visibleArea.name}</h2>
-          <p>{areaOnly ? "Crea una nueva tarea o proceso directamente en Logística. Al guardarlo se abrirá un lienzo para diagramarlo." : "Crea una nueva tarea o proceso y asígnalo a una subárea. Al guardarlo se abrirá un lienzo para diagramarlo."}</p>
+          <p>{areaOnly ? `Crea una nueva tarea o proceso directamente en ${visibleArea.name}. Al guardarlo se abrirá un lienzo para diagramarlo.` : "Crea una nueva tarea o proceso y asígnalo a una subárea. Al guardarlo se abrirá un lienzo para diagramarlo."}</p>
         </div>
       </div>
       <div className="form-grid">

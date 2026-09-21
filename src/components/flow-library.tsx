@@ -4,9 +4,9 @@ import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { ArrowRight, GitBranch, Layers3, LayoutGrid, Search } from "lucide-react";
 import { FlowchartEditor } from "@/components/flowchart-editor";
 import { mergeSubareas, type Area, type Subarea } from "@/lib/data";
-import { marketingFlowcharts, type MarketingFlowchart } from "@/lib/marketing-flowcharts";
+import { flowcharts, type Flowchart } from "@/lib/flowcharts";
 
-type ActiveFlow = { area: Area; subarea: Subarea; flowchart?: MarketingFlowchart };
+type ActiveFlow = { area: Area; subarea: Subarea; flowchart?: Flowchart };
 
 function readStoredSubareas(value: string | null) {
   if (!value) return [];
@@ -18,7 +18,7 @@ function readStoredSubareas(value: string | null) {
   }
 }
 
-function FlowCard({ subarea, flowchart, onOpen }: { subarea: Subarea; flowchart?: MarketingFlowchart; onOpen: () => void }) {
+function FlowCard({ subarea, flowchart, onOpen }: { subarea: Subarea; flowchart?: Flowchart; onOpen: () => void }) {
   const code = flowchart?.code ?? subarea.code;
   const title = flowchart?.title ?? subarea.name;
   const description = flowchart?.description ?? subarea.description;
@@ -62,10 +62,7 @@ export function FlowLibrary({ areas, initialSubareas }: { areas: Area[]; initial
   const [query, setQuery] = useState("");
   const [active, setActive] = useState<ActiveFlow | null>(null);
   const normalizedQuery = query.trim().toLocaleLowerCase("es");
-  const totalFlowcharts = allSubareas.reduce((total, subarea) => {
-    const importedCount = marketingFlowcharts.filter((flowchart) => flowchart.subareaCode === subarea.code).length;
-    return total + Math.max(1, importedCount);
-  }, 0);
+  const totalFlowcharts = flowcharts.length;
 
   return <>
     <div className="page-heading">
@@ -79,9 +76,10 @@ export function FlowLibrary({ areas, initialSubareas }: { areas: Area[]; initial
 
     <div className="flow-area-stack">
       {areas.map((area) => {
-        const areaSubareas = allSubareas.filter((subarea) => subarea.areaCode === area.code);
+        const configuredSubareas = allSubareas.filter((subarea) => subarea.areaCode === area.code);
+        const areaSubareas = configuredSubareas.length ? configuredSubareas : [{ code: area.code, areaCode: area.code, name: area.name, description: area.description, owner: area.owner, flow: [], source: "Drive" as const }];
         const visibleGroups = areaSubareas.map((subarea) => {
-          const imported = marketingFlowcharts.filter((flowchart) => flowchart.subareaCode === subarea.code);
+          const imported = flowcharts.filter((flowchart) => flowchart.subareaCode === subarea.code);
           const matchingFlows = imported.filter((flowchart) => !normalizedQuery || `${area.name} ${subarea.name} ${subarea.owner} ${flowchart.title} ${flowchart.description}`.toLocaleLowerCase("es").includes(normalizedQuery));
           const subareaMatches = !normalizedQuery || `${area.name} ${subarea.name} ${subarea.owner} ${subarea.description}`.toLocaleLowerCase("es").includes(normalizedQuery);
           return { subarea, flowcharts: imported.length ? matchingFlows : subareaMatches ? [undefined] : [] };

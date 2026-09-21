@@ -45,7 +45,7 @@ export function SubareaPageClient({
   }, [storedRaw]);
 
   const allSiblings = useMemo(() => {
-    const source = area.code === "LOG" ? staticSiblings : mergeSubareas(staticSiblings, storedSubareas);
+    const source = area.code === "LOG" || area.code === "REC" ? staticSiblings : mergeSubareas(staticSiblings, storedSubareas);
     return source.map((item) => displaySubarea(item, overrides));
   }, [area.code, staticSiblings, storedSubareas, overrides]);
 

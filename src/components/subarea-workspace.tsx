@@ -23,11 +23,11 @@ const viewerTabs = ["Diagrama", "Ficha", "KPI", "Documentos", "Historial"] as co
 type ViewerTab = typeof viewerTabs[number];
 
 export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedProcesses, initialFlowCode, initialEdit = false }: SubareaWorkspaceProps) {
-  const isAreaRoot = area.code === "LOG" && subarea.code === "LOG";
+  const isAreaRoot = (area.code === "LOG" && subarea.code === "LOG") || (area.code === "REC" && subarea.code === "REC");
   const allProcesses = useProcesses(linkedProcesses);
   const subareaProcesses = useMemo(
-    () => allProcesses.filter((p) => p.subareaCode.toLowerCase() === subarea.code.toLowerCase()),
-    [allProcesses, subarea.code]
+    () => allProcesses.filter((p) => isAreaRoot ? p.areaCode === area.code || p.area === area.name : p.subareaCode.toLowerCase() === subarea.code.toLowerCase()),
+    [allProcesses, area.code, area.name, isAreaRoot, subarea.code]
   );
 
   // Synthesize flowcharts for linked processes that don't have an imported JSON flowchart
@@ -284,7 +284,7 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
           </div>
           <aside className="facts">
             <div className="fact"><span>Área</span><strong>{area.name}</strong></div>
-            <div className="fact"><span>{isAreaRoot ? "Ubicación" : "Subárea"}</span><strong>{isAreaRoot ? "Procesos directos de Logística" : subarea.name}</strong></div>
+            <div className="fact"><span>{isAreaRoot ? "Ubicación" : "Subárea"}</span><strong>{isAreaRoot ? `Procesos directos de ${area.name}` : subarea.name}</strong></div>
             <div className="fact"><span>Tipo</span><strong>{activeProcess?.type ?? "Proceso"}</strong></div>
             <div className="fact"><span>Responsable</span><strong>{activeFlow?.owner ?? subarea.owner}</strong></div>
             <div className="fact"><span>Criticidad</span><strong>{activeProcess?.criticality ?? "Media"}</strong></div>

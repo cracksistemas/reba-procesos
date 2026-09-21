@@ -58,7 +58,7 @@ function buildFlow(spec:Spec): MarketingFlowchart {
   nodes.push(makeNode(end, "end", "Cierre de proceso con atención trazable", "EVIDENCIA", 405, y + 142, 390, 62));
   edges.push(makeEdge(`${spec.code}-close-yes`, close, end, "Sí"));
 
-  return { code:spec.code, sourceId:spec.code, subareaCode:spec.subareaCode, subareaName:spec.subareaName, owner:"Personal de Recepción", title:spec.title, description:spec.description,
+  return { code:spec.code, sourceId:spec.code, subareaCode:"REC", subareaName:"Recepción", owner:"Personal de Recepción", title:spec.title, description:spec.description,
     context:"Manual operativo de Recepción. Se utiliza información institucional aprobada, trato cordial y trazabilidad de cada atención, derivación o pendiente.",
     closure:"Atención resuelta o correctamente derivada, con responsable, estado y próxima acción cuando corresponda.",
     canvas:{width:1100,height:y + 255}, nodes, edges };
