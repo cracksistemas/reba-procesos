@@ -1,9 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { isLocalAuthConfigured, LOCAL_AUTH_COOKIE, LOCAL_AUTH_PAYLOAD } from "@/lib/local-auth";
+import { getLocalAuthConfig, isLocalAuthConfigured, LOCAL_AUTH_COOKIE, LOCAL_AUTH_PAYLOAD } from "@/lib/local-auth";
 
 async function localSessionIsValid(request: NextRequest) {
-  const secret = process.env.LOCAL_AUTH_SECRET;
+  const { secret } = getLocalAuthConfig();
   const session = request.cookies.get(LOCAL_AUTH_COOKIE)?.value;
   if (!secret || !session) return false;
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);

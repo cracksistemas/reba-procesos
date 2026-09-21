@@ -1,6 +1,6 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
-import { isLocalAuthConfigured, LOCAL_AUTH_COOKIE, LOCAL_AUTH_PAYLOAD } from "@/lib/local-auth";
+import { getLocalAuthConfig, isLocalAuthConfigured, LOCAL_AUTH_COOKIE, LOCAL_AUTH_PAYLOAD } from "@/lib/local-auth";
 
 function sameValue(left: string, right: string) {
   const a = Buffer.from(left);
@@ -20,15 +20,14 @@ export async function POST(request: Request) {
   const body = await request.json().catch(() => null) as { email?: unknown; password?: unknown } | null;
   const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
   const password = typeof body?.password === "string" ? body.password : "";
-  const allowedEmail = process.env.LOCAL_AUTH_EMAIL!.trim().toLowerCase();
-  const allowedPassword = process.env.LOCAL_AUTH_PASSWORD!;
+  const { email: allowedEmail, password: allowedPassword, secret } = getLocalAuthConfig();
 
-  if (!sameValue(email, allowedEmail) || !sameValue(password, allowedPassword)) {
+  if (!allowedPassword || !secret || !sameValue(email, allowedEmail) || !sameValue(password, allowedPassword)) {
     return NextResponse.json({ message: "Correo o contraseña incorrectos." }, { status: 401 });
   }
 
   const response = NextResponse.json({ ok: true });
-  response.cookies.set(LOCAL_AUTH_COOKIE, sessionValue(process.env.LOCAL_AUTH_SECRET!), {
+  response.cookies.set(LOCAL_AUTH_COOKIE, sessionValue(secret), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
