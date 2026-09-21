@@ -621,7 +621,7 @@ function FlowchartCanvas({ area, subarea, flowCode, flowTitle, flowDescription, 
       flowCode, areaCode: area.code, subareaCode: subarea.code, title: flowTitle,
       description: flowDescription ?? "", snapshot: graph,
     });
-    setNotice(result.synced ? "Flujograma guardado en Supabase y en este navegador." : `Borrador guardado en este navegador. ${result.message ?? ""}`.trim());
+    setNotice(result.synced ? "Flujograma guardado en el servidor y en este navegador." : `Borrador guardado en este navegador. ${result.message ?? ""}`.trim());
   };
 
   useEffect(() => {

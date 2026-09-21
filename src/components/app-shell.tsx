@@ -15,10 +15,10 @@ const nav = [
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname(); const [open, setOpen] = useState(false); const [collapsed, setCollapsed] = useState(false);
-  const router = useRouter(); const [userEmail, setUserEmail] = useState("");
-  useEffect(() => { setUserEmail("admin@rebagliatidiplomados.com"); }, [pathname]);
-  async function signOut() { await fetch("/auth/local/logout", { method:"POST" }); router.replace("/ingreso"); router.refresh(); }
-  const userName = "Gerencia"; const userInitial = userName.charAt(0).toUpperCase();
+  const router = useRouter(); const [user, setUser] = useState<{ email: string; fullName: string } | null>(null);
+  useEffect(() => { if (pathname === "/ingreso") return; let active = true; fetch("/api/me").then((response) => response.ok ? response.json() : null).then((data) => { if (active) setUser(data); }).catch(() => undefined); return () => { active = false; }; }, [pathname]);
+  async function signOut() { await fetch("/auth/logout", { method: "POST" }); router.replace("/ingreso"); router.refresh(); }
+  const userEmail = user?.email ?? ""; const userName = user?.fullName || userEmail.split("@")[0] || "Usuario"; const userInitial = userName.charAt(0).toUpperCase();
   if (pathname === "/ingreso") return <>{children}</>;
   return <div className={`app-shell ${collapsed ? "sidebar-is-collapsed" : ""}`}>
     {open && <button className="sidebar-scrim" aria-label="Cerrar menú" onClick={() => setOpen(false)} />}

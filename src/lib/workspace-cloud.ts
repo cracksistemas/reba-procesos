@@ -1,7 +1,6 @@
 "use client";
 
 import type { Process, ProcessStatus } from "@/lib/data";
-import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
 type CloudResult = { synced: boolean; message?: string };
 
@@ -11,32 +10,27 @@ const statusFromDatabase: Record<string, ProcessStatus> = { draft: "Borrador", i
 function criticalityToDatabase(value: Process["criticality"]) { return value === "Alta" ? "high" : value === "Baja" ? "low" : "medium"; }
 function criticalityFromDatabase(value: string): Process["criticality"] { return value === "high" ? "Alta" : value === "low" ? "Baja" : "Media"; }
 
-async function authenticatedClient(): Promise<{ client: ReturnType<typeof createClient> } | { message: string }> {
-  if (!isSupabaseConfigured()) return { message: "Supabase aún no está configurado en este despliegue." };
-  const client = createClient();
-  const { data, error } = await client.auth.getUser();
-  if (error || !data.user) return { message: "Inicia sesión para guardar este cambio en la nube." };
-  return { client };
+async function send(url: string, method: string, body: unknown): Promise<CloudResult> {
+  const response = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).catch(() => null);
+  if (response?.ok) return { synced: true };
+  const data = await response?.json().catch(() => null) as { message?: string } | null;
+  return { synced: false, message: data?.message ?? "No se pudo conectar con el servidor." };
 }
 
 export async function saveProcessToCloud(process: Process): Promise<CloudResult> {
-  const connection = await authenticatedClient();
-  if ("message" in connection) return { synced: false, message: connection.message };
-  const { error } = await connection.client.rpc("save_workspace_item", { p_item: {
+  return send("/api/workspace/items", "POST", {
     code: process.code, item_type: process.type === "Tarea" ? "task" : "process",
     area_code: process.areaCode ?? process.subareaCode.slice(0, 3), subarea_code: process.subareaCode,
     name: process.name, owner_label: process.owner, objective: process.objective, scope: process.scope,
     tasks: process.tasks ?? [], status: statusToDatabase[process.status],
     criticality: criticalityToDatabase(process.criticality), version: process.version,
-  } });
-  return error ? { synced: false, message: error.message } : { synced: true };
+  });
 }
 
 export async function loadCloudProcesses(): Promise<Process[]> {
-  const connection = await authenticatedClient();
-  if ("message" in connection) return [];
-  const { data, error } = await connection.client.rpc("get_workspace_items");
-  if (error || !Array.isArray(data)) return [];
+  const response = await fetch("/api/workspace/items").catch(() => null);
+  const data: unknown = response?.ok ? await response.json().catch(() => null) : null;
+  if (!Array.isArray(data)) return [];
   return data.map((row) => {
     const item = row as Record<string, unknown>;
     const updatedAt = typeof item.updated_at === "string" ? new Date(item.updated_at) : new Date();
@@ -53,19 +47,13 @@ export async function loadCloudProcesses(): Promise<Process[]> {
 }
 
 export async function saveFlowchartToCloud(input: { flowCode: string; areaCode: string; subareaCode: string; title: string; description: string; snapshot: unknown }): Promise<CloudResult> {
-  const connection = await authenticatedClient();
-  if ("message" in connection) return { synced: false, message: connection.message };
-  const { error } = await connection.client.rpc("save_flowchart_document", {
-    p_flow_code: input.flowCode, p_area_code: input.areaCode, p_subarea_code: input.subareaCode,
-    p_title: input.title, p_description: input.description, p_snapshot: input.snapshot,
-    p_change_summary: "Edición visual desde REBA Procesos",
+  return send(`/api/workspace/flowcharts/${encodeURIComponent(input.flowCode)}`, "PUT", {
+    areaCode: input.areaCode, subareaCode: input.subareaCode, title: input.title, description: input.description, snapshot: input.snapshot,
   });
-  return error ? { synced: false, message: error.message } : { synced: true };
 }
 
 export async function loadFlowchartFromCloud(flowCode: string): Promise<string | null> {
-  const connection = await authenticatedClient();
-  if ("message" in connection) return null;
-  const { data, error } = await connection.client.rpc("get_flowchart_document", { p_flow_code: flowCode });
-  return error || !data ? null : JSON.stringify(data);
+  const response = await fetch(`/api/workspace/flowcharts/${encodeURIComponent(flowCode)}`).catch(() => null);
+  const data = response?.ok ? await response.json().catch(() => null) as { snapshot?: unknown } | null : null;
+  return data?.snapshot ? JSON.stringify(data.snapshot) : null;
 }

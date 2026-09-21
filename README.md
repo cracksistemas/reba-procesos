@@ -5,7 +5,7 @@ Portal de gestión, consulta, revisión y aprobación de procesos para Rebagliat
 La solución sigue una arquitectura híbrida:
 
 - **Next.js + Vercel:** experiencia web, rutas y despliegue.
-- **Supabase:** autenticación, metadatos, RLS, aprobaciones y auditoría.
+- **PostgreSQL:** usuarios, roles, metadatos, RLS, aprobaciones y auditoría.
 - **Google Drive:** repositorio documental y archivos maestros.
 - **Editor visual REBA sobre XYFlow (MIT):** lienzo integrado con arrastre, conexiones, zoom, minimapa, selección múltiple y autoajuste de cada figura al largo de su texto.
 - **Marketing v3.0:** 17 flujogramas operativos importados desde el HTML institucional, agrupados en 8 subáreas y conservados como 155 nodos y 163 conexiones editables.
@@ -18,7 +18,7 @@ El repositorio incluye un MVP funcional en modo piloto y la infraestructura nece
 
 Módulos implementados:
 
-- ingreso por enlace mágico de Supabase;
+- ingreso con correo y contraseña, y gestión de usuarios y roles;
 - dashboard gerencial;
 - catálogo con búsqueda y filtros;
 - áreas, subáreas y mapa institucional;
@@ -48,32 +48,19 @@ Abre `http://localhost:3000`. Si no se define la clave pública de Supabase, `/i
 ## Variables de entorno
 
 ```text
-NEXT_PUBLIC_SUPABASE_URL
-NEXT_PUBLIC_SUPABASE_ANON_KEY
-NEXT_PUBLIC_APP_URL
+DATABASE_URL                              # obligatorio: postgres://usuario:clave@host:5432/base
+SESSION_SECRET                            # opcional: si falta, la firma de sesión se deriva de DATABASE_URL
 NEXT_PUBLIC_GOOGLE_DRIVE_ROOT_FOLDER_ID
-GOOGLE_CLIENT_ID
-GOOGLE_CLIENT_SECRET
 ```
 
-No agregues `service_role` a variables públicas ni al navegador. La autorización debe verificarse en base de datos mediante RLS.
+## Base de datos y usuarios
 
-## Supabase
+El portal usa un PostgreSQL propio (un solo contenedor); ya no depende de Supabase.
 
-El esquema está en [`supabase/migrations`](supabase/migrations). Incluye perfiles, áreas, subáreas con flujogramas, roles, procesos, versiones, participantes, documentos, comentarios, KPI, aprobaciones y auditoría.
-
-```bash
-npx supabase link --project-ref jqhechsdraqpdfyddaaz
-npx supabase db push
-```
-
-Antes de producción:
-
-1. Crea usuarios en Supabase Auth.
-2. Crea sus perfiles y asignaciones de rol.
-3. Ejecuta pruebas de RLS para cada rol.
-4. Configura las URL de redirección de Auth para preview y production.
-5. Mantén las claves secretas solo en el servidor.
+- Al arrancar aplica solo, en orden, los `.sql` de [`supabase/migrations`](supabase/migrations) y los registra en `public.schema_migrations`.
+- `000000000000_postgres_compat.sql` crea lo que las migraciones esperaban de Supabase (`auth.users`, `auth.uid()` y el rol `authenticated`), por lo que las políticas RLS siguen decidiendo los permisos.
+- Con la base vacía, `/ingreso` pide crear al primer superadministrador. Los demás usuarios, contraseñas y roles por área se gestionan en `/administracion`.
+- Los usuarios no se eliminan: se desactivan, porque el historial los referencia.
 
 ## Google Drive y edición visual
 
