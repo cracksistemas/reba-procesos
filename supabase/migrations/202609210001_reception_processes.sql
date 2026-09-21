@@ -2,8 +2,7 @@
 -- Codes are stable so imported processes and their flowcharts keep their references.
 update public.areas
 set name = 'Recepción',
-    description = 'Atención, inscripción, caja, certificados, canales digitales y continuidad operativa.',
-    owner_label = 'Coordinación de Recepción'
+    description = 'Atención, inscripción, caja, certificados, canales digitales y continuidad operativa.'
 where code = 'REC';
 
 insert into public.subareas(area_id, code, name, description, owner_label, flow_steps, source)
