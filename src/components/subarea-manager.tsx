@@ -1,5 +1,6 @@
 "use client";
 
+import { useCanEdit } from "@/lib/session-context";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useCallback, useMemo, useState, useSyncExternalStore } from "react";
@@ -20,6 +21,7 @@ const splitLines = (value: string) => value
   .slice(0, 10);
 
 export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly = false }: SubareaManagerProps) {
+  const canEdit = useCanEdit(area.code);
   const router = useRouter();
   const { overrides, renameArea, renameSubarea } = useStructureNameOverrides();
   const visibleArea = displayArea(area, overrides);
@@ -161,7 +163,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
         <h1>{visibleArea.name}</h1>
         <p>{visibleArea.description} {areaOnly ? "Sus procesos se gestionan directamente en esta área." : "Administra sus subáreas, múltiples tareas y procesos operativos."}</p>
       </div>
-      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+      {canEdit && <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
         <button className="button button-secondary" onClick={() => { setRenameTarget({ type: "area", code: area.code, currentName: visibleArea.name }); setRenameValue(visibleArea.name); setShowSubareaForm(false); setShowProcessForm(false); }}><Pencil size={15}/> Renombrar área</button>
         {!areaOnly && <button
           className="button button-secondary"
@@ -179,7 +181,7 @@ export function SubareaManager({ area, initialSubareas, areaProcesses, areaOnly 
         >
           {showProcessForm ? <X size={16}/> : <Plus size={16}/>} {showProcessForm ? "Cancelar" : "Añadir proceso / tarea"}
         </button>
-      </div>
+      </div>}
     </div>
 
     {notice && <div className="pilot-banner" role="status"><CheckCircle2 size={17}/><span>{notice} <strong>Guardado con éxito en este navegador.</strong></span></div>}

@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, GitBranch } from "lucide-react";
-import { areas, getSubareas } from "@/lib/data";
+import { getSubareas } from "@/lib/data";
+import { useVisibleAreas } from "@/lib/session-context";
 import { displayArea, displaySubarea, useStructureNameOverrides } from "@/lib/structure-name-store";
 
 export function AreasDirectoryClient() {
   const { overrides } = useStructureNameOverrides();
+  const areas = useVisibleAreas();
   return <>
     <div className="page-heading">
       <div><div className="breadcrumb"><Link href="/biblioteca">Biblioteca</Link> / <span>Áreas</span></div><p className="eyebrow">Primer nivel de navegación</p><h1>Áreas institucionales</h1><p>Selecciona un área para consultar exclusivamente sus subáreas.</p></div>

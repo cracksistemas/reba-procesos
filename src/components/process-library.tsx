@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowRight, Clock3, GitBranch, LayoutGrid, Network, Search, Star } from "lucide-react";
-import { areas, getSubareas, processes, subareas } from "@/lib/data";
+import { areas as allAreas, getSubareas, processes, subareas as allSubareas } from "@/lib/data";
+import { canSeeArea, useSession } from "@/lib/session-context";
 import { flowcharts, getAreaFlowcharts, getFlowchartVersion } from "@/lib/flowcharts";
 import { useProcesses } from "@/lib/process-store";
 
@@ -14,7 +15,10 @@ function normalize(value: string) {
 }
 
 export function ProcessLibrary({ initialQuery = "" }: { initialQuery?: string }) {
-  const allProcesses = useProcesses(processes);
+  const { user } = useSession();
+  const areas = useMemo(() => allAreas.filter((area) => canSeeArea(user, area.code)), [user]);
+  const subareas = useMemo(() => allSubareas.filter((item) => canSeeArea(user, item.areaCode)), [user]);
+  const allProcesses = useProcesses(processes).filter((item) => canSeeArea(user, item.areaCode ?? item.subareaCode.slice(0, 3)));
   const [mode, setMode] = useState<LibraryMode>("areas");
   const [query, setQuery] = useState(initialQuery);
   const term = normalize(query.trim());
@@ -29,9 +33,9 @@ export function ProcessLibrary({ initialQuery = "" }: { initialQuery?: string })
         return matches(`${item.code} ${item.name} ${item.description} ${item.owner} ${area?.name ?? ""}`);
       }),
       processes: allProcesses.filter((item) => matches(`${item.code} ${item.name} ${item.area} ${item.subarea} ${item.owner} ${item.objective}`)),
-      flows: flowcharts.filter((item) => { const area = areas.find((candidate) => item.subareaCode.startsWith(`${candidate.code}-`)); return matches(`${item.code} ${item.title} ${item.description} ${item.owner} ${item.subareaName} ${area?.name ?? ""}`); }),
+      flows: flowcharts.filter((item) => canSeeArea(user, item.subareaCode.slice(0, 3))).filter((item) => { const area = areas.find((candidate) => item.subareaCode.startsWith(`${candidate.code}-`)); return matches(`${item.code} ${item.title} ${item.description} ${item.owner} ${item.subareaName} ${area?.name ?? ""}`); }),
     };
-  }, [term, allProcesses]);
+  }, [term, allProcesses, areas, subareas, user]);
 
   const resultCount = results ? results.areas.length + results.subareas.length + results.processes.length + results.flows.length : 0;
 

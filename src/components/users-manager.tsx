@@ -49,7 +49,7 @@ export function UsersManager() {
   if (loaded && error) return <section className="card"><div className="card-header"><div><h2>Usuarios y roles</h2><p>{error}</p></div></div></section>;
 
   return <section className="card">
-    <div className="card-header"><div><h2>Usuarios y roles</h2><p>Crea cuentas, cambia contraseñas y asigna permisos por área.</p></div>{!draft && <button className="button button-primary" onClick={() => { setFormError(""); setDraft(emptyDraft); }}><UserPlus size={15}/> Nuevo usuario</button>}</div>
+    <div className="card-header"><div><h2>Usuarios y roles</h2><p>Crea cuentas, cambia contraseñas y asigna permisos por área. Solo el superadministrador accede aquí; un superadministrador solo puede editarse a sí mismo.</p></div>{!draft && <button className="button button-primary" onClick={() => { setFormError(""); setDraft(emptyDraft); }}><UserPlus size={15}/> Nuevo usuario</button>}</div>
 
     {draft && <form className="subarea-form" onSubmit={save}>
       <div className="form-grid">
@@ -76,7 +76,7 @@ export function UsersManager() {
         <td>{user.assignments.length ? user.assignments.map((item) => <span key={`${item.role}-${item.area}`} className="table-secondary">{roleName(item.role)} · {areaName(item.area)}</span>) : <span className="table-secondary">Sin roles</span>}</td>
         <td>{user.isActive ? "Activo" : "Desactivado"}</td>
         <td>{user.lastSignInAt ? new Date(user.lastSignInAt).toLocaleString("es-PE", { dateStyle: "short", timeStyle: "short" }) : "Nunca"}</td>
-        <td className="table-actions"><button className="icon-button" aria-label={`Editar ${user.email}`} title="Editar" onClick={() => { setFormError(""); setDraft({ id: user.id, email: user.email, fullName: user.fullName, password: "", isActive: user.isActive, assignments: user.assignments }); }}><Pencil size={15}/></button></td>
+        <td className="table-actions">{(user.id === currentUserId || !user.assignments.some((item) => item.role === "superadmin")) && <button className="icon-button" aria-label={`Editar ${user.email}`} title="Editar" onClick={() => { setFormError(""); setDraft({ id: user.id, email: user.email, fullName: user.fullName, password: "", isActive: user.isActive, assignments: user.assignments }); }}><Pencil size={15}/></button>}</td>
       </tr>)}
       {loaded && !users.length && <tr><td colSpan={5}>Aún no hay usuarios.</td></tr>}
     </tbody></table></div>

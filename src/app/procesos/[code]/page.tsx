@@ -1,9 +1,6 @@
 import { ProcessPageClient } from "@/components/process-page-client";
-import { getProcess, processes } from "@/lib/data";
-
-export function generateStaticParams() {
-  return processes.map((process) => ({ code: process.code }));
-}
+import { getProcess } from "@/lib/data";
+import { requireAreaAccess } from "@/lib/server/guards";
 
 export async function generateMetadata(props: { params: Promise<{ code: string }> }) {
   const { code } = await props.params;
@@ -14,6 +11,7 @@ export async function generateMetadata(props: { params: Promise<{ code: string }
 export default async function ProcessPage(props: { params: Promise<{ code: string }> }) {
   const { code } = await props.params;
   const process = getProcess(code);
+  await requireAreaAccess(process?.areaCode ?? code.slice(0, 3));
 
   return <ProcessPageClient code={code} staticProcess={process} />;
 }

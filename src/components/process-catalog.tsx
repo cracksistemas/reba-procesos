@@ -4,7 +4,8 @@ import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 import { ArrowRight, CheckCircle2, Plus, Save, Search, X } from "lucide-react";
 import { StatusBadge } from "@/components/status-badge";
-import { areas, processes as defaultProcesses, subareas as defaultSubareas, type ProcessType } from "@/lib/data";
+import { areas as allAreas, processes as defaultProcesses, subareas as allDefaultSubareas, type ProcessType } from "@/lib/data";
+import { canSeeArea, useSession } from "@/lib/session-context";
 import { saveProcess, useProcesses } from "@/lib/process-store";
 
 const splitTasks = (value: string) => value
@@ -13,6 +14,9 @@ const splitTasks = (value: string) => value
   .filter(Boolean);
 
 export function ProcessCatalog({ initialArea = "Todas", initialSubarea = "Todas" }: { initialArea?: string; initialSubarea?: string }) {
+  const { user } = useSession();
+  const areas = useMemo(() => allAreas.filter((item) => canSeeArea(user, item.code)), [user]);
+  const defaultSubareas = useMemo(() => allDefaultSubareas.filter((item) => canSeeArea(user, item.areaCode)), [user]);
   const allProcesses = useProcesses(defaultProcesses);
   const [query, setQuery] = useState("");
   const [area, setArea] = useState(initialArea);
@@ -29,12 +33,12 @@ export function ProcessCatalog({ initialArea = "Todas", initialSubarea = "Todas"
 
   const availableFormSubareas = useMemo(
     () => defaultSubareas.filter((item) => item.areaCode === formAreaCode),
-    [formAreaCode]
+    [defaultSubareas, formAreaCode]
   );
 
   const subareaOptions = useMemo(
     () => defaultSubareas.filter((item) => area === "Todas" || item.areaCode === area),
-    [area]
+    [defaultSubareas, area]
   );
 
   const filtered = useMemo(() => allProcesses.filter((item) => {

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { userTransaction } from "@/lib/server/db";
-import { getSessionUser, jsonError } from "@/lib/server/session";
+import { canEditArea, getSessionUser, jsonError } from "@/lib/server/session";
 
 export async function GET(_request: Request, ctx: RouteContext<"/api/workspace/flowcharts/[code]">) {
   const user = await getSessionUser();
@@ -16,6 +16,7 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/workspace/fl
   const { code } = await ctx.params;
   const body = await request.json().catch(() => null) as { areaCode?: string; subareaCode?: string; title?: string; description?: string; snapshot?: unknown } | null;
   if (!body?.snapshot || typeof body.snapshot !== "object") return jsonError("Solicitud inválida.", 400);
+  if (!canEditArea(user, body.areaCode ?? "")) return jsonError("No tienes permiso para editar esta área.", 403);
   try {
     await userTransaction(user.id, (client) => client.query(
       "select public.save_flowchart_document($1, $2, $3, $4, $5, $6::jsonb, $7)",

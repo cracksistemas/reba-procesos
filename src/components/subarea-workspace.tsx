@@ -1,5 +1,6 @@
 "use client";
 
+import { useCanEdit } from "@/lib/session-context";
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock3, Download, FileText, GitBranch, LayoutGrid, ListChecks, Pencil, Plus, Save, ShieldCheck, UserRound, X } from "lucide-react";
@@ -23,6 +24,7 @@ const viewerTabs = ["Diagrama", "Ficha", "KPI", "Documentos", "Historial"] as co
 type ViewerTab = typeof viewerTabs[number];
 
 export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedProcesses, initialFlowCode, initialEdit = false }: SubareaWorkspaceProps) {
+  const canEdit = useCanEdit(area.code);
   const isAreaRoot = (area.code === "LOG" && subarea.code === "LOG") || (area.code === "REC" && subarea.code === "REC");
   const allProcesses = useProcesses(linkedProcesses);
   const subareaProcesses = useMemo(
@@ -48,7 +50,8 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
   const initial = initialFlowCode && unifiedFlowcharts.some((item) => item.code === initialFlowCode) ? initialFlowCode : null;
   const [activeCode, setActiveCode] = useState<string | null>(initial);
   const [tab, setTab] = useState<ViewerTab>("Diagrama");
-  const [editing, setEditing] = useState(initialEdit && Boolean(initial));
+  const [editingRequested, setEditing] = useState(initialEdit && Boolean(initial));
+  const editing = editingRequested && canEdit;
   const [showAddForm, setShowAddForm] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
@@ -253,9 +256,9 @@ export function SubareaWorkspace({ area, subarea, siblings, flowcharts, linkedPr
           <span><ShieldCheck size={13}/> {activeFlow ? (activeProcess ? activeProcess.status : "Documentado") : "Borrador"}</span>
           <span><Clock3 size={13}/> Versión {activeFlow ? activeVersion : "0.1"}</span>
         </div>
-        <button className={`button ${editing ? "button-secondary" : "button-primary"}`} onClick={() => setEditing((current) => !current)}>
+        {canEdit && <button className={`button ${editing ? "button-secondary" : "button-primary"}`} onClick={() => setEditing((current) => !current)}>
           {editing ? <X size={15}/> : <Pencil size={15}/>} {editing ? "Salir de edición" : "Editar"}
-        </button>
+        </button>}
       </div>
 
       {editing && <div className="editing-mode-banner"><Pencil size={15}/><span><strong>Modo edición.</strong> Estás trabajando sobre un borrador local en el lienzo; los cambios se guardan en este navegador.</span></div>}

@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { adminQuery, adminTransaction } from "@/lib/server/db";
-import { getSessionUser, isAdmin, jsonError } from "@/lib/server/session";
+import { getSessionUser, isSuperadmin, jsonError } from "@/lib/server/session";
 import { createUser, normalizeEmail, parseAssignments, replaceAssignments, validateCredentials } from "@/lib/server/users";
 
 export async function GET() {
   const admin = await getSessionUser();
-  if (!isAdmin(admin)) return jsonError("Solo los administradores pueden gestionar usuarios.", 403);
+  if (!isSuperadmin(admin)) return jsonError("Solo el superadministrador puede gestionar usuarios.", 403);
   const [users, roles, areas] = await Promise.all([
     adminQuery(
       `select p.id, p.email, p.full_name as "fullName", p.is_active as "isActive", u.last_sign_in_at as "lastSignInAt",
@@ -21,7 +21,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const admin = await getSessionUser();
-  if (!isAdmin(admin)) return jsonError("Solo los administradores pueden gestionar usuarios.", 403);
+  if (!isSuperadmin(admin)) return jsonError("Solo el superadministrador puede gestionar usuarios.", 403);
   const body = await request.json().catch(() => null) as { email?: unknown; password?: unknown; fullName?: unknown; assignments?: unknown } | null;
   const email = normalizeEmail(body?.email); const password = typeof body?.password === "string" ? body.password : "";
   const fullName = typeof body?.fullName === "string" ? body.fullName.trim() : "";
